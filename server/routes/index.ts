@@ -12,7 +12,7 @@ export default function routes({ auditService, hmppsAuthClient, commonUtils }: S
     res.render('pages/index')
   })
 
-  basicDetailsRoutes(router, auditService, hmppsAuthClient, commonUtils)
+  basicDetailsRoutes(router, auditService, hmppsAuthClient)
 
   return router
 }
