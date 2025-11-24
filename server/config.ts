@@ -1,4 +1,4 @@
-import { AgentConfig } from '@ministryofjustice/hmpps-rest-client'
+import {AgentConfig} from '@ministryofjustice/hmpps-rest-client'
 
 const production = process.env.NODE_ENV === 'production'
 
@@ -72,14 +72,23 @@ export default {
       agent: new AgentConfig(Number(get('TOKEN_VERIFICATION_API_TIMEOUT_RESPONSE', 5000))),
       enabled: get('TOKEN_VERIFICATION_ENABLED', 'false') === 'true',
     },
-    exampleApi: {
-      url: get('EXAMPLE_API_URL', 'http://localhost:8080', requiredInProduction),
+    cosso: {
+      url: get('COSSO_API_URL', 'http://localhost:9091/cosso-api', requiredInProduction),
       healthPath: '/health/ping',
       timeout: {
-        response: Number(get('EXAMPLE_API_TIMEOUT_RESPONSE', 5000)),
-        deadline: Number(get('EXAMPLE_API_TIMEOUT_DEADLINE', 5000)),
+        response: Number(get('COSSO_API_TIMEOUT_RESPONSE', 5000)),
+        deadline: Number(get('COSSO_API_TIMEOUT_DEADLINE', 5000)),
       },
-      agent: new AgentConfig(Number(get('EXAMPLE_API_TIMEOUT_RESPONSE', 5000))),
+      agent: new AgentConfig(Number(get('COSSO_API_TIMEOUT_RESPONSE', 5000))),
+    },
+    ndeliusIntegration: {
+      url: get('NDELIUS_INTEGRATION_URL', 'http://localhost:9091/ndelius', requiredInProduction),
+      healthPath: '/health/ping',
+      timeout: {
+        response: Number(get('NDELIUS_INTEGRATION_TIMEOUT_RESPONSE', 10000)),
+        deadline: Number(get('NDELIUS_INTEGRATION_TIMEOUT_DEADLINE', 10000)),
+      },
+      agent: new AgentConfig(Number(get('NDELIUS_INTEGRATION_TIMEOUT_RESPONSE', 10000))),
     },
   },
   sqs: {
