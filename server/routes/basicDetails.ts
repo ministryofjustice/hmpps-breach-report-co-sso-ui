@@ -17,10 +17,9 @@ export default function basicDetailsRoutes(
     const cossoClient = new CossoApiClient(authenticationClient)
 
     const cossoId: string = req.params.id
-    let cosso: Cosso
     const basicDetails: BasicDetails = null
 
-    cosso = await cossoClient.getCossoById(cossoId, res.locals.user.username)
+    const cosso: Cosso = await cossoClient.getCossoById(cossoId, res.locals.user.username)
 
     res.render('pages/basic-details', {
       cosso,

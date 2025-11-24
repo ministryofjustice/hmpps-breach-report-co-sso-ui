@@ -4,7 +4,7 @@ import type { Services } from '../services'
 import { Page } from '../services/auditService'
 import basicDetailsRoutes from './basicDetails'
 
-export default function routes({ auditService, hmppsAuthClient, commonUtils }: Services): Router {
+export default function routes({ auditService, hmppsAuthClient }: Services): Router {
   const router = Router()
 
   router.get('/', async (req, res, next) => {
