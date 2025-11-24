@@ -1,9 +1,9 @@
-import {dataAccess} from '../data'
+import { dataAccess } from '../data'
 import AuditService from './auditService'
-import CommonUtils from "./commonUtils";
+import CommonUtils from './commonUtils'
 
 export const services = () => {
-  const {applicationInfo, hmppsAuditClient, hmppsAuthClient} = dataAccess()
+  const { applicationInfo, hmppsAuditClient, hmppsAuthClient } = dataAccess()
   const commonUtils = new CommonUtils()
 
   return {

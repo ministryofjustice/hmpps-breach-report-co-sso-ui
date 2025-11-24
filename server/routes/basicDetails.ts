@@ -1,9 +1,9 @@
-import {Router} from 'express'
-import {AuthenticationClient} from '@ministryofjustice/hmpps-auth-clients'
-import AuditService, {Page} from '../services/auditService'
+import { Router } from 'express'
+import { AuthenticationClient } from '@ministryofjustice/hmpps-auth-clients'
+import AuditService, { Page } from '../services/auditService'
 
-import CossoApiClient, {Cosso} from '../data/cossoApiClient'
-import NDeliusIntegrationApiClient, {BasicDetails} from '../data/ndeliusIntegrationApiClient'
+import CossoApiClient, { Cosso } from '../data/cossoApiClient'
+import NDeliusIntegrationApiClient, { BasicDetails } from '../data/ndeliusIntegrationApiClient'
 import CommonUtils from '../services/commonUtils'
 
 export default function basicDetailsRoutes(
@@ -15,13 +15,13 @@ export default function basicDetailsRoutes(
   const currentPage = 'basic-details'
 
   router.get('/basic-details/:id', async (req, res) => {
-    await auditService.logPageView(Page.BASIC_DETAILS, {who: res.locals.user.username, correlationId: req.id})
+    await auditService.logPageView(Page.BASIC_DETAILS, { who: res.locals.user.username, correlationId: req.id })
     const cossoClient = new CossoApiClient(authenticationClient)
     const ndeliusIntegrationApiClient = new NDeliusIntegrationApiClient(authenticationClient)
 
     const cossoId: string = req.params.id
     let cosso: Cosso = null
-    let basicDetails: BasicDetails = null
+    const basicDetails: BasicDetails = null
 
     cosso = await cossoClient.getCossoById(cossoId, res.locals.user.username)
 
@@ -40,7 +40,7 @@ export default function basicDetailsRoutes(
 
     const cossoId: string = req.params.id
     let cosso: Cosso = null
-    let basicDetails: BasicDetails = null
+    const basicDetails: BasicDetails = null
 
     cosso = await cossoClient.getCossoById(cossoId, res.locals.user.username)
 

@@ -1,4 +1,4 @@
-import HmppsAuditClient, {AuditEvent} from '../data/hmppsAuditClient'
+import HmppsAuditClient, { AuditEvent } from '../data/hmppsAuditClient'
 
 export enum Page {
   EXAMPLE_PAGE = 'EXAMPLE_PAGE',

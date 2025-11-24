@@ -11,5 +11,4 @@ context('Basic Details page', () => {
     cy.get('#close-button').should('contain.text', 'Save Progress and Close')
     cy.get('#refresh-from-ndelius--button').should('contain.text', 'Refresh from Delius')
   })
-
 })
