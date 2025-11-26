@@ -20,4 +20,5 @@ export default class CossoApiClient extends RestClient {
 
 export interface Cosso {
   id: string
+  crn: string
 }

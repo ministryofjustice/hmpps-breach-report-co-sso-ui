@@ -2,7 +2,7 @@
   "mappings": [
     {
       "request": {
-        "urlPattern": "/ndelius/basic-details/X000001",
+        "urlPattern": "/ndelius/basic-details/X012345",
         "method": "GET"
       },
       "response": {
