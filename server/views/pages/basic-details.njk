@@ -15,15 +15,6 @@
 
   <form method="post">
 
-    {% set errorList =[
-      { text: errorMessages.genericErrorMessage.text, href: "#" } if errorMessages.genericErrorMessage else None
-    ] | reject("undefined") %}
-
-    {% if errorMessages | length > 0 %}
-      {% from "govuk/components/error-summary/macro.njk" import govukErrorSummary %}
-      {{ govukErrorSummary({ titleText: "There is a problem", errorList: errorList }) }}
-    {% endif %}
-
     <input type="hidden" name="_csrf" value="{{ csrfToken }}">
 
     <div class="govuk-grid-row">
@@ -31,52 +22,7 @@
         {% include "pages/side-nav.njk" %}
       </div>
       <div class="govuk-grid-column-two-thirds">
-
-        {% if not showEmbeddedError %}
-
-          {% include "partials/review-required.njk" %}
-
-          <h1 id="page-title" class="govuk-heading-l">COSSO - Basic Details</h1>
-
-          <h2 class="govuk-heading-m">COSSO ID</h2>
-          <p id="id">{{ cossoId }}</p>
-
-          <h2 class="govuk-heading-m">Crn</h2>
           <p id="id">{{ cosso.crn }}</p>
-
-          <div class="moj-button-group">
-            {{ govukButton({
-              text: "Continue",
-              preventDoubleClick: "true",
-              type: "submit",
-              attributes: {
-                id: "continue-button"
-              }
-            }) }}
-            {{ govukButton({
-              text: "Save Progress and Close",
-              type: "submit",
-              name: "action",
-              value: "saveProgressAndClose",
-              classes: "govuk-button--secondary",
-              attributes: {
-                id: "close-button"
-              }
-            }) }}
-
-            {{ govukButton({
-              text: "Refresh from Delius",
-              preventDoubleClick: "true",
-              type: "submit",
-              name: "action",
-              value: "refreshFromNdelius",
-              classes: "govuk-button--secondary",
-              attributes: {
-                id: "refresh-from-ndelius--button"
-              }
-            }) }}
-          </div>
-        {% endif %}
       </div>
     </div>
 
