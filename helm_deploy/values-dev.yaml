@@ -11,9 +11,14 @@ generic-service:
     INGRESS_URL: "https://breach-report-co-sso-ui-dev.hmpps.service.justice.gov.uk"
     HMPPS_AUTH_URL: "https://sign-in-dev.hmpps.service.justice.gov.uk/auth"
     TOKEN_VERIFICATION_API_URL: "https://token-verification-api-dev.prison.service.justice.gov.uk"
-    EXAMPLE_API_URL: 'https://template-kotlin-dev.hmpps.service.justice.gov.uk'
+    COSSO_API_URL: "https://breach-report-co-sso-api-dev.hmpps.service.justice.gov.uk"
     ENVIRONMENT_NAME: DEV
-    AUDIT_ENABLED: "false"
+
+  allowlist:
+    groups:
+      - digital_staff_and_mojo
+      - unilink_staff
+      - moj_cloud_platform # for end-to-end testing
 
 generic-prometheus-alerts:
   alertSeverity: hmpps-co-sso-notifications

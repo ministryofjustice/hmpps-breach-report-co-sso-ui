@@ -22,11 +22,9 @@ permissions:
   packages: write
 
 concurrency:
-  # Only cancel in progress when on a branch - use SHA on main to ensure uniqueness.
-  # This will allow multiple pipelines to run at the same time on main.
-  # Note that two pipelines running within a few minutes of each other will cause issues with helm deploying to
-  # a namespace, as the second one will not be able to get a lock as a deploy will be in progress.
-  group: ${{ github.workflow }}-${{ github.ref == 'refs/heads/main' && github.sha || github.ref }}
+  group: ${{ github.workflow }}-${{ github.ref }}
+  # This will cancel all running build/test/release pipelines that are not on the main branch
+  # If this pipeline is on the main branch, it will wait until existing runs complete
   cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
 
 jobs:
@@ -35,6 +33,8 @@ jobs:
     name: node build
     uses: ministryofjustice/hmpps-github-actions/.github/workflows/node_build.yml@v2 # WORKFLOW_VERSION
     secrets: inherit
+    with:
+      install_command: 'npm run setup'
   # generic node unit tests - feel free to override with local tests if required
   node_unit_tests:
     name: node unit tests
@@ -44,7 +44,7 @@ jobs:
   # generic node integration tests using wiremock - feel free to override with local tests if required
   node_integration_tests:
     name: node integration tests
-    uses: ministryofjustice/hmpps-github-actions/.github/workflows/node_integration_tests.yml@v2 # WORKFLOW_VERSION
+    uses: ./.github/workflows/integration_test.yml
     needs: [node_build]
     secrets: inherit
   helm_lint:
@@ -80,25 +80,23 @@ jobs:
       environment: 'dev'
       app_version: '${{ needs.build.outputs.app_version }}'
       slack_notification: 'false' # if 'true', it needs a valid NONPROD_RELEASES_SLACK_CHANNEL variable to be set
-  # deploy_preprod:
-  #   name: Deploy to pre-production environment
-  #   needs:
-  #     - build
-  #     - deploy_dev
-  #   uses: ministryofjustice/hmpps-github-actions/.github/workflows/deploy_env.yml@v2 # WORKFLOW_VERSION
-  #   secrets: inherit
-  #   with:
-  #     environment: 'preprod'
-  #     app_version: '${{ needs.build.outputs.app_version }}'
-  #     slack_notification: 'false' # if 'true', it needs a valid NONPROD_RELEASES_SLACK_CHANNEL variable to be set
-  # deploy_prod:
-  #   name: Deploy to production environment
-  #   needs:
-  #     - build
-  #     - deploy_preprod
-  #   uses: ministryofjustice/hmpps-github-actions/.github/workflows/deploy_env.yml@v2 # WORKFLOW_VERSION
-  #   secrets: inherit
-  #   with:
-  #     environment: 'prod'
-  #     app_version: '${{ needs.build.outputs.app_version }}'
-  #     slack_notification: 'false' # if 'true', it needs a valid PROD_RELEASES_SLACK_CHANNEL variable to be set
+  deploy_preprod:
+    name: Deploy to pre-production environment
+    needs:
+      - build
+      - deploy_dev
+    uses: ministryofjustice/hmpps-github-actions/.github/workflows/deploy_env.yml@v2 # WORKFLOW_VERSION
+    secrets: inherit
+    with:
+      environment: 'preprod'
+      app_version: '${{ needs.build.outputs.app_version }}'
+  deploy_prod:
+    name: Deploy to production environment
+    needs:
+      - build
+      - deploy_preprod
+    uses: ministryofjustice/hmpps-github-actions/.github/workflows/deploy_env.yml@v2 # WORKFLOW_VERSION
+    secrets: inherit
+    with:
+      environment: 'prod'
+      app_version: '${{ needs.build.outputs.app_version }}'
