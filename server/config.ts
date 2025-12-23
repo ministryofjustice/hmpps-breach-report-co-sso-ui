@@ -73,7 +73,7 @@ export default {
       enabled: get('TOKEN_VERIFICATION_ENABLED', 'false') === 'true',
     },
     cosso: {
-      url: get('COSSO_API_URL', 'http://localhost:9091/cosso-api', requiredInProduction),
+      url: get('COSSO_API_URL', 'http://localhost:9091/cosso', requiredInProduction),
       healthPath: '/health/ping',
       timeout: {
         response: Number(get('COSSO_API_TIMEOUT_RESPONSE', 5000)),
