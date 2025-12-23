@@ -39,6 +39,26 @@
           "response-template"
         ]
       }
+    },
+    {
+      "request": {
+        "url": "/cosso/00000000-0000-0000-0000-000000000011",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "id": "00000000-0000-0000-0000-000000000011",
+          "crn": "X012345",
+          "completedDate": "2025-01-01T12:34:56"
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        "transformers": [
+          "response-template"
+        ]
+      }
     }
   ]
 }
