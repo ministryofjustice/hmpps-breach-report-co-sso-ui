@@ -2,14 +2,15 @@
   "mappings": [
     {
       "request": {
-        "url": "/cosso-api/cosso/00000000-0000-0000-0000-000000000001",
+        "url": "/cosso/00000000-0000-0000-0000-000000000001",
         "method": "GET"
       },
       "response": {
         "status": 200,
         "jsonBody": {
           "id": "00000000-0000-0000-0000-000000000001",
-          "crn": "X012345"
+          "crn": "X012345",
+          "completedDate": null
         },
         "headers": {
           "Content-Type": "application/json;charset=UTF-8"
@@ -21,14 +22,15 @@
     },
     {
       "request": {
-        "url": "/cosso-api/cosso/00000000-0000-0000-0000-000000000001",
+        "url": "/cosso/00000000-0000-0000-0000-000000000001",
         "method": "PUT"
       },
       "response": {
         "status": 200,
         "jsonBody": {
           "id": "00000000-0000-0000-0000-000000000001",
-          "crn": "X012345"
+          "crn": "X012345",
+          "completedDate": null
         },
         "headers": {
           "Content-Type": "application/json;charset=UTF-8"

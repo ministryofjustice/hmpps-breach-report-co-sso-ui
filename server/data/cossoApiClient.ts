@@ -1,5 +1,6 @@
 import { asSystem, RestClient } from '@ministryofjustice/hmpps-rest-client'
 import type { AuthenticationClient } from '@ministryofjustice/hmpps-auth-clients'
+import { ZonedDateTime } from '@js-joda/core'
 import config from '../config'
 import logger from '../../logger'
 
@@ -21,4 +22,5 @@ export default class CossoApiClient extends RestClient {
 export interface Cosso {
   id: string
   crn: string
+  completedDate: ZonedDateTime
 }
