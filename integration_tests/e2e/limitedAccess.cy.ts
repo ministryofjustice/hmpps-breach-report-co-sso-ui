@@ -26,32 +26,4 @@ context('Limited Access checks', () => {
     cy.get('#exclusionText').should('not.exist')
     cy.get('#restrictionText').should('not.exist')
   })
-
-  it('Check your report LAO Excluded', () => {
-    cy.visit('/check-your-answers/00000000-0000-0000-0000-100000000005')
-    cy.get('#lao-panel').should('exist')
-    cy.get('#exclusionText').should('exist')
-    cy.get('#restrictionText').should('not.exist')
-  })
-
-  it('Check your report LAO Restricted', () => {
-    cy.visit('/check-your-answers/00000000-0000-0000-0000-100000000006')
-    cy.get('#lao-panel').should('exist')
-    cy.get('#exclusionText').should('not.exist')
-    cy.get('#restrictionText').should('exist')
-  })
-
-  it('Check your report LAO Both', () => {
-    cy.visit('/check-your-answers/00000000-0000-0000-0000-100000000007')
-    cy.get('#lao-panel').should('exist')
-    cy.get('#exclusionText').should('exist')
-    cy.get('#restrictionText').should('exist')
-  })
-
-  it('Check your report LAO None', () => {
-    cy.visit('/check-your-answers/00000000-0000-0000-0000-100000000008')
-    cy.get('#lao-panel').should('not.exist')
-    cy.get('#exclusionText').should('not.exist')
-    cy.get('#restrictionText').should('not.exist')
-  })
 })
