@@ -135,6 +135,94 @@
         },
         "transformers": ["response-template"]
       }
+    },
+    {
+      "request": {
+        "url": "/cosso-api/cosso/ace6f3ef-e677-45b7-8570-52c7593a8987",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "id": "ace6f3ef-e677-45b7-8570-52c7593a8987",
+          "crn": "X100123",
+          "completedDate": null
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        "transformers": ["response-template"]
+      }
+    },
+    {
+      "request": {
+        "url": "/cosso-api/cosso/67006838-34e7-41b8-8ea9-5bec66106041",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "id": "67006838-34e7-41b8-8ea9-5bec66106041",
+          "crn": "Z000001",
+          "completedDate": null
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        "transformers": ["response-template"]
+      }
+    },
+    {
+      "request": {
+        "url": "/cosso-api/cosso/cf3c91c3-2a56-4854-a5b6-a2b4983b0a5e",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "id": "cf3c91c3-2a56-4854-a5b6-a2b4983b0a5e",
+          "crn": "Z000002",
+          "completedDate": null
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        "transformers": ["response-template"]
+      }
+    },
+    {
+      "request": {
+        "url": "/cosso-api/cosso/d6cbd844-28e9-4fcb-82db-f50bd335b7f9",
+        "method": "GET"
+      },
+      "response": {
+        "status": 500,
+        "jsonBody": {
+          "message": "Some server side error occurred in the cosso service"
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        "transformers": ["response-template"]
+      }
+    },
+    {
+      "request": {
+        "url": "/cosso-api/cosso/d378bbc3-7032-4a4d-9cba-94eb49fef1bc",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "id": "d378bbc3-7032-4a4d-9cba-94eb49fef1bc",
+          "crn": "Z000002",
+          "completedDate": null
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        "transformers": ["response-template"]
+      }
     }
   ]
 }

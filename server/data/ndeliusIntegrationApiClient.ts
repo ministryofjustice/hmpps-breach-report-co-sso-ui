@@ -16,6 +16,15 @@ export default class NDeliusIntegrationApiClient extends RestClient {
       asSystem(username),
     )
   }
+
+  async getBasicDetails(crn: string, username: string): Promise<BasicDetails> {
+    return this.get(
+      {
+        path: `/basic-details/${crn}/${username}`,
+      },
+      asSystem(username),
+    )
+  }
 }
 
 export interface Name {
@@ -30,6 +39,9 @@ export interface BasicDetails {
   addresses: DeliusAddress[]
   dateOfBirth: string
   prisonNumber: string
+  emailAddress: string
+  mobileNumber: string
+  telephoneNumber: string
 }
 
 export interface DeliusAddress {
