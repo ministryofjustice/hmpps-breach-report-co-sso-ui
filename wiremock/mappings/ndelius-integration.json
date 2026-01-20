@@ -161,15 +161,83 @@
 
     {
       "request": {
-        "url": "/suicide-risk-api/suicide-risk/00000000-0000-0000-0000-100000000008",
+        "urlPattern": "/ndelius/offence-details/X012345/(.*?)",
         "method": "GET"
       },
       "response": {
         "status": 200,
         "jsonBody": {
-          "id": "00000000-0000-0000-0000-100000000008",
-          "crn": "X100504",
-          "completedDate": null
+          "mainOffence": {
+            "description":"Offence Description",
+            "code":"OFF_CDE"
+          },
+          "additionalOffences": [
+            {
+              "description":"Additional Offence Description A",
+              "code":"AOFF_CDE_1"
+            },
+            {
+              "description":"Additional Offence Description B",
+              "code":"AOFF_CDE_2"
+            }
+          ],
+          "sentencingCourt":"TEST style Court",
+          "sentenceDate":"2025-04-01",
+          "sentenceImposed":{
+            "description":"Sentence Imposed Description",
+            "code":"SNT_CDE"
+          },
+          "suspendedCustodyLength":{
+            "length": 20,
+            "lengthUnits": "Days"
+          },
+          "requirementsImposed": [
+            {
+              "id": 1234,
+              "startDate": "2025-01-01",
+              "requirementTypeMainCategoryDescription": "Requirement Type Main Category Description",
+              "requirementLength": 20,
+              "requirementLengthUnits": "Months",
+              "requirementTypeSubCategoryDescription": "Requirement Type Sub Category Description",
+              "secondaryRequirementLength": 12,
+              "secondaryRequirementLengthUnits": "Months"
+            },
+            {
+              "id": 4444,
+              "startDate": "2025-02-41",
+              "requirementTypeMainCategoryDescription": "Another Main Category Description",
+              "requirementLength": 7,
+              "requirementLengthUnits": "Years",
+              "requirementTypeSubCategoryDescription": "Sub Cat Description",
+              "secondaryRequirementLength": 10,
+              "secondaryRequirementLengthUnits": "Months"
+            }
+          ],
+          "sentence": {
+            "length": 5,
+            "lengthUnits": "Months",
+            "type": "Sentence Type",
+            "secondLength": 2,
+            "secondLengthUnits": "Days"
+          },
+          "additionalSentences": [
+            {
+              "length": 1,
+              "lengthUnits": "Days",
+              "type": "Main Type",
+              "subtype": "Sub Type",
+              "secondLength": 4,
+              "secondLengthUnits": "Hours"
+            },
+            {
+              "length": 12,
+              "lengthUnits": "Months",
+              "type": "Another Main Type",
+              "subtype": "Second Sub Type",
+              "secondLength": 4,
+              "secondLengthUnits": "Weeks"
+            }
+          ]
         },
         "headers": {
           "Content-Type": "application/json;charset=UTF-8"
@@ -238,6 +306,21 @@
         "status": 400,
         "jsonBody": {
           "message": "CRN not found"
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        }
+      }
+    },
+    {
+      "request": {
+        "urlPattern": "/ndelius/offence-details/Z000001/(.*?)",
+        "method": "GET"
+      },
+      "response": {
+        "status": 500,
+        "jsonBody": {
+          "message": "Some server side error occurred"
         },
         "headers": {
           "Content-Type": "application/json;charset=UTF-8"
