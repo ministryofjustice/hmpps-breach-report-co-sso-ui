@@ -27,6 +27,35 @@ export default class CossoApiClient extends RestClient {
       asSystem(username),
     )
   }
+
+  async getAmendmentById(uuid: string, username: string): Promise<CossoAmendment> {
+    return this.get(
+      {
+        path: `/cosso/amendment/${uuid}`,
+      },
+      asSystem(username),
+    )
+  }
+
+  async updateAmendment(id: string, amendment: CossoAmendment, username: string) {
+    await this.put(
+      {
+        path: `/cosso/amendment/${id}`,
+        data: amendment as unknown as Record<string, unknown>,
+      },
+      asSystem(username),
+    )
+  }
+
+  async createAmendment(amendment: CossoAmendment, username: string): Promise<string> {
+    return this.post(
+      {
+        path: `/cosso/amendment`,
+        data: amendment as unknown as Record<string, unknown>,
+      },
+      asSystem(username),
+    )
+  }
 }
 
 export interface Cosso {
@@ -40,6 +69,7 @@ export interface Cosso {
   postalAddress: CossoAddress
   dateOfBirth: string
   basicDetailsSaved: boolean
+  amendments: CossoAmendment[]
 }
 
 export interface CossoAddress {
@@ -54,4 +84,12 @@ export interface CossoAddress {
   district: string
   county: string
   postcode: string
+}
+
+export interface CossoAmendment {
+  id?: string
+  cossoId: string
+  amendmentDetails: string
+  amendmentReason: string
+  amendmentDate: string
 }
