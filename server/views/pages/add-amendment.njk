@@ -1,10 +1,6 @@
 {% extends "../partials/layout.njk" %}
 
-{% if currentAmendmentId %}
-  {% set pageTitle = applicationName + " - Edit Amendment" %}
-{% else %}
-  {% set pageTitle = applicationName + " - Add Amendment" %}
-{% endif %}
+{% set pageTitle = applicationName + " - Amendment Details" %}
 {% set mainClasses = "app-container govuk-body" %}
 
 {% block content %}
@@ -38,11 +34,7 @@
     </div>
     <div class="govuk-grid-column-two-thirds">
 
-      {% if currentAmendmentId %}
-        <h1 id="page-title" class="govuk-heading-l">Breach Report CO SSO - Edit Amendment</h1>
-      {% else %}
-        <h1 id="page-title" class="govuk-heading-l">Breach Report CO SSO - Add Amendment</h1>
-      {% endif %}
+      <h1 id="page-title" class="govuk-heading-l">Breach Report CO SSO - Amendment Details</h1>
 
       {{ govukCharacterCount({
         label: {

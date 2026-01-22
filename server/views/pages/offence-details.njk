@@ -89,9 +89,9 @@
         <h2 class="govuk-heading-m">Amendments to the Order</h2>
         {% if cosso.amendments | length > 0 %}
           {% for amendment in cosso.amendments %}
-            <p id="amendment-{{loop.index}}">{{ amendment.amendmentDetails }}<br/>
-              {{ amendment.amendmentReason }}<br/>
-              {{ amendment.amendmentDate }}<br/>
+            <p id="amendment-{{loop.index}}"><span class="govuk-!-font-weight-bold">Details of the Amendment:</span> {{ amendment.amendmentDetails }}<br/>
+              <span class="govuk-!-font-weight-bold">Reasons for the Amendment:</span> {{ amendment.amendmentReason }}<br/>
+              <span class="govuk-!-font-weight-bold">Date of the Amendment:</span> {{ amendment.amendmentDate }}<br/>
               <a id="edit-link-{{ loop.index }}" href="/add-amendment/{{ cossoId }}?amendmentId={{ amendment.id }}" class="govuk-link">Edit this Amendment</a><br/>
               <a id="delete-link-{{ loop.index }}" href="/delete-amendment/{{ cossoId }}?amendmentId={{ amendment.id }}" class="govuk-link">Delete this Amendment</a>
             </p>
