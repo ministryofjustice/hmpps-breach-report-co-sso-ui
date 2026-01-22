@@ -74,6 +74,9 @@
             <p id="requirements-imposed-{{loop.index}}"> <span class="govuk-!-font-weight-bold">Requirement Type:</span> {{ req.requirementTypeMainCategoryDescription }}<br/>
               <span class="govuk-!-font-weight-bold"> Requirement Length:</span> {{ req.requirementLength}} {{ req.requirementLengthUnits }}<br/>
               <span class="govuk-!-font-weight-bold">Secondary Requirement Length:</span> {{ req.secondaryRequirementLength}} {{ req.secondaryRequirementLengthUnits }}</p>
+            {% if not loop.last %}
+              <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+            {% endif %}
           {% endfor %}
         {% else %}
           <p>No information found</p>
@@ -95,6 +98,9 @@
               <a id="edit-link-{{ loop.index }}" href="/add-amendment/{{ cossoId }}?amendmentId={{ amendment.id }}" class="govuk-link">Edit this Amendment</a><br/>
               <a id="delete-link-{{ loop.index }}" href="/delete-amendment/{{ cossoId }}?amendmentId={{ amendment.id }}" class="govuk-link">Delete this Amendment</a>
             </p>
+            {% if not loop.last %}
+              <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+            {% endif %}
           {% endfor %}
         {% else %}
           <p>No Amendments added</p>
