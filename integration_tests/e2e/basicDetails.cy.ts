@@ -46,7 +46,7 @@ context('Basic Details page', () => {
     cy.get('#page-title').should('not.exist')
   })
 
-  it('continue button performs a post and redirects to information page', () => {
+  it('continue button performs a post and redirects to witness details page', () => {
     cy.intercept('POST', '/basic-details/**').as('formSubmit')
     cy.visit('/basic-details/00000000-0000-0000-0000-000000000001')
     cy.get('#continue-button').click()

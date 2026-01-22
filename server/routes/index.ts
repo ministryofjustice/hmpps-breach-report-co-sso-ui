@@ -8,6 +8,7 @@ import complianceRoutes from './compliance'
 import failuresRoutes from './failures'
 import witnessDetailsRoutes from './witness-details'
 import offenceDetailsRoutes from './offence-details'
+import addAmendmentRoutes from './addAmendment'
 
 export default function routes({ auditService, hmppsAuthClient, commonUtils }: Services): Router {
   const router = Router()
@@ -23,6 +24,7 @@ export default function routes({ auditService, hmppsAuthClient, commonUtils }: S
   offenceDetailsRoutes(router, auditService, hmppsAuthClient, commonUtils)
   reportCompletedRoutes(router, auditService, hmppsAuthClient)
   witnessDetailsRoutes(router, auditService, hmppsAuthClient, commonUtils)
+  addAmendmentRoutes(router, auditService, hmppsAuthClient)
 
   return router
 }

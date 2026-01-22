@@ -223,6 +223,238 @@
         },
         "transformers": ["response-template"]
       }
+    },
+    {
+      "request": {
+        "url": "/cosso-api/cosso/amendment/ff15ee51-d8e1-4913-9f55-2a3151b0ab11",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "id": "ff15ee51-d8e1-4913-9f55-2a3151b0ab11",
+          "cossoId": "00000000-0000-0000-0000-000000000001",
+          "amendmentDetails": "TEST DETAILS",
+          "amendmentReason": "TEST REASON",
+          "amendmentDate": "2026-01-14"
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        "transformers": [
+          "response-template"
+        ]
+      }
+    },
+    {
+      "request": {
+        "url": "/cosso-api/cosso/amendment/d6cbd844-28e9-4fcb-82db-f50bd335b7f9",
+        "method": "GET"
+      },
+      "response": {
+        "status": 500,
+        "jsonBody": {
+          "message": "Some server side error occurred in the cosso service"
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        "transformers": ["response-template"]
+      }
+    },
+    {
+      "request": {
+        "url": "/cosso-api/cosso/amendment/5b23e77b-41e2-44b0-913a-23beaf278c1b",
+        "method": "GET"
+      },
+      "response": {
+        "status": 404,
+        "jsonBody": {
+          "message": "Document not found"
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        "transformers": ["response-template"]
+      }
+    },
+    {
+      "request": {
+        "url": "/cosso-api/cosso/amendment/ff15ee51-d8e1-4913-9f55-2a3151b0ab11",
+        "method": "PUT"
+      },
+      "response": {
+        "status": 200
+      }
+    },
+    {
+      "request": {
+        "url": "/cosso-api/cosso/amendment",
+        "method": "POST"
+      },
+      "response": {
+        "status": 200
+      }
+    },
+    {
+      "request": {
+        "url": "/cosso-api/cosso/f92b344c-5a20-405c-b407-3bac4a507043",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "id": "f92b344c-5a20-405c-b407-3bac4a507043",
+          "crn": "X012345",
+          "completedDate": null,
+          "amendments": [
+            {
+              "id": "00000000-0000-0000-0000-000000000001",
+              "cossoId": "f92b344c-5a20-405c-b407-3bac4a507043",
+              "amendmentDetails": "TEST DETAILS",
+              "amendmentReason": "TEST REASON",
+              "amendmentDate": "2026-01-14"
+            },
+            {
+              "id": "00000000-0000-0000-0000-000000000001",
+              "cossoId": "f92b344c-5a20-405c-b407-3bac4a507043",
+              "amendmentDetails": "SECOND DETAILS",
+              "amendmentReason": "SECOND REASON",
+              "amendmentDate": "2025-12-25"
+            }
+          ]
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        "transformers": ["response-template"]
+      }
+    },
+    {
+      "request": {
+        "url": "/cosso-api/cosso/f13cd4b7-52fd-4d9e-8ce1-b380fc0c8be4",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "id": "f13cd4b7-52fd-4d9e-8ce1-b380fc0c8be4",
+          "crn": "X012345",
+          "completedDate": null
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        "transformers": ["response-template"]
+      }
+    },
+    {
+      "request": {
+        "url": "/cosso-api/cosso/5ef68fe7-f7c5-4a3b-a30f-3d386c08138b",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "id": "5ef68fe7-f7c5-4a3b-a30f-3d386c08138b",
+          "crn": "X012345",
+          "completedDate": null
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        "transformers": ["response-template"]
+      }
+    },
+    {
+      "request": {
+        "url": "/cosso-api/cosso/1397b54d-4360-4ec5-bc75-8a908bc5e49c",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "id": "1397b54d-4360-4ec5-bc75-8a908bc5e49c",
+          "crn": "X012345",
+          "completedDate": null
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        "transformers": ["response-template"]
+      }
+    },
+    {
+      "request": {
+        "url": "/cosso-api/cosso/499ab129-866a-4f9e-a4bf-7699cc95a4f7",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "id": "499ab129-866a-4f9e-a4bf-7699cc95a4f7",
+          "crn": "X012345",
+          "completedDate": null,
+          "amendments": [
+            {
+              "id": "00000000-0000-0000-0000-000000000003",
+              "cossoId": "499ab129-866a-4f9e-a4bf-7699cc95a4f7",
+              "amendmentDetails": "TEST DETAILS",
+              "amendmentReason": "TEST REASON",
+              "amendmentDate": "2026-01-14"
+            }
+          ]
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        "transformers": ["response-template"]
+      }
+    },
+    {
+      "request": {
+        "url": "/cosso-api/cosso/deb3be2a-e196-412e-b349-7c89d1b539af",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "id": "deb3be2a-e196-412e-b349-7c89d1b539af",
+          "crn": "X012345",
+          "completedDate": null,
+          "amendments": [
+            {
+              "id": "00000000-0000-0000-0000-000000000004",
+              "cossoId": "deb3be2a-e196-412e-b349-7c89d1b539af",
+              "amendmentDetails": "TEST DETAILS",
+              "amendmentReason": "TEST REASON",
+              "amendmentDate": "2026-01-14"
+            }
+          ]
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        "transformers": ["response-template"]
+      }
+    },
+    {
+      "request": {
+        "url": "/cosso-api/cosso/9de01b5e-30bd-4989-b0ad-29d5df2b70cf",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "id": "9de01b5e-30bd-4989-b0ad-29d5df2b70cf",
+          "crn": "Z000001",
+          "completedDate": null
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        "transformers": ["response-template"]
+      }
     }
   ]
 }

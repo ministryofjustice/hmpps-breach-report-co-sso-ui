@@ -1,0 +1,110 @@
+{% extends "../partials/layout.njk" %}
+
+{% set pageTitle = applicationName + " - Amendment Details" %}
+{% set mainClasses = "app-container govuk-body" %}
+
+{% block content %}
+  {% from "moj/components/side-navigation/macro.njk" import mojSideNavigation %}
+  {% from "govuk/components/panel/macro.njk" import govukPanel %}
+  {% from "govuk/components/textarea/macro.njk" import govukTextarea %}
+  {% from "moj/components/date-picker/macro.njk" import mojDatePicker %}
+  {% from "govuk/components/button/macro.njk" import govukButton %}
+  {% from "govuk/components/character-count/macro.njk" import govukCharacterCount %}
+
+<form method="post">
+
+  {% set errorList =[
+    { text: errorMessages.genericErrorMessage.text, href: "#" } if errorMessages.genericErrorMessage else None,
+    { text: errorMessages.amendmentDetails.text, href: "#amendmentdetail" } if errorMessages.amendmentDetails else None,
+    { text: errorMessages.amendmentReason.text, href: "#amendmentreason" } if errorMessages.amendmentReason else None,
+    { text: errorMessages.amendmentDate.text, href: "#amendmentdate" } if errorMessages.amendmentDate else None
+  ] | reject("undefined") %}
+
+  {% if errorMessages | length > 0 %}
+    {% from "govuk/components/error-summary/macro.njk" import govukErrorSummary %}
+    {{ govukErrorSummary({ titleText: "There is a problem", errorList: errorList }) }}
+  {% endif %}
+
+  <input type="hidden" name="_csrf" value="{{ csrfToken }}">
+  <input type="hidden" name="currentAmendmentId" value="{{ currentAmendmentId }}">
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-one-third">
+      {% include "pages/side-nav.njk" %}
+    </div>
+    <div class="govuk-grid-column-two-thirds">
+
+      <h1 id="page-title" class="govuk-heading-l">Breach Report CO SSO - Amendment Details</h1>
+
+      {{ govukCharacterCount({
+        label: {
+          text: "Details of Amendment",
+          classes: "govuk-label--m",
+          isPageHeading: false
+        },
+        value: amendment.amendmentDetails,
+        classes: "govuk-input--width-30",
+        name: "amendmentdetail",
+        id: "amendmentdetail",
+        maxlength: 20000,
+        errorMessage: {
+          text: errorMessages.amendmentDetails.text
+        } if errorMessages.amendmentDetails.text
+      }) }}
+
+      {{ govukCharacterCount({
+        label: {
+          text: "Reason for Amendment",
+          classes: "govuk-label--m",
+          isPageHeading: false
+        },
+        value: amendment.amendmentReason,
+        classes: "govuk-input--width-30",
+        name: "amendmentreason",
+        id: "amendmentreason",
+        maxlength: 20000,
+        errorMessage: {
+          text: errorMessages.amendmentReason.text
+        } if errorMessages.amendmentReason.text
+      }) }}
+
+      {{ mojDatePicker({
+        id: "amendmentdate",
+        name: "amendmentdate",
+        label: {
+          text: "Date of Amendment"
+        },
+        value: currentAmendmentDate,
+        errorMessage: {
+          text: errorMessages.amendmentDate.text
+        } if errorMessages.amendmentDate.text
+      }) }}
+
+      <div class="moj-button-group">
+        {{ govukButton({
+          text: "Save",
+          preventDoubleClick: "true",
+          type: "submit",
+          attributes: {
+            id: "save-button"
+          }
+        }) }}
+        {{ govukButton({
+          text: "Cancel without saving",
+          type: "submit",
+          name: "action",
+          value: "cancel",
+          classes: "govuk-button--secondary",
+          attributes: {
+            id: "cancel-button"
+          }
+        }) }}
+      </div>
+
+    </div>
+
+
+  </div>
+
+  {% endblock %}
+</form>
