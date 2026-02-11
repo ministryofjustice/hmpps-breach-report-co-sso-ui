@@ -216,7 +216,6 @@ export default function failuresRoutes(
     cosso.supportingComments = req.body.supportingComments
     cosso.failuresAndEnforcementSaved = true
 
-
     const errorMessages: ErrorMessages = validateFailures(cosso)
     const hasErrors: boolean = Object.keys(errorMessages).length > 0
 
