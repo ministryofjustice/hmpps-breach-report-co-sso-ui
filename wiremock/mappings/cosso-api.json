@@ -455,6 +455,513 @@
         },
         "transformers": ["response-template"]
       }
+    },
+    {
+      "request": {
+        "url": "/cosso-api/cosso/dd88f738-f5f9-4ada-94e8-897b781e5db1",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "id": "dd88f738-f5f9-4ada-94e8-897b781e5db1",
+          "crn": "X012345",
+          "completedDate": null,
+          "whyInBreach": "Why In Breach Test Text",
+          "stepsToPreventBreach": "Preventative Steps Test Text",
+          "riskHistory": "Heres why the risk has changed",
+          "confirmEqualities": false,
+          "recommendations": "continued",
+          "supportingComments": "Additional comments to Support recommendation",
+          "riskOfHarmChanged": true,
+          "cossoContactList": []
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        "transformers": ["response-template"]
+      }
+    },
+    {
+      "request": {
+        "url": "/cosso-api/cosso/referencedata/screeninformation/failures_and_enforcements",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody":
+        [
+          {
+            "screenName": "failures_and_enforcement",
+            "fieldName": "breach_reason",
+            "fieldText": "Why In Breach Help Text"
+          },
+          {
+            "screenName": "failures_and_enforcement",
+            "fieldName": "preventative_steps",
+            "fieldText": "Preventative Steps Help Text"
+          },
+          {
+            "screenName": "failures_and_enforcement",
+            "fieldName": "risk_of_serious_harm",
+            "fieldText": "Risk of Serious Harm Help Text"
+          },
+          {
+            "screenName": "failures_and_enforcement",
+            "fieldName": "recommendation",
+            "fieldText": "Recommendation Help Text"
+          }
+        ],
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        "transformers": ["response-template"]
+      }
+    },
+    {
+      "request": {
+        "url": "/cosso-api/cosso/755df153-992c-4104-a094-42dc88e1a5f9",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "id": "755df153-992c-4104-a094-42dc88e1a5f9",
+          "crn": "X012345",
+          "completedDate": null,
+          "whyInBreach": null,
+          "stepsToPreventBreach": null,
+          "riskHistory": null,
+          "confirmEqualities": false,
+          "recommendations": null,
+          "supportingComments": null,
+          "riskOfHarmChanged": null,
+          "cossoContactList": []
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        "transformers": ["response-template"]
+      }
+    },
+    {
+      "request": {
+        "url": "/cosso-api/cosso/8a5fca4c-f72d-4bae-8170-fbe069ed1aaf",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "id": "8a5fca4c-f72d-4bae-8170-fbe069ed1aaf",
+          "crn": "X012345",
+          "completedDate": null,
+          "whyInBreach": "WhyInBreachTestText",
+          "stepsToPreventBreach": "PreventativeStepsTestText",
+          "riskHistory": "RiskHistoryTestText",
+          "confirmEqualities": true,
+          "recommendations": "continued",
+          "supportingComments": "Additional comments to Support recommendation",
+          "riskOfHarmChanged": true,
+          "cossoContactList": []
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        "transformers": ["response-template"]
+      }
+    },
+    {
+      "request": {
+        "url": "/cosso-api/cosso/8a5fca4c-f72d-4bae-8170-fbe069ed1aaf",
+        "method": "PUT"
+      },
+      "response": {
+        "status": 200
+      }
+    },
+    {
+      "request": {
+        "url": "/cosso-api/cosso/7d03c0ce-4c65-4488-8448-6ae7475dd99b",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "id": "7d03c0ce-4c65-4488-8448-6ae7475dd99b",
+          "crn": "X012345",
+          "completedDate": null,
+          "whyInBreach": "WhyInBreachTestText",
+          "stepsToPreventBreach": "PreventativeStepsTestText",
+          "riskHistory": "RiskHistoryTestText",
+          "confirmEqualities": true,
+          "recommendations": "continued",
+          "supportingComments": "Additional comments to Support recommendation",
+          "riskOfHarmChanged": true,
+          "cossoContactList": []
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        "transformers": ["response-template"]
+      }
+    },
+    {
+      "request": {
+        "url": "/cosso-api/cosso/7d03c0ce-4c65-4488-8448-6ae7475dd99b",
+        "method": "PUT"
+      },
+      "response": {
+        "status": 200
+      }
+    },
+    {
+      "request": {
+        "url": "/cosso-api/cosso/5800666c-d39e-4a04-8277-a82bf484f68d",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "id": "5800666c-d39e-4a04-8277-a82bf484f68d",
+          "crn": "X012345",
+          "completedDate": null,
+          "whyInBreach": null,
+          "stepsToPreventBreach": null,
+          "riskHistory": null,
+          "confirmEqualities": true,
+          "recommendations": null,
+          "supportingComments": null,
+          "riskOfHarmChanged": true,
+          "cossoContactList": []
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        "transformers": ["response-template"]
+      }
+    },
+    {
+      "request": {
+        "url": "/cosso-api/cosso/f90dc7e9-1792-471a-af57-f6425abd58ec",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "id": "f90dc7e9-1792-471a-af57-f6425abd58ec",
+          "crn": "X012345",
+          "completedDate": null,
+          "whyInBreach": "Test Text",
+          "stepsToPreventBreach": "Test Text",
+          "riskHistory": "Test Text",
+          "confirmEqualities": false,
+          "recommendations": "continued",
+          "supportingComments": "Test Text",
+          "riskOfHarmChanged": true,
+          "cossoContactList": []
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        "transformers": ["response-template"]
+      }
+    },
+    {
+      "request": {
+        "url": "/cosso-api/cosso/9adf969d-7632-4703-a039-965b9ecf6db6",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "id": "9adf969d-7632-4703-a039-965b9ecf6db6",
+          "crn": "X012345",
+          "completedDate": null,
+          "whyInBreach": "Test Text",
+          "stepsToPreventBreach": "Test Text",
+          "riskHistory": "Test Text",
+          "confirmEqualities": false,
+          "recommendations": "continued",
+          "supportingComments": "Test Text",
+          "riskOfHarmChanged": true,
+          "cossoContactList": [
+            {
+              "id": "088dbec3-f52d-49cb-9c7e-9b7ab41d7674",
+              "cossoId": "9adf969d-7632-4703-a039-965b9ecf6db6",
+              "deliusContactId": 7,
+              "contactTypeDescription": "TYYYpe Description"
+            }
+          ]
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        "transformers": ["response-template"]
+      }
+    },
+    {
+      "request": {
+        "url": "/cosso-api/cosso/fcba94f3-af98-45b4-9df4-eab8c2ad2c46",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "id": "fcba94f3-af98-45b4-9df4-eab8c2ad2c46",
+          "crn": "X012345",
+          "completedDate": null,
+          "whyInBreach": "Test Text",
+          "stepsToPreventBreach": "Test Text",
+          "riskHistory": "Test Text",
+          "confirmEqualities": false,
+          "recommendations": "continued",
+          "supportingComments": "Test Text",
+          "riskOfHarmChanged": true,
+          "cossoContactList": [
+            {
+              "id": "7c264c3e-6644-430c-8c42-aca5b654b524",
+              "cossoId": "fcba94f3-af98-45b4-9df4-eab8c2ad2c46",
+              "deliusContactId": 42,
+              "contactTypeDescription": "Missing Contact Description"
+            }
+          ]
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        "transformers": ["response-template"]
+      }
+    },
+    {
+      "request": {
+        "url": "/cosso-api/cosso/677f38d6-28be-488f-948c-e5757bd688e3",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "id": "677f38d6-28be-488f-948c-e5757bd688e3",
+          "crn": "X012345",
+          "completedDate": null,
+          "whyInBreach": "Test Text",
+          "stepsToPreventBreach": "Test Text",
+          "riskHistory": "Test Text",
+          "confirmEqualities": true,
+          "recommendations": "continued",
+          "supportingComments": "Test Text",
+          "riskOfHarmChanged": true,
+          "cossoContactList": [
+            {
+              "id": "088dbec3-f52d-49cb-9c7e-9b7ab41d7674",
+              "cossoId": "677f38d6-28be-488f-948c-e5757bd688e3",
+              "deliusContactId": 7,
+              "contactTypeDescription": "TYYYpe Description"
+            }
+          ]
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        "transformers": [
+          "response-template"
+        ]
+      }
+    },
+    {
+      "request": {
+        "url": "/cosso-api/cosso/677f38d6-28be-488f-948c-e5757bd688e3",
+        "method": "PUT"
+      },
+      "response": {
+        "status": 200
+      }
+    },
+    {
+      "request": {
+        "url": "/cosso-api/cosso/contact/bycossoid/677f38d6-28be-488f-948c-e5757bd688e3",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": [
+          {
+            "id": "088dbec3-f52d-49cb-9c7e-9b7ab41d7674",
+            "cossoId": "677f38d6-28be-488f-948c-e5757bd688e3",
+            "deliusContactId": 7,
+            "contactTypeDescription": "TYYYpe Description"
+          },
+          {
+            "id": "46dc2f07-ca17-4fb7-a2d3-043b4d3fdd2d",
+            "cossoId": "677f38d6-28be-488f-948c-e5757bd688e3",
+            "deliusContactId": 0,
+            "contactTypeDescription": "Contact Type Description"
+          }
+        ],
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        "transformers": [
+          "response-template"
+        ]
+      }
+    },
+    {
+      "request": {
+        "url": "/cosso-api/cosso/f34327bb-5e85-45e3-956b-e855fcb4ca59",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "id": "f34327bb-5e85-45e3-956b-e855fcb4ca59",
+          "crn": "X012345",
+          "completedDate": null,
+          "whyInBreach": "Test Text",
+          "stepsToPreventBreach": "Test Text",
+          "riskHistory": "Test Text",
+          "confirmEqualities": true,
+          "recommendations": "continued",
+          "supportingComments": "Test Text",
+          "riskOfHarmChanged": true,
+          "cossoContactList": [
+            {
+              "id": "088dbec3-f52d-49cb-9c7e-9b7ab41d7674",
+              "cossoId": "f34327bb-5e85-45e3-956b-e855fcb4ca59",
+              "deliusContactId": 7,
+              "contactTypeDescription": "TYYYpe Description"
+            },
+            {
+              "id": "7c264c3e-6644-430c-8c42-aca5b654b524",
+              "cossoId": "f34327bb-5e85-45e3-956b-e855fcb4ca59",
+              "deliusContactId": 42,
+              "contactTypeDescription": "Missing Contact Description"
+            }
+          ]
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        "transformers": [
+          "response-template"
+        ]
+      }
+    },
+    {
+      "request": {
+        "url": "/cosso-api/cosso/contact/7c264c3e-6644-430c-8c42-aca5b654b524",
+        "method": "DELETE"
+      },
+      "response": {
+        "status": 200
+      }
+    },
+    {
+      "request": {
+        "url": "/cosso-api/cosso/contact/088dbec3-f52d-49cb-9c7e-9b7ab41d7674",
+        "method": "DELETE"
+      },
+      "response": {
+        "status": 200
+      }
+    },
+    {
+      "request": {
+        "url": "/cosso-api/cosso/f34327bb-5e85-45e3-956b-e855fcb4ca59",
+        "method": "PUT"
+      },
+      "response": {
+        "status": 200
+      }
+    },
+    {
+      "request": {
+        "url": "/cosso-api/cosso/5fad0c74-e7ee-4025-a8eb-4452e206a040",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "id": "5fad0c74-e7ee-4025-a8eb-4452e206a040",
+          "crn": "Z000008",
+          "completedDate": null,
+          "whyInBreach": "Test Text",
+          "stepsToPreventBreach": "Test Text",
+          "riskHistory": "Test Text",
+          "confirmEqualities": false,
+          "recommendations": "continued",
+          "supportingComments": "Test Text",
+          "riskOfHarmChanged": true,
+          "cossoContactList": []
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        "transformers": [
+          "response-template"
+        ]
+      }
+    },
+    {
+      "request": {
+        "url": "/cosso-api/cosso/17dcfbd8-7be9-4470-8748-1dd1e61ea665",
+        "method": "GET"
+      },
+      "response": {
+        "status": 500,
+        "jsonBody": {
+          "message": "Some server side error occurred in the cosso service"
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        "transformers": ["response-template"]
+      }
+    },
+    {
+      "request": {
+        "url": "/cosso-api/cosso/contact",
+        "method": "POST"
+      },
+      "response": {
+        "status": 200
+      }
+    },
+    {
+      "request": {
+        "url": "/cosso-api/cosso/89096e7c-c5cb-4ab0-b741-ae7fcd4d2ae1",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "id": "89096e7c-c5cb-4ab0-b741-ae7fcd4d2ae1",
+          "crn": "X012345",
+          "completedDate": null,
+          "whyInBreach": "Test Text",
+          "stepsToPreventBreach": "Test Text",
+          "riskHistory": "Test Text",
+          "confirmEqualities": true,
+          "recommendations": "continued",
+          "supportingComments": "Test Text",
+          "riskOfHarmChanged": true,
+          "cossoContactList": []
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        "transformers": [
+          "response-template"
+        ]
+      }
+    },
+    {
+      "request": {
+        "url": "/cosso-api/cosso/89096e7c-c5cb-4ab0-b741-ae7fcd4d2ae1",
+        "method": "PUT"
+      },
+      "response": {
+        "status": 200
+      }
     }
   ]
 }

@@ -326,6 +326,101 @@
           "Content-Type": "application/json;charset=UTF-8"
         }
       }
+    },
+    {
+      "request": {
+        "urlPattern": "/ndelius/failures-enforcements/X012345/(.*?)",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "enforceableContacts": [
+            {
+              "id": 0,
+              "datetime": "2025-08-22T13:31:17.343Z",
+              "description": "Contact Description",
+              "type": {
+                "code": "CTTYPE",
+                "description": "Contact Type Description"
+              },
+              "outcome": {
+                "code": "CTOUT",
+                "description": "Contact Outcome Description"
+              },
+              "notes": "Some example notes"
+            },
+            {
+              "id": 7,
+              "datetime": "2025-05-26T13:31:17.343Z",
+              "description": "Contacty",
+              "type": {
+                "code": "CTTYPE",
+                "description": "TYYYpe Description"
+              },
+              "outcome": {
+                "code": "CTOUT",
+                "description": "Outcome of fun"
+              },
+              "notes": "Some example notes"
+            },
+            {
+              "id": 1246574,
+              "datetime": "2026-01-01T13:31:17.343Z",
+              "description": "A Contact",
+              "type": {
+                "code": "CTTYPE",
+                "description": "Custom Type"
+              },
+              "outcome": {
+                "code": "CTOUT",
+                "description": "Custom Description"
+              },
+              "notes": "Some example notes"
+            }
+          ],
+          "registrations": [
+            {
+              "id": 123456,
+              "type": {
+                "code": "REGCDE",
+                "description": "Registration Code Description"
+              },
+              "level": {
+                "code": "REGLVL",
+                "description": "Registration Level Description"
+              },
+              "category": {
+                "code": "REGCAT",
+                "description": "Registration Category Description"
+              },
+              "startDate": "2025-01-01",
+              "endDate": "2025-01-01",
+              "notes": "some notes in here",
+              "documentsLinked": true,
+              "deregistered": false
+            }
+          ]
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        }
+      }
+    },
+    {
+      "request": {
+        "urlPattern": "/ndelius/failures-enforcements/Z000008/(.*?)",
+        "method": "GET"
+      },
+      "response": {
+        "status": 500,
+        "jsonBody": {
+          "message": "Some server side error occurred"
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        }
+      }
     }
   ]
 }

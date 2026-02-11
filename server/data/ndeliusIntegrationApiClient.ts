@@ -35,6 +35,15 @@ export default class NDeliusIntegrationApiClient extends RestClient {
       asSystem(username),
     )
   }
+
+  async getFailures(crn: string, username: string): Promise<Failures> {
+    return this.get(
+      {
+        path: `/failures-enforcements/${crn}/${username}`,
+      },
+      asSystem(username),
+    )
+  }
 }
 
 export interface Name {
@@ -79,6 +88,32 @@ export interface LimitedAccessCheck {
 export interface ReferenceData {
   code: string
   description: string
+}
+
+export interface EnforceableContact {
+  id: number
+  datetime: string
+  description: string
+  type: ReferenceData
+  outcome: ReferenceData
+  notes: string
+}
+
+export interface Registration {
+  id: number
+  type: ReferenceData
+  level: ReferenceData
+  category: ReferenceData
+  startDate: string
+  endDate: string
+  notes: string
+  documentsLinked: boolean
+  deregistered: boolean
+}
+
+export interface Failures {
+  enforceableContacts: EnforceableContact[]
+  registrations: Registration[]
 }
 
 export interface DeliusRequirement {

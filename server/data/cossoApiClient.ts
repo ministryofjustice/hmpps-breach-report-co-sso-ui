@@ -56,6 +56,73 @@ export default class CossoApiClient extends RestClient {
       asSystem(username),
     )
   }
+
+  async createCossoContact(cossoContact: CossoContact, username: string): Promise<string> {
+    return this.post(
+      {
+        path: `/cosso/contact`,
+        data: cossoContact as unknown as Record<string, unknown>,
+      },
+      asSystem(username),
+    )
+  }
+
+  async updateCossoContact(cossoContact: CossoContact, username: string) {
+    return this.put(
+      {
+        path: `/cosso/contact/${cossoContact.id}`,
+        data: cossoContact as unknown as Record<string, unknown>,
+      },
+      asSystem(username),
+    )
+  }
+
+  async deleteContact(id: string, username: string) {
+    return this.delete(
+      {
+        path: `/cosso/contact/${id}`,
+      },
+      asSystem(username),
+    )
+  }
+
+  async batchUpdateContacts(cossoId: string, contacts: Array<CossoContact>, username: string): Promise<void> {
+    const promises = []
+    for (const contact of contacts) {
+      if (contact.id) {
+        promises.push(this.updateCossoContact(contact, username))
+      } else {
+        promises.push(this.createCossoContact(contact, username))
+      }
+    }
+    await Promise.all(promises)
+  }
+
+  async batchDeleteContacts(contacts: Array<CossoContact>, username: string): Promise<void> {
+    const promises = []
+    for (const contact of contacts) {
+      promises.push(this.deleteContact(contact.id, username))
+    }
+    await Promise.all(promises)
+  }
+
+  async getCossoContactsForCosso(id: string, username: string): Promise<Array<CossoContact>> {
+    return this.get(
+      {
+        path: `/cosso/contact/bycossoid/${id}`,
+      },
+      asSystem(username),
+    )
+  }
+
+  async getScreenInformationForScreen(screen: string, username: string): Promise<Array<ScreenInformation>> {
+    return this.get(
+      {
+        path: `/cosso/referencedata/screeninformation/${screen}`,
+      },
+      asSystem(username),
+    )
+  }
 }
 
 export interface Cosso {
@@ -70,6 +137,16 @@ export interface Cosso {
   dateOfBirth: string
   basicDetailsSaved: boolean
   amendments: CossoAmendment[]
+  cossoContactList: CossoContact[]
+  whyInBreach: string
+  stepsToPreventBreach: string
+  complianceToDate: string
+  riskHistory: string
+  confirmEqualities: boolean
+  recommendations: string
+  supportingComments: string
+  riskOfHarmChanged: boolean
+  failuresAndEnforcementSaved: boolean
 }
 
 export interface CossoAddress {
@@ -92,4 +169,17 @@ export interface CossoAmendment {
   amendmentDetails: string
   amendmentReason: string
   amendmentDate: string
+}
+
+export interface CossoContact {
+  id?: string
+  cossoId: string
+  deliusContactId: number
+  contactTypeDescription: string
+}
+
+export interface ScreenInformation {
+  screenName: string
+  fieldName: string
+  fieldText: string
 }
