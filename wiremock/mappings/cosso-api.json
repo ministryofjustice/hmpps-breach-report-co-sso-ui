@@ -60,7 +60,6 @@
         ]
       }
     },
-
     {
       "request": {
         "url": "/cosso-api/cosso/00000000-0000-0000-0000-100000000005",
@@ -76,10 +75,11 @@
         "headers": {
           "Content-Type": "application/json;charset=UTF-8"
         },
-        "transformers": ["response-template"]
+        "transformers": [
+          "response-template"
+        ]
       }
     },
-
     {
       "request": {
         "url": "/cosso-api/cosso/00000000-0000-0000-0000-100000000006",
@@ -95,10 +95,11 @@
         "headers": {
           "Content-Type": "application/json;charset=UTF-8"
         },
-        "transformers": ["response-template"]
+        "transformers": [
+          "response-template"
+        ]
       }
     },
-
     {
       "request": {
         "url": "/cosso-api/cosso/00000000-0000-0000-0000-100000000007",
@@ -114,10 +115,11 @@
         "headers": {
           "Content-Type": "application/json;charset=UTF-8"
         },
-        "transformers": ["response-template"]
+        "transformers": [
+          "response-template"
+        ]
       }
     },
-
     {
       "request": {
         "url": "/cosso-api/cosso/00000000-0000-0000-0000-100000000008",
@@ -133,7 +135,9 @@
         "headers": {
           "Content-Type": "application/json;charset=UTF-8"
         },
-        "transformers": ["response-template"]
+        "transformers": [
+          "response-template"
+        ]
       }
     },
     {
@@ -151,7 +155,9 @@
         "headers": {
           "Content-Type": "application/json;charset=UTF-8"
         },
-        "transformers": ["response-template"]
+        "transformers": [
+          "response-template"
+        ]
       }
     },
     {
@@ -169,7 +175,9 @@
         "headers": {
           "Content-Type": "application/json;charset=UTF-8"
         },
-        "transformers": ["response-template"]
+        "transformers": [
+          "response-template"
+        ]
       }
     },
     {
@@ -187,7 +195,9 @@
         "headers": {
           "Content-Type": "application/json;charset=UTF-8"
         },
-        "transformers": ["response-template"]
+        "transformers": [
+          "response-template"
+        ]
       }
     },
     {
@@ -203,7 +213,9 @@
         "headers": {
           "Content-Type": "application/json;charset=UTF-8"
         },
-        "transformers": ["response-template"]
+        "transformers": [
+          "response-template"
+        ]
       }
     },
     {
@@ -221,7 +233,9 @@
         "headers": {
           "Content-Type": "application/json;charset=UTF-8"
         },
-        "transformers": ["response-template"]
+        "transformers": [
+          "response-template"
+        ]
       }
     },
     {
@@ -259,7 +273,9 @@
         "headers": {
           "Content-Type": "application/json;charset=UTF-8"
         },
-        "transformers": ["response-template"]
+        "transformers": [
+          "response-template"
+        ]
       }
     },
     {
@@ -275,7 +291,9 @@
         "headers": {
           "Content-Type": "application/json;charset=UTF-8"
         },
-        "transformers": ["response-template"]
+        "transformers": [
+          "response-template"
+        ]
       }
     },
     {
@@ -327,7 +345,9 @@
         "headers": {
           "Content-Type": "application/json;charset=UTF-8"
         },
-        "transformers": ["response-template"]
+        "transformers": [
+          "response-template"
+        ]
       }
     },
     {
@@ -345,7 +365,9 @@
         "headers": {
           "Content-Type": "application/json;charset=UTF-8"
         },
-        "transformers": ["response-template"]
+        "transformers": [
+          "response-template"
+        ]
       }
     },
     {
@@ -363,7 +385,9 @@
         "headers": {
           "Content-Type": "application/json;charset=UTF-8"
         },
-        "transformers": ["response-template"]
+        "transformers": [
+          "response-template"
+        ]
       }
     },
     {
@@ -381,7 +405,9 @@
         "headers": {
           "Content-Type": "application/json;charset=UTF-8"
         },
-        "transformers": ["response-template"]
+        "transformers": [
+          "response-template"
+        ]
       }
     },
     {
@@ -408,7 +434,9 @@
         "headers": {
           "Content-Type": "application/json;charset=UTF-8"
         },
-        "transformers": ["response-template"]
+        "transformers": [
+          "response-template"
+        ]
       }
     },
     {
@@ -435,7 +463,9 @@
         "headers": {
           "Content-Type": "application/json;charset=UTF-8"
         },
-        "transformers": ["response-template"]
+        "transformers": [
+          "response-template"
+        ]
       }
     },
     {
@@ -453,7 +483,161 @@
         "headers": {
           "Content-Type": "application/json;charset=UTF-8"
         },
-        "transformers": ["response-template"]
+        "transformers": [
+          "response-template"
+        ]
+      }
+    },
+    {
+      "request": {
+        "url": "/cosso-api/cosso/9de01b5e-30bd-4989-b0ad-29d5df2b70cs",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "id": "9de01b5e-30bd-4989-b0ad-29d5df2b70cs",
+          "crn": "X012345",
+          "titleAndFullName": "Billy The Kid",
+          "dateOfBirth": "1980-03-17",
+          "postalAddress": {
+            "id": 1,
+            "status": "Postal",
+            "buildingName": "Older Postal Address",
+            "buildingNumber": "1",
+            "streetName": "Older Postal Address",
+            "townCity": "Postal Town",
+            "district": "Postal District",
+            "county": "Postal County",
+            "postcode": "AA1 1AA",
+            "startDate": "2025-02-15"
+          },
+          "completedDate": null,
+          "basicDetailsSaved": true,
+          "offenceDetailsSaved": true,
+          "failuresAndEnforcementSaved": true,
+          "roAndWitnessDetailsSaved": true,
+          "complianceToDateSaved": true,
+          "roEmailAddress": "ro_email@email.com",
+          "roTelephoneNumber": "0123456789",
+          "roTitleAndFullName": "Mr Ro Test",
+          "witnessAvailability": "Witness availability details",
+          "probationArea": "London",
+          "workAddress": {
+            "id": 2,
+            "status": "Work",
+            "buildingName": "Work Address",
+            "buildingNumber": "2",
+            "streetName": "Work Address",
+            "townCity": "Old Town",
+            "district": "District Address",
+            "county": "County",
+            "postcode": "BB2 2BB",
+            "startDate": "2025-01-02"
+          },
+          "mainOffence": "Offence Description",
+          "sentencingCourt": "TEST style Court",
+          "sentenceDate": "2025-04-01",
+          "sentenceType": "Sentence Imposed Description",
+          "sentenceLength": "20 Days",
+          "requirementList": [
+            {
+              "id": 1234,
+              "startDate": "2025-01-01",
+              "requirementTypeMainCategoryDescription": "Requirement Type Main Category Description",
+              "requirementLength": "20 Months",
+              "requirementTypeSubCategoryDescription": "Requirement Type Sub Category Description",
+              "requirementSecondLength": "12 Months"
+            },
+            {
+              "id": 4444,
+              "startDate": "2025-02-41",
+              "requirementTypeMainCategoryDescription": "Another Main Category Description",
+              "requirementLength": "2 Months",
+              "requirementTypeSubCategoryDescription": "Sub Cat Description",
+              "requirementSecondLength": "1 Months"
+            }
+          ],
+          "amendments": [
+            {
+              "id": "00000000-0000-0000-0000-000000000001",
+              "cossoId": "f92b344c-5a20-405c-b407-3bac4a507043",
+              "amendmentDetails": "TEST DETAILS",
+              "amendmentReason": "TEST REASON",
+              "amendmentDate": "2026-01-14"
+            },
+            {
+              "id": "00000000-0000-0000-0000-000000000001",
+              "cossoId": "f92b344c-5a20-405c-b407-3bac4a507043",
+              "amendmentDetails": "SECOND DETAILS",
+              "amendmentReason": "SECOND REASON",
+              "amendmentDate": "2025-12-25"
+            }
+          ],
+          "whyInBreach": "Breach reason details",
+          "stepsToPreventBreach": "Steps to prevent breach details",
+          "riskOfHarmChanged": true,
+          "riskHistory": "Risk history details comments",
+          "recommendations":"The order is continued",
+          "supportingComments":"The order is continues supporting comments",
+          "diversityConfirmation":true,
+          "complianceToDate": "Description of compliance with the whole order to date",
+          "signature": "Ro Test 10/02/2026"
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        "transformers": [
+          "response-template"
+        ]
+      }
+    },
+    {
+      "request": {
+        "url": "/cosso-api/cosso/9c7f4a6d-3e2b-4d8f-9b61-2c7f5a9e1d34",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "id": "9c7f4a6d-3e2b-4d8f-9b61-2c7f5a9e1d34",
+          "completedDate": null,
+          "basicDetailsSaved": false,
+          "offenceDetailsSaved": false,
+          "failuresAndEnforcementSaved": false,
+          "roAndWitnessDetailsSaved": false,
+          "complianceToDateSaved": false
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        "transformers": [
+          "response-template"
+        ]
+      }
+    },
+    {
+      "request": {
+        "url": "/cosso-api/cosso/e3b2f8c1-6a4d-4c92-9f27-8d5a1c7e4b90",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "id": "e3b2f8c1-6a4d-4c92-9f27-8d5a1c7e4b90",
+          "completedDate": null,
+          "basicDetailsSaved": true,
+          "offenceDetailsSaved": true,
+          "failuresAndEnforcementSaved": true,
+          "roAndWitnessDetailsSaved": true,
+          "complianceToDateSaved": true
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        "transformers": [
+          "response-template"
+        ]
       }
     }
   ]

@@ -6,15 +6,726 @@
 {% block content %}
   {% from "moj/components/side-navigation/macro.njk" import mojSideNavigation %}
   {% from "govuk/components/panel/macro.njk" import govukPanel %}
-
+  {% from "govuk/components/button/macro.njk" import govukButton %}
 
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-one-third">
       {% include "pages/side-nav.njk" %}
     </div>
     <div class="govuk-grid-column-two-thirds">
-      <p>Check Your Report</p>
+      <h1 id="page-title" class="govuk-heading-l">Breach Notice - Check Your Answers</h1>
+
+      <!-- basic details section-->
+      <div class="govuk-summary-card">
+        <div class="govuk-summary-card__title-wrapper">
+          <h2 class="govuk-summary-card__title">
+            Basic Details
+          </h2>
+          <ul class="govuk-summary-card__actions">
+            <li class="govuk-summary-card__action">
+              {% if cosso.basicDetailsSaved %}
+                <a id="change-basic-details" class="govuk-link"
+                   href="/basic-details/{{ cossoId }}?returnTo=check-your-report">Change<span
+                    class="govuk-visually-hidden">Basic Details</span></a>
+              {% endif %}
+            </li>
+          </ul>
+        </div>
+        <div class="govuk-summary-card__content">
+          <dl class="govuk-summary-list">
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                Title and Full Name
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {% if cosso.titleAndFullName == null and cosso.basicDetailsSaved %}
+                  <a id="cya-link-title-and-name" href="/basic-details/{{ cossoId }}?returnTo=check-your-report"
+                     class="govuk-link">enter required
+                    information<span class="govuk-visually-hidden"> for Title and Full name</span></a>
+                {% else %}
+                  <p id="offenderName"> {{ cosso.titleAndFullName }} </p>
+                {% endif %}
+              </dd>
+              <dd class="govuk-summary-list__actions">
+                {% if cosso.titleAndFullName == null %}
+                  <span class="govuk-tag--light-blue">Required</span>
+                {% endif %}
+              </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                CRN
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {% if cosso.crn == null and cosso.basicDetailsSaved %}
+                  <a id="cya-link-crn" href="/basic-details/{{ cossoId }}?returnTo=check-your-report"
+                     class="govuk-link">enter required
+                    information<span class="govuk-visually-hidden">CRN</span></a>
+                {% else %}
+                  <p id="crn"> {{ cosso.crn }} </p>
+                {% endif %}
+              </dd>
+              <dd class="govuk-summary-list__actions">
+                {% if cosso.crn == null %}
+                  <span class="govuk-tag--light-blue">Required</span>
+                {% endif %}
+              </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                Postal Address
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {% if cosso.postalAddress == null and cosso.basicDetailsSaved %}
+                  <a id="cya-link-postal-address" href="/basic-details/{{ cossoId }}?returnTo=check-your-report"
+                     class="govuk-link">enter required
+                    information<span class="govuk-visually-hidden"> for Postal Address</span></a>
+                {% else %}
+                  {% if cosso.postalAddress.officeDescription != null %}
+                    <span id="postal-address-office-description"> {{ cosso.postalAddress.officeDescription }} </span><br> {% endif %}
+                  {% if cosso.postalAddress.buildingName != null %}
+                    <span id="postal-address-building-name"> {{ cosso.postalAddress.buildingName }} </span><br> {% endif %}
+                  {% if cosso.postalAddress.buildingNumber != null or cosso.postalAddress.streetName != null %}
+                    <span id="postal-address-building-number-street-name">{{ cosso.postalAddress.buildingNumber }}
+                      {{ cosso.postalAddress.streetName }}</span><br> {% endif %}
+                  {% if cosso.postalAddress.district != null %}
+                    <span id="postal-address-district">{{ cosso.postalAddress.district }}</span><br> {% endif %}
+                  {% if cosso.postalAddress.townCity != null %}
+                    <span id="postal-address-town">{{ cosso.postalAddress.townCity }}</span><br> {% endif %}
+                  {% if cosso.postalAddress.county != null %}
+                    <span id="postal-address-county">{{ cosso.postalAddress.county }}</span><br> {% endif %}
+                  {% if cosso.postalAddress.postcode != null %}
+                    <span id="postal-address-postcode">{{ cosso.postalAddress.postcode }}</span> {% endif %}
+                {% endif %}
+                <p id="postalAddress">
+              </dd>
+              <dd class="govuk-summary-list__actions">
+                {% if cosso.postalAddress == null %}
+                  <span class="govuk-tag--light-blue">Required</span>
+                {% endif %}
+              </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                Date of Birth
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {% if cosso.dateOfBirth == null and cosso.basicDetailsSaved %}
+                  <a id="cya-link-date-of-birth" href="/basic-details/{{ cossoId }}?returnTo=check-your-report"
+                     class="govuk-link">enter required
+                    information<span class="govuk-visually-hidden"> for Date of Birth</span></a>
+                {% else %}
+                  <span id="dob">{{ dateOfBirth }}</span>
+                {% endif %}
+              </dd>
+              <dd class="govuk-summary-list__actions">
+                {% if cosso.dateOfBirth == null %}
+                  <span class="govuk-tag--light-blue">
+                            Required
+                </span>
+                {% endif %}
+              </dd>
+            </div>
+          </dl>
+        </div>
+      </div>
+
+      <div class="govuk-summary-card">
+        <div class="govuk-summary-card__title-wrapper">
+          <h2 class="govuk-summary-card__title">
+            RO and Witness Details
+          </h2>
+          <ul class="govuk-summary-card__actions">
+            <li class="govuk-summary-card__action">
+              {% if cosso.roAndWitnessDetailsSaved %}
+                <a id="change-ro-and-witness-details" class="govuk-link"
+                   href="/witness-details/{{ cossoId }}?returnTo=check-your-report">Change<span
+                    class="govuk-visually-hidden">RO and Witness Details</span></a>
+              {% endif %}
+            </li>
+          </ul>
+        </div>
+        <div class="govuk-summary-card__content">
+          <dl class="govuk-summary-list">
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                Full name of RO
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {% if cosso.roAndWitnessDetailsSaved and (not cosso.roTitleAndFullName or cosso.roTitleAndFullName | trim == '') %}
+                  <a id="cya-link-ro-title-and-full-name"
+                     href="/witness-details/{{ cossoId }}?returnTo=check-your-report"
+                     class="govuk-link">enter required
+                    information<span class="govuk-visually-hidden">RO title and full name</span></a>
+                {% else %}
+                  <span id="ro-full-name">{{ cosso.roTitleAndFullName }}</span>
+                {% endif %}
+              </dd>
+              <dd class="govuk-summary-list__actions">
+                {% if not cosso.roTitleAndFullName or cosso.roTitleAndFullName | trim == '' %}
+                  <span class="govuk-tag--light-blue">Required</span>
+                {% endif %}
+              </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                Probation Area
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {% if cosso.roAndWitnessDetailsSaved and (not cosso.probationArea or cosso.probationArea | trim == '') %}
+                  <a id="cya-link-probation-area" href="/witness-details/{{ cossoId }}?returnTo=check-your-report"
+                     class="govuk-link">enter required
+                    information<span class="govuk-visually-hidden">Probation area</span></a>
+                {% else %}
+                  <span id="probation-area">{{ cosso.probationArea }}</span>
+                {% endif %}
+              </dd>
+              <dd class="govuk-summary-list__actions">
+                {% if not cosso.probationArea or cosso.probationArea | trim == '' %}
+                  <span class="govuk-tag--light-blue">Required</span>
+                {% endif %}
+              </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                Office Address
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {% if cosso.workAddress == null and cosso.roAndWitnessDetailsSaved %}
+                  <a id="cya-link-office-address" href="/witness-details/{{ cossoId }}?returnTo=check-your-report"
+                     class="govuk-link">enter required
+                    information<span class="govuk-visually-hidden"> for Work Address</span></a>
+                {% else %}
+                  {% if cosso.workAddress.officeDescription != null %}
+                    <span id="work-address-office-description">{{ cosso.workAddress.officeDescription }}</span><br>
+                  {% endif %}
+                  {% if cosso.workAddress.buildingName != null %}
+                    <span id="work-address-building-name">{{ cosso.workAddress.buildingName }}</span><br>
+                  {% endif %}
+                  {% if cosso.workAddress.buildingNumber != null or cosso.workAddress.streetName != null %}
+                    <span id="work-address-building-number-street-name">
+                      {{ cosso.workAddress.buildingNumber }} {{ cosso.postalAddress.streetName }}</span><br>
+                  {% endif %}
+                  {% if cosso.workAddress.district != null %}
+                    <span id="work-address-district">{{ cosso.workAddress.district }}</span><br>
+                  {% endif %}
+                  {% if cosso.workAddress.townCity != null %}
+                    <span id="work-address-town">{{ cosso.workAddress.townCity }}</span><br>
+                  {% endif %}
+                  {% if cosso.workAddress.county != null %}
+                    <span id="work-address-county">{{ cosso.workAddress.county }}</span><br>
+                  {% endif %}
+                  {% if cosso.workAddress.postcode != null %}
+                    <span id="work-address-postcode">{{ cosso.workAddress.postcode }}</span>
+                  {% endif %}
+                {% endif %}
+              </dd>
+              <dd class="govuk-summary-list__actions">
+                {% if cosso.workAddress == null %}
+                  <span class="govuk-tag--light-blue">Required</span>
+                {% endif %}
+              </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                Phone Number
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {% if cosso.roAndWitnessDetailsSaved and (not cosso.roTelephoneNumber or cosso.roTelephoneNumber | trim == '') %}
+                  <a id="cya-link-ro-telephone-number" href="/witness-details/{{ cossoId }}?returnTo=check-your-report"
+                     class="govuk-link">enter required
+                    information<span class="govuk-visually-hidden">Ro telephone number</span></a>
+                {% else %}
+                  <span id="ro-telephone-number">{{ cosso.roTelephoneNumber }}</span>
+                {% endif %}
+              </dd>
+              <dd class="govuk-summary-list__actions">
+                {% if not cosso.roTelephoneNumber or cosso.roTelephoneNumber | trim == '' %}
+                  <span class="govuk-tag--light-blue">Required</span>
+                {% endif %}
+              </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                Email Address
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {% if cosso.roAndWitnessDetailsSaved and (not cosso.roEmailAddress or cosso.roEmailAddress | trim == '') %}
+                  <a id="cya-link-ro-email-address" href="/witness-details/{{ cossoId }}?returnTo=check-your-report"
+                     class="govuk-link">enter required
+                    information<span class="govuk-visually-hidden">RO email address</span></a>
+                {% else %}
+                  <span id="ro-email-address">{{ cosso.roEmailAddress }}</span>
+                {% endif %}
+              </dd>
+              <dd class="govuk-summary-list__actions">
+                {% if not cosso.roEmailAddress or cosso.roEmailAddress | trim == '' %}
+                  <span class="govuk-tag--light-blue">Required</span>
+                {% endif %}
+              </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                Witness availability
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {% if cosso.roAndWitnessDetailsSaved and (not cosso.witnessAvailability or cosso.witnessAvailability | trim == '') %}
+                  <a id="cya-link-witness-availability" href="/witness-details/{{ cossoId }}?returnTo=check-your-report"
+                     class="govuk-link">enter required
+                    information<span class="govuk-visually-hidden">Witness availability</span></a>
+                {% else %}
+                  <span id="witness-availability">{{ cosso.witnessAvailability }}</span>
+                {% endif %}
+              </dd>
+              <dd class="govuk-summary-list__actions">
+                {% if not cosso.witnessAvailability or cosso.witnessAvailability | trim == '' %}
+                  <span class="govuk-tag--light-blue">Required</span>
+                {% endif %}
+              </dd>
+            </div>
+          </dl>
+        </div>
+      </div>
+
+      <div class="govuk-summary-card">
+        <div class="govuk-summary-card__title-wrapper">
+          <h2 class="govuk-summary-card__title">
+            Offence Details
+          </h2>
+          <ul class="govuk-summary-card__actions">
+            <li class="govuk-summary-card__action">
+              {% if cosso.offenceDetailsSaved %}
+                <a id="change-offence-details" class="govuk-link"
+                   href="/offence-details/{{ cossoId }}?returnTo=check-your-report">Change<span
+                    class="govuk-visually-hidden">Offence Details</span></a>
+              {% endif %}
+            </li>
+          </ul>
+        </div>
+        <div class="govuk-summary-card__content">
+          <dl class="govuk-summary-list">
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                Main Offence
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {% if cosso.offenceDetailsSaved and (not cosso.mainOffence or cosso.mainOffence | trim == '') %}
+                  <a id="cya-link-main-offence" href="/offence-details/{{ cossoId }}?returnTo=check-your-report"
+                     class="govuk-link">enter required
+                    information<span class="govuk-visually-hidden">Main Offence</span></a>
+                {% else %}
+                  <span id="main-offence">{{ cosso.mainOffence }}</span>
+                {% endif %}
+              </dd>
+              <dd class="govuk-summary-list__actions">
+                {% if not cosso.mainOffence or cosso.mainOffence | trim == '' %}
+                  <span class="govuk-tag--light-blue">Required</span>
+                {% endif %}
+              </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                Sentencing Court
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {% if cosso.offenceDetailsSaved and (not cosso.sentencingCourt or cosso.sentencingCourt | trim == '') %}
+                  <a id="cya-link-sentencing-court" href="/offence-details/{{ cossoId }}?returnTo=check-your-report"
+                     class="govuk-link">enter required
+                    information<span class="govuk-visually-hidden">Sentencing court</span></a>
+                {% else %}
+                  <span id="sentencing-court">{{ cosso.sentencingCourt }}</span>
+                {% endif %}
+              </dd>
+              <dd class="govuk-summary-list__actions">
+                {% if not cosso.sentencingCourt or cosso.sentencingCourt | trim == '' %}
+                  <span class="govuk-tag--light-blue">Required</span>
+                {% endif %}
+              </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                Date of sentence
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {% if cosso.offenceDetailsSaved and (not sentenceDate or sentenceDate | trim == '') %}
+                  <a id="cya-link-sentence-date" href="/offence-details/{{ cossoId }}?returnTo=check-your-report"
+                     class="govuk-link">enter required
+                    information<span class="govuk-visually-hidden">Sentence date</span></a>
+                {% else %}
+                  <span id="sentence-date">{{ sentenceDate }}</span>
+                {% endif %}
+              </dd>
+              <dd class="govuk-summary-list__actions">
+                {% if not sentenceDate or sentenceDate | trim == '' %}
+                  <span class="govuk-tag--light-blue">Required</span>
+                {% endif %}
+              </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                Sentence Imposed
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {% if cosso.offenceDetailsSaved and (not cosso.sentenceType or cosso.sentenceType | trim == '') %}
+                  <a id="cya-link-imposed-sentence" href="/offence-details/{{ cossoId }}?returnTo=check-your-report"
+                     class="govuk-link">enter required
+                    information<span class="govuk-visually-hidden">Sentence imposed</span></a>
+                {% else %}
+                  <span id="sentence-imposed">{{ cosso.sentenceType }}</span>
+                {% endif %}
+              </dd>
+              <dd class="govuk-summary-list__actions">
+                {% if not cosso.sentenceType or cosso.sentenceType | trim == '' %}
+                  <span class="govuk-tag--light-blue">Required</span>
+                {% endif %}
+              </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                Sentence Length
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {% if cosso.offenceDetailsSaved and (not cosso.sentenceLength or cosso.sentenceLength | trim == '') %}
+                  <a id="cya-link-sentence-length" href="/offence-details/{{ cossoId }}?returnTo=check-your-report"
+                     class="govuk-link">enter required
+                    information<span class="govuk-visually-hidden">Sentence length</span></a>
+                {% else %}
+                  <span id="sentence-length">{{ cosso.sentenceLength }}</span>
+                {% endif %}
+              </dd>
+              <dd class="govuk-summary-list__actions">
+                {% if not cosso.sentenceLength or cosso.sentenceLength | trim == '' %}
+                  <span class="govuk-tag--light-blue">Required</span>
+                {% endif %}
+              </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                Requirements
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {% if cosso.offenceDetailsSaved and (not cosso.requirementList) %}
+                  <a id="cya-link-requirements" href="/offence-details/{{ cossoId }}?returnTo=check-your-report"
+                     class="govuk-link">enter required
+                    information<span class="govuk-visually-hidden">Requirements </span></a>
+                {% else %}
+                  {% for req in cosso.requirementList %}
+                    <p id="requirement-info-{{ loop.index }}">{{ req.requirementTypeMainCategoryDescription }}
+                      <br>
+                      {{ req.requirementLength }}
+                      <br>
+                      {{ req.requirementSecondLength }}
+                    </p>
+                  {% endfor %}
+                {% endif %}
+              </dd>
+              <dd class="govuk-summary-list__actions">
+                {% if not cosso.sentenceLength or cosso.sentenceLength | trim == '' %}
+                  <span class="govuk-tag--light-blue">Required</span>
+                {% endif %}
+              </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                Amendments
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {% if cosso.offenceDetailsSaved and (not cosso.amendments) %}
+                  <a id="cya-link-amendments" href="/offence-details/{{ cossoId }}?returnTo=check-your-report"
+                     class="govuk-link">enter required
+                    information<span class="govuk-visually-hidden"> Amendments</span></a>
+                {% else %}
+                  {% for req in cosso.amendments %}
+                    <p id="amendment-info-{{ loop.index }}">{{ req.amendmentDetails }}
+                      <br>
+                      {{ req.amendmentReason }}
+                      <br>
+                      {{ req.amendmentDate }}
+                    </p>
+                  {% endfor %}
+                {% endif %}
+              </dd>
+              <dd class="govuk-summary-list__actions">
+                {% if not cosso.sentenceLength or cosso.sentenceLength | trim == '' %}
+                  <span class="govuk-tag--light-blue">Required</span>
+                {% endif %}
+              </dd>
+            </div>
+          </dl>
+        </div>
+      </div>
+
+      <div class="govuk-summary-card">
+        <div class="govuk-summary-card__title-wrapper">
+          <h2 class="govuk-summary-card__title">
+            Failures and Enforcement
+          </h2>
+          <ul class="govuk-summary-card__actions">
+            <li class="govuk-summary-card__action">
+              {% if cosso.failuresAndEnforcementSaved %}
+                <a id="change-failures-and-enforcement" class="govuk-link"
+                   href="/failures/{{ cossoId }}?returnTo=check-your-report">Change<span
+                    class="govuk-visually-hidden">Failures and Enforcement</span></a>
+              {% endif %}
+            </li>
+          </ul>
+        </div>
+        <div class="govuk-summary-card__content">
+          <dl class="govuk-summary-list">
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                Why is this person in breach?
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {% if cosso.failuresAndEnforcementSaved and (not cosso.whyInBreach or cosso.whyInBreach | trim == '') %}
+                  <a id="cya-link-why-in-breach" href="/failures/{{ cossoId }}?returnTo=check-your-report"
+                     class="govuk-link">enter required
+                    information<span class="govuk-visually-hidden">Why in breach?</span></a>
+                {% else %}
+                  <span id="why-in-breach">{{ cosso.whyInBreach }}</span>
+                {% endif %}
+              </dd>
+              <dd class="govuk-summary-list__actions">
+                {% if not cosso.whyInBreach or cosso.whyInBreach | trim == '' %}
+                  <span class="govuk-tag--light-blue">Required</span>
+                {% endif %}
+              </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                What steps have been taken to prevent this from happening?
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {% if cosso.failuresAndEnforcementSaved and (not cosso.stepsToPreventBreach or cosso.stepsToPreventBreach | trim == '') %}
+                  <a id="cya-link-steps-to-prevent-breach" href="/failures/{{ cossoId }}?returnTo=check-your-report"
+                     class="govuk-link">enter required
+                    information<span class="govuk-visually-hidden">Steps to prevent a breach</span></a>
+                {% else %}
+                  <span id="steps-to-prevent-breach">{{ cosso.stepsToPreventBreach }}</span>
+                {% endif %}
+              </dd>
+              <dd class="govuk-summary-list__actions">
+                {% if not cosso.stepsToPreventBreach or cosso.stepsToPreventBreach | trim == '' %}
+                  <span class="govuk-tag--light-blue">Required</span>
+                {% endif %}
+              </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                Has the risk of serious self harm changed since the order was imposed?
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {% if cosso.failuresAndEnforcementSaved and (not cosso.riskOfHarmChanged or cosso.riskOfHarmChanged is null) %}
+                  <a id="cya-link-risk-of-harm-changed" href="/failures/{{ cossoId }}?returnTo=check-your-report"
+                     class="govuk-link">enter required
+                    information<span class="govuk-visually-hidden">Risk of harm changed?</span></a>
+                {% else %}
+                  <span id="risk-changed">{{ 'Yes' if cosso.riskOfHarmChanged else 'No' }}</span>
+                {% endif %}
+              </dd>
+              <dd class="govuk-summary-list__actions">
+                {% if not cosso.riskOfHarmChanged or cosso.riskOfHarmChanged is null %}
+                  <span class="govuk-tag--light-blue">Required</span>
+                {% endif %}
+              </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                Please describe
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {% if cosso.failuresAndEnforcementSaved and (not cosso.riskHistory or cosso.riskHistory | trim == '') %}
+                  <a id="cya-link-please-describe-harm-changed"
+                     href="/failures/{{ cossoId }}?returnTo=check-your-report"
+                     class="govuk-link">enter required
+                    information<span class="govuk-visually-hidden">Please describe</span></a>
+                {% else %}
+                  <span id="risk-history">{{ cosso.riskHistory }}</span>
+                {% endif %}
+              </dd>
+              <dd class="govuk-summary-list__actions">
+                {% if not cosso.riskHistory or cosso.riskHistory is null %}
+                  <span class="govuk-tag--light-blue">Required</span>
+                {% endif %}
+              </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                Diversity confirmation
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {% if cosso.failuresAndEnforcementSaved and (cosso.diversityConfirmation !== true) %}
+                  <a id="cya-link-diversity-confirmation" href="/failures/{{ cossoId }}?returnTo=check-your-report"
+                     class="govuk-link">enter required
+                    information<span class="govuk-visually-hidden">Diversity confirmation</span></a>
+                {% else %}
+                  <span id="diversity-confirmation">Confirmed</span>
+                {% endif %}
+              </dd>
+              <dd class="govuk-summary-list__actions">
+                {% if not cosso.recommendations or cosso.recommendations | trim == '' %}
+                  <span class="govuk-tag--light-blue">Required</span>
+                {% endif %}
+              </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                Recommendation
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {% if cosso.failuresAndEnforcementSaved and (not cosso.recommendations or cosso.recommendations | trim == '') %}
+                  <a id="cya-link-recommendation" href="/failures/{{ cossoId }}?returnTo=check-your-report"
+                     class="govuk-link">enter required
+                    information<span class="govuk-visually-hidden">Recommendations</span></a>
+                {% else %}
+                  <span id="recommendations">{{ cosso.recommendations }}</span>
+                {% endif %}
+              </dd>
+              <dd class="govuk-summary-list__actions">
+                {% if not cosso.recommendations or cosso.recommendations | trim == '' %}
+                  <span class="govuk-tag--light-blue">Required</span>
+                {% endif %}
+              </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                Comments to support the recommendation
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {% if cosso.failuresAndEnforcementSaved and (not cosso.supportingComments or cosso.supportingComments | trim == '') %}
+                  <a id="cya-link-supporting-comments" href="/failures/{{ cossoId }}?returnTo=check-your-report"
+                     class="govuk-link">enter required
+                    information<span class="govuk-visually-hidden">Supporting comments</span></a>
+                {% else %}
+                    <span id="supporting-comments">{{ cosso.supportingComments }}</span>
+                {% endif %}
+              </dd>
+              <dd class="govuk-summary-list__actions">
+                {% if not cosso.supportingComments or cosso.supportingComments | trim == '' %}
+                  <span class="govuk-tag--light-blue">Required</span>
+                {% endif %}
+              </dd>
+            </div>
+          </dl>
+        </div>
+      </div>
+
+      <div class="govuk-summary-card">
+        <div class="govuk-summary-card__title-wrapper">
+          <h2 class="govuk-summary-card__title">
+            Compliance to date
+          </h2>
+          <ul class="govuk-summary-card__actions">
+            <li class="govuk-summary-card__action">
+              {% if cosso.complianceToDateSaved %}
+                <a id="change-compliance" class="govuk-link"
+                   href="/compliance/{{ cossoId }}?returnTo=check-your-report">Change<span
+                    class="govuk-visually-hidden">Compliance details</span></a>
+              {% endif %}
+            </li>
+          </ul>
+        </div>
+        <div class="govuk-summary-card__content">
+          <dl class="govuk-summary-list">
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                Compliance with the order to date
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {% if cosso.complianceToDateSaved and (not cosso.complianceToDate or cosso.complianceToDate | trim == '') %}
+                  <a id="cya-link-compliance" href="/compliance/{{ cossoId }}?returnTo=check-your-report"
+                     class="govuk-link">enter required
+                    information<span class="govuk-visually-hidden">Compliance To Date</span></a>
+                {% else %}
+                  <span id="compliance">{{ cosso.complianceToDate }}</span>
+                {% endif %}
+              </dd>
+              <dd class="govuk-summary-list__actions">
+                {% if not cosso.complianceToDate or cosso.complianceToDate | trim == '' %}
+                  <span class="govuk-tag--light-blue">Required</span>
+                {% endif %}
+              </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                Signature
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {% if cosso.complianceToDateSaved and (not cosso.signature or cosso.signature | trim == '') %}
+                  <a id="cya-link-signature" href="/compliance/{{ cossoId }}?returnTo=check-your-report"
+                     class="govuk-link">enter required
+                    information<span class="govuk-visually-hidden">Signature</span></a>
+                {% else %}
+                  <span id="signature">{{ cosso.signature }}</span>
+                {% endif %}
+              </dd>
+              <dd class="govuk-summary-list__actions">
+                {% if not cosso.signature or cosso.signature | trim == '' %}
+                  <span class="govuk-tag--light-blue">Required</span>
+                {% endif %}
+              </dd>
+            </div>
+          </dl>
+        </div>
+      </div>
+
+      <div class="moj-button-group">
+        {% if reportValidated %}
+          {{ govukButton({
+            text: "Publish",
+            preventDoubleClick: "true",
+            type: "submit",
+            attributes: {
+              id: "publish"
+            }
+          }) }}
+          {{ govukButton({
+            text: "View Draft Report",
+            classes: "govuk-button--secondary",
+            preventDoubleClick: "true",
+            href: '/pdf/'+cossoId,
+            attributes: {
+              target: "_blank"
+            }
+          }) }}
+          {{ govukButton({
+            text: "Delete draft",
+            href: '/confirm-delete/'+breachNotice.id,
+            classes: "govuk-button--secondary",
+            preventDoubleClick: "true"
+          }) }}
+          {{ govukButton({
+            text: "Close",
+            href: "/close",
+            classes: "govuk-button--secondary",
+            preventDoubleClick: "true"
+          }) }}
+        {% else %}
+          {{ govukButton({
+            text: "View Draft Report",
+            classes: "govuk-button--secondary",
+            preventDoubleClick: "true",
+            href: '/pdf/'+cossoId,
+            attributes: {
+              target: "_blank"
+            }
+          }) }}
+          {{ govukButton({
+            text: "Delete draft",
+            href: '/confirm-delete/'+breachNotice.id,
+            classes: "govuk-button--secondary",
+            preventDoubleClick: "true"
+          }) }}
+          {{ govukButton({
+            text: "Close",
+            href: "/close",
+            classes: "govuk-button--secondary",
+            preventDoubleClick: "true"
+          }) }}
+        {% endif %}
+      </div>
     </div>
   </div>
+
 
 {% endblock %}

@@ -9,6 +9,7 @@ export enum Page {
   COMPLIANCE = 'COMPLIANCE',
   CHECK_YOUR_REPORT = 'CHECK_YOUR_REPORT',
   ADD_AMENDMENT = 'ADD_AMENDMENT',
+  VIEW_PDF = 'VIEW_PDF',
 }
 
 export interface PageViewEventDetails {
