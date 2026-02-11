@@ -3,7 +3,7 @@ import { AuthenticationClient } from '@ministryofjustice/hmpps-auth-clients'
 import AuditService, { Page } from '../services/auditService'
 import { ErrorMessages } from '../data/uiModels'
 import { handleIntegrationErrors } from '../utils/utils'
-import CossoApiClient from "../data/cossoApiClient";
+import CossoApiClient from '../data/cossoApiClient'
 
 export default function pdfMaintenanceRoutes(
   router: Router,
