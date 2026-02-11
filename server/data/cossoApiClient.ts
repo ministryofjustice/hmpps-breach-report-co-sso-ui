@@ -1,8 +1,8 @@
 import { asSystem, RestClient } from '@ministryofjustice/hmpps-rest-client'
 import { ZonedDateTime } from '@js-joda/core'
+import { AuthenticationClient } from '@ministryofjustice/hmpps-rest-client/dist/main'
 import config from '../config'
 import logger from '../../logger'
-import {AuthenticationClient} from "@ministryofjustice/hmpps-rest-client/dist/main";
 
 export default class CossoApiClient extends RestClient {
   constructor(authenticationClient: AuthenticationClient) {
@@ -58,10 +58,11 @@ export default class CossoApiClient extends RestClient {
   }
 
   async getDraftPdfById(uuid: string, username: string): Promise<ArrayBuffer> {
-    return this.get({
-      path: `/cosso/${uuid}/pdf`,
-      responseType: 'arraybuffer',
-    },
+    return this.get(
+      {
+        path: `/cosso/${uuid}/pdf`,
+        responseType: 'arraybuffer',
+      },
       asSystem(username),
     )
   }
