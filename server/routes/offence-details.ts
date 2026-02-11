@@ -20,6 +20,7 @@ export default function offenceDetailsRoutes(
     const cossoClient = new CossoApiClient(authenticationClient)
     const ndeliusIntegrationApiClient = new NDeliusIntegrationApiClient(authenticationClient)
     const cossoId: string = req.params.id
+    const callingScreen: string = req.query.returnTo as string
     let cosso: Cosso
     let offenceDetails: OffenceDetails
 
@@ -89,22 +90,66 @@ export default function offenceDetailsRoutes(
       cossoId,
       currentPage,
       offenceDetails,
+      callingScreen,
     })
   })
 
   router.post('/offence-details/:id', async (req, res, next) => {
     await auditService.logPageView(Page.OFFENCE_DETAILS, { who: res.locals.user.username, correlationId: req.id })
+    const cossoClient = new CossoApiClient(authenticationClient)
     const cossoId: string = req.params.id
+    const callingScreen: string = req.query.returnTo as string
+    let cosso: Cosso = null
 
-    // if the user selected saveProgressAndClose then send a close back to the client
-    if (req.body.action === 'saveProgressAndClose') {
-      res.send(
-        `<p>You can now safely close this window</p><script nonce="${res.locals.cspNonce}">window.close()</script>`,
+    try {
+      cosso = await cossoClient.getCossoById(cossoId, res.locals.user.username)
+      if (Object.keys(cosso).length === 0) {
+        const errorMessages: ErrorMessages = {}
+        errorMessages.genericErrorMessage = {
+          text: 'The document has not been found or has been deleted. An error has been logged. 404',
+        }
+        res.render(`pages/detailed-error`, { errorMessages })
+        return
+      }
+    } catch (error) {
+      const errorMessages: ErrorMessages = handleIntegrationErrors(
+        error?.responseStatus,
+        error?.data?.userMessage,
+        'Breach Report CO SSO',
       )
-    } else if (req.body.action === 'addAmendment') {
+
+      // Navigate to the detailed error page on 400
+      if (error?.responseStatus === 400) {
+        res.render(`pages/detailed-error`, { errorMessages })
+        return
+      }
+
+      // Navigate to the detailed error page on 404
+      if (error?.responseStatus === 404) {
+        res.render(`pages/detailed-error`, { errorMessages })
+        return
+      }
+
+      const showEmbeddedError = true
+      res.render(`pages/offence-details`, { errorMessages, showEmbeddedError })
+      return
+    }
+
+    if (req.body.action === 'addAmendment') {
       res.redirect(`/add-amendment/${cossoId}`)
     } else {
-      res.redirect(`/failures/${cossoId}`)
+      cosso.offenceDetailsSaved = true
+      await cossoClient.updateCosso(cossoId, cosso, res.locals.user.username)
+
+      if (req.body.action === 'saveProgressAndClose') {
+        res.send(
+          `<p>You can now safely close this window</p><script nonce="${res.locals.cspNonce}">window.close()</script>`,
+        )
+      } else if (callingScreen && callingScreen === 'check-your-report') {
+        res.redirect(`/check-your-report/${req.params.id}`)
+      } else {
+        res.redirect(`/failures/${cossoId}`)
+      }
     }
   })
 

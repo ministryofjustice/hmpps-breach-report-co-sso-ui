@@ -147,6 +147,7 @@ export interface Cosso {
   supportingComments: string
   riskOfHarmChanged: boolean
   failuresAndEnforcementSaved: boolean
+  offenceDetailsSaved: boolean
 }
 
 export interface CossoAddress {
