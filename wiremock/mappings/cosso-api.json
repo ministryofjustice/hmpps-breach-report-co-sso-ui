@@ -962,6 +962,78 @@
       "response": {
         "status": 200
       }
+    },
+    {
+      "request": {
+        "url": "/cosso-api/cosso/65877fba-84d1-48f1-a354-646e642a8774",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "id": "65877fba-84d1-48f1-a354-646e642a8774",
+          "crn": "X012345",
+          "completedDate": null
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        "transformers": ["response-template"]
+      }
+    },
+    {
+      "request": {
+        "url": "/cosso-api/cosso/65877fba-84d1-48f1-a354-646e642a8774",
+        "method": "PUT"
+      },
+      "response": {
+        "status": 200
+      }
+    },
+    {
+      "request": {
+        "url": "/cosso-api/cosso/2cc90af2-6558-4677-8616-42d8489b26fe",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "id": "2cc90af2-6558-4677-8616-42d8489b26fe",
+          "crn": "X012345",
+          "completedDate": null
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        "transformers": ["response-template"]
+      }
+    },
+    {
+      "request": {
+        "url": "/cosso-api/cosso/2cc90af2-6558-4677-8616-42d8489b26fe",
+        "method": "PUT"
+      },
+      "response": {
+        "status": 200
+      }
+    },
+    {
+      "request": {
+        "url": "/cosso-api/cosso/5ef68fe7-f7c5-4a3b-a30f-3d386c08138b",
+        "method": "PUT"
+      },
+      "response": {
+        "status": 200
+      }
+    },
+    {
+      "request": {
+        "url": "/cosso-api/cosso/f13cd4b7-52fd-4d9e-8ce1-b380fc0c8be4",
+        "method": "PUT"
+      },
+      "response": {
+        "status": 200
+      }
     }
   ]
 }

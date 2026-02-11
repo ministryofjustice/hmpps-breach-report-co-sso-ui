@@ -68,6 +68,16 @@ context('Offence Details page', () => {
     cy.url().should('include', '/failures/5ef68fe7-f7c5-4a3b-a30f-3d386c08138b')
   })
 
+  it('should return to check your report if came from check your report', () => {
+    cy.intercept('POST', '/offence-details/**').as('formSubmit')
+    cy.visit('/offence-details/65877fba-84d1-48f1-a354-646e642a8774?returnTo=check-your-report')
+    cy.url().should('include', '/offence-details')
+    cy.get('#page-title').should('contain.text', 'Breach Report CO SSO - Offence Details')
+    cy.get('#continue-button').click()
+    cy.wait('@formSubmit')
+    cy.url().should('include', '/check-your-report/65877fba-84d1-48f1-a354-646e642a8774')
+  })
+
   it('add amendment button redirects to add amendment page', () => {
     cy.visit('/offence-details/1397b54d-4360-4ec5-bc75-8a908bc5e49c')
     cy.url().should('include', '/offence-details')

@@ -108,6 +108,7 @@ context('Failures and Enforcement page', () => {
     cy.wait('@formSubmit')
     cy.url().should('include', '/check-your-report/89096e7c-c5cb-4ab0-b741-ae7fcd4d2ae1')
   })
+
   it('correct validation should show on max character fields', () => {
     cy.visit('/failures/5800666c-d39e-4a04-8277-a82bf484f68d')
     cy.url().should('include', '/failures')

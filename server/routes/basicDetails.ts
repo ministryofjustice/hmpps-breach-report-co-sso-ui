@@ -27,6 +27,7 @@ export default function basicDetailsRoutes(
     const cossoClient = new CossoApiClient(authenticationClient)
     const ndeliusIntegrationApiClient = new NDeliusIntegrationApiClient(authenticationClient)
     const cossoId: string = req.params.id
+    const callingScreen: string = req.query.returnTo as string
     let basicDetails: BasicDetails = null
     let cosso: Cosso = null
 
@@ -110,6 +111,7 @@ export default function basicDetailsRoutes(
       telephoneNumber,
       emailAddress,
       addAddressDeeplink,
+      callingScreen,
     })
   })
 
@@ -117,6 +119,7 @@ export default function basicDetailsRoutes(
     const cossoClient = new CossoApiClient(authenticationClient)
     const ndeliusIntegrationApiClient = new NDeliusIntegrationApiClient(authenticationClient)
     const cossoId: string = req.params.id
+    const callingScreen: string = req.query.returnTo as string
     let cosso: Cosso = null
     let basicDetails: BasicDetails = null
 
@@ -201,6 +204,8 @@ export default function basicDetailsRoutes(
     } else if (req.body.action === 'refreshFromNdelius') {
       // redirect to warning details to force a reload
       res.redirect(`/basic-details/${cossoId}`)
+    } else if (callingScreen && callingScreen === 'check-your-report') {
+      res.redirect(`/check-your-report/${req.params.id}`)
     } else {
       res.redirect(`/witness-details/${cossoId}`)
     }
