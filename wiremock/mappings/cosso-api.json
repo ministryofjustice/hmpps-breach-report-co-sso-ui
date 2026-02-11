@@ -925,6 +925,43 @@
       "response": {
         "status": 200
       }
+    },
+    {
+      "request": {
+        "url": "/cosso-api/cosso/89096e7c-c5cb-4ab0-b741-ae7fcd4d2ae1",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "id": "89096e7c-c5cb-4ab0-b741-ae7fcd4d2ae1",
+          "crn": "X012345",
+          "completedDate": null,
+          "whyInBreach": "Test Text",
+          "stepsToPreventBreach": "Test Text",
+          "riskHistory": "Test Text",
+          "confirmEqualities": true,
+          "recommendations": "continued",
+          "supportingComments": "Test Text",
+          "riskOfHarmChanged": true,
+          "cossoContactList": []
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        "transformers": [
+          "response-template"
+        ]
+      }
+    },
+    {
+      "request": {
+        "url": "/cosso-api/cosso/89096e7c-c5cb-4ab0-b741-ae7fcd4d2ae1",
+        "method": "PUT"
+      },
+      "response": {
+        "status": 200
+      }
     }
   ]
 }

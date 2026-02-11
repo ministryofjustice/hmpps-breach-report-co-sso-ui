@@ -146,6 +146,7 @@ export interface Cosso {
   recommendations: string
   supportingComments: string
   riskOfHarmChanged: boolean
+  failuresAndEnforcementSaved: boolean
 }
 
 export interface CossoAddress {

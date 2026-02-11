@@ -99,6 +99,15 @@ context('Failures and Enforcement page', () => {
     cy.url().should('include', '/compliance/7d03c0ce-4c65-4488-8448-6ae7475dd99b')
   })
 
+  it('should return to check your report if came from check your report', () => {
+    cy.intercept('POST', '/failures/**').as('formSubmit')
+    cy.visit('/failures/89096e7c-c5cb-4ab0-b741-ae7fcd4d2ae1?returnTo=check-your-report')
+    cy.url().should('include', '/failures')
+    cy.get('#page-title').should('contain.text', 'Breach Report CO SSO - Failures and Enforcement')
+    cy.get('#continue-button').click()
+    cy.wait('@formSubmit')
+    cy.url().should('include', '/check-your-report/89096e7c-c5cb-4ab0-b741-ae7fcd4d2ae1')
+  })
   it('correct validation should show on max character fields', () => {
     cy.visit('/failures/5800666c-d39e-4a04-8277-a82bf484f68d')
     cy.url().should('include', '/failures')

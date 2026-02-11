@@ -20,6 +20,7 @@ export default function failuresRoutes(
     const cossoClient = new CossoApiClient(authenticationClient)
     const ndeliusIntegrationApiClient = new NDeliusIntegrationApiClient(authenticationClient)
     const cossoId: string = req.params.id
+    const callingScreen: string = req.query.returnTo as string
     let cosso: Cosso = null
     let failures: Failures = null
     let screenInfo: ScreenInformation[] = null
@@ -109,6 +110,7 @@ export default function failuresRoutes(
       currentPage,
       failures,
       existingContacts,
+      callingScreen,
       reasonHelp: screenInfo.find(si => si.fieldName === 'breach_reason')?.fieldText,
       preventHelp: screenInfo.find(si => si.fieldName === 'preventative_steps')?.fieldText,
       riskHelp: screenInfo.find(si => si.fieldName === 'risk_of_serious_harm')?.fieldText,
@@ -121,6 +123,7 @@ export default function failuresRoutes(
     const cossoClient = new CossoApiClient(authenticationClient)
     const ndeliusIntegrationApiClient = new NDeliusIntegrationApiClient(authenticationClient)
     const cossoId: string = req.params.id
+    const callingScreen: string = req.query.returnTo as string
     let cosso: Cosso = null
     let failures: Failures = null
     let screenInfo: ScreenInformation[] = null
@@ -211,6 +214,8 @@ export default function failuresRoutes(
     cosso.riskHistory = req.body.riskHistory
     cosso.recommendations = req.body.recommendationOptions
     cosso.supportingComments = req.body.supportingComments
+    cosso.failuresAndEnforcementSaved = true
+
 
     const errorMessages: ErrorMessages = validateFailures(cosso)
     const hasErrors: boolean = Object.keys(errorMessages).length > 0
@@ -242,6 +247,8 @@ export default function failuresRoutes(
         res.send(
           `<p>You can now safely close this window</p><script nonce="${res.locals.cspNonce}">window.close()</script>`,
         )
+      } else if (callingScreen && callingScreen === 'check-your-report') {
+        res.redirect(`/check-your-report/${req.params.id}`)
       } else {
         res.redirect(`/compliance/${cossoId}`)
       }
@@ -253,6 +260,7 @@ export default function failuresRoutes(
         currentPage,
         failures,
         existingContacts,
+        callingScreen,
         reasonHelp: screenInfo.find(si => si.fieldName === 'breach_reason')?.fieldText,
         preventHelp: screenInfo.find(si => si.fieldName === 'preventative_steps')?.fieldText,
         riskHelp: screenInfo.find(si => si.fieldName === 'risk_of_serious_harm')?.fieldText,
