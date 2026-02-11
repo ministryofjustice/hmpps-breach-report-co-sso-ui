@@ -1,0 +1,161 @@
+{% extends "../partials/layout.njk" %}
+
+{% set pageTitle = applicationName + " - Offence Details" %}
+{% set mainClasses = "app-container govuk-body" %}
+
+{% block content %}
+  {% from "moj/components/side-navigation/macro.njk" import mojSideNavigation %}
+  {% from "govuk/components/panel/macro.njk" import govukPanel %}
+  {% from "govuk/components/button/macro.njk" import govukButton %}
+  {% from "govuk/components/radios/macro.njk" import govukRadios %}
+
+<form method="post">
+
+  {% set errorList =[
+    { text: errorMessages.genericErrorMessage.text, href: "#" } if errorMessages.genericErrorMessage else None
+  ] | reject("undefined") %}
+
+  {% if errorMessages | length > 0 %}
+    {% from "govuk/components/error-summary/macro.njk" import govukErrorSummary %}
+    {{ govukErrorSummary({ titleText: "There is a problem", errorList: errorList }) }}
+  {% endif %}
+
+  <input type="hidden" name="_csrf" value="{{ csrfToken }}">
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-one-third">
+
+      {% set addAmendmentButton %}
+        {{ govukButton({
+          text: "Add Amendment",
+          type: "submit",
+          name: "action",
+          value: "addAmendment",
+          attributes: {
+            id: "add-amendment-button"
+          }
+        }) }}
+      {% endset %}
+
+      {% include "pages/side-nav.njk" %}
+    </div>
+
+    <div class="govuk-grid-column-two-thirds">
+
+      {% if not showEmbeddedError %}
+
+        <h1 id="page-title" class="govuk-heading-l">Breach Report CO SSO - Offence Details</h1>
+
+        <h2 class="govuk-heading-m">Original Offence</h2>
+        <p id="main-offence">{{ offenceDetails.mainOffence.description }}</p>
+
+        <h2 class="govuk-heading-m">Original Additional Offence(s)</h2>
+        {% if offenceDetails.additionalOffences | length > 0 %}
+          {% for off in offenceDetails.additionalOffences %}
+            <p id="additional-offence-{{loop.index}}">{{ off.description }}</p>
+          {% endfor %}
+        {% endif %}
+
+        <h2 class="govuk-heading-m">Sentencing Court</h2>
+        <p id="court">{{ offenceDetails.sentencingCourt }}</p>
+
+        <h2 class="govuk-heading-m">Date of Sentence</h2>
+        <p id="sentence-date">{{ offenceDetails.sentenceDate }}</p>
+
+        <h2 class="govuk-heading-m">Sentence Imposed</h2>
+        <p id="sentence-imposed">{{ offenceDetails.sentenceImposed.description }}</p>
+
+        <h2 class="govuk-heading-m">Suspended Custody Length</h2>
+        <p id="custody-length">{{ offenceDetails.suspendedCustodyLength.length }} {{ offenceDetails.suspendedCustodyLength.lengthUnits }}</p>
+
+        <h2 class="govuk-heading-m">Requirements Imposed</h2>
+        {% if offenceDetails.requirementsImposed | length > 0 %}
+          {% for req in offenceDetails.requirementsImposed %}
+            <p id="requirements-imposed-{{loop.index}}"> <span class="govuk-!-font-weight-bold">Requirement Type:</span> {{ req.requirementTypeMainCategoryDescription }}<br/>
+              <span class="govuk-!-font-weight-bold"> Requirement Length:</span> {{ req.requirementLength}} {{ req.requirementLengthUnits }}<br/>
+              <span class="govuk-!-font-weight-bold">Secondary Requirement Length:</span> {{ req.secondaryRequirementLength}} {{ req.secondaryRequirementLengthUnits }}</p>
+            {% if not loop.last %}
+              <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+            {% endif %}
+          {% endfor %}
+        {% else %}
+          <p>No information found</p>
+        {% endif %}
+
+        <h2 class="govuk-heading-m">Additional Sentences</h2>
+        {% if offenceDetails.additionalSentences | length > 0 %}
+          {% for sen in offenceDetails.additionalSentences %}
+            <p id="additional-sentence-{{loop.index}}">{{ sen.type }} - {{ sen.subtype }}</p>
+          {% endfor %}
+        {% endif %}
+
+        <h2 class="govuk-heading-m">Amendments to the Order</h2>
+        {% if cosso.amendments | length > 0 %}
+          {% for amendment in cosso.amendments %}
+            <p id="amendment-{{loop.index}}"><span class="govuk-!-font-weight-bold">Details of the Amendment:</span> {{ amendment.amendmentDetails }}<br/>
+              <span class="govuk-!-font-weight-bold">Reasons for the Amendment:</span> {{ amendment.amendmentReason }}<br/>
+              <span class="govuk-!-font-weight-bold">Date of the Amendment:</span> {{ amendment.amendmentDate }}<br/>
+              <a id="edit-link-{{ loop.index }}" href="/add-amendment/{{ cossoId }}?amendmentId={{ amendment.id }}" class="govuk-link">Edit this Amendment</a><br/>
+              <a id="delete-link-{{ loop.index }}" href="/delete-amendment/{{ cossoId }}?amendmentId={{ amendment.id }}" class="govuk-link">Delete this Amendment</a>
+            </p>
+            {% if not loop.last %}
+              <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+            {% endif %}
+          {% endfor %}
+        {% else %}
+          <p>No Amendments added</p>
+        {% endif %}
+        {{ govukRadios({
+          name: "amendmentsToAdd",
+          fieldset: {
+            legend: {
+              text: "Are there any amendments to add to the order?",
+              isPageHeading: false,
+              classes: "govuk-fieldset__legend--m"
+            }
+          },
+          hint: {
+            text: "Select one option"
+          },
+          items: [
+            {
+              value: "Yes",
+              text: "Yes",
+              conditional: {
+              html: addAmendmentButton
+            }
+            },
+            {
+              value: "No",
+              text: "No"
+            }
+          ]
+        }) }}
+
+        <div class="moj-button-group">
+          {{ govukButton({
+            text: "Continue",
+            preventDoubleClick: "true",
+            type: "submit",
+            attributes: {
+              id: "continue-button"
+            }
+          }) }}
+          {{ govukButton({
+            text: "Save Progress and Close",
+            type: "submit",
+            name: "action",
+            value: "saveProgressAndClose",
+            classes: "govuk-button--secondary",
+            attributes: {
+              id: "close-button"
+            }
+          }) }}
+        </div>
+
+      {% endif %}
+    </div>
+  </div>
+
+  {% endblock %}
+</form>

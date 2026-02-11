@@ -1,7 +1,28 @@
 <nav class="moj-side-navigation" aria-label="Side navigation">
   <ul class="moj-side-navigation__list">
+
     <li class="moj-side-navigation__item {{ "moj-side-navigation__item--active" if currentPage == "basic-details" }}">
-      <a id="nav-basic-details" href="/basic-details/{{ cossoId }}" aria-current="location">Basic details</a>
+      <a id="nav-basic-details" href="/basic-details/{{ cossoId }}" aria-current="location">Basic Details</a>
+    </li>
+
+    <li class="moj-side-navigation__item {{ "moj-side-navigation__item--active" if currentPage == "witness-details" }}">
+      <a id="nav-witness-details" href="/witness-details/{{ cossoId }}" aria-current="location">RO and Witness Details</a>
+    </li>
+
+    <li class="moj-side-navigation__item {{ "moj-side-navigation__item--active" if currentPage == "offence-details" }}">
+      <a id="nav-offence-details" href="/offence-details/{{ cossoId }}" aria-current="location">Offence Details</a>
+    </li>
+
+    <li class="moj-side-navigation__item {{ "moj-side-navigation__item--active" if currentPage == "failures" }}">
+      <a id="nav-failures" href="/failures/{{ cossoId }}" aria-current="location">Failures and Enforcements</a>
+    </li>
+
+    <li class="moj-side-navigation__item {{ "moj-side-navigation__item--active" if currentPage == "compliance" }}">
+      <a id="nav-compliance" href="/compliance/{{ cossoId }}" aria-current="location">Compliance to date</a>
+    </li>
+
+    <li class="moj-side-navigation__item {{ "moj-side-navigation__item--active" if currentPage == "check-your-report" }}">
+      <a id="nav-check-your-report" href="/check-your-report/{{ cossoId }}" aria-current="location">Check Your Report</a>
     </li>
   </ul>
 </nav>
