@@ -23,10 +23,7 @@ export default function confirmDeleteRoutes(
 
     if (req.body.action === 'confirm') {
       try {
-        const cosso: Cosso = await cossoApiClient.getCossoById(
-          cossoId,
-          res.locals.user.username,
-        )
+        const cosso: Cosso = await cossoApiClient.getCossoById(cossoId, res.locals.user.username)
         if (Object.keys(cosso).length === 0) {
           const errorMessages: ErrorMessages = {}
           errorMessages.genericErrorMessage = {
