@@ -336,4 +336,13 @@ context('Check your answers', () => {
     cy.url().should('include', '/check-your-report')
     cy.get('#publish').should('not.exist')
   })
+
+  it('I can delete draft', () => {
+    cy.visit('/check-your-report/9de01b5e-30bd-4989-b0ad-29d5df2b70cs')
+    cy.url().should('include', '/check-your-report')
+    cy.get('#delete-btn').should('exist')
+    cy.get('#delete-btn').click()
+    cy.url().should('include', '/confirm-delete/9de01b5e-30bd-4989-b0ad-29d5df2b70cs')
+    cy.visit('/check-your-report/9de01b5e-30bd-4989-b0ad-29d5df2b70cs')
+  })
 })

@@ -66,6 +66,15 @@ export default class CossoApiClient extends RestClient {
       asSystem(username),
     )
   }
+
+  async deleteCosso(cossoId: string, username: string) {
+    return this.delete(
+      {
+        path: `/cosso/${cossoId}`,
+      },
+      asSystem(username),
+    )
+  }
 }
 
 export interface Cosso {

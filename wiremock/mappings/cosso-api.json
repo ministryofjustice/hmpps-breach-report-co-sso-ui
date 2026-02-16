@@ -639,6 +639,26 @@
           "response-template"
         ]
       }
+    },
+    {
+      "request": {
+        "url": "/cosso-api/cosso/9de01b5e-30bd-4989-b0ad-29d5df2b70cs",
+        "method": "DELETE"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "id": "9de01b5e-30bd-4989-b0ad-29d5df2b70cs",
+          "crn": "X012345",
+          "completedDate": null
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        "transformers": [
+          "response-template"
+        ]
+      }
     }
   ]
 }

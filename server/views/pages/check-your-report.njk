@@ -690,9 +690,12 @@
           }) }}
           {{ govukButton({
             text: "Delete draft",
-            href: '/confirm-delete/'+breachNotice.id,
+            href: '/confirm-delete/'+cossoId,
             classes: "govuk-button--secondary",
-            preventDoubleClick: "true"
+            preventDoubleClick: "true",
+            attributes: {
+              id: "delete-btn"
+            }
           }) }}
           {{ govukButton({
             text: "Close",
@@ -712,8 +715,11 @@
           }) }}
           {{ govukButton({
             text: "Delete draft",
-            href: '/confirm-delete/'+breachNotice.id,
+            href: '/confirm-delete/'+cossoId,
             classes: "govuk-button--secondary",
+            attributes: {
+              id: "delete-btn"
+            },
             preventDoubleClick: "true"
           }) }}
           {{ govukButton({
