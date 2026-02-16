@@ -57,6 +57,73 @@ export default class CossoApiClient extends RestClient {
     )
   }
 
+  async createCossoContact(cossoContact: CossoContact, username: string): Promise<string> {
+    return this.post(
+      {
+        path: `/cosso/contact`,
+        data: cossoContact as unknown as Record<string, unknown>,
+      },
+      asSystem(username),
+    )
+  }
+
+  async updateCossoContact(cossoContact: CossoContact, username: string) {
+    return this.put(
+      {
+        path: `/cosso/contact/${cossoContact.id}`,
+        data: cossoContact as unknown as Record<string, unknown>,
+      },
+      asSystem(username),
+    )
+  }
+
+  async deleteContact(id: string, username: string) {
+    return this.delete(
+      {
+        path: `/cosso/contact/${id}`,
+      },
+      asSystem(username),
+    )
+  }
+
+  async batchUpdateContacts(cossoId: string, contacts: Array<CossoContact>, username: string): Promise<void> {
+    const promises = []
+    for (const contact of contacts) {
+      if (contact.id) {
+        promises.push(this.updateCossoContact(contact, username))
+      } else {
+        promises.push(this.createCossoContact(contact, username))
+      }
+    }
+    await Promise.all(promises)
+  }
+
+  async batchDeleteContacts(contacts: Array<CossoContact>, username: string): Promise<void> {
+    const promises = []
+    for (const contact of contacts) {
+      promises.push(this.deleteContact(contact.id, username))
+    }
+    await Promise.all(promises)
+  }
+
+  async getCossoContactsForCosso(id: string, username: string): Promise<Array<CossoContact>> {
+    return this.get(
+      {
+        path: `/cosso/contact/bycossoid/${id}`,
+      },
+      asSystem(username),
+    )
+  }
+
+  async getScreenInformationForScreen(screen: string, username: string): Promise<Array<ScreenInformation>> {
+    return this.get(
+      {
+        path: `/cosso/referencedata/screeninformation/${screen}`,
+      },
+      asSystem(username),
+    )
+  }
+
   async getDraftPdfById(uuid: string, username: string): Promise<ArrayBuffer> {
     return this.get(
       {
@@ -101,14 +168,18 @@ export interface Cosso {
   sentenceLength: string
   requirementList: CossoRequirement[]
   amendments: CossoAmendment[]
+  cossoContactList: CossoContact[]
   whyInBreach: string
   stepsToPreventBreach: string
-  riskOfHarmChanged: boolean
+  complianceToDate: string
   riskHistory: string
-  diversityConfirmation: boolean
+  confirmEqualities: boolean
   recommendations: string
   supportingComments: string
-  complianceToDate: string
+  riskOfHarmChanged: boolean
+  failuresAndEnforcementSaved: boolean
+  offenceDetailsSaved: boolean
+  diversityConfirmation: boolean
   signature: string
 }
 
@@ -132,6 +203,19 @@ export interface CossoAmendment {
   amendmentDetails: string
   amendmentReason: string
   amendmentDate: string
+}
+
+export interface CossoContact {
+  id?: string
+  cossoId: string
+  deliusContactId: number
+  contactTypeDescription: string
+}
+
+export interface ScreenInformation {
+  screenName: string
+  fieldName: string
+  fieldText: string
 }
 
 export interface CossoRequirement {

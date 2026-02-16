@@ -1,3 +1,4 @@
+import { ParsedQs } from 'qs'
 import { DeliusAddress, Name } from '../data/ndeliusIntegrationApiClient'
 import { ErrorMessages } from '../data/uiModels'
 import { CossoAddress } from '../data/cossoApiClient'
@@ -83,4 +84,9 @@ export function toCossoAddress(deliusAddress: DeliusAddress): CossoAddress {
     county: deliusAddress.county,
     postcode: deliusAddress.postcode,
   }
+}
+
+export default function asArray(param: undefined | string | ParsedQs | (string | ParsedQs)[]): string[] {
+  if (param === undefined) return []
+  return Array.isArray(param) ? (param as string[]) : [param as string]
 }
