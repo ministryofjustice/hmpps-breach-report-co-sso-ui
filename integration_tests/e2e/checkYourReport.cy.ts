@@ -2,7 +2,7 @@ context('Check your answers', () => {
   it('Basic Details populated', () => {
     cy.visit('/check-your-report/9de01b5e-30bd-4989-b0ad-29d5df2b70cs')
     cy.url().should('include', '/check-your-report')
-    cy.get('#page-title').should('contain.text', 'Breach Notice - Check Your Answers')
+    cy.get('#page-title').should('contain.text', 'Breach Report - Check Your Answers')
     cy.get('#change-basic-details').should('exist')
     cy.get('#cya-link-title-and-name').should('not.exist')
     cy.get('#cya-link-crn').should('not.exist')
@@ -27,7 +27,7 @@ context('Check your answers', () => {
   it('basic details not populated', () => {
     cy.visit('/check-your-report/e3b2f8c1-6a4d-4c92-9f27-8d5a1c7e4b90')
     cy.url().should('include', '/check-your-report')
-    cy.get('#page-title').should('contain.text', 'Breach Notice - Check Your Answers')
+    cy.get('#page-title').should('contain.text', 'Breach Report - Check Your Answers')
     cy.get('#change-basic-details').should('exist')
     cy.get('#cya-link-title-and-name').should('exist')
     cy.get('#cya-link-crn').should('exist')
@@ -114,7 +114,7 @@ context('Check your answers', () => {
   it('Offence Details not populated', () => {
     cy.visit('/check-your-report/e3b2f8c1-6a4d-4c92-9f27-8d5a1c7e4b90')
     cy.url().should('include', '/check-your-report')
-    cy.get('#page-title').should('contain.text', 'Breach Notice - Check Your Answers')
+    cy.get('#page-title').should('contain.text', 'Breach Report - Check Your Answers')
     cy.get('#change-offence-details').should('exist')
     cy.get('#cya-link-main-offence').should('exist')
     cy.get('#cya-link-sentencing-court').should('exist')
@@ -185,7 +185,7 @@ context('Check your answers', () => {
   it('Failures and Enforcement not populated', () => {
     cy.visit('/check-your-report/e3b2f8c1-6a4d-4c92-9f27-8d5a1c7e4b90')
     cy.url().should('include', '/check-your-report')
-    cy.get('#page-title').should('contain.text', 'Breach Notice - Check Your Answers')
+    cy.get('#page-title').should('contain.text', 'Breach Report - Check Your Answers')
     cy.get('#change-failures-and-enforcement').should('exist')
     cy.get('#cya-link-why-in-breach').should('exist')
     cy.get('#cya-link-steps-to-prevent-breach').should('exist')
@@ -262,7 +262,7 @@ context('Check your answers', () => {
   it('RO and witness details not populated', () => {
     cy.visit('/check-your-report/e3b2f8c1-6a4d-4c92-9f27-8d5a1c7e4b90')
     cy.url().should('include', '/check-your-report')
-    cy.get('#page-title').should('contain.text', 'Breach Notice - Check Your Answers')
+    cy.get('#page-title').should('contain.text', 'Breach Report - Check Your Answers')
     cy.get('#change-ro-and-witness-details').should('exist')
     cy.get('#cya-link-ro-title-and-full-name').should('exist')
     cy.get('#cya-link-probation-area').should('exist')
