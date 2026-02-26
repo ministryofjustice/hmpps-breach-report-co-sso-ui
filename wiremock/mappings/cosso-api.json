@@ -523,6 +523,8 @@
           "roTitleAndFullName": "Mr Ro Test",
           "witnessAvailability": "Witness availability details",
           "probationArea": "London",
+          "cossoContactList": [],
+          "deliusContactId": 7,
           "workAddress": {
             "id": 2,
             "status": "Work",
@@ -1205,6 +1207,68 @@
           "id": "2cc90af2-6558-4677-8616-42d8489b26fe",
           "crn": "X012345",
           "completedDate": null
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        "transformers": ["response-template"]
+      }
+    },
+    {
+      "request": {
+        "url": "/cosso-api/cosso/6c9e90ed-1ac1-4bcb-b271-6b0a1f6ef9a4",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "id": "6c9e90ed-1ac1-4bcb-b271-6b0a1f6ef9a4",
+          "crn": "X012345",
+          "completedDate": null,
+          "cossoContactList": [],
+          "deliusContactId": 7,
+          "reviewRequiredDate": "2025-01-01T12:34:56",
+          "reviewEvent": "MERGE"
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        "transformers": ["response-template"]
+      }
+    },
+    {
+      "request": {
+        "url": "/cosso-api/cosso/a3b2e7c4-8b0d-4f6f-9e12-2c6d1a7f3c58",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "id": "a3b2e7c4-8b0d-4f6f-9e12-2c6d1a7f3c58",
+          "crn": "X012345",
+          "completedDate": null,
+          "reviewRequiredDate": "2025-01-01T12:34:56",
+          "reviewEvent": "UNMERGE"
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        "transformers": ["response-template"]
+      }
+    },
+    {
+      "request": {
+        "url": "/cosso-api/cosso/f1d6c2a9-3f44-4c2a-9a9d-9c4a6bb7c1e0",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "id": "f1d6c2a9-3f44-4c2a-9a9d-9c4a6bb7c1e0",
+          "crn": "X012345",
+          "completedDate": null,
+          "reviewRequiredDate": "2025-01-01T12:34:56",
+          "reviewEvent": "EVENT_MOVE"
         },
         "headers": {
           "Content-Type": "application/json;charset=UTF-8"

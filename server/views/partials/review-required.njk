@@ -1,0 +1,30 @@
+{%- from "moj/components/alert/macro.njk" import mojAlert -%}
+
+{% if cosso.reviewRequiredDate != null %}
+
+  {% set messageHtml %}
+    {% if cosso.reviewEvent == 'MERGE' %}
+      A Merge occurred on {{ cosso.reviewRequiredDate | toUserDate() }} in NDelius and important details have changed. This form should be reviewed before proceeding. Please confirm all information or discard this form.
+    {% endif %}
+    {% if cosso.reviewEvent == 'UNMERGE' %}
+      An Unmerge occurred on {{ cosso.reviewRequiredDate | toUserDate() }} in NDelius and important details have changed. This form should be reviewed before proceeding. Please confirm all information or discard this form.
+    {% endif %}
+    {% if cosso.reviewEvent == 'EVENT_MOVE' %}
+      A Move Event occurred on {{ cosso.reviewRequiredDate | toUserDate() }} in NDelius and important details have changed. This form should be reviewed before proceeding. Please confirm all information or discard this form.
+    {% endif %}
+    {% if cosso.reviewEvent == 'MOVE_NSI' %}
+      A Move NSI Event occurred on {{ cosso.reviewRequiredDate | toUserDate() }} in NDelius and important details have changed. This form should be reviewed before proceeding. Please confirm all information or discard this form.
+    {% endif %}
+  {% endset -%}
+
+  {{ mojAlert({
+    variant: "warning",
+    title: "Review Required",
+    showTitleAsHeading: true,
+    dismissible: false,
+    html: messageHtml,
+    attributes: {
+      id: "reviewAlert"
+    }
+  }) }}
+{% endif %}
