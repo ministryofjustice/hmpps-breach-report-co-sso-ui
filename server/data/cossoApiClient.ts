@@ -1,6 +1,6 @@
 import { asSystem, RestClient } from '@ministryofjustice/hmpps-rest-client'
-import type { AuthenticationClient } from '@ministryofjustice/hmpps-auth-clients'
 import { ZonedDateTime } from '@js-joda/core'
+import { AuthenticationClient } from '@ministryofjustice/hmpps-rest-client/dist/main'
 import config from '../config'
 import logger from '../../logger'
 
@@ -123,19 +123,50 @@ export default class CossoApiClient extends RestClient {
       asSystem(username),
     )
   }
+
+  async getDraftPdfById(uuid: string, username: string): Promise<ArrayBuffer> {
+    return this.get(
+      {
+        path: `/cosso/${uuid}/pdf`,
+        responseType: 'arraybuffer',
+      },
+      asSystem(username),
+    )
+  }
+
+  async deleteCosso(cossoId: string, username: string) {
+    return this.delete(
+      {
+        path: `/cosso/${cossoId}`,
+      },
+      asSystem(username),
+    )
+  }
 }
 
 export interface Cosso {
   id: string
   crn: string
+  dateOfBirth: string
   completedDate: ZonedDateTime
   titleAndFullName: string
   telephoneNumber: string
   emailAddress: string
   mobileNumber: string
   postalAddress: CossoAddress
-  dateOfBirth: string
   basicDetailsSaved: boolean
+  roTitleAndFullName: string
+  roTelephoneNumber: string
+  roEmailAddress: string
+  witnessAvailability: string
+  workAddress: CossoAddress
+  roAndWitnessDetailsSaved: boolean
+  mainOffence: string
+  sentencingCourt: string
+  sentenceDate: string
+  sentenceType: string
+  sentenceLength: string
+  requirementList: CossoRequirement[]
   amendments: CossoAmendment[]
   cossoContactList: CossoContact[]
   whyInBreach: string
@@ -148,6 +179,8 @@ export interface Cosso {
   riskOfHarmChanged: boolean
   failuresAndEnforcementSaved: boolean
   offenceDetailsSaved: boolean
+  diversityConfirmation: boolean
+  signature: string
 }
 
 export interface CossoAddress {
@@ -183,4 +216,14 @@ export interface ScreenInformation {
   screenName: string
   fieldName: string
   fieldText: string
+}
+
+export interface CossoRequirement {
+  id?: string
+  deliusRequirementId: number
+  cossoId: string
+  requirementTypeMainCategoryDescription: string
+  requirementTypeSubCategoryDescription: string
+  requirementLength: string
+  requirementSecondLength: string
 }

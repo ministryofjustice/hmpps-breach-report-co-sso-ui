@@ -1,7 +1,7 @@
 import { ParsedQs } from 'qs'
 import { DeliusAddress, Name } from '../data/ndeliusIntegrationApiClient'
 import { ErrorMessages } from '../data/uiModels'
-import { CossoAddress } from '../data/cossoApiClient'
+import { Cosso, CossoAddress } from '../data/cossoApiClient'
 
 const properCase = (word: string): string =>
   word.length >= 1 ? word[0].toUpperCase() + word.toLowerCase().slice(1) : word
@@ -89,4 +89,45 @@ export function toCossoAddress(deliusAddress: DeliusAddress): CossoAddress {
 export default function asArray(param: undefined | string | ParsedQs | (string | ParsedQs)[]): string[] {
   if (param === undefined) return []
   return Array.isArray(param) ? (param as string[]) : [param as string]
+}
+
+export function createBlankCossoWithId(id: string): Cosso {
+  return {
+    amendments: [],
+    basicDetailsSaved: false,
+    completedDate: undefined,
+    complianceToDate: '',
+    confirmEqualities: false,
+    cossoContactList: [],
+    dateOfBirth: '',
+    diversityConfirmation: false,
+    emailAddress: '',
+    failuresAndEnforcementSaved: false,
+    id,
+    mainOffence: '',
+    mobileNumber: '',
+    offenceDetailsSaved: false,
+    postalAddress: undefined,
+    recommendations: '',
+    requirementList: [],
+    riskHistory: '',
+    riskOfHarmChanged: false,
+    roAndWitnessDetailsSaved: false,
+    roEmailAddress: '',
+    roTelephoneNumber: '',
+    roTitleAndFullName: '',
+    sentenceDate: '',
+    sentenceLength: '',
+    sentenceType: '',
+    sentencingCourt: '',
+    signature: '',
+    stepsToPreventBreach: '',
+    supportingComments: '',
+    telephoneNumber: '',
+    titleAndFullName: '',
+    whyInBreach: '',
+    witnessAvailability: '',
+    workAddress: undefined,
+    crn: '',
+  }
 }
