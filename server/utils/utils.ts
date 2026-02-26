@@ -1,7 +1,7 @@
 import { ParsedQs } from 'qs'
 import { DeliusAddress, Name } from '../data/ndeliusIntegrationApiClient'
 import { ErrorMessages } from '../data/uiModels'
-import {Cosso, CossoAddress} from '../data/cossoApiClient'
+import { Cosso, CossoAddress } from '../data/cossoApiClient'
 
 const properCase = (word: string): string =>
   word.length >= 1 ? word[0].toUpperCase() + word.toLowerCase().slice(1) : word
