@@ -22,7 +22,7 @@ export default function pdfMaintenanceRoutes(
       const stream: ArrayBuffer = await cossoApiClient.getDraftPdfById(cossoId, res.locals.user.username)
 
       res.setHeader('Content-Type', 'application/pdf')
-      res.setHeader('Content-Disposition', `filename="suicide_risk_form_${cosso.crn}_draft.pdf"`)
+      res.setHeader('Content-Disposition', `filename="breach_report_co_sso_${cosso.crn}_draft.pdf"`)
       res.send(stream)
     } catch (error) {
       const errorMessages: ErrorMessages = handleIntegrationErrors(
