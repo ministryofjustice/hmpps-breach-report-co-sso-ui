@@ -14,7 +14,7 @@ export default function addAmendmentRoutes(
   const currentPage = 'add-amendment'
 
   router.get('/add-amendment/:id', async (req, res) => {
-    await auditService.logPageView(Page.BASIC_DETAILS, { who: res.locals.user.username, correlationId: req.id })
+    await auditService.logPageView(Page.ADD_AMENDMENT, { who: res.locals.user.username, correlationId: req.id })
     const cossoClient = new CossoApiClient(authenticationClient)
     const cossoId: string = req.params.id
     const currentAmendmentId: string = req.query.amendmentid as string

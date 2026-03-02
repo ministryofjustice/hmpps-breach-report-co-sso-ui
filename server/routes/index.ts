@@ -12,6 +12,7 @@ import addAmendmentRoutes from './addAmendment'
 import pdfMaintenanceRoutes from './pdfMaintenance'
 import confirmDeleteRoutes from './confirm-delete'
 import formDeletedRoutes from './form-deleted'
+import addAddressRoutes from './add-address'
 
 export default function routes({ auditService, hmppsAuthClient, commonUtils }: Services): Router {
   const router = Router()
@@ -37,5 +38,6 @@ export default function routes({ auditService, hmppsAuthClient, commonUtils }: S
   pdfMaintenanceRoutes(router, auditService, hmppsAuthClient)
   confirmDeleteRoutes(router, auditService, hmppsAuthClient)
   formDeletedRoutes(router, auditService)
+  addAddressRoutes(router, auditService, hmppsAuthClient, commonUtils)
   return router
 }
