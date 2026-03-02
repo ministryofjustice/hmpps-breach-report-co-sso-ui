@@ -42,11 +42,7 @@ export default function witnessDetailsRoutes(
       }
       screenInfo = await cossoClient.getScreenInformationForScreen('witness_details', res.locals.user.username)
     } catch (error) {
-      errorMessages = handleIntegrationErrors(
-        error?.responseStatus,
-        error?.data?.userMessage,
-        'Breach Report CO SSO',
-      )
+      errorMessages = handleIntegrationErrors(error?.responseStatus, error?.data?.userMessage, 'Breach Report CO SSO')
 
       // Navigate to the detailed error page on 400
       if (error?.responseStatus === 400) {
@@ -68,11 +64,7 @@ export default function witnessDetailsRoutes(
     try {
       witnessDetails = await ndeliusIntegrationApiClient.getWitnessDetails(cosso.crn, res.locals.user.username)
     } catch (error) {
-      errorMessages = handleIntegrationErrors(
-        error.responseStatus,
-        error.data?.message,
-        'NDelius Integration',
-      )
+      errorMessages = handleIntegrationErrors(error.responseStatus, error.data?.message, 'NDelius Integration')
 
       // take the user to detailed error page for 400 type errors
       if (error.responseStatus === 400) {
