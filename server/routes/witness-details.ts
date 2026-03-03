@@ -327,7 +327,7 @@ export default function witnessDetailsRoutes(
         addresses.map(address => ({
           text: formatAddressForSelectMenuDisplay(address),
           value: `${address.id}`,
-          selected: witnessDetailsSaved && address.id.toString() === selectedAddressId.toString(),
+          selected: witnessDetailsSaved && address.id === selectedAddressId,
         })),
       )
 
