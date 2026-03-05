@@ -12,6 +12,7 @@ export enum Page {
   VIEW_PDF = 'VIEW_PDF',
   CONFIRM_DELETE = 'CONFIRM_DELETE',
   DOCUMENT_DELETED = 'DOCUMENT_DELETED',
+  ADD_ADDRESS = 'ADD_ADDRESS',
 }
 
 export interface PageViewEventDetails {

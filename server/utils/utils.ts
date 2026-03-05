@@ -1,6 +1,6 @@
 import { ParsedQs } from 'qs'
 import { DeliusAddress, Name } from '../data/ndeliusIntegrationApiClient'
-import { ErrorMessages } from '../data/uiModels'
+import { ErrorMessages, SelectItem } from '../data/uiModels'
 import { Cosso, CossoAddress } from '../data/cossoApiClient'
 
 const properCase = (word: string): string =>
@@ -29,6 +29,10 @@ export const initialiseName = (fullName?: string): string | null => {
 
 export function formatTitleAndFullName(title: string, name: Name): string {
   return [title, name.forename, name.middleName, name.surname].filter(Boolean).join(' ')
+}
+
+export function formatFullName(name: Name): string {
+  return [name.forename, name.middleName, name.surname].filter(Boolean).join(' ')
 }
 
 export function findMainOrPostalAddressInAddressList(addressList: Array<DeliusAddress>): DeliusAddress {
@@ -91,6 +95,33 @@ export default function asArray(param: undefined | string | ParsedQs | (string |
   return Array.isArray(param) ? (param as string[]) : [param as string]
 }
 
+export function formatAddressForSelectMenuDisplay(deliusAddress: DeliusAddress): string {
+  if (deliusAddress) {
+    return [
+      deliusAddress.officeDescription,
+      deliusAddress.buildingName,
+      [deliusAddress.buildingNumber, deliusAddress.streetName]
+        .filter(item => item)
+        .join(' ')
+        .trim(),
+      deliusAddress.district,
+      deliusAddress.townCity,
+      deliusAddress.county,
+      deliusAddress.postcode,
+    ]
+      .filter(item => item)
+      .join(', ')
+  }
+  return null
+}
+
+export function arrangeSelectItemListAlphabetically(selectItemsToSort: SelectItem[]): SelectItem[] {
+  if (selectItemsToSort) {
+    return selectItemsToSort.sort((a, b) => a?.text.localeCompare(b?.text, 'en', { numeric: true }))
+  }
+  return selectItemsToSort
+}
+
 export function createBlankCossoWithId(id: string): Cosso {
   return {
     amendments: [],
@@ -129,5 +160,6 @@ export function createBlankCossoWithId(id: string): Cosso {
     witnessAvailability: '',
     workAddress: undefined,
     crn: '',
+    probationArea: '',
   }
 }

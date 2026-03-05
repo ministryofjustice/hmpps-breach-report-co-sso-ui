@@ -179,6 +179,7 @@ export interface Cosso {
   riskOfHarmChanged: boolean
   failuresAndEnforcementSaved: boolean
   offenceDetailsSaved: boolean
+  probationArea: string
   diversityConfirmation: boolean
   signature: string
 }

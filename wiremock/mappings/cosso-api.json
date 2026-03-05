@@ -527,6 +527,7 @@
           "deliusContactId": 7,
           "workAddress": {
             "id": 2,
+            "address_id": 3,
             "status": "Work",
             "buildingName": "Work Address",
             "buildingNumber": "2",
@@ -1247,6 +1248,7 @@
           "id": "a3b2e7c4-8b0d-4f6f-9e12-2c6d1a7f3c58",
           "crn": "X012345",
           "completedDate": null,
+          "cossoContactList": [],
           "reviewRequiredDate": "2025-01-01T12:34:56",
           "reviewEvent": "UNMERGE"
         },
@@ -1267,6 +1269,7 @@
           "id": "f1d6c2a9-3f44-4c2a-9a9d-9c4a6bb7c1e0",
           "crn": "X012345",
           "completedDate": null,
+          "cossoContactList": [],
           "reviewRequiredDate": "2025-01-01T12:34:56",
           "reviewEvent": "EVENT_MOVE"
         },
@@ -1301,6 +1304,517 @@
       },
       "response": {
         "status": 200
+      }
+    },
+    {
+      "request": {
+        "url": "/cosso-api/cosso/cb43e340-883a-497a-aa30-48e37dfd1866",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "id": "cb43e340-883a-497a-aa30-48e37dfd1866",
+          "crn": "X012345",
+          "completedDate": null
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        "transformers": ["response-template"]
+      }
+    },
+    {
+      "request": {
+        "url": "/cosso-api/cosso/da1ad869-b29b-43e8-bfdc-fb15ce3934d7",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "id": "da1ad869-b29b-43e8-bfdc-fb15ce3934d7",
+          "crn": "X012345",
+          "completedDate": null
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        "transformers": ["response-template"]
+      }
+    },
+    {
+      "request": {
+        "url": "/cosso-api/cosso/2048be31-f7da-4a28-958c-6a9e0691c06a",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "id": "2048be31-f7da-4a28-958c-6a9e0691c06a",
+          "crn": "X012345",
+          "completedDate": null
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        "transformers": ["response-template"]
+      }
+    },
+    {
+      "request": {
+        "url": "/cosso-api/cosso/2048be31-f7da-4a28-958c-6a9e0691c06a",
+        "method": "PUT"
+      },
+      "response": {
+        "status": 200
+      }
+    },
+    {
+      "request": {
+        "url": "/cosso-api/cosso/68cfc760-1d4d-458c-8db5-c84ec0179026",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "id": "68cfc760-1d4d-458c-8db5-c84ec0179026",
+          "crn": "X012345",
+          "completedDate": null
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        "transformers": ["response-template"]
+      }
+    },
+    {
+      "request": {
+        "url": "/cosso-api/cosso/452750f1-dcfd-4d79-a269-09dfb1b9f7e4",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "id": "452750f1-dcfd-4d79-a269-09dfb1b9f7e4",
+          "crn": "X012345",
+          "completedDate": null
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        "transformers": ["response-template"]
+      }
+    },
+    {
+      "request": {
+        "url": "/cosso-api/cosso/44fbdcf5-0e07-44b8-94aa-2e685798af70",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "id": "44fbdcf5-0e07-44b8-94aa-2e685798af70",
+          "crn": "X012345",
+          "workAddress": {
+            "id": "10000002",
+            "addressId": null,
+            "status": "active",
+            "officeDescription": "Descriptive Name",
+            "buildingName": "Descriptive Tower",
+            "buildingNumber": "33",
+            "streetName": "Descriptive Street",
+            "townCity": "Descriptive Town",
+            "district": "Descriptive District",
+            "county": "Descriptive County",
+            "postcode": "DE54 1BE"
+          },
+          "completedDate": null
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        "transformers": ["response-template"]
+      }
+    },
+    {
+      "request": {
+        "url": "/cosso-api/cosso/referencedata/screeninformation/witness_details",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody":
+        [
+          {
+            "screenName": "witness_details",
+            "fieldName": "witness_availability",
+            "fieldText": "Witness Availability Help Text"
+          }
+        ],
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        "transformers": ["response-template"]
+      }
+    },
+    {
+      "request": {
+        "url": "/cosso-api/cosso/22b2660c-8b2b-41fc-8ff4-88ec47423e26",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "id": "22b2660c-8b2b-41fc-8ff4-88ec47423e26",
+          "crn": "X012345",
+          "witnessAvailability": "Some availability for my witness",
+          "workAddress": {
+            "id": "91b0cbf6-0df2-404d-817f-4cec2405c611",
+            "addressId": 2,
+            "status": "Postal",
+            "buildingName": "Newer Postal Address",
+            "buildingNumber": "2",
+            "streetName": "Newer Postal Street",
+            "townCity": "Newer Postal City",
+            "district": "Newer Postal District",
+            "county": "Newer Postal County",
+            "postcode": "PO20 2ST",
+            "startDate": "2025-09-20"
+          },
+          "completedDate": null
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        "transformers": ["response-template"]
+      }
+    },
+    {
+      "request": {
+        "url": "/cosso-api/cosso/8465e5d8-9417-4ff1-9738-bcb047be3c38",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "id": "8465e5d8-9417-4ff1-9738-bcb047be3c38",
+          "crn": "X012345",
+          "workAddress": {
+            "id": "91b0cbf6-0df2-404d-817f-4cec2405c611",
+            "addressId": 2,
+            "status": "Postal",
+            "buildingName": "Newer Postal Address",
+            "buildingNumber": "2",
+            "streetName": "Newer Postal Street",
+            "townCity": "Newer Postal City",
+            "district": "Newer Postal District",
+            "county": "Newer Postal County",
+            "postcode": "PO20 2ST",
+            "startDate": "2025-09-20"
+          },
+          "completedDate": null
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        "transformers": ["response-template"]
+      }
+    },
+    {
+      "request": {
+        "url": "/cosso-api/cosso/8465e5d8-9417-4ff1-9738-bcb047be3c38",
+        "method": "PUT"
+      },
+      "response": {
+        "status": 200
+      }
+    },
+    {
+      "request": {
+        "url": "/cosso-api/cosso/ff0dc548-b881-4da5-875f-86f6ca676b64",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "id": "ff0dc548-b881-4da5-875f-86f6ca676b64",
+          "crn": "X012345",
+          "workAddress": {
+            "id": "91b0cbf6-0df2-404d-817f-4cec2405c611",
+            "addressId": 2,
+            "status": "Postal",
+            "buildingName": "Newer Postal Address",
+            "buildingNumber": "2",
+            "streetName": "Newer Postal Street",
+            "townCity": "Newer Postal City",
+            "district": "Newer Postal District",
+            "county": "Newer Postal County",
+            "postcode": "PO20 2ST",
+            "startDate": "2025-09-20"
+          },
+          "completedDate": null
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        "transformers": ["response-template"]
+      }
+    },
+    {
+      "request": {
+        "url": "/cosso-api/cosso/ff0dc548-b881-4da5-875f-86f6ca676b64",
+        "method": "PUT"
+      },
+      "response": {
+        "status": 200
+      }
+    },
+    {
+      "request": {
+        "url": "/cosso-api/cosso/683da152-0c88-4340-ad18-169a435b70f4",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "id": "683da152-0c88-4340-ad18-169a435b70f4",
+          "crn": "X012345",
+          "workAddress": {
+            "id": "91b0cbf6-0df2-404d-817f-4cec2405c611",
+            "addressId": 2,
+            "status": "Postal",
+            "buildingName": "Newer Postal Address",
+            "buildingNumber": "2",
+            "streetName": "Newer Postal Street",
+            "townCity": "Newer Postal City",
+            "district": "Newer Postal District",
+            "county": "Newer Postal County",
+            "postcode": "PO20 2ST",
+            "startDate": "2025-09-20"
+          },
+          "completedDate": null
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        "transformers": ["response-template"]
+      }
+    },
+    {
+      "request": {
+        "url": "/cosso-api/cosso/683da152-0c88-4340-ad18-169a435b70f4",
+        "method": "PUT"
+      },
+      "response": {
+        "status": 200
+      }
+    },
+    {
+      "request": {
+        "url": "/cosso-api/cosso/ff0dc548-b881-4da5-875f-86f6ca676b64",
+        "method": "PUT"
+      },
+      "response": {
+        "status": 200
+      }
+    },
+    {
+      "request": {
+        "url": "/cosso-api/cosso/107c8aa7-acd9-46c7-8dbb-e1c3b5d7fd1c",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "id": "107c8aa7-acd9-46c7-8dbb-e1c3b5d7fd1c",
+          "crn": "X012345",
+          "workAddress": {
+            "id": "91b0cbf6-0df2-404d-817f-4cec2405c611",
+            "addressId": 2,
+            "status": "Postal",
+            "buildingName": "Newer Postal Address",
+            "buildingNumber": "2",
+            "streetName": "Newer Postal Street",
+            "townCity": "Newer Postal City",
+            "district": "Newer Postal District",
+            "county": "Newer Postal County",
+            "postcode": "PO20 2ST",
+            "startDate": "2025-09-20"
+          },
+          "completedDate": null
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        "transformers": ["response-template"]
+      }
+    },
+    {
+      "request": {
+        "url": "/cosso-api/cosso/107c8aa7-acd9-46c7-8dbb-e1c3b5d7fd1c",
+        "method": "PUT"
+      },
+      "response": {
+        "status": 200
+      }
+    },
+    {
+      "request": {
+        "url": "/cosso-api/cosso/7b75e1c7-2288-4ab6-afdc-727be2898f6c",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "id": "7b75e1c7-2288-4ab6-afdc-727be2898f6c",
+          "crn": "X012345",
+          "completedDate": null
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        "transformers": ["response-template"]
+      }
+    },
+    {
+      "request": {
+        "url": "/cosso-api/cosso/bff008a7-80a9-4c74-ab80-4d15f3c68532",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "id": "bff008a7-80a9-4c74-ab80-4d15f3c68532",
+          "crn": "A000123",
+          "completedDate": null
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        "transformers": ["response-template"]
+      }
+    },
+    {
+      "request": {
+        "url": "/cosso-api/cosso/532b684a-e0d6-4694-b445-e2e1c01b4517",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "id": "532b684a-e0d6-4694-b445-e2e1c01b4517",
+          "crn": "X012345",
+          "workAddress": {
+            "id": "91b0cbf6-0df2-404d-817f-4cec2405c611",
+            "addressId": 66,
+            "status": "Default",
+            "buildingName": "Expired Address",
+            "buildingNumber": "222",
+            "streetName": "Expired Street",
+            "townCity": "Expired City",
+            "district": "Expired District",
+            "county": "Expired County",
+            "postcode": "EX91 7ED",
+            "startDate": "2025-09-20"
+          },
+          "completedDate": null
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        "transformers": ["response-template"]
+      }
+    },
+    {
+      "request": {
+        "url": "/cosso-api/cosso/532b684a-e0d6-4694-b445-e2e1c01b4517",
+        "method": "PUT"
+      },
+      "response": {
+        "status": 200
+      }
+    },
+    {
+      "request": {
+        "url": "/cosso-api/cosso/2e6d8c12-a090-4509-9e39-ac1844ed1062",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "id": "2e6d8c12-a090-4509-9e39-ac1844ed1062",
+          "crn": "A001234",
+          "completedDate": null
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        "transformers": ["response-template"]
+      }
+    },
+    {
+      "request": {
+        "url": "/cosso-api/cosso/396393bc-de1f-488b-9d03-63d0381382ba",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "id": "396393bc-de1f-488b-9d03-63d0381382ba",
+          "crn": "X012345",
+          "workAddress": {
+            "id": "91b0cbf6-0df2-404d-817f-4cec2405c611",
+            "addressId": null,
+            "status": null,
+            "buildingName": "Manual Address",
+            "buildingNumber": "32",
+            "streetName": "Manual Street",
+            "townCity": "Manual City",
+            "district": "Manual District",
+            "county": "Manual County",
+            "postcode": "MN4 0AL",
+            "startDate": "2025-09-20"
+          },
+          "completedDate": null
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        "transformers": ["response-template"]
+      }
+    },
+    {
+      "request": {
+        "url": "/cosso-api/cosso/9c9a1ad2-7141-4b03-837f-b66346a0b6ac",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "id": "9c9a1ad2-7141-4b03-837f-b66346a0b6ac",
+          "crn": "Z000009",
+          "completedDate": null
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        "transformers": ["response-template"]
+      }
+    },
+    {
+      "request": {
+        "url": "/cosso-api/cosso/428d2aa3-b184-4484-b665-8d8e02dd92d8",
+        "method": "GET"
+      },
+      "response": {
+        "status": 500,
+        "jsonBody": {
+          "message": "Some server side error occurred in the cosso service"
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        "transformers": ["response-template"]
       }
     }
   ]

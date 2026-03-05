@@ -421,6 +421,215 @@
           "Content-Type": "application/json;charset=UTF-8"
         }
       }
+    },
+    {
+      "request": {
+        "urlPattern": "/ndelius/responsible-officer/X012345/(.*?)",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "name":
+            {
+              "forename": "Jeff",
+              "middleName": "the",
+              "surname": "Chef"
+            },
+          "telephoneNumber": "01234567891",
+          "emailAddress": "MrJeffTheChef@email.com",
+          "probationArea":
+          {
+            "description":"The Cooking Show Area",
+            "code":"TCSA"
+          },
+          "replyAddresses": [
+            {
+              "id": 1,
+              "status": "Postal",
+              "buildingName": "Older Postal Address",
+              "buildingNumber": "1",
+              "streetName": "Older Postal Address",
+              "townCity": "Older Postal Address",
+              "district": "Older Postal Address",
+              "county": "Older Postal Address",
+              "postcode": "AA1 1AA",
+              "startDate": "2025-02-15"
+            },
+            {
+              "id": 2,
+              "status": "Postal",
+              "buildingName": "Newer Postal Address",
+              "buildingNumber": "2",
+              "streetName": "Newer Postal Address",
+              "townCity": "Newer Postal Address",
+              "district": "Newer Postal Address",
+              "county": "Newer Postal Address",
+              "postcode": "PO20 2ST",
+              "startDate": "2025-09-20"
+            },
+            {
+              "id": 3,
+              "status": "Main",
+              "buildingName": "Older Main Address",
+              "buildingNumber": "3",
+              "streetName": "Older Main Address",
+              "townCity": "Older Main Address",
+              "district": "Older Main Address",
+              "county": "Older Main Address",
+              "postcode": "AA2 2AA",
+              "startDate": "2025-01-10"
+            },
+            {
+              "id": 4,
+              "status": "Main",
+              "buildingName": "Newer Main Address",
+              "buildingNumber": "4",
+              "streetName": "Newer Main Address",
+              "townCity": "Newer Main Address",
+              "district": "Newer Main Address",
+              "county": "Newer Main Address",
+              "postcode": "AA3 3AA",
+              "startDate": "2025-07-25"
+            },
+            {
+              "id": 5,
+              "status": "Previous",
+              "buildingName": "1",
+              "buildingNumber": "1",
+              "streetName": "Previous Street",
+              "townCity": "Previous Town",
+              "district": "Previous District",
+              "county": "Previous county",
+              "postcode": "AA3 3AA",
+              "startDate": "2024-05-01"
+            }
+          ]
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        }
+      }
+    },
+    {
+      "request": {
+        "urlPattern": "/ndelius/responsible-officer/A000123/(.*?)",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "name":
+          {
+            "forename": "Default",
+            "middleName": "Addr",
+            "surname": "Test"
+          },
+          "telephoneNumber": "01234567891",
+          "emailAddress": "Default@email.com",
+          "probationArea":
+          {
+            "description":"Address Area",
+            "code":"TCSA"
+          },
+          "replyAddresses": [
+            {
+              "id": 1,
+              "status": "Postal",
+              "buildingName": "Older Postal Address",
+              "buildingNumber": "1",
+              "streetName": "Older Postal Address",
+              "townCity": "Older Postal Address",
+              "district": "Older Postal Address",
+              "county": "Older Postal Address",
+              "postcode": "AA1 1AA",
+              "startDate": "2025-02-15"
+            },
+            {
+              "id": 2,
+              "status": "Postal",
+              "buildingName": "Newer Postal Address",
+              "buildingNumber": "2",
+              "streetName": "Newer Postal Address",
+              "townCity": "Newer Postal Address",
+              "district": "Newer Postal Address",
+              "county": "Newer Postal Address",
+              "postcode": "PO20 2ST",
+              "startDate": "2025-09-20"
+            },
+            {
+              "id": 3,
+              "status": "Default",
+              "buildingName": "The Default Address",
+              "buildingNumber": "3",
+              "streetName": "Default Street",
+              "townCity": "Default Town",
+              "district": "Default District",
+              "county": "Default County",
+              "postcode": "DE7 4LT",
+              "startDate": "2025-01-10"
+            },
+            {
+              "id": 4,
+              "status": "Main",
+              "buildingName": "Newer Main Address",
+              "buildingNumber": "4",
+              "streetName": "Newer Main Address",
+              "townCity": "Newer Main Address",
+              "district": "Newer Main Address",
+              "county": "Newer Main Address",
+              "postcode": "AA3 3AA",
+              "startDate": "2025-07-25"
+            }
+          ]
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        }
+      }
+    },
+    {
+      "request": {
+        "urlPattern": "/ndelius/responsible-officer/A001234/(.*?)",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "name":
+          {
+            "forename": "No",
+            "middleName": "Available",
+            "surname": "Addresses"
+          },
+          "telephoneNumber": "01234567891",
+          "emailAddress": "none@email.com",
+          "probationArea":
+          {
+            "description":"Address Area",
+            "code":"TCSA"
+          },
+          "replyAddresses": []
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        }
+      }
+    },
+    {
+      "request": {
+        "urlPattern": "/ndelius/responsible-officer/Z000009/(.*?)",
+        "method": "GET"
+      },
+      "response": {
+        "status": 500,
+        "jsonBody": {
+          "message": "Some server side error occurred"
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        }
+      }
     }
   ]
 }

@@ -44,6 +44,15 @@ export default class NDeliusIntegrationApiClient extends RestClient {
       asSystem(username),
     )
   }
+
+  async getWitnessDetails(crn: string, username: string): Promise<WitnessDetails> {
+    return this.get(
+      {
+        path: `/responsible-officer/${crn}/${username}`,
+      },
+      asSystem(username),
+    )
+  }
 }
 
 export interface Name {
@@ -146,4 +155,12 @@ export interface OffenceDetails {
   requirementsImposed: DeliusRequirement[]
   sentence: DeliusSentence
   additionalSentences: DeliusSentence[]
+}
+
+export interface WitnessDetails {
+  name: Name
+  telephoneNumber: string
+  emailAddress: string
+  probationArea: ReferenceData
+  replyAddresses: DeliusAddress[]
 }

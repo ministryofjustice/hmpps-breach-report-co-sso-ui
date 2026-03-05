@@ -162,7 +162,7 @@ export default function failuresRoutes(
       }
 
       const showEmbeddedError = true
-      res.render(`pages/basic-details`, { errorMessages, showEmbeddedError })
+      res.render(`pages/failures`, { errorMessages, showEmbeddedError })
       return
     }
 
@@ -184,7 +184,7 @@ export default function failuresRoutes(
       // stay on the current page for 500 errors
       if (error.responseStatus === 500) {
         const showEmbeddedError = true
-        res.render(`pages/basic-details`, { errorMessages, showEmbeddedError })
+        res.render(`pages/failures`, { errorMessages, showEmbeddedError })
         return
       }
       res.render(`pages/detailed-error`, { errorMessages })
