@@ -28,7 +28,7 @@ context('Add Address page', () => {
     cy.url().should('include', '/witness-details')
   })
 
-  it('will return to sign and send screen when cancel is clicked', () => {
+  it('will return to witness details screen when cancel is clicked', () => {
     cy.visit('/add-address/da1ad869-b29b-43e8-bfdc-fb15ce3934d7')
     cy.url().should('include', '/add-address')
     cy.get('#cancel-button').should('exist').should('be.visible')
