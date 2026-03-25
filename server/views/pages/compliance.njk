@@ -6,16 +6,170 @@
 {% block content %}
   {% from "moj/components/side-navigation/macro.njk" import mojSideNavigation %}
   {% from "govuk/components/panel/macro.njk" import govukPanel %}
+  {% from "govuk/components/button/macro.njk" import govukButton %}
+  {% from "govuk/components/radios/macro.njk" import govukRadios %}
+  {% from "govuk/components/character-count/macro.njk" import govukCharacterCount %}
+  {% from "govuk/components/details/macro.njk" import govukDetails %}
+  {% from "govuk/components/checkboxes/macro.njk" import govukCheckboxes %}
+  {% from "govuk/components/select/macro.njk" import govukSelect %}
+  {% from "moj/components/date-picker/macro.njk" import mojDatePicker %}
+  {% from "govuk/components/table/macro.njk" import govukTable %}
+  {% from "govuk/components/input/macro.njk" import govukInput %}
 
+  <form method="post">
 
-  <div class="govuk-grid-row">
-    <div class="govuk-grid-column-one-third">
-      {% include "pages/side-nav.njk" %}
+    {% set errorList =[
+      { text: errorMessages.genericErrorMessage.text, href: "#" } if errorMessages.genericErrorMessage else None,
+      { text: errorMessages.failureNotSelected.text, href: "#" } if errorMessages.failureNotSelected else None,
+      { text: errorMessages.requirementNotesLength.text, href: "#" } if errorMessages.requirementNotesLength else None,
+      { text: errorMessages.complianceToDate.text, href: "#complianceToDate" } if errorMessages.complianceToDate else None
+    ] | reject("undefined") %}
+
+    {% if errorMessages | length > 0 %}
+      {% from "govuk/components/error-summary/macro.njk" import govukErrorSummary %}
+      {{ govukErrorSummary({ titleText: "There is a problem", errorList: errorList }) }}
+    {% endif %}
+
+    <input type="hidden" name="_csrf" value="{{ csrfToken }}">
+
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-one-third">
+        {% include "pages/side-nav.njk" %}
+      </div>
+      <div class="govuk-grid-column-two-thirds">
+        {% include "partials/review-required.njk" %}
+        <h1 id="page-title" class="govuk-heading-l">Breach Report CO SSO - Compliance to date</h1>
+
+        <div class="govuk-form-group">
+          <h4 id="requirement-text" class="govuk-heading-m">
+            Please select the failures that you wish to record or add details to
+          </h4>
+          {% if uiRequirements | length > 0 %}
+            <div class="govuk-form-group">
+              <fieldset class="govuk-fieldset">
+                <div class="govuk-checkboxes" data-module="govuk-checkboxes">
+                  {% for requirement in uiRequirements %}
+                    <div class="govuk-checkboxes__item">
+                      <input class="govuk-checkboxes__input"
+                             id="requirement_{{ requirement.uiId }}"
+                             name="requirement"
+                             type="checkbox"
+                             value="{{ requirement.uiId }}"
+                               {% if requirement.existing %}checked="checked"{% endif %}
+                             data-aria-controls="conditional-{{ requirement.uiId }}">
+                      <label class="govuk-label govuk-checkboxes__label" for="requirement_{{ requirement.uiId }}">
+                        {% set requirementHtml = requirement.notes | escape | nl2br | safe %}
+                        {{ requirement.type.description }}
+                      </label>
+                    </div>
+                    <div class="govuk-checkboxes__conditional govuk-checkboxes__conditional--hidden"
+                         id="conditional-{{ requirement.uiId }}">
+                      <div class="govuk-form-group">
+
+                        {% set failureReasonSelect %}
+                          {{ govukSelect({
+                            id: "failureReason_"+requirement.uiId,
+                            name: "failureReason_"+requirement.uiId,
+                            label: {
+                              text: "Please select a failure reason"
+                            },
+                            value: requirement.failureReason,
+                            items: breachItems
+                          }) }}
+                        {% endset -%}
+
+                        {{ govukRadios({
+                          name: "requirement_"+requirement.uiId,
+                          fieldset: {
+                            legend: {
+                              text: "Did they fail this requirement?",
+                              isPageHeading: false,
+                              classes: "govuk-fieldset__legend--m"
+                            }
+                          },
+                          hint: {
+                            text: "Select one option"
+                          },
+                          items: [
+                            {
+                              value: "Yes",
+                              text: "Yes",
+                              checked: requirement.failure === true,
+                              conditional: {
+                              html: failureReasonSelect
+                              }
+                            },
+                            {
+                              value: "No",
+                              text: "No",
+                              checked: requirement.failure === false
+                            }
+                          ]
+                        }) }}
+
+                        {{ govukCharacterCount({
+                          hint : { text: "Please add relevant detail" },
+                          value: requirement.notes,
+                          classes: "govuk-input--width-30",
+                          name: "notes_"+requirement.uiId,
+                          id: "notes_"+requirement.uiId,
+                          maxlength: 20000
+                        }) }}
+                      </div>
+                    </div>
+                  {% endfor %}
+                </div>
+              </fieldset>
+            </div>
+          {% endif %}
+        </div>
+
+        <div class="govuk-form-group">
+          <h4 id="compliance-to-date-information" class="govuk-heading-s">Describe the Compliance with the whole order
+            to date?</h4>
+
+          {% set complianceToHelpHtml %}
+            {{ govukDetails({
+              summaryText: "What information to include here",
+              text: complianceToHelp
+            }) }}
+          {% endset -%}
+          {{ govukCharacterCount({
+            hint : {
+              html: complianceToHelpHtml
+            },
+            value: cosso.complianceToDate,
+            classes: "govuk-input--width-30",
+            name: "complianceToDate",
+            id: "complianceToDate",
+            maxlength: 20000,
+            errorMessage: {
+              text: errorMessages.complianceToDate.text
+            } if errorMessages.complianceToDate.text
+          }) }}
+        </div>
+
+        <div class="moj-button-group">
+          {{ govukButton({
+            text: "Continue",
+            preventDoubleClick: "true",
+            type: "submit",
+            attributes: {
+              id: "continue-button"
+            }
+          }) }}
+          {{ govukButton({
+            text: "Save Progress and Close",
+            type: "submit",
+            name: "action",
+            value: "saveProgressAndClose",
+            classes: "govuk-button--secondary",
+            attributes: {
+              id: "close-button"
+            }
+          }) }}
+        </div>
+      </div>
     </div>
-    <div class="govuk-grid-column-two-thirds">
-      {% include "partials/review-required.njk" %}
-      <p>Compliance</p>
-    </div>
-  </div>
-
+  </form>
 {% endblock %}

@@ -115,6 +115,61 @@ export default class CossoApiClient extends RestClient {
     )
   }
 
+  async getCossoRequirementsForCosso(id: string, username: string): Promise<Array<CossoRequirement>> {
+    return this.get(
+      {
+        path: `/cosso/requirement/bycossoid/${id}`,
+      },
+      asSystem(username),
+    )
+  }
+
+  async createCossoRequirement(cossoRequirement: CossoRequirement, username: string): Promise<string> {
+    return this.post(
+      {
+        path: `/cosso/requirement`,
+        data: cossoRequirement as unknown as Record<string, unknown>,
+      },
+      asSystem(username),
+    )
+  }
+
+  async updateCossoRequirement(cossoRequirement: CossoRequirement, username: string): Promise<string> {
+    return this.put(
+      {
+        path: `/cosso/requirement/${cossoRequirement.id}`,
+        data: cossoRequirement as unknown as Record<string, unknown>,
+      },
+      asSystem(username),
+    )
+  }
+
+  async deleteCossoRequirement(id: string, username: string) {
+    return this.delete(
+      {
+        path: `/cosso/requirement/${id}`,
+      },
+      asSystem(username),
+    )
+  }
+
+  async batchUpdateRequirements(cossoId: string, reqs: Array<CossoRequirement>, username: string): Promise<void> {
+    const promises = []
+    for (const r of reqs) {
+      if (r.id) promises.push(this.updateCossoRequirement(r, username))
+      else promises.push(this.createCossoRequirement(r, username))
+    }
+    await Promise.all(promises)
+  }
+
+  async batchDeleteRequirements(reqs: Array<CossoRequirement>, username: string): Promise<void> {
+    const promises = []
+    for (const r of reqs) {
+      promises.push(this.deleteCossoRequirement(r.id, username))
+    }
+    await Promise.all(promises)
+  }
+
   async getScreenInformationForScreen(screen: string, username: string): Promise<Array<ScreenInformation>> {
     return this.get(
       {
@@ -227,4 +282,7 @@ export interface CossoRequirement {
   requirementTypeSubCategoryDescription: string
   requirementLength: string
   requirementSecondLength: string
+  failureReason?: string
+  notes?: string
+  failure?: boolean
 }

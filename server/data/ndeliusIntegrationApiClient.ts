@@ -53,6 +53,12 @@ export default class NDeliusIntegrationApiClient extends RestClient {
       asSystem(username),
     )
   }
+
+  async getRequirements(breachNoticeId: string): Promise<Requirements> {
+    return this.get({
+      path: `/requirements/${breachNoticeId}`,
+    })
+  }
 }
 
 export interface Name {
@@ -163,4 +169,15 @@ export interface WitnessDetails {
   emailAddress: string
   probationArea: ReferenceData
   replyAddresses: DeliusAddress[]
+}
+
+export interface Requirement {
+  id: number
+  type: ReferenceData
+  subType: ReferenceData
+}
+
+export interface Requirements {
+  requirements: Requirement[]
+  breachReasons: ReferenceData[]
 }
