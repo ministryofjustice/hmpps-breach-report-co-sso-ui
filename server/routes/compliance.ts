@@ -148,7 +148,7 @@ export default function complianceRoutes(
         res.render(`pages/detailed-error`, { errorMessages })
         return
       }
-      screenInfo = await cossoClient.getScreenInformationForScreen('compliance_to_date', res.locals.user.username)
+      screenInfo = await cossoClient.getScreenInformationForScreen('compliance', res.locals.user.username)
     } catch (error) {
       errorMessages = {
         ...errorMessages,

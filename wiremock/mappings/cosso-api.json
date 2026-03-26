@@ -1816,6 +1816,246 @@
         },
         "transformers": ["response-template"]
       }
+    },
+    {
+      "request": {
+        "url": "/cosso-api/cosso/4c9a1ad2-7141-4b03-837f-b66346a0b6ad",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "id": "4c9a1ad2-7141-4b03-837f-b66346a0b6ad",
+          "crn": "X666667",
+          "dateOfBirth": "1980-01-01",
+          "titleAndFullName": "Test User",
+          "telephoneNumber": "01234567890",
+          "emailAddress": "test@example.com",
+          "mobileNumber": "07123456789",
+          "basicDetailsSaved": true,
+          "roTitleAndFullName": "Test RO",
+          "roTelephoneNumber": "01911222333",
+          "roEmailAddress": "ro@example.com",
+          "roAndWitnessDetailsSaved": true,
+          "complianceToDate": "test 444",
+          "requirementList": [
+            {
+              "id": "11111111-aaaa-4444-bbbb-cccccccc0001",
+              "deliusRequirementId": 0,
+              "cossoId": "4c9a1ad2-7141-4b03-837f-b66346a0b6ad",
+              "requirementTypeMainCategoryDescription": "Requirement Zero",
+              "requirementTypeSubCategoryDescription": "Requirement Zero - Subtype",
+              "requirementLength": null,
+              "requirementSecondLength": null,
+              "failureReason": null,
+              "notes": "test 1",
+              "failure": false,
+              "createdBy": "TEST_USER",
+              "createdDateTime": "2026-03-25T13:00:05.314256",
+              "lastUpdatedBy": "TEST_USER",
+              "lastUpdatedDateTime": "2026-03-25T13:00:05.314256"
+            },
+            {
+              "id": "22222222-bbbb-5555-cccc-dddddddd0002",
+              "deliusRequirementId": 167,
+              "cossoId": "4c9a1ad2-7141-4b03-837f-b66346a0b6ad",
+              "requirementTypeMainCategoryDescription": "string",
+              "requirementTypeSubCategoryDescription": "string",
+              "requirementLength": null,
+              "requirementSecondLength": null,
+              "failureReason": "Attended late",
+              "notes": "test 2",
+              "failure": true,
+              "createdBy": "TEST_USER",
+              "createdDateTime": "2026-03-25T13:00:05.314256",
+              "lastUpdatedBy": "TEST_USER",
+              "lastUpdatedDateTime": "2026-03-25T13:00:05.314256"
+            }
+          ],
+          "failuresAndEnforcementSaved": true,
+          "offenceDetailsSaved": true
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        "transformers": [
+          "response-template"
+        ]
+      }
+    },
+    {
+      "request": {
+        "url": "/cosso-api/cosso/4c9a1ad2-7141-4b03-837f-b66346a0b6ad",
+        "method": "PUT"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "id": "4c9a1ad2-7141-4b03-837f-b66346a0b6ad",
+          "crn": "X666667",
+          "dateOfBirth": "1980-01-01",
+          "titleAndFullName": "Test User",
+          "telephoneNumber": "01234567890",
+          "emailAddress": "test@example.com",
+          "mobileNumber": "07123456789",
+          "basicDetailsSaved": true,
+          "roTitleAndFullName": "Test RO",
+          "roTelephoneNumber": "01911222333",
+          "roEmailAddress": "ro@example.com",
+          "roAndWitnessDetailsSaved": true,
+          "requirementList": [
+            {
+              "id": "11111111-aaaa-4444-bbbb-cccccccc0001",
+              "deliusRequirementId": 0,
+              "cossoId": "4c9a1ad2-7141-4b03-837f-b66346a0b6ad",
+              "requirementTypeMainCategoryDescription": "Requirement Zero",
+              "requirementTypeSubCategoryDescription": "Requirement Zero - Subtype",
+              "requirementLength": null,
+              "requirementSecondLength": null,
+              "failureReason": null,
+              "notes": "test 1",
+              "complianceToDate": "test 444",
+              "failure": false,
+              "createdBy": "TEST_USER",
+              "createdDateTime": "2026-03-25T13:00:05.314256",
+              "lastUpdatedBy": "TEST_USER",
+              "lastUpdatedDateTime": "2026-03-25T13:00:05.314256"
+            },
+            {
+              "id": "22222222-bbbb-5555-cccc-dddddddd0002",
+              "deliusRequirementId": 167,
+              "cossoId": "4c9a1ad2-7141-4b03-837f-b66346a0b6ad",
+              "requirementTypeMainCategoryDescription": "string",
+              "requirementTypeSubCategoryDescription": "string",
+              "requirementLength": null,
+              "requirementSecondLength": null,
+              "failureReason": "Attended late",
+              "notes": "test 2",
+              "failure": true,
+              "createdBy": "TEST_USER",
+              "createdDateTime": "2026-03-25T13:00:05.314256",
+              "lastUpdatedBy": "TEST_USER",
+              "lastUpdatedDateTime": "2026-03-25T13:00:05.314256"
+            }
+          ],
+          "failuresAndEnforcementSaved": true,
+          "offenceDetailsSaved": true
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        "transformers": [
+          "response-template"
+        ]
+      }
+    },
+    {
+      "request": {
+        "url": "/cosso-api/cosso/referencedata/screeninformation/compliance",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": [
+          {
+            "screenName": "compliance",
+            "fieldName": "compliance_to_date",
+            "fieldText": "By assessing both compliance and engagement regarding all elements of the sentence to date and likely future engagement, the court can make an informed decision on its response to the breach:\n\n        Compliance\n\n        Outline the person’s level of attendance on all elements of the Order/PSS, including those not subject to the breach and completed requirements. Detail number of previous absences and the reasons for these. Provide information about any previous breaches/amendments outlined in Section 4.\n\n        In cases of PSS: Failures to comply with the licence cannot legally have any bearing on enforcement of the PSS. Provide a brief summary only of compliance during the licence, for context, and where relevant specify if the PSS has resulted from the breach of a prior community sentence.\n\n        Engagement\n\n        Brief overview of progress and engagement on each element of the Order or PSS e.g., summary of work completed, progress on sentence plan, progress in addressing factors relevant to risk, offending, protective factors, and adherence to the risk management plan.\n\n        Explain why any element of the sentence has not commenced, if relevant.\n\n        Assess the person’s attitude to the Order/PSS moving forward\n\n        The reasons for non-compliance, how enduring they are, engagement/attendance since the breach and response to addressing any diversity factors or other barriers."
+          }
+        ],
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        "transformers": [
+          "response-template"
+        ]
+      }
+    },
+    {
+      "request": {
+        "url": "/cosso-api/cosso/requirement/11111111-aaaa-4444-bbbb-cccccccc0001",
+        "method": "PUT"
+      },
+      "response": {
+        "status": 200
+      }
+    },
+    {
+      "request": {
+        "url": "/cosso-api/cosso/requirement/22222222-bbbb-5555-cccc-dddddddd0002",
+        "method": "PUT"
+      },
+      "response": {
+        "status": 200
+      }
+    },
+    {
+      "request": {
+        "url": "/cosso-api/cosso/requirement/bycossoid/4c9a1ad2-7141-4b03-837f-b66346a0b6ad",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": [
+          {
+            "id": "11111111-aaaa-4444-bbbb-cccccccc0001",
+            "deliusRequirementId": 0,
+            "cossoId": "4c9a1ad2-7141-4b03-837f-b66346a0b6ad",
+            "requirementTypeMainCategoryDescription": "Requirement Zero",
+            "requirementTypeSubCategoryDescription": "Requirement Zero - Subtype",
+            "requirementLength": null,
+            "requirementSecondLength": null,
+            "failureReason": null,
+            "notes": "test 1",
+            "failure": false
+          },
+          {
+            "id": "22222222-bbbb-5555-cccc-dddddddd0002",
+            "deliusRequirementId": 167,
+            "cossoId": "4c9a1ad2-7141-4b03-837f-b66346a0b6ad",
+            "requirementTypeMainCategoryDescription": "string",
+            "requirementTypeSubCategoryDescription": "string",
+            "requirementLength": null,
+            "requirementSecondLength": null,
+            "failureReason": "Attended late",
+            "notes": "test 2",
+            "failure": true
+          }
+        ],
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        "transformers": [
+          "response-template"
+        ]
+      }
+    },
+    {
+      "request": {
+        "url": "/cosso-api/cosso/requirement",
+        "method": "POST"
+      },
+      "response": {
+        "status": 200
+      }
+    },
+    {
+      "request": {
+        "url": "/cosso-api/cosso/requirement/11111111-aaaa-4444-bbbb-cccccccc0001",
+        "method": "DELETE"
+      },
+      "response": {
+        "status": 200
+      }
+    },
+    {
+      "request": {
+        "url": "/cosso-api/cosso/requirement/22222222-bbbb-5555-cccc-dddddddd0002",
+        "method": "DELETE"
+      },
+      "response": {
+        "status": 200
+      }
     }
   ]
 }
