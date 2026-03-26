@@ -87,7 +87,7 @@ export default function complianceRoutes(
     for (let i = 0; i < requirements.requirements.length; i += 1) {
       const ext = requirements.requirements[i]
 
-      const existing = cosso.requirementList.find(r => r.deliusRequirementId === ext.id)
+      const existing = cosso?.requirementList?.find(r => r.deliusRequirementId === ext.id)
 
       uiRequirements.push({
         uiId: i + 1,
