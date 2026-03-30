@@ -106,7 +106,7 @@ context('Offence Details page', () => {
     cy.get('#delete-link-1').click()
     cy.url().should(
       'include',
-      '/delete-amendment/deb3be2a-e196-412e-b349-7c89d1b539af?amendmentId=00000000-0000-0000-0000-000000000004',
+      '/delete-amendment/deb3be2a-e196-412e-b349-7c89d1b539af/00000000-0000-0000-0000-000000000004',
     )
   })
 

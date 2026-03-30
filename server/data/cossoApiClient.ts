@@ -57,6 +57,15 @@ export default class CossoApiClient extends RestClient {
     )
   }
 
+  async deleteAmendment(amendmentId: string, username: string): Promise<Cosso> {
+    return this.delete(
+      {
+        path: `/cosso/amendment/${amendmentId}`,
+      },
+      asSystem(username),
+    )
+  }
+
   async createCossoContact(cossoContact: CossoContact, username: string): Promise<string> {
     return this.post(
       {

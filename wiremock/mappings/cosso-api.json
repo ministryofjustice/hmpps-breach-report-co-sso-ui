@@ -240,6 +240,19 @@
     },
     {
       "request": {
+        "url": "/cosso-api/cosso/amendment/1397b54d-4360-4ec5-bc75-8a908bc5e49c",
+        "method": "DELETE"
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        "transformers": ["response-template"]
+      }
+    },
+    {
+      "request": {
         "url": "/cosso-api/cosso/amendment/ff15ee51-d8e1-4913-9f55-2a3151b0ab11",
         "method": "GET"
       },
