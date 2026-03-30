@@ -630,6 +630,95 @@
           "Content-Type": "application/json;charset=UTF-8"
         }
       }
+    },
+    {
+      "request": {
+        "urlPattern": "/ndelius/requirements/(.*?)",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "requirements": [
+            {
+              "id": 0,
+              "type": { "code": "REQ01", "description": "Requirement Zero" },
+              "subType": { "code": "REQ01A", "description": "Requirement Zero - Subtype" }
+            },
+            {
+              "id": 167,
+              "type": {
+                "code": "string",
+                "description": "string"
+              },
+              "subType": {
+                "code": "string",
+                "description": "string"
+              }
+            },
+            {
+              "id": 2,
+              "type": {
+                "code": "STR",
+                "description": "A STRING"
+              },
+              "subType": {
+                "code": "SSTR",
+                "description": "A SUBSTRING"
+              }
+            }
+          ],
+          "breachReasons": [
+            {
+              "code": "BR01",
+              "description": "Failed to attend as instructed"
+            },
+            {
+              "code": "BR02",
+              "description": "Attended but failed to comply with instructions"
+            },
+            {
+              "code": "BR03",
+              "description": "Attended late"
+            },
+            {
+              "code": "BR04",
+              "description": "Failed to comply - unacceptable behaviour"
+            },
+            {
+              "code": "BR05",
+              "description": "Failed to submit to treatment as directed"
+            },
+            {
+              "code": "BR06",
+              "description": "Failed to provide sample for drug testing"
+            },
+            {
+              "code": "BR07",
+              "description": "Failed to reside as directed"
+            },
+            {
+              "code": "BR08",
+              "description": "Failed to notify/seek permission to change address"
+            },
+            {
+              "code": "BR09",
+              "description": "Failed to keep in touch as directed"
+            },
+            {
+              "code": "BR10",
+              "description": "Failed to allow install of curfew equipment"
+            },
+            {
+              "code": "BR11",
+              "description": "Failed to take reasonable care of curfew equipment"
+            }
+          ]
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        }
+      }
     }
   ]
 }
