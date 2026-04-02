@@ -22,7 +22,11 @@ export default function routes({ auditService, hmppsAuthClient, commonUtils }: S
     res.render('pages/index')
   })
 
-  router.get('/close', async (req, res, next) => {
+  router.get('/cosso/:id', async (req, res) => {
+    res.redirect(`/basic-details/${req.params.id}`)
+  })
+
+  router.get('/close', async (req, res) => {
     res.send(
       `<p>You can now safely close this window</p><script nonce="${res.locals.cspNonce}">window.close()</script>`,
     )

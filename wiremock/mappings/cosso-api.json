@@ -42,6 +42,26 @@
     },
     {
       "request": {
+        "url": "/cosso-api/cosso/06726a48-db79-4abc-993f-6bf79fb0dffe",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "id": "06726a48-db79-4abc-993f-6bf79fb0dffe",
+          "crn": "P123456",
+          "completedDate": null
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        "transformers": [
+          "response-template"
+        ]
+      }
+    },
+    {
+      "request": {
         "url": "/cosso-api/cosso/00000000-0000-0000-0000-000000000011",
         "method": "GET"
       },
