@@ -9,15 +9,6 @@ export default class NDeliusIntegrationApiClient extends RestClient {
     super('NDelius Integration API', config.apis.ndeliusIntegration, logger, authenticationClient)
   }
 
-  async getLimitedAccessCheck(crn: string, username: string): Promise<LimitedAccessCheck> {
-    return this.get(
-      {
-        path: `/users/${username}/access/${crn}`,
-      },
-      asSystem(username),
-    )
-  }
-
   async getBasicDetails(crn: string, username: string): Promise<BasicDetails> {
     return this.get(
       {
@@ -90,14 +81,6 @@ export interface DeliusAddress {
   county: string
   postcode: string
   startDate: string
-}
-
-export interface LimitedAccessCheck {
-  crn: string
-  userExcluded: boolean
-  exclusionMessage?: string
-  userRestricted: boolean
-  restrictionMessage?: string
 }
 
 export interface ReferenceData {

@@ -12,6 +12,7 @@ generic-service:
     HMPPS_AUTH_URL: "https://sign-in-preprod.hmpps.service.justice.gov.uk/auth"
     TOKEN_VERIFICATION_API_URL: "https://token-verification-api-preprod.prison.service.justice.gov.uk"
     COSSO_API_URL: "https://breach-report-co-sso-api-preprod.hmpps.service.justice.gov.uk"
+    PROBATION_ACCESS_CONTROL_URL: "https://probation-access-control-preprod.hmpps.service.justice.gov.uk"
     ENVIRONMENT_NAME: PRE-PRODUCTION
 
   allowlist:

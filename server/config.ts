@@ -90,6 +90,15 @@ export default {
       },
       agent: new AgentConfig(Number(get('NDELIUS_INTEGRATION_TIMEOUT_RESPONSE', 10000))),
     },
+    probationAccessControl: {
+      url: get('PROBATION_ACCESS_CONTROL_URL', 'http://localhost:9091/probation-access-control', requiredInProduction),
+      healthPath: '/health/ping',
+      timeout: {
+        response: Number(get('PROBATION_ACCESS_CONTROL_API_TIMEOUT_RESPONSE', 5000)),
+        deadline: Number(get('PROBATION_ACCESS_CONTROL_API_TIMEOUT_DEADLINE', 5000)),
+      },
+      agent: new AgentConfig(Number(get('PROBATION_ACCESS_CONTROL_API_TIMEOUT_RESPONSE', 5000))),
+    },
   },
   ndeliusDeeplink: {
     url: get(
