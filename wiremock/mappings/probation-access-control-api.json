@@ -2,7 +2,7 @@
   "mappings": [
     {
       "request": {
-        "urlPattern": "/probation-access-control/users/(.*?)/access/(.*?)",
+        "urlPattern": "/probation-access-control/user/(.*?)/access/(.*?)",
         "method": "GET"
       },
       "response": {
@@ -18,7 +18,7 @@
     },
     {
       "request": {
-        "urlPattern": "/probation-access-control/users/(.*?)/access/X100501",
+        "urlPattern": "/probation-access-control/user/(.*?)/access/X100501",
         "method": "GET"
       },
       "response": {
@@ -36,7 +36,7 @@
     },
     {
       "request": {
-        "urlPattern": "/probation-access-control/users/(.*?)/access/X100502",
+        "urlPattern": "/probation-access-control/user/(.*?)/access/X100502",
         "method": "GET"
       },
       "response": {
@@ -54,7 +54,7 @@
     },
     {
       "request": {
-        "urlPattern": "/probation-access-control/users/(.*?)/access/X100503",
+        "urlPattern": "/probation-access-control/user/(.*?)/access/X100503",
         "method": "GET"
       },
       "response": {
