@@ -1,7 +1,7 @@
 import { type Response } from 'express'
 import { AuthenticationClient } from '@ministryofjustice/hmpps-auth-clients'
 import { Cosso } from '../data/cossoApiClient'
-import NDeliusIntegrationApiClient, { LimitedAccessCheck } from '../data/ndeliusIntegrationApiClient'
+import ProbationAccessControlApiClient, { LimitedAccessCheck } from '../data/probationAccessControlApiClient'
 
 export default class CommonUtils {
   constructor() {}
@@ -17,9 +17,9 @@ export default class CommonUtils {
       return true
     }
 
-    const ndeliusIntegrationApiClient = new NDeliusIntegrationApiClient(authenticationClient)
+    const probationAccessControlApiClient = new ProbationAccessControlApiClient(authenticationClient)
 
-    const laoCheck: LimitedAccessCheck = await ndeliusIntegrationApiClient.getLimitedAccessCheck(
+    const laoCheck: LimitedAccessCheck = await probationAccessControlApiClient.getLimitedAccessCheck(
       cosso.crn,
       res.locals.user.username,
     )
