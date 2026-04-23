@@ -11,7 +11,7 @@ export default class ProbationAccessControlApiClient extends RestClient {
   async getLimitedAccessCheck(crn: string, username: string): Promise<LimitedAccessCheck> {
     return this.get(
       {
-        path: `/users/${username}/access/${crn}`,
+        path: `/user/${username}/access/${crn}`,
       },
       asSystem(username),
     )
