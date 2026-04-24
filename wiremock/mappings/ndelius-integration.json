@@ -344,7 +344,7 @@
     },
     {
       "request": {
-        "urlPattern": "/ndelius/failures-enforcements/X012345/(.*?)/(.*?)",
+        "urlPattern": "/ndelius/failures-enforcements/X012345/(.*?)",
         "method": "GET"
       },
       "response": {
@@ -424,7 +424,7 @@
     },
     {
       "request": {
-        "urlPattern": "/ndelius/failures-enforcements/Z000008/(.*?)/(.*?)",
+        "urlPattern": "/ndelius/failures-enforcements/Z000008/(.*?)",
         "method": "GET"
       },
       "response": {
