@@ -176,7 +176,7 @@
     },
     {
       "request": {
-        "urlPattern": "/ndelius/offence-details/X012345/(.*?)",
+        "urlPattern": "/ndelius/offence-details/(.*?)",
         "method": "GET"
       },
       "response": {
@@ -329,7 +329,7 @@
     },
     {
       "request": {
-        "urlPattern": "/ndelius/offence-details/Z000001/(.*?)",
+        "urlPattern": "/ndelius/offence-details/9de01b5e-30bd-4989-b0ad-29d5df2b70cf",
         "method": "GET"
       },
       "response": {
@@ -344,7 +344,7 @@
     },
     {
       "request": {
-        "urlPattern": "/ndelius/failures-enforcements/X012345/(.*?)",
+        "urlPattern": "/ndelius/failures-enforcements/X012345/(.*?)/(.*?)",
         "method": "GET"
       },
       "response": {
@@ -424,7 +424,7 @@
     },
     {
       "request": {
-        "urlPattern": "/ndelius/failures-enforcements/Z000008/(.*?)",
+        "urlPattern": "/ndelius/failures-enforcements/Z000008/(.*?)/(.*?)",
         "method": "GET"
       },
       "response": {
@@ -439,7 +439,7 @@
     },
     {
       "request": {
-        "urlPattern": "/ndelius/responsible-officer/X012345/(.*?)",
+        "urlPattern": "/ndelius/responsible-officer/X012345",
         "method": "GET"
       },
       "response": {
@@ -528,7 +528,7 @@
     },
     {
       "request": {
-        "urlPattern": "/ndelius/responsible-officer/A000123/(.*?)",
+        "urlPattern": "/ndelius/responsible-officer/A000123",
         "method": "GET"
       },
       "response": {
@@ -605,7 +605,7 @@
     },
     {
       "request": {
-        "urlPattern": "/ndelius/responsible-officer/A001234/(.*?)",
+        "urlPattern": "/ndelius/responsible-officer/A001234",
         "method": "GET"
       },
       "response": {
@@ -633,7 +633,7 @@
     },
     {
       "request": {
-        "urlPattern": "/ndelius/responsible-officer/Z000009/(.*?)",
+        "urlPattern": "/ndelius/responsible-officer/Z000009",
         "method": "GET"
       },
       "response": {

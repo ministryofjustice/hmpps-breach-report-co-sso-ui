@@ -18,19 +18,19 @@ export default class NDeliusIntegrationApiClient extends RestClient {
     )
   }
 
-  async getOffenceDetails(crn: string, username: string): Promise<OffenceDetails> {
+  async getOffenceDetails(uuid: string, username: string): Promise<OffenceDetails> {
     return this.get(
       {
-        path: `/offence-details/${crn}/${username}`,
+        path: `/offence-details/${uuid}`,
       },
       asSystem(username),
     )
   }
 
-  async getFailures(crn: string, username: string): Promise<Failures> {
+  async getFailures(crn: string, uuid: string, username: string): Promise<Failures> {
     return this.get(
       {
-        path: `/failures-enforcements/${crn}/${username}`,
+        path: `/failures-enforcements/${crn}/${uuid}`,
       },
       asSystem(username),
     )
@@ -39,7 +39,7 @@ export default class NDeliusIntegrationApiClient extends RestClient {
   async getWitnessDetails(crn: string, username: string): Promise<WitnessDetails> {
     return this.get(
       {
-        path: `/responsible-officer/${crn}/${username}`,
+        path: `/responsible-officer/${crn}`,
       },
       asSystem(username),
     )
