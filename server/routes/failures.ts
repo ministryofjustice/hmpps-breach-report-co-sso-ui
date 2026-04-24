@@ -64,7 +64,7 @@ export default function failuresRoutes(
     }
 
     try {
-      failures = await ndeliusIntegrationApiClient.getFailures(cosso.crn, res.locals.user.username)
+      failures = await ndeliusIntegrationApiClient.getFailures(cosso.crn, cosso.id, res.locals.user.username)
     } catch (error) {
       const errorMessages: ErrorMessages = handleIntegrationErrors(
         error.responseStatus,
@@ -167,7 +167,7 @@ export default function failuresRoutes(
     }
 
     try {
-      failures = await ndeliusIntegrationApiClient.getFailures(cosso.crn, res.locals.user.username)
+      failures = await ndeliusIntegrationApiClient.getFailures(cosso.crn, cosso.id, res.locals.user.username)
     } catch (error) {
       const errorMessages: ErrorMessages = handleIntegrationErrors(
         error.responseStatus,

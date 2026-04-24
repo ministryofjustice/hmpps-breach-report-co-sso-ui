@@ -59,7 +59,7 @@ export default function offenceDetailsRoutes(
     }
 
     try {
-      offenceDetails = await ndeliusIntegrationApiClient.getOffenceDetails(cosso.crn, res.locals.user.username)
+      offenceDetails = await ndeliusIntegrationApiClient.getOffenceDetails(cosso.id, res.locals.user.username)
     } catch (error) {
       const errorMessages: ErrorMessages = handleIntegrationErrors(
         error.responseStatus,
