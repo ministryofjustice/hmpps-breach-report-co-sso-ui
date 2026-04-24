@@ -1471,6 +1471,24 @@
     },
     {
       "request": {
+        "url": "/cosso-api/cosso/ee7140bc-ae6e-434f-980a-6c648d8248d5",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "id": "ee7140bc-ae6e-434f-980a-6c648d8248d5",
+          "crn": "X012345",
+          "completedDate": null
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        "transformers": ["response-template"]
+      }
+    },
+    {
+      "request": {
         "url": "/cosso-api/cosso/referencedata/screeninformation/witness_details",
         "method": "GET"
       },

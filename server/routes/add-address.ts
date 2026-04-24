@@ -103,7 +103,13 @@ export default function addAddressRoutes(
       (!address.buildingName || address.buildingName.trim() === '') &&
       (!address.buildingNumber || address.buildingNumber.trim() === '')
     ) {
-      errorMessages.identifier = {
+      errorMessages.officeDescription = {
+        text: 'At least 1 out of [Description, Building Name, Address Number] must be present',
+      }
+      errorMessages.buildingName = {
+        text: 'At least 1 out of [Description, Building Name, Address Number] must be present',
+      }
+      errorMessages.buildingNumber = {
         text: 'At least 1 out of [Description, Building Name, Address Number] must be present',
       }
     }

@@ -446,11 +446,11 @@
         "status": 200,
         "jsonBody": {
           "name":
-            {
-              "forename": "Jeff",
-              "middleName": "the",
-              "surname": "Chef"
-            },
+          {
+            "forename": "Jeff",
+            "middleName": "the",
+            "surname": "Chef"
+          },
           "telephoneNumber": "01234567891",
           "emailAddress": "MrJeffTheChef@email.com",
           "probationArea":
