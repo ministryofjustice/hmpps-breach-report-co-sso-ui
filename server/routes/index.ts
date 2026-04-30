@@ -46,6 +46,6 @@ export default function routes({ auditService, hmppsAuthClient, commonUtils }: S
   formDeletedRoutes(router, auditService)
   addAddressRoutes(router, auditService, hmppsAuthClient, commonUtils)
   deleteRecipientRoutes(router, auditService, hmppsAuthClient, commonUtils)
-  signAndSendRoutes(router, auditService, hmppsAuthClient, commonUtils)
+  signAndSendRoutes(router, auditService, hmppsAuthClient)
   return router
 }
