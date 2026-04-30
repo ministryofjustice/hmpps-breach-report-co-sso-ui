@@ -2089,6 +2089,206 @@
       "response": {
         "status": 200
       }
+    },
+    {
+      "request": {
+        "url": "/cosso-api/cosso/ee7140bc-ae6e-434f-980a-6c648d8248d5",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "id": "ee7140bc-ae6e-434f-980a-6c648d8248d5",
+          "crn": "X012345",
+          "completedDate": null
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        "transformers": ["response-template"]
+      }
+    },
+    {
+      "request": {
+        "url": "/cosso-api/cosso/ee7140bc-ae6e-434f-980a-6c648d8248d5",
+        "method": "PUT"
+      },
+      "response": {
+        "status": 200
+      }
+    },
+    {
+      "request": {
+        "url": "/cosso-api/cosso/6fcb76c7-f06c-4aac-92a9-fada15781694",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "id": "6fcb76c7-f06c-4aac-92a9-fada15781694",
+          "crn": "X012345",
+          "completedDate": null,
+          "signature": "Sign and Send 01/01/1970",
+          "sheetSentBy": "Sign and Send Officer"
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        "transformers": ["response-template"]
+      }
+    },
+    {
+      "request": {
+        "url": "/cosso-api/cosso/01fee60f-63c1-495b-b36e-33aff0e429e4",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "id": "01fee60f-63c1-495b-b36e-33aff0e429e4",
+          "crn": "X012345",
+          "completedDate": null,
+          "signature": null,
+          "sheetSentBy": null
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        "transformers": ["response-template"]
+      }
+    },
+    {
+      "request": {
+        "url": "/cosso-api/cosso/5cacfff9-dbe0-4e8c-9d3e-f10ac302b502",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "id": "5cacfff9-dbe0-4e8c-9d3e-f10ac302b502",
+          "crn": "X012345",
+          "completedDate": null,
+          "signature": null,
+          "sheetSentBy": null
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        "transformers": ["response-template"]
+      }
+    },
+    {
+      "request": {
+        "url": "/cosso-api/cosso/95e35d1a-fefe-4d4f-aaa4-a175ced57e1e",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "id": "95e35d1a-fefe-4d4f-aaa4-a175ced57e1e",
+          "crn": "X012345",
+          "completedDate": null,
+          "signature": null,
+          "sheetSentBy": null
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        "transformers": ["response-template"]
+      }
+    },
+    {
+      "request": {
+        "url": "/cosso-api/cosso/2015734f-390c-49e4-8401-fde750c38524",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "id": "2015734f-390c-49e4-8401-fde750c38524",
+          "crn": "X012345",
+          "completedDate": null,
+          "signature": "Sign and Send 01/01/1970",
+          "sheetSentBy": "Sign and Send Officer",
+          "signedByRo": true
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        "transformers": ["response-template"]
+      }
+    },
+    {
+      "request": {
+        "url": "/cosso-api/cosso/a66b643e-0bdc-4599-aa63-74e6073767f3",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "id": "a66b643e-0bdc-4599-aa63-74e6073767f3",
+          "crn": "X012345",
+          "completedDate": null
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        "transformers": ["response-template"]
+      }
+    },
+    {
+      "request": {
+        "url": "/cosso-api/cosso/a66b643e-0bdc-4599-aa63-74e6073767f3",
+        "method": "PUT"
+      },
+      "response": {
+        "status": 200
+      }
+    },
+    {
+      "request": {
+        "url": "/cosso-api/cosso/f0fa9a46-8f64-4459-b48a-7e9e2860737c",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "id": "f0fa9a46-8f64-4459-b48a-7e9e2860737c",
+          "crn": "X012345",
+          "completedDate": null
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        "transformers": ["response-template"]
+      }
+    },
+    {
+      "request": {
+        "url": "/cosso-api/cosso/b548e8b6-d1ff-43e7-b3fa-b0faeb77a3dd",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "id": "b548e8b6-d1ff-43e7-b3fa-b0faeb77a3dd",
+          "crn": "X012345",
+          "completedDate": null
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        "transformers": ["response-template"]
+      }
+    },
+    {
+      "request": {
+        "url": "/cosso-api/cosso/b548e8b6-d1ff-43e7-b3fa-b0faeb77a3dd",
+        "method": "PUT"
+      },
+      "response": {
+        "status": 200
+      }
     }
   ]
 }

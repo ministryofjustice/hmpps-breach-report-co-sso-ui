@@ -38,13 +38,13 @@ context('Compliance page', () => {
     cy.get('#page-title').should('not.exist')
   })
 
-  it('continue button redirects to compliance page', () => {
+  it('continue button redirects to sign and send page', () => {
     cy.intercept('POST', '/compliance/**').as('formSubmit')
     cy.visit('/compliance/4c9a1ad2-7141-4b03-837f-b66346a0b6ad')
     cy.get('#page-title').should('contain.text', 'Breach Report CO SSO - Compliance to date')
     cy.get('#continue-button').click()
     cy.wait('@formSubmit')
-    cy.url().should('include', '/check-your-report/4c9a1ad2-7141-4b03-837f-b66346a0b6ad')
+    cy.url().should('include', '/sign-and-send/4c9a1ad2-7141-4b03-837f-b66346a0b6ad')
   })
 
   it('correct validation should show on max character fields', () => {
@@ -83,7 +83,7 @@ context('Compliance page', () => {
     cy.get('#requirement_3').check()
     cy.get('#continue-button').click()
     cy.wait('@formSubmit')
-    cy.url().should('include', '/check-your-report/4c9a1ad2-7141-4b03-837f-b66346a0b6ad')
+    cy.url().should('include', '/sign-and-send/4c9a1ad2-7141-4b03-837f-b66346a0b6ad')
   })
 
   it('should process save function correctly when removing/deselecting contact', () => {
@@ -94,6 +94,6 @@ context('Compliance page', () => {
     cy.get('#requirement_1').uncheck()
     cy.get('#continue-button').click()
     cy.wait('@formSubmit')
-    cy.url().should('include', '/check-your-report/4c9a1ad2-7141-4b03-837f-b66346a0b6ad')
+    cy.url().should('include', '/sign-and-send/4c9a1ad2-7141-4b03-837f-b66346a0b6ad')
   })
 })

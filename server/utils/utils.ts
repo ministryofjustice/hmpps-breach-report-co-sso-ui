@@ -161,5 +161,8 @@ export function createBlankCossoWithId(id: string): Cosso {
     workAddress: undefined,
     crn: '',
     probationArea: '',
+    signAndSendSaved: false,
+    sheetSentBy: '',
+    signedByRo: false,
   }
 }

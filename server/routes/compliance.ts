@@ -323,7 +323,7 @@ export default function complianceRoutes(
       } else if (callingScreen === 'check-your-report') {
         res.redirect(`/check-your-report/${cossoId}`)
       } else {
-        res.redirect(`/check-your-report/${cossoId}`)
+        res.redirect(`/sign-and-send/${cossoId}`)
       }
     } else {
       res.render('pages/compliance', {

@@ -246,6 +246,9 @@ export interface Cosso {
   probationArea: string
   diversityConfirmation: boolean
   signature: string
+  signAndSendSaved: boolean
+  sheetSentBy: string
+  signedByRo: boolean
 }
 
 export interface CossoAddress {
