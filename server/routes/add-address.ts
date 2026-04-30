@@ -13,7 +13,7 @@ export default function addAddressRoutes(
   authenticationClient: AuthenticationClient,
   commonUtils: CommonUtils,
 ): Router {
-  const currentPage = 'sign-and-send'
+  const currentPage = 'add-address'
 
   router.get('/add-address/:id', async (req, res) => {
     await auditService.logPageView(Page.ADD_ADDRESS, { who: res.locals.user.username, correlationId: req.id })

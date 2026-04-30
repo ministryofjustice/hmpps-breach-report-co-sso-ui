@@ -734,6 +734,44 @@
           "Content-Type": "application/json;charset=UTF-8"
         }
       }
+    },
+    {
+      "request": {
+        "urlPattern": "/ndelius/sign-and-send/X012345",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "name":
+          {
+            "forename": "Sign and",
+            "middleName": "Send",
+            "surname": "Officer"
+          },
+          "telephoneNumber": "01234567891",
+          "emailAddress": "SignSendOfficer@email.com",
+          "addresses": []
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        }
+      }
+    },
+    {
+      "request": {
+        "urlPattern": "/ndelius/sign-and-send/Z000010",
+        "method": "GET"
+      },
+      "response": {
+        "status": 500,
+        "jsonBody": {
+          "message": "Some server side error occurred"
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        }
+      }
     }
   ]
 }
