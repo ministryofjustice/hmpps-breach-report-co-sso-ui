@@ -15,6 +15,7 @@ generic-service:
     PROBATION_ACCESS_CONTROL_URL: "https://probation-access-control-preprod.hmpps.service.justice.gov.uk"
     ENVIRONMENT_NAME: PRE-PRODUCTION
     NDELIUS_INTEGRATION_URL: "https://cosso-and-delius-preprod.hmpps.service.justice.gov.uk"
+    NDELIUS_DEEPLINK_URL: "https://ndelius.pre-prod.delius.probation.hmpps.dsd.io//NDelius-war/delius/JSP/deeplink.xhtml"
 
   allowlist:
     groups:
