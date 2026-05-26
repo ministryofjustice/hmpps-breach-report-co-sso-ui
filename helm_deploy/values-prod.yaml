@@ -3,13 +3,13 @@
 
 generic-service:
   ingress:
-    host: breach-report-co-sso-ui.hmpps.service.justice.gov.uk
+    host: cosso-ui-prod.hmpps.service.justice.gov.uk
 
   env:
-    INGRESS_URL: "https://breach-report-co-sso-ui.hmpps.service.justice.gov.uk"
+    INGRESS_URL: "https://cosso-ui-prod.hmpps.service.justice.gov.uk"
     HMPPS_AUTH_URL: "https://sign-in.hmpps.service.justice.gov.uk/auth"
     TOKEN_VERIFICATION_API_URL: "https://token-verification-api.prison.service.justice.gov.uk"
-    COSSO_API_URL: "https://breach-report-co-sso-api.hmpps.service.justice.gov.uk"
+    COSSO_API_URL: "https://cosso-api-prod.hmpps.service.justice.gov.uk"
     PROBATION_ACCESS_CONTROL_URL: "https://probation-access-control.hmpps.service.justice.gov.uk"
     AUDIT_ENABLED: "false"
     NDELIUS_INTEGRATION_URL: "https://cosso-and-delius.hmpps.service.justice.gov.uk"
