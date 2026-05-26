@@ -13,6 +13,7 @@ generic-service:
     PROBATION_ACCESS_CONTROL_URL: "https://probation-access-control.hmpps.service.justice.gov.uk"
     AUDIT_ENABLED: "false"
     NDELIUS_INTEGRATION_URL: "https://cosso-and-delius.hmpps.service.justice.gov.uk"
+    NDELIUS_DEEPLINK_URL: "https://ndelius.probation.service.justice.gov.uk/NDelius-war/delius/JSP/deeplink.xhtml"
 
   allowlist:
     groups:
