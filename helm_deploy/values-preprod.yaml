@@ -14,6 +14,7 @@ generic-service:
     COSSO_API_URL: "https://breach-report-co-sso-api-preprod.hmpps.service.justice.gov.uk"
     PROBATION_ACCESS_CONTROL_URL: "https://probation-access-control-preprod.hmpps.service.justice.gov.uk"
     ENVIRONMENT_NAME: PRE-PRODUCTION
+    NDELIUS_INTEGRATION_URL: "https://cosso-and-delius-preprod.hmpps.service.justice.gov.uk"
 
   allowlist:
     groups:
