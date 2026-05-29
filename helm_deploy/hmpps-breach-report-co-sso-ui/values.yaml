@@ -15,7 +15,7 @@ generic-service:
   ingress:
     enabled: true
     host: app-hostname.local # override per environment
-    tlsSecretName: hmpps-breach-report-co-sso-ui-cert
+    tlsSecretName: hmpps-cosso-ui-cert
 
   livenessProbe:
     httpGet:
