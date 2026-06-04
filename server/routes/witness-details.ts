@@ -307,7 +307,7 @@ export default function witnessDetailsRoutes(
 
   function getSelectedAddress(addressList: DeliusAddress[], addressIdentifier: string): DeliusAddress {
     const addressIdentifierNumber: number = +addressIdentifier
-    return addressList.find(address => address.id === addressIdentifierNumber)
+    return addressList?.find(address => address.id === addressIdentifierNumber)
   }
 
   function addressListToSelectItemList(
