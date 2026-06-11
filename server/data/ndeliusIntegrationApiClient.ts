@@ -114,7 +114,9 @@ export interface Registration {
   level: ReferenceData
   category: ReferenceData
   startDate: string
+  formattedStartDate: string
   endDate: string
+  formattedEndDate: string
   notes: string
   documentsLinked: boolean
   deregistered: boolean

@@ -6,6 +6,7 @@ import CommonUtils from '../services/commonUtils'
 import { ErrorMessages } from '../data/uiModels'
 import asArray, { handleIntegrationErrors } from '../utils/utils'
 import NDeliusIntegrationApiClient, { EnforceableContact, Failures } from '../data/ndeliusIntegrationApiClient'
+import {toFullUserDate} from "../utils/dateUtils";
 
 export default function failuresRoutes(
   router: Router,
@@ -101,6 +102,13 @@ export default function failuresRoutes(
         })
       }
     }
+
+    for (const requirement of failures.registrations) {
+      requirement.formattedStartDate = toFullUserDate(requirement.startDate)
+      requirement.formattedEndDate = toFullUserDate(requirement.endDate)
+    }
+
+    console.log(failures.registrations)
 
     if (await commonUtils.redirectRequired(cosso, cossoId, res, authenticationClient)) return
 
