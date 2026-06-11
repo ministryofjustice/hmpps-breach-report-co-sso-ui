@@ -7,7 +7,7 @@ context('Offence Details page', () => {
     cy.get('#additional-offence-1').should('contain.text', 'Additional Offence Description A')
     cy.get('#additional-offence-2').should('contain.text', 'Additional Offence Description B')
     cy.get('#court').should('contain.text', 'TEST style Court')
-    cy.get('#sentence-date').should('contain.text', '2025-04-01')
+    cy.get('#sentence-date').should('contain.text', '01/04/2025')
     cy.get('#sentence-imposed').should('contain.text', 'Sentence Imposed Description')
     cy.get('#custody-length').should('contain.text', '20 Days')
     cy.get('#requirements-imposed-1').should(

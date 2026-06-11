@@ -46,7 +46,8 @@ export default class NDeliusIntegrationApiClient extends RestClient {
   }
 
   async getRequirements(breachNoticeId: string, username: string): Promise<Requirements> {
-    return this.get({
+    return this.get(
+      {
         path: `/requirements/${breachNoticeId}`,
       },
       asSystem(username),
