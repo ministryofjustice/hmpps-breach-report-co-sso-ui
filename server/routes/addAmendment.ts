@@ -74,7 +74,7 @@ export default function addAmendmentRoutes(
     })
   })
 
-  router.post('/add-amendment/:id', async (req, res, next) => {
+  router.post('/add-amendment/:id', async (req, res) => {
     await auditService.logPageView(Page.BASIC_DETAILS, { who: res.locals.user.username, correlationId: req.id })
     const cossoClient = new CossoApiClient(authenticationClient)
     const cossoId: string = req.params.id
@@ -132,7 +132,7 @@ export default function addAmendmentRoutes(
 
     if (!amendment.amendmentDetails || amendment.amendmentDetails.trim() === '') {
       errorMessages.amendmentDetails = {
-        text: 'Details of Amendment: This is a required value, please enter a value',
+        text: 'Details of Amendment: This is a required field, please enter a value',
       }
     } else if (amendment.amendmentDetails.length > 20000) {
       errorMessages.amendmentDetails = {
@@ -142,7 +142,7 @@ export default function addAmendmentRoutes(
 
     if (!amendment.amendmentReason || amendment.amendmentReason.trim() === '') {
       errorMessages.amendmentReason = {
-        text: 'Reason for Amendment: This is a required value, please enter a value',
+        text: 'Reason for Amendment: This is a required field, please enter a value',
       }
     } else if (amendment.amendmentReason.length > 20000) {
       errorMessages.amendmentReason = {
@@ -152,7 +152,7 @@ export default function addAmendmentRoutes(
 
     if (!amendment.amendmentDate || amendment.amendmentDate.trim() === '') {
       errorMessages.amendmentDate = {
-        text: 'Date of Amendment: This is a required value, please enter a value',
+        text: 'Date of Amendment: This is a required field, please enter a value',
       }
     }
 

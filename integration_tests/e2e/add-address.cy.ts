@@ -43,19 +43,22 @@ context('Add Address page', () => {
     cy.get('#district').type('E District')
     cy.get('#townCity').type('F Town City')
     cy.get('#county').type('G County')
-    cy.get('#postcode').type('H Postcode')
+    cy.get('#postcode').type('NE259AB')
     cy.get('#save-button').should('exist').should('be.visible')
     cy.get('#save-button').click()
     cy.get('.govuk-error-summary__title').should('exist').should('contain.text', 'There is a problem')
-    cy.get('#officeDescription-error')
-      .should('exist')
-      .should('contain.text', 'At least 1 out of [Description, Building Name, Address Number] must be present')
-    cy.get('#buildingName-error')
-      .should('exist')
-      .should('contain.text', 'At least 1 out of [Description, Building Name, Address Number] must be present')
-    cy.get('#buildingNumber-error')
-      .should('exist')
-      .should('contain.text', 'At least 1 out of [Description, Building Name, Address Number] must be present')
+    cy.get('#officeDescription-error').should('exist')
+    cy.get('#officeDescription-error').contains(
+      'At least 1 out of [Description, Building Name, House Number] must be present',
+    )
+    cy.get('#buildingName-error').should('exist')
+    cy.get('#buildingName-error').contains(
+      'At least 1 out of [Description, Building Name, House Number] must be present',
+    )
+    cy.get('#buildingNumber-error').should('exist')
+    cy.get('#buildingNumber-error').contains(
+      'At least 1 out of [Description, Building Name, House Number] must be present',
+    )
   })
 
   it('validation will trigger when street, town or postcode is left blank', () => {
@@ -70,13 +73,13 @@ context('Add Address page', () => {
     cy.get('.govuk-error-summary__title').should('exist').should('contain.text', 'There is a problem')
     cy.get('#streetName-error')
       .should('exist')
-      .should('contain.text', 'Street Name : This is a required value, please enter a value')
+      .should('contain.text', 'Street Name : This is a required field, please enter a value')
     cy.get('#townCity-error')
       .should('exist')
-      .should('contain.text', 'Town/City : This is a required value, please enter a value')
+      .should('contain.text', 'Town/City : This is a required field, please enter a value')
     cy.get('#postcode-error')
       .should('exist')
-      .should('contain.text', 'Postcode : This is a required value, please enter a value')
+      .should('contain.text', 'Postcode : This is a required field, please enter a value')
   })
 
   it('page will load and show previously entered data fields', () => {

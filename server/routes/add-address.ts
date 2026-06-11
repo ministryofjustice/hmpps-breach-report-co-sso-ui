@@ -98,40 +98,8 @@ export default function addAddressRoutes(
 
   function validateAddress(address: CossoAddress): ErrorMessages {
     let errorMessages: ErrorMessages = {}
-    if (
-      (!address.officeDescription || address.officeDescription.trim() === '') &&
-      (!address.buildingName || address.buildingName.trim() === '') &&
-      (!address.buildingNumber || address.buildingNumber.trim() === '')
-    ) {
-      errorMessages.officeDescription = {
-        text: 'At least 1 out of [Description, Building Name, Address Number] must be present',
-      }
-      errorMessages.buildingName = {
-        text: 'At least 1 out of [Description, Building Name, Address Number] must be present',
-      }
-      errorMessages.buildingNumber = {
-        text: 'At least 1 out of [Description, Building Name, Address Number] must be present',
-      }
-    }
 
-    if (!address.streetName || address.streetName.trim() === '') {
-      errorMessages.streetName = {
-        text: 'Street Name : This is a required value, please enter a value',
-      }
-    }
-
-    if (!address.townCity || address.townCity.trim() === '') {
-      errorMessages.townCity = {
-        text: 'Town/City : This is a required value, please enter a value',
-      }
-    }
-
-    if (!address.postcode || address.postcode.trim() === '') {
-      errorMessages.postcode = {
-        text: 'Postcode : This is a required value, please enter a value',
-      }
-    }
-
+    // Over length
     errorMessages = validateLength(address.officeDescription, 'officeDescription', 'Office Description', errorMessages)
     errorMessages = validateLength(address.buildingName, 'buildingName', 'Building Name', errorMessages)
     errorMessages = validateLength(address.buildingNumber, 'buildingNumber', 'Address Number', errorMessages)
@@ -140,6 +108,34 @@ export default function addAddressRoutes(
     errorMessages = validateLength(address.townCity, 'townCity', 'Town or City', errorMessages)
     errorMessages = validateLength(address.county, 'county', 'County', errorMessages)
     errorMessages = validateLength(address.postcode, 'postcode', 'Postcode', errorMessages)
+
+    if (
+      (!address.officeDescription || address.officeDescription.trim() === '') &&
+      (!address.buildingName || address.buildingName.trim() === '') &&
+      (!address.buildingNumber || address.buildingNumber.trim() === '')
+    ) {
+      errorMessages.identifier = {
+        text: 'At least 1 out of [Description, Building Name, House Number] must be present',
+      }
+    }
+
+    if (!address.streetName || address.streetName.trim() === '') {
+      errorMessages.streetName = {
+        text: 'Street Name : This is a required field, please enter a value',
+      }
+    }
+
+    if (!address.townCity || address.townCity.trim() === '') {
+      errorMessages.townCity = {
+        text: 'Town/City : This is a required field, please enter a value',
+      }
+    }
+
+    if (!address.postcode || address.postcode.trim() === '') {
+      errorMessages.postcode = {
+        text: 'Postcode : This is a required field, please enter a value',
+      }
+    }
 
     return errorMessages
   }

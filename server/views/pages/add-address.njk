@@ -53,8 +53,8 @@
             classes: "govuk-input--width-30",
             name: "officeDescription",
             errorMessage: {
-              text: errorMessages.officeDescription.text
-            } if errorMessages.officeDescription.text
+              text: errorMessages.identifier.text if errorMessages.identifier else errorMessages.officeDescription.text
+            } if errorMessages.identifier.text or errorMessages.officeDescription.text
           }) }}
 
           {{ govukInput({
@@ -68,8 +68,8 @@
             classes: "govuk-input--width-30",
             name: "buildingName",
             errorMessage: {
-              text: errorMessages.buildingName.text
-            } if errorMessages.buildingName.text
+              text: errorMessages.identifier.text if errorMessages.identifier else errorMessages.buildingName.text
+            } if errorMessages.identifier.text or errorMessages.buildingName.text
           }) }}
 
           {{ govukInput({
@@ -83,8 +83,8 @@
             classes: "govuk-input--width-30",
             name: "buildingNumber",
             errorMessage: {
-              text: errorMessages.buildingNumber.text
-            } if errorMessages.buildingNumber.text
+              text: errorMessages.identifier.text if errorMessages.identifier else errorMessages.buildingNumber.text
+            } if errorMessages.identifier.text or errorMessages.buildingNumber.text
           }) }}
 
           {{ govukInput({
