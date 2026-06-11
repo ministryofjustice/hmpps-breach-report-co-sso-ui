@@ -74,13 +74,13 @@ context('Amendment Details page', () => {
     cy.get('.govuk-error-summary__title').should('exist').should('contain.text', 'There is a problem')
     cy.get('#amendmentdetail-error')
       .should('exist')
-      .should('contain.text', 'Details of Amendment: This is a required value, please enter a value')
+      .should('contain.text', 'Details of Amendment: This is a required field, please enter a value')
     cy.get('#amendmentreason-error')
       .should('exist')
-      .should('contain.text', 'Reason for Amendment: This is a required value, please enter a value')
+      .should('contain.text', 'Reason for Amendment: This is a required field, please enter a value')
     cy.get('#amendmentdate-error')
       .should('exist')
-      .should('contain.text', 'Date of Amendment: This is a required value, please enter a value')
+      .should('contain.text', 'Date of Amendment: This is a required field, please enter a value')
   })
 
   it('correct validation should show on max character fields', () => {
