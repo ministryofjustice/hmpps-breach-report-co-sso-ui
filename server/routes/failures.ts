@@ -108,8 +108,6 @@ export default function failuresRoutes(
       requirement.formattedEndDate = toFullUserDate(requirement.endDate)
     }
 
-    console.log(failures.registrations)
-
     if (await commonUtils.redirectRequired(cosso, cossoId, res, authenticationClient)) return
 
     res.render('pages/failures', {
