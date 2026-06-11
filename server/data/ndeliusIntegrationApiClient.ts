@@ -131,12 +131,12 @@ export interface Failures {
 export interface DeliusRequirement {
   id: number
   startDate: LocalDate
-  requirementTypeMainCategoryDescription: string
-  requirementLength: number
-  requirementLengthUnits: string
-  requirementTypeSubCategoryDescription: string
-  secondaryRequirementLength: number
-  secondaryRequirementLengthUnits: string
+  mainCategory: string
+  length: number
+  lengthUnit: string
+  subCategory: string
+  secondaryLength: number
+  secondaryLengthUnit: string
 }
 
 export interface DeliusSentence {

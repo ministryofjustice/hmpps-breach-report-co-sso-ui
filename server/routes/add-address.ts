@@ -102,7 +102,7 @@ export default function addAddressRoutes(
     // Over length
     errorMessages = validateLength(address.officeDescription, 'officeDescription', 'Office Description', errorMessages)
     errorMessages = validateLength(address.buildingName, 'buildingName', 'Building Name', errorMessages)
-    errorMessages = validateLength(address.buildingNumber, 'buildingNumber', 'Address Number', errorMessages)
+    errorMessages = validateLength(address.addressNumber, 'buildingNumber', 'Address Number', errorMessages)
     errorMessages = validateLength(address.streetName, 'streetName', 'Street Name', errorMessages)
     errorMessages = validateLength(address.district, 'district', 'District', errorMessages)
     errorMessages = validateLength(address.townCity, 'townCity', 'Town or City', errorMessages)
