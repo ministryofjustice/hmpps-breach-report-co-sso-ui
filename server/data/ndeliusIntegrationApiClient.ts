@@ -149,7 +149,7 @@ export interface OffenceDetails {
   mainOffence: ReferenceData
   additionalOffences: ReferenceData[]
   sentencingCourt: string
-  sentenceDate: LocalDate
+  sentenceDate: string
   sentenceImposed: ReferenceData
   suspendedCustodyLength: DeliusSentence
   requirementsImposed: DeliusRequirement[]
