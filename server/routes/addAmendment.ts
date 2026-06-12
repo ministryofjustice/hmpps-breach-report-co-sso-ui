@@ -3,7 +3,7 @@ import { AuthenticationClient } from '@ministryofjustice/hmpps-auth-clients'
 import AuditService, { Page } from '../services/auditService'
 import CossoApiClient, { CossoAmendment } from '../data/cossoApiClient'
 import { ErrorMessages } from '../data/uiModels'
-import { fromUserDate, toUserDate } from '../utils/dateUtils'
+import { fromUserDate, isValidUserDate, toUserDate } from '../utils/dateUtils'
 import { handleIntegrationErrors } from '../utils/utils'
 
 export default function addAmendmentRoutes(
@@ -85,15 +85,17 @@ export default function addAmendmentRoutes(
     if (req.body.action === 'cancel') {
       res.redirect(`/offence-details/${cossoId}`)
     } else {
+      const rawAmendmentDate = req.body.amendmentdate as string
+
       amendment = {
         id: currentAmendmentId,
         cossoId,
         amendmentReason: req.body.amendmentreason,
         amendmentDetails: req.body.amendmentdetail,
-        amendmentDate: fromUserDate(req.body.amendmentdate),
+        amendmentDate: isValidUserDate(rawAmendmentDate) ? fromUserDate(rawAmendmentDate) : '',
       }
 
-      const errorMessages: ErrorMessages = validateAmendment(amendment)
+      const errorMessages: ErrorMessages = validateAmendment(amendment, rawAmendmentDate)
       const hasErrors: boolean = Object.keys(errorMessages).length > 0
 
       if (!hasErrors) {
@@ -114,20 +116,19 @@ export default function addAmendmentRoutes(
           res.render(`pages/add-amendment`, { errorMessages, showEmbeddedError, integrationErrorMessages })
         }
       } else {
-        const currentAmendmentDate = toUserDate(amendment.amendmentDate)
         res.render('pages/add-amendment', {
           errorMessages,
           amendment,
           cossoId,
           currentPage,
           currentAmendmentId,
-          currentAmendmentDate,
+          currentAmendmentDate: rawAmendmentDate,
         })
       }
     }
   })
 
-  function validateAmendment(amendment: CossoAmendment): ErrorMessages {
+  function validateAmendment(amendment: CossoAmendment, rawAmendmentDate?: string): ErrorMessages {
     const errorMessages: ErrorMessages = {}
 
     if (!amendment.amendmentDetails || amendment.amendmentDetails.trim() === '') {
@@ -151,8 +152,14 @@ export default function addAmendmentRoutes(
     }
 
     if (!amendment.amendmentDate || amendment.amendmentDate.trim() === '') {
-      errorMessages.amendmentDate = {
-        text: 'Date of Amendment: This is a required field, please enter a value',
+      if (rawAmendmentDate && rawAmendmentDate.trim() !== '') {
+        errorMessages.amendmentDate = {
+          text: 'Date of Amendment: Please enter a valid date in the format d/M/yyyy',
+        }
+      } else {
+        errorMessages.amendmentDate = {
+          text: 'Date of Amendment: This is a required field, please enter a value',
+        }
       }
     }
 

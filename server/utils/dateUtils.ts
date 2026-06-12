@@ -43,3 +43,13 @@ export function toFullUserDate(str: string): string {
   }
   return ''
 }
+
+export function isValidUserDate(str: string): boolean {
+  if (!str || str.trim() === '') return false
+  try {
+    DateTimeFormatter.ofPattern('d/M/yyyy').parse(str)
+    return true
+  } catch {
+    return false
+  }
+}
