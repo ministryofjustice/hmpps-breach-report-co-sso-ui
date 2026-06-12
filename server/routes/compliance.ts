@@ -59,7 +59,7 @@ export default function complianceRoutes(
     }
 
     try {
-      requirements = await ndeliusIntegrationApiClient.getRequirements(cossoId)
+      requirements = await ndeliusIntegrationApiClient.getRequirements(cossoId, res.locals.user.username)
     } catch (error) {
       errorMessages = {
         ...errorMessages,
@@ -173,7 +173,7 @@ export default function complianceRoutes(
     }
 
     try {
-      requirements = await ndeliusIntegrationApiClient.getRequirements(cossoId)
+      requirements = await ndeliusIntegrationApiClient.getRequirements(cossoId, res.locals.user.username)
     } catch (error) {
       errorMessages = {
         ...errorMessages,

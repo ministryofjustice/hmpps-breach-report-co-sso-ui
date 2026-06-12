@@ -58,7 +58,7 @@ export default function addAddressRoutes(
       cosso.workAddress = {
         addressId: null,
         buildingName: null,
-        buildingNumber: null,
+        addressNumber: null,
         officeDescription: null,
         county: null,
         status: null,
@@ -70,7 +70,7 @@ export default function addAddressRoutes(
     }
 
     cosso.workAddress.officeDescription = req.body.officeDescription
-    cosso.workAddress.buildingNumber = req.body.buildingNumber
+    cosso.workAddress.addressNumber = req.body.buildingNumber
     cosso.workAddress.buildingName = req.body.buildingName
     cosso.workAddress.streetName = req.body.streetName
     cosso.workAddress.district = req.body.district
@@ -102,7 +102,7 @@ export default function addAddressRoutes(
     // Over length
     errorMessages = validateLength(address.officeDescription, 'officeDescription', 'Office Description', errorMessages)
     errorMessages = validateLength(address.buildingName, 'buildingName', 'Building Name', errorMessages)
-    errorMessages = validateLength(address.buildingNumber, 'buildingNumber', 'Address Number', errorMessages)
+    errorMessages = validateLength(address.addressNumber, 'buildingNumber', 'Address Number', errorMessages)
     errorMessages = validateLength(address.streetName, 'streetName', 'Street Name', errorMessages)
     errorMessages = validateLength(address.district, 'district', 'District', errorMessages)
     errorMessages = validateLength(address.townCity, 'townCity', 'Town or City', errorMessages)
@@ -112,7 +112,7 @@ export default function addAddressRoutes(
     if (
       (!address.officeDescription || address.officeDescription.trim() === '') &&
       (!address.buildingName || address.buildingName.trim() === '') &&
-      (!address.buildingNumber || address.buildingNumber.trim() === '')
+      (!address.addressNumber || address.addressNumber.trim() === '')
     ) {
       errorMessages.identifier = {
         text: 'At least 1 out of [Description, Building Name, House Number] must be present',

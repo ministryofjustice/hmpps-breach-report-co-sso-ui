@@ -45,10 +45,13 @@ export default class NDeliusIntegrationApiClient extends RestClient {
     )
   }
 
-  async getRequirements(breachNoticeId: string): Promise<Requirements> {
-    return this.get({
-      path: `/requirements/${breachNoticeId}`,
-    })
+  async getRequirements(breachNoticeId: string, username: string): Promise<Requirements> {
+    return this.get(
+      {
+        path: `/requirements/${breachNoticeId}`,
+      },
+      asSystem(username),
+    )
   }
 
   async getSignAndSendDetails(crn: string, username: string): Promise<SignAndSendDetails> {
@@ -112,7 +115,9 @@ export interface Registration {
   level: ReferenceData
   category: ReferenceData
   startDate: string
+  formattedStartDate: string
   endDate: string
+  formattedEndDate: string
   notes: string
   documentsLinked: boolean
   deregistered: boolean
@@ -126,12 +131,12 @@ export interface Failures {
 export interface DeliusRequirement {
   id: number
   startDate: LocalDate
-  requirementTypeMainCategoryDescription: string
-  requirementLength: number
-  requirementLengthUnits: string
-  requirementTypeSubCategoryDescription: string
-  secondaryRequirementLength: number
-  secondaryRequirementLengthUnits: string
+  mainCategory: string
+  length: number
+  lengthUnit: string
+  subCategory: string
+  secondaryLength: number
+  secondaryLengthUnit: string
 }
 
 export interface DeliusSentence {
@@ -147,7 +152,7 @@ export interface OffenceDetails {
   mainOffence: ReferenceData
   additionalOffences: ReferenceData[]
   sentencingCourt: string
-  sentenceDate: LocalDate
+  sentenceDate: string
   sentenceImposed: ReferenceData
   suspendedCustodyLength: DeliusSentence
   requirementsImposed: DeliusRequirement[]

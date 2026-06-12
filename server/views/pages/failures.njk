@@ -120,8 +120,8 @@
                 <p id="registration-{{loop.index}}"> <span class="govuk-!-font-weight-bold">Type:</span> {{ reg.type.description }}<br/>
                   <span class="govuk-!-font-weight-bold">Category:</span> {{ reg.category.description }}<br/>
                   <span class="govuk-!-font-weight-bold">Level:</span> {{ reg.level.description }}<br/>
-                  <span class="govuk-!-font-weight-bold">Start Date:</span> {{ req.startDate }}<br/>
-                  <span class="govuk-!-font-weight-bold">End Date:</span> {{ req.endDate }}</p>
+                  <span class="govuk-!-font-weight-bold">Start Date:</span> {{ reg.formattedStartDate }}<br/>
+                  <span class="govuk-!-font-weight-bold">End Date:</span> {{ reg.formattedEndDate }}</p>
                 {% if not loop.last %}
                   <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
                 {% endif %}

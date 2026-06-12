@@ -61,7 +61,7 @@
         <p id="court">{{ offenceDetails.sentencingCourt }}</p>
 
         <h2 class="govuk-heading-m">Date of Sentence</h2>
-        <p id="sentence-date">{{ offenceDetails.sentenceDate }}</p>
+        <p id="sentence-date">{{ formattedSentenceDate }}</p>
 
         <h2 class="govuk-heading-m">Sentence Imposed</h2>
         <p id="sentence-imposed">{{ offenceDetails.sentenceImposed.description }}</p>
@@ -72,9 +72,9 @@
         <h2 class="govuk-heading-m">Requirements Imposed</h2>
         {% if offenceDetails.requirementsImposed | length > 0 %}
           {% for req in offenceDetails.requirementsImposed %}
-            <p id="requirements-imposed-{{loop.index}}"> <span class="govuk-!-font-weight-bold">Requirement Type:</span> {{ req.requirementTypeMainCategoryDescription }}<br/>
-              <span class="govuk-!-font-weight-bold"> Requirement Length:</span> {{ req.requirementLength}} {{ req.requirementLengthUnits }}<br/>
-              <span class="govuk-!-font-weight-bold">Secondary Requirement Length:</span> {{ req.secondaryRequirementLength}} {{ req.secondaryRequirementLengthUnits }}</p>
+            <p id="requirements-imposed-{{loop.index}}"> <span class="govuk-!-font-weight-bold">Requirement Type:</span> {{ req.mainCategory }}<br/>
+              <span class="govuk-!-font-weight-bold"> Requirement Length:</span> {{ req.length}} {{ req.lengthUnit }}<br/>
+              <span class="govuk-!-font-weight-bold">Secondary Requirement Length:</span> {{ req.secondaryLength}} {{ req.secondaryLengthUnit }}</p>
             {% if not loop.last %}
               <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
             {% endif %}

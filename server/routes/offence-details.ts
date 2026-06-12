@@ -6,6 +6,7 @@ import CommonUtils from '../services/commonUtils'
 import NDeliusIntegrationApiClient, { OffenceDetails } from '../data/ndeliusIntegrationApiClient'
 import { ErrorMessages } from '../data/uiModels'
 import { handleIntegrationErrors } from '../utils/utils'
+import { toFullUserDate } from '../utils/dateUtils'
 
 export default function offenceDetailsRoutes(
   router: Router,
@@ -85,11 +86,14 @@ export default function offenceDetailsRoutes(
 
     if (await commonUtils.redirectRequired(cosso, cossoId, res, authenticationClient)) return
 
+    const formattedSentenceDate = toFullUserDate(offenceDetails.sentenceDate)
+
     res.render('pages/offence-details', {
       cosso,
       cossoId,
       currentPage,
       offenceDetails,
+      formattedSentenceDate,
       callingScreen,
     })
   })

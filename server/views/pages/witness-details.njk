@@ -60,7 +60,7 @@
               <p id="address">
                 {% if cosso.workAddress.buildingName %} {{ cosso.workAddress.buildingName }}
                     <br/>{% endif %}
-                {% if cosso.workAddress.buildingName or cosso.workAddress.streetName %} {{ cosso.workAddress.buildingNumber }} {{ cosso.workAddress.streetName }}
+                {% if cosso.workAddress.buildingName or cosso.workAddress.streetName %} {{ cosso.workAddress.addressNumber }} {{ cosso.workAddress.streetName }}
                     <br/>{% endif %}
                 {% if cosso.workAddress.district %} {{ cosso.workAddress.district }}
                     <br/>{% endif %}

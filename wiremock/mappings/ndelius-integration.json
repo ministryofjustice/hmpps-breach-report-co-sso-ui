@@ -210,22 +210,22 @@
             {
               "id": 1234,
               "startDate": "2025-01-01",
-              "requirementTypeMainCategoryDescription": "Requirement Type Main Category Description",
-              "requirementLength": 20,
-              "requirementLengthUnits": "Months",
-              "requirementTypeSubCategoryDescription": "Requirement Type Sub Category Description",
-              "secondaryRequirementLength": 12,
-              "secondaryRequirementLengthUnits": "Months"
+              "mainCategory": "Requirement Type Main Category Description",
+              "length": 20,
+              "lengthUnit": "Months",
+              "subCategory": "Requirement Type Sub Category Description",
+              "secondaryLength": 12,
+              "secondaryLengthUnit": "Months"
             },
             {
               "id": 4444,
               "startDate": "2025-02-41",
-              "requirementTypeMainCategoryDescription": "Another Main Category Description",
-              "requirementLength": 7,
-              "requirementLengthUnits": "Years",
-              "requirementTypeSubCategoryDescription": "Sub Cat Description",
-              "secondaryRequirementLength": 10,
-              "secondaryRequirementLengthUnits": "Months"
+              "mainCategory": "Another Main Category Description",
+              "length": 7,
+              "lengthUnit": "Years",
+              "subCategory": "Sub Cat Description",
+              "secondaryLength": 10,
+              "secondaryLengthUnit": "Months"
             }
           ],
           "sentence": {
