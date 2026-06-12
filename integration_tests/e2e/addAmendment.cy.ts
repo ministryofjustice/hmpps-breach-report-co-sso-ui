@@ -12,7 +12,7 @@ context('Amendment Details page', () => {
   })
 
   it('should display data, buttons and correct title on existing amendment', () => {
-    cy.visit('/add-amendment/00000000-0000-0000-0000-000000000001?amendmentid=ff15ee51-d8e1-4913-9f55-2a3151b0ab11')
+    cy.visit('/add-amendment/00000000-0000-0000-0000-000000000001?amendmentId=ff15ee51-d8e1-4913-9f55-2a3151b0ab11')
     cy.url().should('include', '/add-amendment')
     cy.get('#page-title').should('contain.text', 'Breach Report CO SSO - Amendment Details')
     cy.title().should('eq', 'Breach Report CO SSO - Amendment Details')
@@ -38,7 +38,7 @@ context('Amendment Details page', () => {
 
   it('save button should function correctly on existing amendment', () => {
     cy.intercept('POST', '/add-amendment/**').as('saveRequest')
-    cy.visit('/add-amendment/00000000-0000-0000-0000-000000000001?amendmentid=ff15ee51-d8e1-4913-9f55-2a3151b0ab11')
+    cy.visit('/add-amendment/00000000-0000-0000-0000-000000000001?amendmentId=ff15ee51-d8e1-4913-9f55-2a3151b0ab11')
     cy.url().should('include', '/add-amendment')
     cy.get('#page-title').should('contain.text', 'Breach Report CO SSO - Amendment Details')
     cy.get('#save-button').click()
@@ -55,7 +55,7 @@ context('Amendment Details page', () => {
   })
 
   it('cancel button should function correctly on existing amendment', () => {
-    cy.visit('/add-amendment/00000000-0000-0000-0000-000000000001?amendmentid=ff15ee51-d8e1-4913-9f55-2a3151b0ab11')
+    cy.visit('/add-amendment/00000000-0000-0000-0000-000000000001?amendmentId=ff15ee51-d8e1-4913-9f55-2a3151b0ab11')
     cy.url().should('include', '/add-amendment')
     cy.get('#page-title').should('contain.text', 'Breach Report CO SSO - Amendment Details')
     cy.get('#cancel-button').click()
@@ -63,7 +63,7 @@ context('Amendment Details page', () => {
   })
 
   it('correct validation should show on blank fields', () => {
-    cy.visit('/add-amendment/00000000-0000-0000-0000-000000000001?amendmentid=ff15ee51-d8e1-4913-9f55-2a3151b0ab11')
+    cy.visit('/add-amendment/00000000-0000-0000-0000-000000000001?amendmentId=ff15ee51-d8e1-4913-9f55-2a3151b0ab11')
     cy.url().should('include', '/add-amendment')
     cy.get('#page-title').should('contain.text', 'Breach Report CO SSO - Amendment Details')
     cy.get('#amendmentdetail').clear()
@@ -101,7 +101,7 @@ context('Amendment Details page', () => {
   })
 
   it('should stay on page and show COSSO Service error message if 500 thrown from COSSO Service', () => {
-    cy.visit('/add-amendment/00000000-0000-0000-0000-000000000001?amendmentid=d6cbd844-28e9-4fcb-82db-f50bd335b7f9')
+    cy.visit('/add-amendment/00000000-0000-0000-0000-000000000001?amendmentId=d6cbd844-28e9-4fcb-82db-f50bd335b7f9')
     cy.get('.govuk-error-summary__title').should('exist').should('contain.text', 'There is a problem')
     cy.contains(
       'There has been a problem fetching information from the Breach Report CO SSO Service. Please try again later.',
@@ -109,7 +109,7 @@ context('Amendment Details page', () => {
   })
 
   it('should stay on page and show COSSO Service error message if 500 thrown from COSSO Service', () => {
-    cy.visit('/add-amendment/00000000-0000-0000-0000-000000000001?amendmentid=5b23e77b-41e2-44b0-913a-23beaf278c1b')
+    cy.visit('/add-amendment/00000000-0000-0000-0000-000000000001?amendmentId=5b23e77b-41e2-44b0-913a-23beaf278c1b')
     cy.get('.govuk-error-summary__title').should('exist').should('contain.text', 'There is a problem')
     cy.contains('The document has not been found or has been deleted. An error has been logged. 404').should('exist')
   })
