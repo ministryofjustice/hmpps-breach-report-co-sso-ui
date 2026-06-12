@@ -17,7 +17,7 @@ export default function addAmendmentRoutes(
     await auditService.logPageView(Page.ADD_AMENDMENT, { who: res.locals.user.username, correlationId: req.id })
     const cossoClient = new CossoApiClient(authenticationClient)
     const cossoId: string = req.params.id
-    const currentAmendmentId: string = req.query.amendmentid as string
+    const currentAmendmentId: string = req.query.amendmentId as string
     let amendment: CossoAmendment
 
     if (currentAmendmentId) {
