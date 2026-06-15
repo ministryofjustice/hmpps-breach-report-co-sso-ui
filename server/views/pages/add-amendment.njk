@@ -34,7 +34,7 @@
     </div>
     <div class="govuk-grid-column-two-thirds">
 
-      <h1 id="page-title" class="govuk-heading-l">Breach Report CO SSO - Amendment Details</h1>
+      <h1 id="page-title" class="govuk-heading-l">{{ "Edit Amendments" if currentAmendmentId else "Add Amendments" }}</h1>
 
       {{ govukCharacterCount({
         label: {
