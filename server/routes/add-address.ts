@@ -115,7 +115,7 @@ export default function addAddressRoutes(
       (!address.addressNumber || address.addressNumber.trim() === '')
     ) {
       errorMessages.identifier = {
-        text: 'At least 1 out of [Description, Building Name, House Number] must be present',
+        text: 'At least 1 out of [Description, Building Name, Address Number] must be present',
       }
     }
 

@@ -49,15 +49,15 @@ context('Add Address page', () => {
     cy.get('.govuk-error-summary__title').should('exist').should('contain.text', 'There is a problem')
     cy.get('#officeDescription-error').should('exist')
     cy.get('#officeDescription-error').contains(
-      'At least 1 out of [Description, Building Name, House Number] must be present',
+      'At least 1 out of [Description, Building Name, Address Number] must be present',
     )
     cy.get('#buildingName-error').should('exist')
     cy.get('#buildingName-error').contains(
-      'At least 1 out of [Description, Building Name, House Number] must be present',
+      'At least 1 out of [Description, Building Name, Address Number] must be present',
     )
     cy.get('#buildingNumber-error').should('exist')
     cy.get('#buildingNumber-error').contains(
-      'At least 1 out of [Description, Building Name, House Number] must be present',
+      'At least 1 out of [Description, Building Name, Address Number] must be present',
     )
   })
 
