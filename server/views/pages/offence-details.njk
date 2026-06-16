@@ -86,7 +86,11 @@
         <h2 class="govuk-heading-m">Additional Sentences</h2>
         {% if offenceDetails.additionalSentences | length > 0 %}
           {% for sen in offenceDetails.additionalSentences %}
-            <p id="additional-sentence-{{loop.index}}">{{ sen.type }} - {{ sen.subtype }}</p>
+            <p id="additional-sentence-{{loop.index}}">{{ sen.type.description}}<br/>
+            {{ sen.length }} {{ sen.units.description }}</p>
+            {% if not loop.last %}
+              <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+            {% endif %}
           {% endfor %}
         {% endif %}
 

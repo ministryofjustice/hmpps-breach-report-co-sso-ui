@@ -148,6 +148,14 @@ export interface DeliusSentence {
   secondLengthUnits: string
 }
 
+export interface DeliusAdditionalSentence {
+  length: number
+  amount: number
+  notes: string
+  type: ReferenceData
+  units: ReferenceData
+}
+
 export interface OffenceDetails {
   mainOffence: ReferenceData
   additionalOffences: ReferenceData[]
@@ -157,7 +165,7 @@ export interface OffenceDetails {
   suspendedCustodyLength: DeliusSentence
   requirementsImposed: DeliusRequirement[]
   sentence: DeliusSentence
-  additionalSentences: DeliusSentence[]
+  additionalSentences: DeliusAdditionalSentence[]
 }
 
 export interface WitnessDetails {

@@ -238,19 +238,29 @@
           "additionalSentences": [
             {
               "length": 1,
-              "lengthUnits": "Days",
-              "type": "Main Type",
-              "subtype": "Sub Type",
-              "secondLength": 4,
-              "secondLengthUnits": "Hours"
+              "amount": 789,
+              "notes": "comments added by mr bingo bongo\n @13:58",
+              "type": {
+                "code": "CMPN",
+                "description": "COMPENSATION"
+              },
+              "units": {
+                "code": "M",
+                "description": "Months"
+              }
             },
             {
-              "length": 12,
-              "lengthUnits": "Months",
-              "type": "Another Main Type",
-              "subtype": "Second Sub Type",
-              "secondLength": 4,
-              "secondLengthUnits": "Weeks"
+              "length": 56,
+              "amount": 67,
+              "notes": "These notes do not exist",
+              "type": {
+                "code": "GSHR",
+                "description": "Additional Sentence Type"
+              },
+              "units": {
+                "code": "W",
+                "description": "Weeks"
+              }
             }
           ]
         },
