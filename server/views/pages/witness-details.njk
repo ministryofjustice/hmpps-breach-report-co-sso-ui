@@ -58,6 +58,8 @@
           <h2 class="govuk-heading-m">Work Location and Address</h2>
           {% if cosso.workAddress != null %}
               <p id="address">
+                {% if cosso.workAddress.officeDescription %} {{ cosso.workAddress.officeDescription }}
+                    <br/>{% endif %}
                 {% if cosso.workAddress.buildingName %} {{ cosso.workAddress.buildingName }}
                     <br/>{% endif %}
                 {% if cosso.workAddress.buildingName or cosso.workAddress.streetName %} {{ cosso.workAddress.addressNumber }} {{ cosso.workAddress.streetName }}

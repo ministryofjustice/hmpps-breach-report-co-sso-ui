@@ -585,6 +585,7 @@
             {
               "id": 3,
               "status": "Default",
+              "officeDescription": "Default Office",
               "buildingName": "The Default Address",
               "buildingNumber": "3",
               "streetName": "Default Street",
