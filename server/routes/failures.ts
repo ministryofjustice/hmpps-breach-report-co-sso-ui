@@ -94,10 +94,10 @@ export default function failuresRoutes(
       if (!enforceableContactListIds || !enforceableContactListIds.includes(contact.deliusContactId)) {
         failures.enforceableContacts.push({
           id: contact.deliusContactId,
-          datetime: null,
-          description: null,
-          type: { description: contact.contactTypeDescription, code: '-1' },
-          outcome: null,
+          datetime: contact.contactDate,
+          description: contact.contactTypeDescription,
+          type: { code: '-1', description: contact.contactTypeDescription },
+          outcome: { code: '-1', description: contact.contactOutcome },
           notes: null,
         })
       }
@@ -204,10 +204,10 @@ export default function failuresRoutes(
       if (!enforceableContactListIds || !enforceableContactListIds.includes(contact.deliusContactId)) {
         failures.enforceableContacts.push({
           id: contact.deliusContactId,
-          datetime: null,
+          datetime: contact.contactDate,
           description: contact.contactTypeDescription,
-          type: null,
-          outcome: null,
+          type: { code: '-1', description: contact.contactTypeDescription },
+          outcome: { code: '-1', description: contact.contactOutcome },
           notes: null,
         })
       }
@@ -323,6 +323,11 @@ export default function failuresRoutes(
       deliusContactId: enforceableContact.id,
       cossoId,
       contactTypeDescription: enforceableContact.type.description,
+      contactDate: enforceableContact.datetime,
+      contactOutcome: enforceableContact.outcome.description,
+      contactLocation: null,
+      contactPerson: null,
+      formSent: null,
     }
   }
 

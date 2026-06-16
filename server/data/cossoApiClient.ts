@@ -278,6 +278,11 @@ export interface CossoContact {
   cossoId: string
   deliusContactId: number
   contactTypeDescription: string
+  contactPerson: string
+  contactLocation: CossoAddress
+  contactDate: string
+  contactOutcome: string
+  formSent: string
 }
 
 export interface ScreenInformation {
