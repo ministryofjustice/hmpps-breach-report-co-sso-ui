@@ -95,11 +95,11 @@
         {% endif %}
 
         <h2 class="govuk-heading-m">Amendments to the Order</h2>
-        {% if cosso.amendments | length > 0 %}
-          {% for amendment in cosso.amendments %}
+        {% if formattedAmendments | length > 0 %}
+          {% for amendment in formattedAmendments %}
             <p id="amendment-{{loop.index}}"><span class="govuk-!-font-weight-bold">Details of the Amendment:</span> {{ amendment.amendmentDetails }}<br/>
               <span class="govuk-!-font-weight-bold">Reasons for the Amendment:</span> {{ amendment.amendmentReason }}<br/>
-              <span class="govuk-!-font-weight-bold">Date of the Amendment:</span> {{ amendment.amendmentDate }}<br/>
+              <span class="govuk-!-font-weight-bold">Date of the Amendment:</span> {{ amendment.formattedAmendmentDate }}<br/>
               <a id="edit-link-{{ loop.index }}" href="/add-amendment/{{ cossoId }}?amendmentId={{ amendment.id }}" class="govuk-link">Edit this Amendment</a><br/>
               <a id="delete-link-{{ loop.index }}" href="/delete-amendment/{{ cossoId }}/{{ amendment.id }}" class="govuk-link">Delete this Amendment</a>
             </p>
