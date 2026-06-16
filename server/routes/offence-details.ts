@@ -88,12 +88,18 @@ export default function offenceDetailsRoutes(
 
     const formattedSentenceDate = toFullUserDate(offenceDetails.sentenceDate)
 
+    const formattedAmendments = cosso.amendments?.map(amendment => ({
+      ...amendment,
+      formattedAmendmentDate: toFullUserDate(amendment.amendmentDate),
+    }))
+
     res.render('pages/offence-details', {
       cosso,
       cossoId,
       currentPage,
       offenceDetails,
       formattedSentenceDate,
+      formattedAmendments,
       callingScreen,
     })
   })

@@ -23,10 +23,10 @@ context('Offence Details page', () => {
     cy.get('#additional-sentence-2').should('contain.text', 'Another Main Type - Second Sub Type')
     cy.get('#amendment-1').should('contain.text', 'Details of the Amendment: TEST DETAILS')
     cy.get('#amendment-1').should('contain.text', 'Reasons for the Amendment: TEST REASON')
-    cy.get('#amendment-1').should('contain.text', 'Date of the Amendment: 2026-01-14')
+    cy.get('#amendment-1').should('contain.text', 'Date of the Amendment: 14/01/2026')
     cy.get('#amendment-2').should('contain.text', 'Details of the Amendment: SECOND DETAILS')
     cy.get('#amendment-2').should('contain.text', 'Reasons for the Amendment: SECOND REASON')
-    cy.get('#amendment-2').should('contain.text', 'Date of the Amendment: 2025-12-25')
+    cy.get('#amendment-2').should('contain.text', 'Date of the Amendment: 25/12/2025')
   })
 
   it('can see buttons', () => {
