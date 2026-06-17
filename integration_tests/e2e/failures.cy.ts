@@ -168,7 +168,7 @@ context('Failures and Enforcement page', () => {
     cy.get('#contact-1246574').should('not.be.checked')
   })
 
-  it('should display contacts returned from DB but not integrations', () => {
+  it('should display contacts returned from DB but not integrations and show warning message', () => {
     cy.visit('/failures/fcba94f3-af98-45b4-9df4-eab8c2ad2c46')
     cy.url().should('include', '/failures')
     cy.get('#page-title').should('contain.text', 'Breach Report CO SSO - Failures and Enforcement')
@@ -177,6 +177,10 @@ context('Failures and Enforcement page', () => {
     cy.get('#contact-1246574').should('not.be.checked')
     cy.get('#contact-42').should('be.checked')
     cy.get('label[for="contact-42"]').should('contain.text', 'Missing Contact Description')
+    cy.get('.govuk-error-summary__title').should('exist').should('contain.text', 'There is a problem')
+    cy.contains(
+      'Selected Contact: One or more previously selected contacts are no longer available in Delius. Please review your selections before continuing.',
+    ).should('exist')
   })
 
   it('should process save function correctly when adding/selecting contact', () => {

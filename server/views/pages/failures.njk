@@ -22,7 +22,8 @@
       { text: errorMessages.stepsToPreventBreach.text, href: "#stepsToPreventBreach" } if errorMessages.stepsToPreventBreach else None,
       { text: errorMessages.riskHistory.text, href: "#riskHistory" } if errorMessages.riskHistory else None,
       { text: errorMessages.supportingComments.text, href: "#supportingComments" } if errorMessages.supportingComments else None,
-      { text: errorMessages.confirmEqualities.text, href: "#confirmationStatement" } if errorMessages.confirmEqualities else None
+      { text: errorMessages.confirmEqualities.text, href: "#confirmationStatement" } if errorMessages.confirmEqualities else None,
+      { text: errorMessages.contacts.text, href: "#contacts" } if errorMessages.contacts else None
     ] | reject("undefined") %}
 
     {% if errorMessages | length > 0 %}
@@ -45,7 +46,7 @@
           <h1 id="page-title" class="govuk-heading-l">Breach Report CO SSO - Failures and Enforcement</h1>
 
           {% if failures.enforceableContacts | length > 0 %}
-            <div class="govuk-form-group">
+            <div class="govuk-form-group" id="contacts">
               <fieldset class="govuk-fieldset">
                 <div class="govuk-checkboxes" data-module="govuk-checkboxes">
                   {% for failure in failures.enforceableContacts %}
