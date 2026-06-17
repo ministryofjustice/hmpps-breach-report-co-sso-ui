@@ -90,16 +90,18 @@ export default function failuresRoutes(
     }
     const existingContacts = cosso.cossoContactList.map(c => c.deliusContactId)
     const enforceableContactListIds = failures.enforceableContacts?.map(c => c.id)
+    let deletedContactExists = false
     for (const contact of cosso.cossoContactList) {
       if (!enforceableContactListIds || !enforceableContactListIds.includes(contact.deliusContactId)) {
         failures.enforceableContacts.push({
           id: contact.deliusContactId,
-          datetime: null,
-          description: null,
-          type: { description: contact.contactTypeDescription, code: '-1' },
-          outcome: null,
+          datetime: contact.contactDate,
+          description: contact.contactTypeDescription,
+          type: { code: '-1', description: contact.contactTypeDescription },
+          outcome: { code: '-1', description: contact.contactOutcome },
           notes: null,
         })
+        deletedContactExists = true
       }
     }
 
@@ -110,7 +112,15 @@ export default function failuresRoutes(
 
     if (await commonUtils.redirectRequired(cosso, cossoId, res, authenticationClient)) return
 
+    const errorMessages: ErrorMessages = {}
+    if (deletedContactExists) {
+      errorMessages.contacts = {
+        text: 'Selected Contact: One or more previously selected contacts are no longer available in Delius. Please review your selections before continuing.',
+      }
+    }
+
     res.render('pages/failures', {
+      errorMessages,
       cosso,
       cossoId,
       currentPage,
@@ -200,16 +210,18 @@ export default function failuresRoutes(
     const existingContacts = asArray(req.body.contact).map(Number)
 
     const enforceableContactListIds = failures.enforceableContacts?.map(c => c.id)
+    let deletedContactExists = false
     for (const contact of cosso.cossoContactList) {
       if (!enforceableContactListIds || !enforceableContactListIds.includes(contact.deliusContactId)) {
         failures.enforceableContacts.push({
           id: contact.deliusContactId,
-          datetime: null,
+          datetime: contact.contactDate,
           description: contact.contactTypeDescription,
-          type: null,
-          outcome: null,
+          type: { code: '-1', description: contact.contactTypeDescription },
+          outcome: { code: '-1', description: contact.contactOutcome },
           notes: null,
         })
+        deletedContactExists = true
       }
     }
 
@@ -258,6 +270,12 @@ export default function failuresRoutes(
         res.redirect(`/compliance/${cossoId}`)
       }
     } else {
+      if (deletedContactExists) {
+        errorMessages.contacts = {
+          text: 'Selected Contact: One or more previously selected contacts are no longer available in Delius. Please review your selections before continuing.',
+        }
+      }
+
       res.render('pages/failures', {
         errorMessages,
         cosso,
@@ -323,6 +341,11 @@ export default function failuresRoutes(
       deliusContactId: enforceableContact.id,
       cossoId,
       contactTypeDescription: enforceableContact.type.description,
+      contactDate: enforceableContact.datetime,
+      contactOutcome: enforceableContact.outcome.description,
+      contactLocation: null,
+      contactPerson: null,
+      formSent: null,
     }
   }
 
