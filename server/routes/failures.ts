@@ -207,6 +207,11 @@ export default function failuresRoutes(
       return
     }
 
+    for (const requirement of failures.registrations) {
+      requirement.formattedStartDate = toFullUserDate(requirement.startDate)
+      requirement.formattedEndDate = toFullUserDate(requirement.endDate)
+    }
+
     const existingContacts = asArray(req.body.contact).map(Number)
 
     const enforceableContactListIds = failures.enforceableContacts?.map(c => c.id)
@@ -225,7 +230,7 @@ export default function failuresRoutes(
       }
     }
 
-    cosso.confirmEqualities = req.body.confirmationStatement
+    cosso.confirmEqualities = req.body.confirmationStatement === 'true'
     cosso.whyInBreach = req.body.whyInBreach
     cosso.stepsToPreventBreach = req.body.stepsToPreventBreach
     cosso.riskOfHarmChanged = req.body.riskOfHarmChanged
