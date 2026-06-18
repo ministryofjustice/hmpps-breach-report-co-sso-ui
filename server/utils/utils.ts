@@ -166,3 +166,7 @@ export function createBlankCossoWithId(id: string): Cosso {
     signedByRo: false,
   }
 }
+
+export function convertLineBreaks(str: string): string {
+  return str.replace(/\r\n|\r/g, '\n')
+}

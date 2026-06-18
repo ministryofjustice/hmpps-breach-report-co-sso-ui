@@ -6,6 +6,7 @@ import CommonUtils from '../services/commonUtils'
 import { ErrorMessages, SelectItem } from '../data/uiModels'
 import {
   arrangeSelectItemListAlphabetically,
+  convertLineBreaks,
   formatAddressForSelectMenuDisplay,
   formatFullName,
   handleIntegrationErrors,
@@ -208,7 +209,7 @@ export default function witnessDetailsRoutes(
     if (await commonUtils.redirectRequired(cosso, cossoId, res, authenticationClient)) return
 
     cosso.roAndWitnessDetailsSaved = true
-    cosso.witnessAvailability = req.body.witnessAvailability
+    cosso.witnessAvailability = convertLineBreaks(req.body.witnessAvailability)
     // Validation when use
     const errorMessages: ErrorMessages = validateFailures(cosso)
     const hasErrors: boolean = Object.keys(errorMessages).length > 0
