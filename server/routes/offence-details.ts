@@ -107,6 +107,7 @@ export default function offenceDetailsRoutes(
   router.post('/offence-details/:id', async (req, res, next) => {
     await auditService.logPageView(Page.OFFENCE_DETAILS, { who: res.locals.user.username, correlationId: req.id })
     const cossoClient = new CossoApiClient(authenticationClient)
+    const ndeliusIntegrationApiClient = new NDeliusIntegrationApiClient(authenticationClient)
     const cossoId: string = req.params.id
     const callingScreen: string = req.query.returnTo as string
     let cosso: Cosso = null
@@ -148,6 +149,38 @@ export default function offenceDetailsRoutes(
     if (req.body.action === 'addAmendment') {
       res.redirect(`/add-amendment/${cossoId}`)
     } else {
+      try {
+        const offenceDetails = await ndeliusIntegrationApiClient.getOffenceDetails(cossoId, res.locals.user.username)
+        cosso.mainOffence = offenceDetails.mainOffence?.description ?? cosso.mainOffence
+        cosso.sentencingCourt = offenceDetails.sentencingCourt ?? cosso.sentencingCourt
+        cosso.sentenceDate = offenceDetails.sentenceDate ?? cosso.sentenceDate
+        cosso.sentenceType = offenceDetails.sentenceImposed?.description ?? cosso.sentenceType
+        if (offenceDetails.suspendedCustodyLength?.length != null) {
+          cosso.sentenceLength = `${offenceDetails.suspendedCustodyLength.length} ${offenceDetails.suspendedCustodyLength.lengthUnits ?? ''}`.trim()
+        }
+      } catch (error) {
+        const errorMessages: ErrorMessages = handleIntegrationErrors(
+          error.responseStatus,
+          error.data?.message,
+          'NDelius Integration',
+        )
+
+        // take the user to detailed error page for 400 type errors
+        if (error.responseStatus === 400) {
+          res.render(`pages/detailed-error`, { errorMessages })
+          return
+        }
+
+        // stay on the current page for 500 errors
+        if (error.responseStatus === 500) {
+          const showEmbeddedError = true
+          res.render(`pages/offence-details`, { errorMessages, showEmbeddedError })
+          return
+        }
+        res.render(`pages/detailed-error`, { errorMessages })
+        return
+      }
+
       cosso.offenceDetailsSaved = true
       await cossoClient.updateCosso(cossoId, cosso, res.locals.user.username)
 
