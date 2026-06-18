@@ -516,7 +516,7 @@
                 Has the risk of serious self harm changed since the order was imposed?
               </dt>
               <dd class="govuk-summary-list__value">
-                {% if cosso.failuresAndEnforcementSaved and (not cosso.riskOfHarmChanged or cosso.riskOfHarmChanged is null) %}
+                {% if cosso.failuresAndEnforcementSaved and cosso.riskOfHarmChanged == null %}
                   <a id="cya-link-risk-of-harm-changed" href="/failures/{{ cossoId }}?returnTo=check-your-report"
                      class="govuk-link">enter required
                     information<span class="govuk-visually-hidden">Risk of harm changed?</span></a>
@@ -525,7 +525,7 @@
                 {% endif %}
               </dd>
               <dd class="govuk-summary-list__actions">
-                {% if not cosso.riskOfHarmChanged or cosso.riskOfHarmChanged is null %}
+                {% if cosso.riskOfHarmChanged == null %}
                   <span class="govuk-tag--light-blue">Required</span>
                 {% endif %}
               </dd>
@@ -555,7 +555,7 @@
                 Diversity confirmation
               </dt>
               <dd class="govuk-summary-list__value">
-                {% if cosso.failuresAndEnforcementSaved and (cosso.diversityConfirmation !== true) %}
+                {% if cosso.failuresAndEnforcementSaved and not cosso.confirmEqualities %}
                   <a id="cya-link-diversity-confirmation" href="/failures/{{ cossoId }}?returnTo=check-your-report"
                      class="govuk-link">enter required
                     information<span class="govuk-visually-hidden">Diversity confirmation</span></a>
