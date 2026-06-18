@@ -147,7 +147,7 @@
           {% set witnessAvailabilityHelpHtml %}
             {{ govukDetails({
               summaryText: "What to include here",
-              text: witnessAvailabilityHelp
+              html: witnessAvailabilityHelp | escape | nl2br | safe
             }) }}
           {% endset -%}
           {{ govukCharacterCount({
