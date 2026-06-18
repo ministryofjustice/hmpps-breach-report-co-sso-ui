@@ -68,7 +68,7 @@
           {% set whyInBreachHelpHtml %}
             {{ govukDetails({
               summaryText: "What to include here",
-              text: reasonHelp
+              html: reasonHelp | escape | nl2br | safe
             }) }}
           {% endset -%}
           {{ govukCharacterCount({
@@ -93,7 +93,7 @@
           {% set stepsToPreventBreachHelpHtml %}
             {{ govukDetails({
               summaryText: "What to include here",
-              text: preventHelp
+              html: preventHelp | escape | nl2br | safe
             }) }}
           {% endset -%}
           {{ govukCharacterCount({
@@ -140,7 +140,7 @@
           {% set riskedHistoryHelpHtml %}
             {{ govukDetails({
               summaryText: "What to include here",
-              text: riskHelp
+              html: riskHelp | escape | nl2br | safe
             }) }}
           {% endset -%}
           {% set riskHistoryConditionalHtml %}
@@ -238,7 +238,7 @@
           {% set supportingCommentsHelpHtml %}
             {{ govukDetails({
               summaryText: "What to include in your recommendation support statement",
-              text: recommendationHelp
+              html: recommendationHelp | escape | nl2br | safe
             }) }}
           {% endset -%}
           {{ govukCharacterCount({
