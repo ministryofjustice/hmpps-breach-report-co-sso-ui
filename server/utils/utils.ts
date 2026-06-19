@@ -164,6 +164,7 @@ export function createBlankCossoWithId(id: string): Cosso {
     signAndSendSaved: false,
     sheetSentBy: '',
     signedByRo: false,
+    complianceToDateSaved: false,
   }
 }
 
