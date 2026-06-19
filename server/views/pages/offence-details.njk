@@ -87,7 +87,12 @@
         {% if offenceDetails.additionalSentences | length > 0 %}
           {% for sen in offenceDetails.additionalSentences %}
             <p id="additional-sentence-{{loop.index}}">{{ sen.type.description}}<br/>
-            {{ sen.length }} {{ sen.units.description }}</p>
+            {% if sen.amount != null %}
+              £{{ sen.amount | toGBP }}
+            {% else %}
+              {{ sen.length }} {{ sen.units.description }}
+            {% endif %}
+            </p>
             {% if not loop.last %}
               <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
             {% endif %}

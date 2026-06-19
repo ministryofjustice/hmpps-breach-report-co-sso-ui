@@ -41,4 +41,5 @@ export default function nunjucksSetup(app: express.Express): void {
   njkEnv.addFilter('initialiseName', initialiseName)
   njkEnv.addFilter('assetMap', (url: string) => assetManifest[url] || url)
   njkEnv.addFilter('toUserDate', toUserDate)
+  njkEnv.addFilter('toGBP', (amount: number) => Number(amount).toFixed(2))
 }
