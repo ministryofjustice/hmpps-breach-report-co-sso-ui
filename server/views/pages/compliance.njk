@@ -132,7 +132,7 @@
           {% set complianceToHelpHtml %}
             {{ govukDetails({
               summaryText: "What information to include here",
-              text: complianceToHelp
+              html: complianceToHelp | escape | nl2br | safe
             }) }}
           {% endset -%}
           {{ govukCharacterCount({
