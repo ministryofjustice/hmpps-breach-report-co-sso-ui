@@ -20,7 +20,7 @@ context('Offence Details page', () => {
     cy.get('#requirements-imposed-2').should('contain.text', 'Requirement Length: 7 Years')
     cy.get('#requirements-imposed-2').should('contain.text', 'Secondary Requirement Length: 10 Months')
     cy.get('#additional-sentence-1').should('contain.text', 'COMPENSATION').and('contain.text', '£789.00')
-    cy.get('#additional-sentence-2').should('contain.text', 'Additional Sentence Type').and('contain.text', '56 Weeks')
+    cy.get('#additional-sentence-2').should('contain.text', 'Additional Sentence Type').and('contain.text', '£67.00')
     cy.get('#amendment-1').should('contain.text', 'Details of the Amendment: TEST DETAILS')
     cy.get('#amendment-1').should('contain.text', 'Reasons for the Amendment: TEST REASON')
     cy.get('#amendment-1').should('contain.text', 'Date of the Amendment: 14/01/2026')
