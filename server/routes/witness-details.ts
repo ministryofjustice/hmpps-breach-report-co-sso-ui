@@ -266,7 +266,7 @@ export default function witnessDetailsRoutes(
         req.body.alternateAddress,
       )
 
-      witnessDetails.replyAddresses?.sort((a, b) => a.buildingName.localeCompare(b.buildingName))
+      witnessDetails.replyAddresses?.sort((a, b) => (a.buildingName ?? '').localeCompare(b.buildingName ?? ''))
 
       res.render('pages/witness-details', {
         errorMessages,
