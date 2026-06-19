@@ -305,6 +305,7 @@ export default function complianceRoutes(
     const hasErrors: boolean = Object.keys(errorMessages).length > 0
 
     if (!hasErrors) {
+      cosso.complianceToDateSaved = true
       await cossoClient.updateCosso(cossoId, cosso, res.locals.user.username)
       await cossoClient.batchUpdateRequirements(cossoId, requirementsToPush, res.locals.user.username)
 

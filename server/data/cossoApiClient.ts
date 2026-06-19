@@ -236,6 +236,7 @@ export interface Cosso {
   whyInBreach: string
   stepsToPreventBreach: string
   complianceToDate: string
+  complianceToDateSaved: boolean
   riskHistory: string
   confirmEqualities: boolean
   recommendations: string
