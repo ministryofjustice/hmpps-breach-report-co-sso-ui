@@ -71,7 +71,7 @@ export default function checkYourReportRoutes(
       cosso.stepsToPreventBreach?.trim().length > 0 &&
       cosso.riskOfHarmChanged != null &&
       cosso.riskHistory?.trim().length > 0 &&
-      cosso.diversityConfirmation != null &&
+      cosso.confirmEqualities != null &&
       cosso.recommendations?.trim().length > 0 &&
       cosso.supportingComments?.trim().length > 0 &&
       cosso.complianceToDate?.trim().length > 0 &&
