@@ -616,7 +616,7 @@
           "riskHistory": "Risk history details comments",
           "recommendations":"The order is continued",
           "supportingComments":"The order is continues supporting comments",
-          "diversityConfirmation":true,
+          "confirmEqualities": true,
           "complianceToDate": "Description of compliance with the whole order to date",
           "signature": "Ro Test 10/02/2026"
         },
