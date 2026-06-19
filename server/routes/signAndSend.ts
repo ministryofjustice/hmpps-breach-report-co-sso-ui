@@ -2,7 +2,11 @@ import { Router } from 'express'
 import { AuthenticationClient } from '@ministryofjustice/hmpps-auth-clients'
 import AuditService, { Page } from '../services/auditService'
 import CossoApiClient, { Cosso } from '../data/cossoApiClient'
-import NDeliusIntegrationApiClient, { SignAndSendDetails } from '../data/ndeliusIntegrationApiClient'
+import NDeliusIntegrationApiClient, {
+  ResponsibleOfficerDetails,
+  SignAndSendDetails,
+  UserDetails,
+} from '../data/ndeliusIntegrationApiClient'
 import { ErrorMessages } from '../data/uiModels'
 import { handleIntegrationErrors } from '../utils/utils'
 import { toFullUserDate } from '../utils/dateUtils'
@@ -186,8 +190,8 @@ export default function signAndSendRoutes(
       await cossoClient.updateCosso(cossoId, cosso, res.locals.user.username)
       res.redirect(`/sign-and-send/${req.params.id}`)
     } else if (req.body.action === 'sign') {
-      cosso.signature = createSignatureString(signAndSendDetails)
-      cosso.sheetSentBy = getOfficerString(signAndSendDetails)
+      cosso.signature = createSignatureString(signAndSendDetails.userDetails, formSentBy)
+      cosso.sheetSentBy = getOfficerString(signAndSendDetails.responsibleOfficer)
       await cossoClient.updateCosso(cossoId, cosso, res.locals.user.username)
       res.redirect(`/sign-and-send/${req.params.id}`)
     } else if (callingScreen === 'check-your-report') {
@@ -235,26 +239,35 @@ export default function signAndSendRoutes(
     }
   })
 
-  function createSignatureString(signAndSendDetails: SignAndSendDetails): string {
+  function createSignatureString(currentUserDetails: UserDetails, formSentBy: string): string {
     let signature: string = ''
-    if (signAndSendDetails != null && signAndSendDetails.name != null) {
-      signature += signAndSendDetails.name.forename
-      if (signAndSendDetails.name.middleName != null) {
-        signature += ` ${signAndSendDetails.name.middleName}`
+    if (currentUserDetails != null) {
+      signature += currentUserDetails.forename
+      if (currentUserDetails.middleName != null) {
+        signature += ` ${currentUserDetails.middleName}`
       }
-      signature += ` ${signAndSendDetails.name.surname} ${toFullUserDate(new Date().toISOString())}`
+      signature += ` ${currentUserDetails.surname} ${toFullUserDate(new Date().toISOString())}`
     }
+
+    if (formSentBy === 'RO') {
+      signature += ` (Responsible Officer)`
+    }
+
+    if (formSentBy === 'USER') {
+      signature += ` (User on behalf of the Responsible Officer)`
+    }
+
     return signature
   }
 
-  function getOfficerString(signAndSendDetails: SignAndSendDetails): string {
+  function getOfficerString(responsibleOfficerDetails: ResponsibleOfficerDetails): string {
     let signature: string = ''
-    if (signAndSendDetails != null && signAndSendDetails.name != null) {
-      signature += signAndSendDetails.name.forename
-      if (signAndSendDetails.name.middleName != null) {
-        signature += ` ${signAndSendDetails.name.middleName}`
+    if (responsibleOfficerDetails != null) {
+      signature += responsibleOfficerDetails.name.forename
+      if (responsibleOfficerDetails.name.middleName != null) {
+        signature += ` ${responsibleOfficerDetails.name.middleName}`
       }
-      signature += ` ${signAndSendDetails.name.surname}`
+      signature += ` ${responsibleOfficerDetails.name.surname}`
     }
     return signature
   }

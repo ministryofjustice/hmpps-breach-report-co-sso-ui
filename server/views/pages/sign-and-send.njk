@@ -60,12 +60,12 @@
         }) }}
 
         <h2 class="govuk-heading-m">Officer Name</h2>
-        <p id="name">{{ signAndSendDetails.name.forename }}
-          <span> </span> {% if signAndSendDetails.name.middleName != null %} {{ signAndSendDetails.name.middleName }}
-            <span> </span> {% endif %} {{ signAndSendDetails.name.surname }}</p>
+        <p id="name">{{ signAndSendDetails.responsibleOfficer.name.forename }}
+          <span> </span> {% if signAndSendDetails.responsibleOfficer.name.middleName != null %} {{ signAndSendDetails.responsibleOfficer.name.middleName }}
+            <span> </span> {% endif %} {{ signAndSendDetails.responsibleOfficer.name.surname }}</p>
 
         <h2 class="govuk-heading-m">Officer Email Address</h2>
-        <p id="officer-email-address">{{ signAndSendDetails.emailAddress }}</p>
+        <p id="officer-email-address">{{ signAndSendDetails.responsibleOfficer.emailAddress }}</p>
 
         <h2 class="govuk-heading-m">Signature</h2>
 
@@ -95,7 +95,7 @@
         {% endif %}
 
         <h2 class="govuk-heading-m">Telephone Number</h2>
-        <p id="telephone-number">{{ signAndSendDetails.telephoneNumber }}</p>
+        <p id="telephone-number">{{ signAndSendDetails.responsibleOfficer.telephoneNumber }}</p>
 
         <div class="moj-button-group">
           {{ govukButton({
