@@ -2146,7 +2146,7 @@
           "id": "6fcb76c7-f06c-4aac-92a9-fada15781694",
           "crn": "X012345",
           "completedDate": null,
-          "signature": "Sign and Send 01/01/1970",
+          "signature": "Sign and Send 01/01/1970 (Responsible Officer)",
           "sheetSentBy": "Sign and Send Officer"
         },
         "headers": {
@@ -2255,7 +2255,7 @@
           "id": "2015734f-390c-49e4-8401-fde750c38524",
           "crn": "X012345",
           "completedDate": null,
-          "signature": "Sign and Send 01/01/1970",
+          "signature": "Sign and Send 01/01/1970 (Responsible Officer)",
           "sheetSentBy": "Sign and Send Officer",
           "signedByRo": true
         },

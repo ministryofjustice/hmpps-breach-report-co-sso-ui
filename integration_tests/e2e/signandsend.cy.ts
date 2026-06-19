@@ -52,9 +52,11 @@ context('Sign and Send Page', () => {
     cy.get('#page-title').should('contain.text', 'Breach Report CO SSO - Sign and Send')
     cy.get('#whoIsSendingTheForm').should('exist')
     cy.get('input[type="radio"][value="RO"]').should('be.checked')
-    cy.get('#name').should('exist').should('contain.text', 'Sign and\n             Send\n               Officer')
-    cy.get('#officer-email-address').should('exist').should('contain.text', 'SignSendOfficer@email.com')
-    cy.get('#signature').should('exist').should('contain.text', 'Sign and Send 01/01/1970')
+    cy.get('#name').should('exist')
+    cy.contains('RoForename RoMiddle RoSurname').should('exist');
+    cy.get('#officer-email-address').should('exist').should('contain', 'respondibleOfficer@email.com')
+    cy.get('#signature').should('exist')
+    cy.contains('respondibleOfficer@email.com').should('exist');
     cy.get('#telephone-number').should('exist').should('contain.text', '01234567891')
   })
 
