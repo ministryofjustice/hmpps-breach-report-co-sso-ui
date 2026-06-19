@@ -2197,6 +2197,35 @@
     },
     {
       "request": {
+        "url": "/cosso-api/cosso/51460968-0560-408d-843e-0ec25a8abafc",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "id": "51460968-0560-408d-843e-0ec25a8abafc",
+          "crn": "X012345",
+          "completedDate": null,
+          "signature": null,
+          "sheetSentBy": null
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        "transformers": ["response-template"]
+      }
+    },
+    {
+      "request": {
+        "url": "/cosso-api/cosso/51460968-0560-408d-843e-0ec25a8abafc",
+        "method": "PUT"
+      },
+      "response": {
+        "status": 200
+      }
+    },
+    {
+      "request": {
         "url": "/cosso-api/cosso/95e35d1a-fefe-4d4f-aaa4-a175ced57e1e",
         "method": "GET"
       },

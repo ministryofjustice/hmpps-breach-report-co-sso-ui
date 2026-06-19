@@ -57,7 +57,7 @@ export default class NDeliusIntegrationApiClient extends RestClient {
   async getSignAndSendDetails(crn: string, username: string): Promise<SignAndSendDetails> {
     return this.get(
       {
-        path: `/sign-and-send/${crn}`,
+        path: `/sign-and-send/${crn}/${username}`,
       },
       asSystem(username),
     )
@@ -98,6 +98,19 @@ export interface DeliusAddress {
 export interface ReferenceData {
   code: string
   description: string
+}
+
+export interface UserDetails {
+  forename: string
+  middleName: string
+  surname: string
+}
+
+export interface ResponsibleOfficerDetails {
+  name: Name
+  telephoneNumber?: string
+  emailAddress?: string
+  addresses: DeliusAddress[]
 }
 
 export interface EnforceableContact {
@@ -188,8 +201,6 @@ export interface Requirements {
 }
 
 export interface SignAndSendDetails {
-  name: Name
-  telephoneNumber?: string
-  emailAddress?: string
-  addresses: DeliusAddress[]
+  userDetails: UserDetails
+  responsibleOfficer: ResponsibleOfficerDetails
 }

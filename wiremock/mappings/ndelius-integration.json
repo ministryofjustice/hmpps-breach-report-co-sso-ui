@@ -748,21 +748,28 @@
     },
     {
       "request": {
-        "urlPattern": "/ndelius/sign-and-send/X012345",
+        "urlPattern": "/ndelius/sign-and-send/X012345/(.*?)",
         "method": "GET"
       },
       "response": {
         "status": 200,
         "jsonBody": {
-          "name":
-          {
-            "forename": "Sign and",
-            "middleName": "Send",
-            "surname": "Officer"
+          "userDetails": {
+            "forename": "UserSignForename",
+            "middleName": "UserSignMiddle",
+            "surname": "UserSignSurname"
           },
-          "telephoneNumber": "01234567891",
-          "emailAddress": "SignSendOfficer@email.com",
-          "addresses": []
+          "responsibleOfficer": {
+            "name":
+            {
+              "forename": "RoForename",
+              "middleName": "RoMiddle",
+              "surname": "RoSurname"
+            },
+            "telephoneNumber": "01234567891",
+            "emailAddress": "respondibleOfficer@email.com",
+            "addresses": []
+          }
         },
         "headers": {
           "Content-Type": "application/json;charset=UTF-8"
@@ -771,7 +778,7 @@
     },
     {
       "request": {
-        "urlPattern": "/ndelius/sign-and-send/Z000010",
+        "urlPattern": "/ndelius/sign-and-send/Z000010/(.*?)",
         "method": "GET"
       },
       "response": {
