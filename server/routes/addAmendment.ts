@@ -3,7 +3,7 @@ import { AuthenticationClient } from '@ministryofjustice/hmpps-auth-clients'
 import AuditService, { Page } from '../services/auditService'
 import CossoApiClient, { CossoAmendment } from '../data/cossoApiClient'
 import { ErrorMessages } from '../data/uiModels'
-import {fromUserDate, isValidUserDate, toFullUserDate, toUserDate} from '../utils/dateUtils'
+import { fromUserDate, isValidUserDate, toFullUserDate } from '../utils/dateUtils'
 import { handleIntegrationErrors } from '../utils/utils'
 
 export default function addAmendmentRoutes(
