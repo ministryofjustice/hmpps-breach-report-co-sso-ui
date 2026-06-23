@@ -61,6 +61,9 @@ context('Side Navigation Menu checks', () => {
 
   it('Check Your Report is disabled when sign-and-send not yet saved', () => {
     cy.visit(`/basic-details/${savedCossoId}`)
-    cy.get('#nav-check-your-report-disabled').should('exist').and('have.attr', 'href', '#').and('have.class', 'disabled-nav')
+    cy.get('#nav-check-your-report-disabled')
+      .should('exist')
+      .and('have.attr', 'href', '#')
+      .and('have.class', 'disabled-nav')
   })
 })
