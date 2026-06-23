@@ -29,6 +29,10 @@ export default function checkYourReportRoutes(
       dateOfBirth = toFullUserDate(cosso.dateOfBirth)
       sentenceDate = toFullUserDate(cosso.sentenceDate)
       reportValidated = validateReport(cosso)
+      cosso.amendments = cosso.amendments?.map(amendment => ({
+        ...amendment,
+        formattedAmendmentDate: toFullUserDate(amendment.amendmentDate),
+      }))
     } catch (error) {
       const errorMessages: ErrorMessages = handleIntegrationErrors(error.status, error.data?.message, 'COSSO')
       const showEmbeddedError = true
