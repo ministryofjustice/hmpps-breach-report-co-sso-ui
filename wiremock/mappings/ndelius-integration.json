@@ -204,7 +204,7 @@
           },
           "suspendedCustodyLength":{
             "length": 20,
-            "lengthUnits": "Days"
+            "units": "Days"
           },
           "requirementsImposed": [
             {
