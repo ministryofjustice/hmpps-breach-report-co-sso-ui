@@ -154,7 +154,7 @@ export default function addAmendmentRoutes(
     if (!amendment.amendmentDate || amendment.amendmentDate.trim() === '') {
       if (rawAmendmentDate && rawAmendmentDate.trim() !== '') {
         errorMessages.amendmentDate = {
-          text: 'Date of Amendment: Please enter a valid date in the format dd/MM/yyyy',
+          text: 'Date of Amendment: Please enter a valid date in the format dd/mm/yyyy',
         }
       } else {
         errorMessages.amendmentDate = {
