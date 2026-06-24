@@ -6,27 +6,51 @@
     </li>
 
     <li class="moj-side-navigation__item {{ "moj-side-navigation__item--active" if currentPage == "witness-details" }}">
-      <a id="nav-witness-details" href="/witness-details/{{ cossoId }}" aria-current="location">RO and Witness Details</a>
+      {% if cosso.basicDetailsSaved %}
+        <a id="nav-witness-details" href="/witness-details/{{ cossoId }}" aria-current="location">RO and Witness Details</a>
+      {% else %}
+        <a id="nav-witness-details-disabled" href="#" aria-current="location" class="disabled-nav">RO and Witness Details</a>
+      {% endif %}
     </li>
 
     <li class="moj-side-navigation__item {{ "moj-side-navigation__item--active" if currentPage == "offence-details" }}">
-      <a id="nav-offence-details" href="/offence-details/{{ cossoId }}" aria-current="location">Offence Details</a>
+      {% if cosso.roAndWitnessDetailsSaved %}
+        <a id="nav-offence-details" href="/offence-details/{{ cossoId }}" aria-current="location">Offence Details</a>
+      {% else %}
+        <a id="nav-offence-details-disabled" href="#" aria-current="location" class="disabled-nav">Offence Details</a>
+      {% endif %}
     </li>
 
     <li class="moj-side-navigation__item {{ "moj-side-navigation__item--active" if currentPage == "failures" }}">
-      <a id="nav-failures" href="/failures/{{ cossoId }}" aria-current="location">Failures and Enforcements</a>
+      {% if cosso.offenceDetailsSaved %}
+        <a id="nav-failures" href="/failures/{{ cossoId }}" aria-current="location">Failures and Enforcements</a>
+      {% else %}
+        <a id="nav-failures-disabled" href="#" aria-current="location" class="disabled-nav">Failures and Enforcements</a>
+      {% endif %}
     </li>
 
     <li class="moj-side-navigation__item {{ "moj-side-navigation__item--active" if currentPage == "compliance" }}">
-      <a id="nav-compliance" href="/compliance/{{ cossoId }}" aria-current="location">Compliance to date</a>
+      {% if cosso.failuresAndEnforcementSaved %}
+        <a id="nav-compliance" href="/compliance/{{ cossoId }}" aria-current="location">Compliance to date</a>
+      {% else %}
+        <a id="nav-compliance-disabled" href="#" aria-current="location" class="disabled-nav">Compliance to date</a>
+      {% endif %}
     </li>
 
     <li class="moj-side-navigation__item {{ "moj-side-navigation__item--active" if currentPage == "sign-and-send" }}">
-      <a id="nav-compliance" href="/sign-and-send/{{ cossoId }}" aria-current="location">Sign and Send</a>
+      {% if cosso.complianceToDateSaved %}
+        <a id="nav-sign-and-send" href="/sign-and-send/{{ cossoId }}" aria-current="location">Sign and Send</a>
+      {% else %}
+        <a id="nav-sign-and-send-disabled" href="#" aria-current="location" class="disabled-nav">Sign and Send</a>
+      {% endif %}
     </li>
 
     <li class="moj-side-navigation__item {{ "moj-side-navigation__item--active" if currentPage == "check-your-report" }}">
-      <a id="nav-check-your-report" href="/check-your-report/{{ cossoId }}" aria-current="location">Check Your Report</a>
+      {% if cosso.signAndSendSaved %}
+        <a id="nav-check-your-report" href="/check-your-report/{{ cossoId }}" aria-current="location">Check Your Report</a>
+      {% else %}
+        <a id="nav-check-your-report-disabled" href="#" aria-current="location" class="disabled-nav">Check Your Report</a>
+      {% endif %}
     </li>
   </ul>
 </nav>
