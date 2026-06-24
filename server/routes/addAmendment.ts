@@ -3,7 +3,7 @@ import { AuthenticationClient } from '@ministryofjustice/hmpps-auth-clients'
 import AuditService, { Page } from '../services/auditService'
 import CossoApiClient, { CossoAmendment } from '../data/cossoApiClient'
 import { ErrorMessages } from '../data/uiModels'
-import { fromUserDate, isValidUserDate, toUserDate } from '../utils/dateUtils'
+import { fromUserDate, isValidUserDate, toFullUserDate } from '../utils/dateUtils'
 import { handleIntegrationErrors } from '../utils/utils'
 
 export default function addAmendmentRoutes(
@@ -63,7 +63,7 @@ export default function addAmendmentRoutes(
       }
     }
 
-    const currentAmendmentDate = toUserDate(amendment.amendmentDate)
+    const currentAmendmentDate = toFullUserDate(amendment.amendmentDate)
 
     res.render('pages/add-amendment', {
       amendment,
@@ -154,7 +154,7 @@ export default function addAmendmentRoutes(
     if (!amendment.amendmentDate || amendment.amendmentDate.trim() === '') {
       if (rawAmendmentDate && rawAmendmentDate.trim() !== '') {
         errorMessages.amendmentDate = {
-          text: 'Date of Amendment: Please enter a valid date in the format d/M/yyyy',
+          text: 'Date of Amendment: Please enter a valid date in the format dd/MM/yyyy',
         }
       } else {
         errorMessages.amendmentDate = {

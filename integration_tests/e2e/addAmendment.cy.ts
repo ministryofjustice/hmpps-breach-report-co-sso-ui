@@ -18,7 +18,7 @@ context('Amendment Details page', () => {
     cy.title().should('eq', 'Breach Report CO SSO - Amendment Details')
     cy.get('#amendmentdetail').should('contain.text', 'TEST DETAILS')
     cy.get('#amendmentreason').should('contain.text', 'TEST REASON')
-    cy.get('#amendmentdate').should('have.value', '14/1/2026')
+    cy.get('#amendmentdate').should('have.value', '14/01/2026')
     cy.get('#save-button').should('exist').should('contain.text', 'Save')
     cy.get('#cancel-button').should('exist').should('contain.text', 'Cancel without saving')
   })
