@@ -1,4 +1,4 @@
-import { DateTimeFormatter } from '@js-joda/core'
+import { DateTimeFormatter, LocalDateTime, OffsetDateTime } from '@js-joda/core'
 
 export function fromUserDate(str: string): string {
   if (str) {
@@ -41,6 +41,18 @@ export function toFullUserDate(str: string): string {
     const timeStrippedString = str.includes('T') ? str.split('T')[0] : str
     return DateTimeFormatter.ofPattern('dd/MM/yyyy').format(DateTimeFormatter.ISO_LOCAL_DATE.parse(timeStrippedString))
   }
+  return ''
+}
+
+export function toIsoLocalDateTime(str: string): string {
+  if (str) {
+    if (/(Z|[+-]\d{2}:\d{2})$/.test(str)) {
+      return OffsetDateTime.parse(str).toLocalDateTime().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME)
+    }
+
+    return LocalDateTime.parse(str).format(DateTimeFormatter.ISO_LOCAL_DATE_TIME)
+  }
+
   return ''
 }
 
