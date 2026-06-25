@@ -23,6 +23,7 @@ context('Failures and Enforcement page', () => {
     cy.get('#page-title').should('contain.text', 'Breach Report CO SSO – RO and Witness Details')
     cy.get('#continue-button').should('contain.text', 'Continue')
     cy.get('#close-button').should('contain.text', 'Save Progress and Close')
+    cy.get('#refresh-from-ndelius-button').should('contain.text', 'Refresh from Delius')
   })
 
   it('can see alternate address dropdown conditionally', () => {
@@ -82,6 +83,19 @@ context('Failures and Enforcement page', () => {
     cy.get('#continue-button').click()
     cy.wait('@formSubmit')
     cy.url().should('include', '/check-your-answers/107c8aa7-acd9-46c7-8dbb-e1c3b5d7fd1c')
+  })
+
+  it('refresh button performs a post request then reloads the screen', () => {
+    cy.intercept('POST', '/witness-details/**').as('refreshRequest')
+    cy.visit('/witness-details/0fea3a87-039d-42c7-b531-3f6b30252e6f')
+    cy.get('#page-title').should('contain.text', 'Breach Report CO SSO – RO and Witness Details')
+    cy.get('#name').should('contain.text', 'Jeff the Chef')
+    cy.get('#refresh-from-ndelius-button').click()
+    cy.wait('@refreshRequest')
+    cy.url().should('include', '/witness-details/0fea3a87-039d-42c7-b531-3f6b30252e6f')
+    cy.url().should('include', '/witness-details')
+    cy.get('#page-title').should('contain.text', 'Breach Report CO SSO – RO and Witness Details')
+    cy.get('#name').should('contain.text', 'Jeff the Chef')
   })
 
   it('correct validation should show on max character fields', () => {

@@ -2336,6 +2336,24 @@
       "response": {
         "status": 200
       }
+    },
+    {
+      "request": {
+        "url": "/cosso-api/cosso/0fea3a87-039d-42c7-b531-3f6b30252e6f",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "id": "0fea3a87-039d-42c7-b531-3f6b30252e6f",
+          "crn": "X012345",
+          "completedDate": null
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        "transformers": ["response-template"]
+      }
     }
   ]
 }
