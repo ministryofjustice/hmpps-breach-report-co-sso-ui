@@ -194,13 +194,13 @@ export default function signAndSendRoutes(
       cosso.sheetSentBy = getOfficerString(signAndSendDetails.responsibleOfficer)
       await cossoClient.updateCosso(cossoId, cosso, res.locals.user.username)
       res.redirect(`/sign-and-send/${req.params.id}`)
-    } else if (callingScreen === 'check-your-report') {
+    } else if (callingScreen === 'check-your-answers') {
       cosso.signAndSendSaved = true
       cosso.signedByRo = null
       if (formSentBy !== null) {
         cosso.signedByRo = formSentBy === 'RO'
         await cossoClient.updateCosso(cossoId, cosso, res.locals.user.username)
-        res.redirect(`/check-your-report/${cossoId}`)
+        res.redirect(`/check-your-answers/${cossoId}`)
       } else {
         errorMessages.sentByResponsibleOfficerOrUser = {
           text: 'Please select who is sending this document before leaving this screen',
@@ -222,7 +222,7 @@ export default function signAndSendRoutes(
       if (formSentBy !== null) {
         cosso.signedByRo = formSentBy === 'RO'
         await cossoClient.updateCosso(cossoId, cosso, res.locals.user.username)
-        res.redirect(`/check-your-report/${cossoId}`)
+        res.redirect(`/check-your-answers/${cossoId}`)
       } else {
         errorMessages.sentByResponsibleOfficerOrUser = {
           text: 'Please select who is sending this document before leaving this screen',

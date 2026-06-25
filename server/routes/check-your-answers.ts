@@ -7,15 +7,15 @@ import { toFullUserDate } from '../utils/dateUtils'
 import { ErrorMessages } from '../data/uiModels'
 import { createBlankCossoWithId, handleIntegrationErrors } from '../utils/utils'
 
-export default function checkYourReportRoutes(
+export default function checkYourAnswersRoutes(
   router: Router,
   auditService: AuditService,
   authenticationClient: AuthenticationClient,
   commonUtils: CommonUtils,
 ): Router {
-  const currentPage = 'check-your-report'
+  const currentPage = 'check-your-answers'
 
-  router.get('/check-your-report/:id', async (req, res) => {
+  router.get('/check-your-answers/:id', async (req, res) => {
     await auditService.logPageView(Page.CHECK_YOUR_REPORT, { who: res.locals.user.username, correlationId: req.id })
     const cossoClient = new CossoApiClient(authenticationClient)
     const cossoId: string = req.params.id
@@ -38,12 +38,12 @@ export default function checkYourReportRoutes(
       const showEmbeddedError = true
       cosso = createBlankCossoWithId(req.params.id)
       // always stay on page and display the error when there are isssues retrieving the breach notice
-      res.render(`pages/check-your-report`, { errorMessages, showEmbeddedError, cosso })
+      res.render(`pages/check-your-answers`, { errorMessages, showEmbeddedError, cosso })
       return
     }
     if (await commonUtils.redirectRequired(cosso, cossoId, res, authenticationClient)) return
 
-    res.render('pages/check-your-report', {
+    res.render('pages/check-your-answers', {
       cosso,
       dateOfBirth,
       sentenceDate,

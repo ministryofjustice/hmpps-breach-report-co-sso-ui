@@ -35,7 +35,7 @@ context('Review Alert data checks', () => {
   })
 
   it('Check Your Answers no review', () => {
-    cy.visit('/check-your-report/9de01b5e-30bd-4989-b0ad-29d5df2b70cs')
+    cy.visit('/check-your-answers/9de01b5e-30bd-4989-b0ad-29d5df2b70cs')
     cy.get('#reviewAlert').should('not.exist')
   })
 
@@ -94,7 +94,7 @@ context('Review Alert data checks', () => {
   })
 
   it('Check Your Answers merge review', () => {
-    cy.visit('/check-your-report/6c9e90ed-1ac1-4bcb-b271-6b0a1f6ef9a4')
+    cy.visit('/check-your-answers/6c9e90ed-1ac1-4bcb-b271-6b0a1f6ef9a4')
     cy.get('#reviewAlert').should('exist')
     cy.get('#reviewAlert').should(
       'contain.text',
@@ -157,7 +157,7 @@ context('Review Alert data checks', () => {
   })
 
   it('Check Your Answers unmerge review', () => {
-    cy.visit('/check-your-report/a3b2e7c4-8b0d-4f6f-9e12-2c6d1a7f3c58')
+    cy.visit('/check-your-answers/a3b2e7c4-8b0d-4f6f-9e12-2c6d1a7f3c58')
     cy.get('#reviewAlert').should('exist')
     cy.get('#reviewAlert').should(
       'contain.text',
@@ -220,7 +220,7 @@ context('Review Alert data checks', () => {
   })
 
   it('Check Your Answers event move review', () => {
-    cy.visit('/check-your-report/f1d6c2a9-3f44-4c2a-9a9d-9c4a6bb7c1e0')
+    cy.visit('/check-your-answers/f1d6c2a9-3f44-4c2a-9a9d-9c4a6bb7c1e0')
     cy.get('#reviewAlert').should('exist')
     cy.get('#reviewAlert').should(
       'contain.text',

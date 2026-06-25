@@ -74,14 +74,14 @@ context('Failures and Enforcement page', () => {
     cy.get('#page-title').should('not.exist')
   })
 
-  it('should return to check your report if came from check your report', () => {
+  it('should return to check your answers if came from check your answers', () => {
     cy.intercept('POST', '/witness-details/**').as('formSubmit')
-    cy.visit('/witness-details/107c8aa7-acd9-46c7-8dbb-e1c3b5d7fd1c?returnTo=check-your-report')
+    cy.visit('/witness-details/107c8aa7-acd9-46c7-8dbb-e1c3b5d7fd1c?returnTo=check-your-answers')
     cy.url().should('include', '/witness-details')
     cy.get('#page-title').should('contain.text', 'Breach Report CO SSO – RO and Witness Details')
     cy.get('#continue-button').click()
     cy.wait('@formSubmit')
-    cy.url().should('include', '/check-your-report/107c8aa7-acd9-46c7-8dbb-e1c3b5d7fd1c')
+    cy.url().should('include', '/check-your-answers/107c8aa7-acd9-46c7-8dbb-e1c3b5d7fd1c')
   })
 
   it('correct validation should show on max character fields', () => {

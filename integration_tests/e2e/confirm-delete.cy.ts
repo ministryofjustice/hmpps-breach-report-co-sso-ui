@@ -8,10 +8,10 @@ context('Confirm delete Page', () => {
     cy.get('#cancel-button').should('exist').and('contain.text', 'Cancel')
   })
 
-  it('cancel button redirects back to check your report page without performing a delete', () => {
+  it('cancel button redirects back to check your answers page without performing a delete', () => {
     cy.visit(`/confirm-delete/${cossoId}`)
     cy.get('#cancel-button').click()
-    cy.url().should('include', `/check-your-report/${cossoId}`)
+    cy.url().should('include', `/check-your-answers/${cossoId}`)
   })
 
   it('confirm button redirects to Document Deleted confirmation screen', () => {
