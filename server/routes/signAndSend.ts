@@ -187,11 +187,13 @@ export default function signAndSendRoutes(
     } else if (req.body.action === 'clear-signature') {
       cosso.signature = null
       cosso.sheetSentBy = null
+      cosso.signedByRo = formSentBy === null ? cosso.signedByRo : formSentBy === 'RO'
       await cossoClient.updateCosso(cossoId, cosso, res.locals.user.username)
       res.redirect(`/sign-and-send/${req.params.id}`)
     } else if (req.body.action === 'sign') {
       cosso.signature = createSignatureString(signAndSendDetails.userDetails, formSentBy)
       cosso.sheetSentBy = getOfficerString(signAndSendDetails.responsibleOfficer)
+      cosso.signedByRo = formSentBy === null ? null : formSentBy === 'RO'
       await cossoClient.updateCosso(cossoId, cosso, res.locals.user.username)
       res.redirect(`/sign-and-send/${req.params.id}`)
     } else if (callingScreen === 'check-your-answers') {
