@@ -5,7 +5,7 @@ import CossoApiClient, { Cosso, CossoRequirement, ScreenInformation } from '../d
 import CommonUtils from '../services/commonUtils'
 import NDeliusIntegrationApiClient, { ReferenceData, Requirements } from '../data/ndeliusIntegrationApiClient'
 import { ErrorMessages } from '../data/uiModels'
-import asArray, { handleIntegrationErrors } from '../utils/utils'
+import asArray, {convertLineBreaks, handleIntegrationErrors} from '../utils/utils'
 
 export default function complianceRoutes(
   router: Router,
@@ -226,7 +226,7 @@ export default function complianceRoutes(
       })
     }
 
-    cosso.complianceToDate = req.body.complianceToDate
+    cosso.complianceToDate = convertLineBreaks(req.body.complianceToDate)
 
     const selectedRequirementList = asArray(req.body.requirement).map(Number)
 

@@ -4,7 +4,7 @@ import AuditService, { Page } from '../services/auditService'
 import CossoApiClient, { Cosso, CossoContact, ScreenInformation } from '../data/cossoApiClient'
 import CommonUtils from '../services/commonUtils'
 import { ErrorMessages } from '../data/uiModels'
-import asArray, { handleIntegrationErrors } from '../utils/utils'
+import asArray, {convertLineBreaks, handleIntegrationErrors} from '../utils/utils'
 import NDeliusIntegrationApiClient, { EnforceableContact, Failures } from '../data/ndeliusIntegrationApiClient'
 import { toFullUserDate, toIsoLocalDateTime } from '../utils/dateUtils'
 
@@ -231,12 +231,12 @@ export default function failuresRoutes(
     }
 
     cosso.confirmEqualities = req.body.confirmationStatement === 'true'
-    cosso.whyInBreach = req.body.whyInBreach
-    cosso.stepsToPreventBreach = req.body.stepsToPreventBreach
+    cosso.whyInBreach = convertLineBreaks(req.body.whyInBreach)
+    cosso.stepsToPreventBreach = convertLineBreaks(req.body.stepsToPreventBreach)
     cosso.riskOfHarmChanged = req.body.riskOfHarmChanged
-    cosso.riskHistory = req.body.riskHistory
+    cosso.riskHistory = convertLineBreaks(req.body.riskHistory)
     cosso.recommendations = req.body.recommendationOptions
-    cosso.supportingComments = req.body.supportingComments
+    cosso.supportingComments = convertLineBreaks(req.body.supportingComments)
     cosso.failuresAndEnforcementSaved = true
 
     const errorMessages: ErrorMessages = validateFailures(cosso)
