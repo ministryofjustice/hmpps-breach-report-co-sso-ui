@@ -4,7 +4,7 @@ import AuditService, { Page } from '../services/auditService'
 import CossoApiClient, { Cosso, CossoContact, ScreenInformation } from '../data/cossoApiClient'
 import CommonUtils from '../services/commonUtils'
 import { ErrorMessages } from '../data/uiModels'
-import asArray, {convertLineBreaks, handleIntegrationErrors} from '../utils/utils'
+import asArray, { convertLineBreaks, handleIntegrationErrors } from '../utils/utils'
 import NDeliusIntegrationApiClient, { EnforceableContact, Failures } from '../data/ndeliusIntegrationApiClient'
 import { toFullUserDate, toIsoLocalDateTime } from '../utils/dateUtils'
 
