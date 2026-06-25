@@ -67,17 +67,17 @@ context('Sign and Send Page', () => {
     cy.get('input[type="radio"][value="RO"]').check()
     cy.get('#continue-button').should('exist')
     cy.get('#continue-button').click()
-    cy.url().should('include', '/check-your-report/a66b643e-0bdc-4599-aa63-74e6073767f3')
+    cy.url().should('include', '/check-your-answers/a66b643e-0bdc-4599-aa63-74e6073767f3')
   })
 
-  it('should return to check your report if came from check your report', () => {
-    cy.visit('/sign-and-send/ee7140bc-ae6e-434f-980a-6c648d8248d5?returnTo=check-your-report')
+  it('should return to check your answers if came from check your answers', () => {
+    cy.visit('/sign-and-send/ee7140bc-ae6e-434f-980a-6c648d8248d5?returnTo=check-your-answers')
     cy.url().should('include', '/sign-and-send')
     cy.get('#page-title').should('contain.text', 'Breach Report CO SSO - Sign and Send')
     cy.get('input[type="radio"][value="RO"]').check()
     cy.get('#continue-button').should('exist')
     cy.get('#continue-button').click()
-    cy.url().should('include', '/check-your-report/ee7140bc-ae6e-434f-980a-6c648d8248d5')
+    cy.url().should('include', '/check-your-answers/ee7140bc-ae6e-434f-980a-6c648d8248d5')
   })
 
   it('Refresh from delius reloads', () => {

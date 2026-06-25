@@ -10,7 +10,7 @@ context('Side Navigation Menu checks', () => {
     cy.get('#nav-failures-disabled').should('exist')
     cy.get('#nav-compliance-disabled').should('exist')
     cy.get('#nav-sign-and-send-disabled').should('exist')
-    cy.get('#nav-check-your-report-disabled').should('exist')
+    cy.get('#nav-check-your-answers-disabled').should('exist')
   })
 
   it('Disabled navigation links have href="#" and disabled-nav class', () => {
@@ -20,7 +20,7 @@ context('Side Navigation Menu checks', () => {
     cy.get('#nav-failures-disabled').should('have.attr', 'href', '#').and('have.class', 'disabled-nav')
     cy.get('#nav-compliance-disabled').should('have.attr', 'href', '#').and('have.class', 'disabled-nav')
     cy.get('#nav-sign-and-send-disabled').should('have.attr', 'href', '#').and('have.class', 'disabled-nav')
-    cy.get('#nav-check-your-report-disabled').should('have.attr', 'href', '#').and('have.class', 'disabled-nav')
+    cy.get('#nav-check-your-answers-disabled').should('have.attr', 'href', '#').and('have.class', 'disabled-nav')
   })
 
   it('Navigates to Basic Details', () => {
@@ -59,9 +59,9 @@ context('Side Navigation Menu checks', () => {
     cy.url().should('include', `/sign-and-send/${savedCossoId}`)
   })
 
-  it('Check Your Report is disabled when sign-and-send not yet saved', () => {
+  it('Check Your Answers is disabled when sign-and-send not yet saved', () => {
     cy.visit(`/basic-details/${savedCossoId}`)
-    cy.get('#nav-check-your-report-disabled')
+    cy.get('#nav-check-your-answers-disabled')
       .should('exist')
       .and('have.attr', 'href', '#')
       .and('have.class', 'disabled-nav')

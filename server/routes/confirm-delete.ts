@@ -46,7 +46,7 @@ export default function confirmDeleteRoutes(
       }
       res.redirect(`/form-deleted/${cossoId}`)
     } else {
-      res.redirect(`/check-your-report/${cossoId}`)
+      res.redirect(`/check-your-answers/${cossoId}`)
     }
   })
 

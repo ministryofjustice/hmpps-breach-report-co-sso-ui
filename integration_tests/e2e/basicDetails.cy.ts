@@ -54,14 +54,14 @@ context('Basic Details page', () => {
     cy.url().should('include', '/witness-details/00000000-0000-0000-0000-000000000001')
   })
 
-  it('should return to check your report if came from check your report', () => {
+  it('should return to check your answers if came from check your answers', () => {
     cy.intercept('POST', '/basic-details/**').as('formSubmit')
-    cy.visit('/basic-details/2cc90af2-6558-4677-8616-42d8489b26fe?returnTo=check-your-report')
+    cy.visit('/basic-details/2cc90af2-6558-4677-8616-42d8489b26fe?returnTo=check-your-answers')
     cy.url().should('include', '/basic-details')
     cy.get('#page-title').should('contain.text', 'Breach Report CO SSO - Basic Details')
     cy.get('#continue-button').click()
     cy.wait('@formSubmit')
-    cy.url().should('include', '/check-your-report/2cc90af2-6558-4677-8616-42d8489b26fe')
+    cy.url().should('include', '/check-your-answers/2cc90af2-6558-4677-8616-42d8489b26fe')
   })
 
   it('should display deeplink when no valid addresses present', () => {

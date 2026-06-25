@@ -3,7 +3,7 @@ import { Router } from 'express'
 import type { Services } from '../services'
 import basicDetailsRoutes from './basicDetails'
 import reportCompletedRoutes from './reportCompleted'
-import checkYourReportRoutes from './check-your-report'
+import checkYourAnswersRoutes from './check-your-answers'
 import complianceRoutes from './compliance'
 import failuresRoutes from './failures'
 import witnessDetailsRoutes from './witness-details'
@@ -34,7 +34,7 @@ export default function routes({ auditService, hmppsAuthClient, commonUtils }: S
   })
 
   basicDetailsRoutes(router, auditService, hmppsAuthClient, commonUtils)
-  checkYourReportRoutes(router, auditService, hmppsAuthClient, commonUtils)
+  checkYourAnswersRoutes(router, auditService, hmppsAuthClient, commonUtils)
   complianceRoutes(router, auditService, hmppsAuthClient, commonUtils)
   failuresRoutes(router, auditService, hmppsAuthClient, commonUtils)
   offenceDetailsRoutes(router, auditService, hmppsAuthClient, commonUtils)

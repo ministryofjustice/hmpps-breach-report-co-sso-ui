@@ -321,8 +321,8 @@ export default function complianceRoutes(
         res.send(
           `<p>You can now safely close this window</p><script nonce="${res.locals.cspNonce}">window.close()</script>`,
         )
-      } else if (callingScreen === 'check-your-report') {
-        res.redirect(`/check-your-report/${cossoId}`)
+      } else if (callingScreen === 'check-your-answers') {
+        res.redirect(`/check-your-answers/${cossoId}`)
       } else {
         res.redirect(`/sign-and-send/${cossoId}`)
       }
