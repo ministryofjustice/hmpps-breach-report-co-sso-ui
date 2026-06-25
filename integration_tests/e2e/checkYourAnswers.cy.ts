@@ -175,7 +175,7 @@ context('Check your answers', () => {
     cy.get('#risk-changed').should('contain.text', 'Yes')
     cy.get('#risk-history').should('contain.text', 'Risk history details comments')
     cy.get('#diversity-confirmation').should('contain.text', 'Confirmed')
-    cy.get('#recommendations').should('contain.text', 'The order is continued')
+    cy.get('#recommendations').should('contain.text', 'The Order is continued')
     cy.get('#supporting-comments').should('contain.text', 'The order is continues supporting comments')
     cy.get('#change-failures-and-enforcement').click()
     cy.url().should('include', '/failures/9de01b5e-30bd-4989-b0ad-29d5df2b70cs')

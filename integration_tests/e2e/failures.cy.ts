@@ -26,17 +26,21 @@ context('Failures and Enforcement page', () => {
       'I confirm that equalities and diversity information has been considered as part of preparing the report and recommendations',
     )
     cy.get('label[for="recommendationOptions"]').should('contain.text', 'The Order is continued')
-    cy.get('input[name="recommendationOptions"][value="continued"]').should('be.checked')
+    cy.get('input[name="recommendationOptions"][value="The Order is continued"]').should('be.checked')
     cy.get('label[for="recommendationOptions-2"]').should(
       'contain.text',
       'The community order is revoked and the person be re-sentenced',
     )
-    cy.get('input[name="recommendationOptions"][value="revoked"]').should('not.be.checked')
+    cy.get(
+      'input[name="recommendationOptions"][value="The community order is revoked and the person be re-sentenced"]',
+    ).should('not.be.checked')
     cy.get('label[for="recommendationOptions-3"]').should(
       'contain.text',
       'Custody is activated for the suspended sentence',
     )
-    cy.get('input[name="recommendationOptions"][value="activated"]').should('not.be.checked')
+    cy.get('input[name="recommendationOptions"][value="Custody is activated for the suspended sentence"]').should(
+      'not.be.checked',
+    )
     cy.get('#supportingComments-hint').should('contain.text', 'Recommendation Help Text')
     cy.get('#supportingComments').should('contain.text', 'Additional comments to Support recommendation')
   })
@@ -51,9 +55,13 @@ context('Failures and Enforcement page', () => {
     cy.get('input[name="riskOfHarmChanged"][value="false"]').should('be.checked')
     cy.get('#riskHistory').should('have.value', '')
     cy.get('input[id="confirmationStatement"]').should('not.be.checked')
-    cy.get('input[name="recommendationOptions"][value="continued"]').should('not.be.checked')
-    cy.get('input[name="recommendationOptions"][value="revoked"]').should('not.be.checked')
-    cy.get('input[name="recommendationOptions"][value="activated"]').should('not.be.checked')
+    cy.get('input[name="recommendationOptions"][value="The Order is continued"]').should('not.be.checked')
+    cy.get(
+      'input[name="recommendationOptions"][value="The community order is revoked and the person be re-sentenced"]',
+    ).should('not.be.checked')
+    cy.get('input[name="recommendationOptions"][value="Custody is activated for the suspended sentence"]').should(
+      'not.be.checked',
+    )
     cy.get('#supportingComments').should('have.value', '')
   })
 

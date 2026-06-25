@@ -614,7 +614,7 @@
           "stepsToPreventBreach": "Steps to prevent breach details",
           "riskOfHarmChanged": true,
           "riskHistory": "Risk history details comments",
-          "recommendations":"The order is continued",
+          "recommendations":"The Order is continued",
           "supportingComments":"The order is continues supporting comments",
           "confirmEqualities": true,
           "complianceToDate": "Description of compliance with the whole order to date",
@@ -711,7 +711,7 @@
           "stepsToPreventBreach": "Preventative Steps Test Text",
           "riskHistory": "Heres why the risk has changed",
           "confirmEqualities": false,
-          "recommendations": "continued",
+          "recommendations": "The Order is continued",
           "supportingComments": "Additional comments to Support recommendation",
           "riskOfHarmChanged": true,
           "cossoContactList": []
@@ -799,7 +799,7 @@
           "stepsToPreventBreach": "PreventativeStepsTestText",
           "riskHistory": "RiskHistoryTestText",
           "confirmEqualities": true,
-          "recommendations": "continued",
+          "recommendations": "The Order is continued",
           "supportingComments": "Additional comments to Support recommendation",
           "riskOfHarmChanged": true,
           "cossoContactList": []
@@ -834,7 +834,7 @@
           "stepsToPreventBreach": "PreventativeStepsTestText",
           "riskHistory": "RiskHistoryTestText",
           "confirmEqualities": true,
-          "recommendations": "continued",
+          "recommendations": "The Order is continued",
           "supportingComments": "Additional comments to Support recommendation",
           "riskOfHarmChanged": true,
           "cossoContactList": []
@@ -895,7 +895,7 @@
           "stepsToPreventBreach": "Test Text",
           "riskHistory": "Test Text",
           "confirmEqualities": false,
-          "recommendations": "continued",
+          "recommendations": "The Order is continued",
           "supportingComments": "Test Text",
           "riskOfHarmChanged": true,
           "cossoContactList": []
@@ -921,7 +921,7 @@
           "stepsToPreventBreach": "Test Text",
           "riskHistory": "Test Text",
           "confirmEqualities": false,
-          "recommendations": "continued",
+          "recommendations": "The Order is continued",
           "supportingComments": "Test Text",
           "riskOfHarmChanged": true,
           "cossoContactList": [
@@ -954,7 +954,7 @@
           "stepsToPreventBreach": "Test Text",
           "riskHistory": "Test Text",
           "confirmEqualities": false,
-          "recommendations": "continued",
+          "recommendations": "The Order is continued",
           "supportingComments": "Test Text",
           "riskOfHarmChanged": true,
           "cossoContactList": [
@@ -987,7 +987,7 @@
           "stepsToPreventBreach": "Test Text",
           "riskHistory": "Test Text",
           "confirmEqualities": true,
-          "recommendations": "continued",
+          "recommendations": "The Order is continued",
           "supportingComments": "Test Text",
           "riskOfHarmChanged": true,
           "cossoContactList": [
@@ -1060,7 +1060,7 @@
           "stepsToPreventBreach": "Test Text",
           "riskHistory": "Test Text",
           "confirmEqualities": true,
-          "recommendations": "continued",
+          "recommendations": "The Order is continued",
           "supportingComments": "Test Text",
           "riskOfHarmChanged": true,
           "cossoContactList": [
@@ -1128,7 +1128,7 @@
           "stepsToPreventBreach": "Test Text",
           "riskHistory": "Test Text",
           "confirmEqualities": false,
-          "recommendations": "continued",
+          "recommendations": "The Order is continued",
           "supportingComments": "Test Text",
           "riskOfHarmChanged": true,
           "cossoContactList": []
@@ -1181,7 +1181,7 @@
           "stepsToPreventBreach": "Test Text",
           "riskHistory": "Test Text",
           "confirmEqualities": true,
-          "recommendations": "continued",
+          "recommendations": "The Order is continued",
           "supportingComments": "Test Text",
           "riskOfHarmChanged": true,
           "cossoContactList": []
