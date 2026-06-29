@@ -12,7 +12,8 @@
   <form method="post">
 
     {% set errorList =[
-      { text: errorMessages.genericErrorMessage.text, href: "#" } if errorMessages.genericErrorMessage else None
+      { text: errorMessages.genericErrorMessage.text, href: "#" } if errorMessages.genericErrorMessage else None,
+      { text: errorMessages.sentByResponsibleOfficerOrUser.text, href: "#whoIsSendingTheForm" } if errorMessages.sentByResponsibleOfficerOrUser else None
     ] | reject("undefined") %}
 
     {% if errorMessages | length > 0 %}
