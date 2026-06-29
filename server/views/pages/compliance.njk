@@ -18,12 +18,21 @@
 
   <form method="post">
 
-    {% set errorList =[
-      { text: errorMessages.genericErrorMessage.text, href: "#" } if errorMessages.genericErrorMessage else None,
-      { text: errorMessages.failureNotSelected.text, href: "#" } if errorMessages.failureNotSelected else None,
-      { text: errorMessages.requirementNotesLength.text, href: "#" } if errorMessages.requirementNotesLength else None,
-      { text: errorMessages.complianceToDate.text, href: "#complianceToDate" } if errorMessages.complianceToDate else None
-    ] | reject("undefined") %}
+    {% set errorList = [] %}
+    {% if errorMessages.genericErrorMessage %}
+      {% set errorList = errorList.concat([{ text: errorMessages.genericErrorMessage.text, href: "#" }]) %}
+    {% endif %}
+    {% if errorMessages.failureNotSelected %}
+      {% set errorList = errorList.concat([{ text: errorMessages.failureNotSelected.text, href: "#" }]) %}
+    {% endif %}
+    {% for requirement in uiRequirements %}
+      {% if errorMessages['requirement_' + requirement.uiId] %}
+        {% set errorList = errorList.concat([{ text: errorMessages['requirement_' + requirement.uiId].text, href: "#notes_" + requirement.uiId }]) %}
+      {% endif %}
+    {% endfor %}
+    {% if errorMessages.complianceToDate %}
+      {% set errorList = errorList.concat([{ text: errorMessages.complianceToDate.text, href: "#complianceToDate" }]) %}
+    {% endif %}
 
     {% if errorMessages | length > 0 %}
       {% from "govuk/components/error-summary/macro.njk" import govukErrorSummary %}
@@ -115,7 +124,10 @@
                           classes: "govuk-input--width-30",
                           name: "notes_"+requirement.uiId,
                           id: "notes_"+requirement.uiId,
-                          maxlength: 20000
+                          maxlength: 20000,
+                          errorMessage: {
+                            text: errorMessages['requirement_' + requirement.uiId].text
+                          } if errorMessages['requirement_' + requirement.uiId]
                         }) }}
                       </div>
                     </div>
