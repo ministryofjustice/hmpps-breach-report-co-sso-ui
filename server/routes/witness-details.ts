@@ -208,80 +208,85 @@ export default function witnessDetailsRoutes(
 
     if (await commonUtils.redirectRequired(cosso, cossoId, res, authenticationClient)) return
 
-    cosso.roAndWitnessDetailsSaved = true
-    cosso.witnessAvailability = convertLineBreaks(req.body.witnessAvailability)
-    // Validation when use
-    const errorMessages: ErrorMessages = validateFailures(cosso)
-    const hasErrors: boolean = Object.keys(errorMessages).length > 0
-
-    if (!hasErrors) {
-      cosso.probationArea = witnessDetails.probationArea.description
-      cosso.roTitleAndFullName = formatFullName(witnessDetails.name)
-      cosso.roTelephoneNumber = witnessDetails.telephoneNumber
-      cosso.roEmailAddress = witnessDetails.emailAddress
-      cosso = handleSelectedAddress(cosso, witnessDetails, req.body.alternateAddress)
-
-      await cossoClient.updateCosso(cossoId, cosso, res.locals.user.username)
-      if (req.body.action === 'saveProgressAndClose') {
-        res.send(
-          `<p>You can now safely close this window</p><script nonce="${res.locals.cspNonce}">window.close()</script>`,
-        )
-      } else if (callingScreen && callingScreen === 'check-your-answers') {
-        res.redirect(`/check-your-answers/${req.params.id}`)
-      } else {
-        res.redirect(`/offence-details/${cossoId}`)
-      }
+    if (req.body.action === 'refreshFromNdelius') {
+      // redirect to witness details to force a reload
+      res.redirect(`/witness-details/${cossoId}`)
     } else {
-      let defaultAddress: DeliusAddress = null
-      if (cosso.workAddress == null && witnessDetails.replyAddresses != null) {
-        defaultAddress = witnessDetails.replyAddresses.find(record => record.status === 'Default')
+      cosso.roAndWitnessDetailsSaved = true
+      cosso.witnessAvailability = convertLineBreaks(req.body.witnessAvailability)
+      // Validation when use
+      const errorMessages: ErrorMessages = validateFailures(cosso)
+      const hasErrors: boolean = Object.keys(errorMessages).length > 0
 
-        if (defaultAddress) {
-          cosso.workAddress = toCossoAddress(defaultAddress)
+      if (!hasErrors) {
+        cosso.probationArea = witnessDetails.probationArea.description
+        cosso.roTitleAndFullName = formatFullName(witnessDetails.name)
+        cosso.roTelephoneNumber = witnessDetails.telephoneNumber
+        cosso.roEmailAddress = witnessDetails.emailAddress
+        cosso = handleSelectedAddress(cosso, witnessDetails, req.body.alternateAddress)
+
+        await cossoClient.updateCosso(cossoId, cosso, res.locals.user.username)
+        if (req.body.action === 'saveProgressAndClose') {
+          res.send(
+            `<p>You can now safely close this window</p><script nonce="${res.locals.cspNonce}">window.close()</script>`,
+          )
+        } else if (callingScreen && callingScreen === 'check-your-answers') {
+          res.redirect(`/check-your-answers/${req.params.id}`)
+        } else {
+          res.redirect(`/offence-details/${cossoId}`)
         }
-      }
+      } else {
+        let defaultAddress: DeliusAddress = null
+        if (cosso.workAddress == null && witnessDetails.replyAddresses != null) {
+          defaultAddress = witnessDetails.replyAddresses.find(record => record.status === 'Default')
 
-      let addressNotAvailable: boolean = false
-      if (cosso.workAddress != null && cosso.workAddress.addressId != null && witnessDetails.replyAddresses != null) {
-        const addressPresent = witnessDetails.replyAddresses.find(record => record.id === cosso.workAddress.addressId)
-        if (addressPresent == null) {
-          cosso.workAddress = null
-          addressNotAvailable = true
-          await cossoClient.updateCosso(req.params.id, cosso, res.locals.user.username)
-
-          errorMessages.genericErrorMessage = {
-            text: 'Work Location and Address: The previously selected address is no longer available. Please select an alternative.',
+          if (defaultAddress) {
+            cosso.workAddress = toCossoAddress(defaultAddress)
           }
         }
+
+        let addressNotAvailable: boolean = false
+        if (cosso.workAddress != null && cosso.workAddress.addressId != null && witnessDetails.replyAddresses != null) {
+          const addressPresent = witnessDetails.replyAddresses.find(record => record.id === cosso.workAddress.addressId)
+          if (addressPresent == null) {
+            cosso.workAddress = null
+            addressNotAvailable = true
+            await cossoClient.updateCosso(req.params.id, cosso, res.locals.user.username)
+
+            errorMessages.genericErrorMessage = {
+              text: 'Work Location and Address: The previously selected address is no longer available. Please select an alternative.',
+            }
+          }
+        }
+
+        let manualAddressAllowed: boolean = false
+        if (witnessDetails.replyAddresses == null || witnessDetails.replyAddresses.length === 0) {
+          manualAddressAllowed = true
+        }
+
+        const alternateAddressOptions = addressListToSelectItemList(
+          witnessDetails.replyAddresses,
+          cosso.roAndWitnessDetailsSaved,
+          req.body.alternateAddress,
+        )
+
+        witnessDetails.replyAddresses?.sort((a, b) => (a.buildingName ?? '').localeCompare(b.buildingName ?? ''))
+
+        res.render('pages/witness-details', {
+          errorMessages,
+          cosso,
+          cossoId,
+          currentPage,
+          witnessDetails,
+          callingScreen,
+          manualAddressAllowed,
+          alternateAddressOptions,
+          addressNotAvailable,
+          roName: formatFullName(witnessDetails.name),
+          displayAlternate: req.body.offenderAddressSelectOne === 'No',
+          witnessAvailability: screenInfo.find(si => si.fieldName === 'witness_availability')?.fieldText,
+        })
       }
-
-      let manualAddressAllowed: boolean = false
-      if (witnessDetails.replyAddresses == null || witnessDetails.replyAddresses.length === 0) {
-        manualAddressAllowed = true
-      }
-
-      const alternateAddressOptions = addressListToSelectItemList(
-        witnessDetails.replyAddresses,
-        cosso.roAndWitnessDetailsSaved,
-        req.body.alternateAddress,
-      )
-
-      witnessDetails.replyAddresses?.sort((a, b) => (a.buildingName ?? '').localeCompare(b.buildingName ?? ''))
-
-      res.render('pages/witness-details', {
-        errorMessages,
-        cosso,
-        cossoId,
-        currentPage,
-        witnessDetails,
-        callingScreen,
-        manualAddressAllowed,
-        alternateAddressOptions,
-        addressNotAvailable,
-        roName: formatFullName(witnessDetails.name),
-        displayAlternate: req.body.offenderAddressSelectOne === 'No',
-        witnessAvailability: screenInfo.find(si => si.fieldName === 'witness_availability')?.fieldText,
-      })
     }
   })
 
