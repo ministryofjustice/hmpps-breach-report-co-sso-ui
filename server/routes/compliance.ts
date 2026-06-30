@@ -282,8 +282,8 @@ export default function complianceRoutes(
         }
 
         if (notes && notes.length > 20000) {
-          errorMessages.requirementNotesLength = {
-            text: 'Please ensure requirement notes are less than 20000 characters',
+          errorMessages[`requirement_${uiId}`] = {
+            text: 'Requirement Notes: This field must be 20000 characters or less',
           }
         }
 
