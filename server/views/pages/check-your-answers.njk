@@ -670,67 +670,70 @@
         </div>
       </div>
 
-      <div class="moj-button-group">
-        {% if reportValidated %}
-          {{ govukButton({
-            text: "Publish",
-            preventDoubleClick: "true",
-            type: "submit",
-            attributes: {
-              id: "publish"
-            }
-          }) }}
-          {{ govukButton({
-            text: "View Draft Report",
-            classes: "govuk-button--secondary",
-            preventDoubleClick: "true",
-            href: '/pdf/'+cossoId,
-            attributes: {
-              target: "_blank"
-            }
-          }) }}
-          {{ govukButton({
-            text: "Delete draft",
-            href: '/confirm-delete/'+cossoId,
-            classes: "govuk-button--secondary",
-            preventDoubleClick: "true",
-            attributes: {
-              id: "delete-btn"
-            }
-          }) }}
-          {{ govukButton({
-            text: "Close",
-            href: "/close",
-            classes: "govuk-button--secondary",
-            preventDoubleClick: "true"
-          }) }}
-        {% else %}
-          {{ govukButton({
-            text: "View Draft Report",
-            classes: "govuk-button--secondary",
-            preventDoubleClick: "true",
-            href: '/pdf/'+cossoId,
-            attributes: {
-              target: "_blank"
-            }
-          }) }}
-          {{ govukButton({
-            text: "Delete draft",
-            href: '/confirm-delete/'+cossoId,
-            classes: "govuk-button--secondary",
-            attributes: {
-              id: "delete-btn"
-            },
-            preventDoubleClick: "true"
-          }) }}
-          {{ govukButton({
-            text: "Close",
-            href: "/close",
-            classes: "govuk-button--secondary",
-            preventDoubleClick: "true"
-          }) }}
-        {% endif %}
-      </div>
+      <form method="post" action="/check-your-answers/{{ cossoId }}">
+        <input type="hidden" name="_csrf" value="{{ csrfToken }}">
+        <div class="moj-button-group">
+          {% if reportValidated %}
+            {{ govukButton({
+              text: "Publish",
+              preventDoubleClick: "true",
+              type: "submit",
+              attributes: {
+                id: "publish"
+              }
+            }) }}
+            {{ govukButton({
+              text: "View Draft Report",
+              classes: "govuk-button--secondary",
+              preventDoubleClick: "true",
+              href: '/pdf/'+cossoId,
+              attributes: {
+                target: "_blank"
+              }
+            }) }}
+            {{ govukButton({
+              text: "Delete draft",
+              href: '/confirm-delete/'+cossoId,
+              classes: "govuk-button--secondary",
+              preventDoubleClick: "true",
+              attributes: {
+                id: "delete-btn"
+              }
+            }) }}
+            {{ govukButton({
+              text: "Close",
+              href: "/close",
+              classes: "govuk-button--secondary",
+              preventDoubleClick: "true"
+            }) }}
+          {% else %}
+            {{ govukButton({
+              text: "View Draft Report",
+              classes: "govuk-button--secondary",
+              preventDoubleClick: "true",
+              href: '/pdf/'+cossoId,
+              attributes: {
+                target: "_blank"
+              }
+            }) }}
+            {{ govukButton({
+              text: "Delete draft",
+              href: '/confirm-delete/'+cossoId,
+              classes: "govuk-button--secondary",
+              attributes: {
+                id: "delete-btn"
+              },
+              preventDoubleClick: "true"
+            }) }}
+            {{ govukButton({
+              text: "Close",
+              href: "/close",
+              classes: "govuk-button--secondary",
+              preventDoubleClick: "true"
+            }) }}
+          {% endif %}
+        </div>
+      </form>
     </div>
   </div>
 

@@ -53,6 +53,54 @@ export default function checkYourAnswersRoutes(
     })
   })
 
+  router.post('/check-your-answers/:id', async (req, res) => {
+    await auditService.logPageView(Page.CHECK_YOUR_REPORT, { who: res.locals.user.username, correlationId: req.id })
+    const cossoClient = new CossoApiClient(authenticationClient)
+    const cossoId: string = req.params.id
+    let cosso: Cosso
+
+    try {
+      cosso = await cossoClient.getCossoById(cossoId, res.locals.user.username)
+    } catch (error) {
+      const errorMessages: ErrorMessages = handleIntegrationErrors(error.status, error.data?.message, 'COSSO')
+      const showEmbeddedError = true
+      cosso = createBlankCossoWithId(req.params.id)
+      res.render(`pages/check-your-answers`, { errorMessages, showEmbeddedError, cosso })
+      return
+    }
+
+    if (!validateReport(cosso)) {
+      const dateOfBirth = toFullUserDate(cosso.dateOfBirth)
+      const sentenceDate = toFullUserDate(cosso.sentenceDate)
+      cosso.amendments = cosso.amendments?.map(amendment => ({
+        ...amendment,
+        formattedAmendmentDate: toFullUserDate(amendment.amendmentDate),
+      }))
+      res.render('pages/check-your-answers', {
+        cosso,
+        dateOfBirth,
+        sentenceDate,
+        cossoId,
+        reportValidated: false,
+        currentPage,
+      })
+      return
+    }
+
+    cosso.completedDate = new Date().toISOString()
+
+    try {
+      await cossoClient.updateCosso(cossoId, cosso, res.locals.user.username)
+    } catch (error) {
+      const errorMessages: ErrorMessages = handleIntegrationErrors(error.status, error.data?.message, 'COSSO')
+      const showEmbeddedError = true
+      res.render(`pages/check-your-answers`, { errorMessages, showEmbeddedError, cosso })
+      return
+    }
+
+    res.redirect(`/report-completed/${cossoId}`)
+  })
+
   function validateReport(cosso: Cosso): boolean {
     return (
       cosso.titleAndFullName?.trim().length > 0 &&

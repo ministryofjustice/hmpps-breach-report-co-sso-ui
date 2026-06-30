@@ -1,5 +1,4 @@
 import { asSystem, RestClient } from '@ministryofjustice/hmpps-rest-client'
-import { ZonedDateTime } from '@js-joda/core'
 import { AuthenticationClient } from '@ministryofjustice/hmpps-rest-client/dist/main'
 import config from '../config'
 import logger from '../../logger'
@@ -212,7 +211,7 @@ export interface Cosso {
   id: string
   crn: string
   dateOfBirth: string
-  completedDate: ZonedDateTime
+  completedDate: string
   titleAndFullName: string
   telephoneNumber: string
   emailAddress: string
