@@ -158,7 +158,7 @@ export default function offenceDetailsRoutes(
         cosso.additionalOffence = offenceDetails.additionalOffences.map(x => x.description).join('\n')
         if (offenceDetails.suspendedCustodyLength?.length != null) {
           cosso.sentenceLength =
-            `${offenceDetails.suspendedCustodyLength.length} ${offenceDetails.suspendedCustodyLength.lengthUnits ?? ''}`.trim()
+            `${offenceDetails.suspendedCustodyLength.length} ${offenceDetails.suspendedCustodyLength.units ?? ''}`.trim()
         }
       } catch (error) {
         const errorMessages: ErrorMessages = handleIntegrationErrors(
