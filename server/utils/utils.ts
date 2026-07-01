@@ -136,6 +136,7 @@ export function createBlankCossoWithId(id: string): Cosso {
     failuresAndEnforcementSaved: false,
     id,
     mainOffence: '',
+    additionalOffence: '',
     mobileNumber: '',
     offenceDetailsSaved: false,
     postalAddress: undefined,
