@@ -330,10 +330,9 @@ export default function failuresRoutes(
       }
     }
 
-    if (cosso.riskOfHarmChanged && (!cosso.riskHistory || cosso.riskHistory.trim() === ''))
-    {
+    if (cosso.riskOfHarmChanged && (!cosso.riskHistory || cosso.riskHistory.trim() === '')) {
       errorMessages.riskHistory = {
-        text: 'The "Please Describe" field is blank. Please enter relevant information here before proceeding'
+        text: 'The "Please Describe" field is blank. Please enter relevant information here before proceeding',
       }
     }
 
