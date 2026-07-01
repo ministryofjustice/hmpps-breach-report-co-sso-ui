@@ -225,6 +225,7 @@ export interface Cosso {
   workAddress: CossoAddress
   roAndWitnessDetailsSaved: boolean
   mainOffence: string
+  additionalOffence: string
   sentencingCourt: string
   sentenceDate: string
   sentenceType: string
