@@ -576,6 +576,7 @@
           "sentenceDate": "2025-04-01",
           "sentenceType": "Sentence Imposed Description",
           "sentenceLength": "20 Days",
+          "suspendedCustodyLength": "10 Days",
           "requirementList": [
             {
               "id": 1234,

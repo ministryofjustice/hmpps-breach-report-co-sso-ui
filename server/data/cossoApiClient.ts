@@ -229,6 +229,8 @@ export interface Cosso {
   sentenceDate: string
   sentenceType: string
   sentenceLength: string
+  lengthUnits: string
+  suspendedCustodyLength: string
   requirementList: CossoRequirement[]
   amendments: CossoAmendment[]
   cossoContactList: CossoContact[]
