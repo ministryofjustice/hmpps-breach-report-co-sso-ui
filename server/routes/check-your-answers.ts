@@ -91,6 +91,7 @@ export default function checkYourAnswersRoutes(
 
     try {
       await cossoClient.updateCosso(cossoId, cosso, res.locals.user.username)
+      await cossoClient.publishCosso(cossoId, res.locals.user.username)
     } catch (error) {
       const errorMessages: ErrorMessages = handleIntegrationErrors(error.status, error.data?.message, 'COSSO')
       const showEmbeddedError = true
