@@ -209,7 +209,7 @@ export default class CossoApiClient extends RestClient {
   async publishCosso(id: string, username: string) {
     await this.post(
       {
-        path: `/cosso/publish/${id}`
+        path: `/cosso/publish/${id}`,
       },
       asSystem(username),
     )
