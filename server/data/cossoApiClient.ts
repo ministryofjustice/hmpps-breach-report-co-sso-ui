@@ -205,6 +205,15 @@ export default class CossoApiClient extends RestClient {
       asSystem(username),
     )
   }
+
+  async publishCosso(id: string, username: string) {
+    await this.post(
+      {
+        path: `/cosso/publish/${id}`,
+      },
+      asSystem(username),
+    )
+  }
 }
 
 export interface Cosso {
