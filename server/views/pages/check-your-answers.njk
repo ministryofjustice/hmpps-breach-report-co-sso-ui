@@ -391,13 +391,21 @@
                      class="govuk-link">enter required
                     information<span class="govuk-visually-hidden">Sentence length</span></a>
                 {% else %}
-                  <span id="sentence-length">{{ cosso.sentenceLength }}</span>
+                  <span id="sentence-length">{{ cosso.sentenceLength }} {{ cosso.lengthUnits }}</span>
                 {% endif %}
               </dd>
               <dd class="govuk-summary-list__actions">
                 {% if not cosso.sentenceLength or cosso.sentenceLength | trim == '' %}
                   <span class="govuk-tag--light-blue">Required</span>
                 {% endif %}
+              </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                Suspended Custody Length (SSO disposals only)
+              </dt>
+              <dd class="govuk-summary-list__value">
+                  <span id="suspended-custody-length">{{ cosso.suspendedCustodyLength }}</span>
               </dd>
             </div>
             <div class="govuk-summary-list__row">
@@ -531,6 +539,7 @@
               </dd>
             </div>
             <div class="govuk-summary-list__row">
+              {% if cosso.failuresAndEnforcementSaved and cosso.riskOfHarmChanged == true %}
               <dt class="govuk-summary-list__key">
                 Please describe
               </dt>
@@ -549,6 +558,7 @@
                   <span class="govuk-tag--light-blue">Required</span>
                 {% endif %}
               </dd>
+              {% endif %}
             </div>
             <div class="govuk-summary-list__row">
               <dt class="govuk-summary-list__key">

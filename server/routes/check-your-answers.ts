@@ -122,12 +122,12 @@ export default function checkYourAnswersRoutes(
       cosso.whyInBreach?.trim().length > 0 &&
       cosso.stepsToPreventBreach?.trim().length > 0 &&
       cosso.riskOfHarmChanged != null &&
-      cosso.riskHistory?.trim().length > 0 &&
       cosso.confirmEqualities != null &&
       cosso.recommendations?.trim().length > 0 &&
       cosso.supportingComments?.trim().length > 0 &&
       cosso.complianceToDate?.trim().length > 0 &&
-      cosso.signature?.trim().length > 0
+      cosso.signature?.trim().length > 0 &&
+      (cosso.riskOfHarmChanged === false || (cosso.riskOfHarmChanged === true && cosso.riskHistory?.trim().length > 0))
     )
   }
 
