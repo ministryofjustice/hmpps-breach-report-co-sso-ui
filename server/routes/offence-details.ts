@@ -155,9 +155,10 @@ export default function offenceDetailsRoutes(
         cosso.sentencingCourt = offenceDetails.sentencingCourt ?? cosso.sentencingCourt
         cosso.sentenceDate = offenceDetails.sentenceDate ?? cosso.sentenceDate
         cosso.sentenceType = offenceDetails.sentenceImposed?.description ?? cosso.sentenceType
+        cosso.additionalOffence = offenceDetails.additionalOffences.map(x => x.description).join('\n')
         if (offenceDetails.suspendedCustodyLength?.length != null) {
           cosso.sentenceLength =
-            `${offenceDetails.suspendedCustodyLength.length} ${offenceDetails.suspendedCustodyLength.lengthUnits ?? ''}`.trim()
+            `${offenceDetails.suspendedCustodyLength.length} ${offenceDetails.suspendedCustodyLength.units ?? ''}`.trim()
         }
       } catch (error) {
         const errorMessages: ErrorMessages = handleIntegrationErrors(
