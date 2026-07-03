@@ -85,6 +85,23 @@ context('Failures and Enforcement page', () => {
     cy.get('#riskHistory').should('contain.text', 'Heres why the risk has changed')
   })
 
+  it('correct validation should show when risk of serious harm is yes and no reason is entered', () => {
+    cy.visit('/failures/2d9d0ad5-3f6a-4c2c-8a27-3d5b4e2f1c90')
+    cy.url().should('include', '/failures')
+    cy.get('#page-title').should('contain.text', 'Breach Report CO SSO - Failures and Enforcement')
+    cy.get('input[name="riskOfHarmChanged"][value="true"]').click()
+    cy.get('#riskHistory').should('be.visible')
+    cy.get('#riskHistory').should('have.value', '')
+    cy.get('#continue-button').click()
+    cy.get('.govuk-error-summary__title').should('exist').should('contain.text', 'There is a problem')
+    cy.get('#riskHistory-error')
+      .should('exist')
+      .should(
+        'contain.text',
+        'The "Please Describe" field is blank. Please enter relevant information here before proceeding',
+      )
+  })
+
   it('close button displays message', () => {
     cy.intercept('POST', '/failures/**').as('saveAndCloseRequest')
     cy.visit('/failures/8a5fca4c-f72d-4bae-8170-fbe069ed1aaf')

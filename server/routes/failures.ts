@@ -233,7 +233,7 @@ export default function failuresRoutes(
     cosso.confirmEqualities = req.body.confirmationStatement === 'true'
     cosso.whyInBreach = convertLineBreaks(req.body.whyInBreach)
     cosso.stepsToPreventBreach = convertLineBreaks(req.body.stepsToPreventBreach)
-    cosso.riskOfHarmChanged = req.body.riskOfHarmChanged
+    cosso.riskOfHarmChanged = req.body.riskOfHarmChanged === 'true'
     cosso.riskHistory = convertLineBreaks(req.body.riskHistory)
     cosso.recommendations = req.body.recommendationOptions
     cosso.supportingComments = convertLineBreaks(req.body.supportingComments)
@@ -327,6 +327,12 @@ export default function failuresRoutes(
     if (!cosso.confirmEqualities) {
       errorMessages.confirmEqualities = {
         text: 'Confirmation Statement : Please complete the Diversity and equalities confirmation to proceed',
+      }
+    }
+
+    if (cosso.riskOfHarmChanged && (!cosso.riskHistory || cosso.riskHistory.trim() === '')) {
+      errorMessages.riskHistory = {
+        text: 'The "Please Describe" field is blank. Please enter relevant information here before proceeding',
       }
     }
 
