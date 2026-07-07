@@ -10,11 +10,13 @@ import NDeliusIntegrationApiClient, {
 import { ErrorMessages } from '../data/uiModels'
 import { handleIntegrationErrors } from '../utils/utils'
 import { toFullUserDate } from '../utils/dateUtils'
+import CommonUtils from '../services/commonUtils'
 
 export default function signAndSendRoutes(
   router: Router,
   auditService: AuditService,
   authenticationClient: AuthenticationClient,
+  commonUtils: CommonUtils,
 ): Router {
   const currentPage = 'sign-and-send'
 
@@ -58,6 +60,8 @@ export default function signAndSendRoutes(
       res.render(`pages/sign-and-send`, { errorMessages, showEmbeddedError })
       return
     }
+
+    if (await commonUtils.redirectRequired(cosso, cossoId, res, authenticationClient)) return
 
     try {
       signAndSendDetails = await ndeliusIntegrationApiClient.getSignAndSendDetails(cosso.crn, res.locals.user.username)
@@ -138,6 +142,8 @@ export default function signAndSendRoutes(
       res.render(`pages/sign-and-send`, { errorMessages, showEmbeddedError })
       return
     }
+
+    if (await commonUtils.redirectRequired(cosso, cossoId, res, authenticationClient)) return
 
     try {
       signAndSendDetails = await ndeliusIntegrationApiClient.getSignAndSendDetails(cosso.crn, res.locals.user.username)
