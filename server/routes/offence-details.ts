@@ -156,8 +156,12 @@ export default function offenceDetailsRoutes(
         cosso.sentenceDate = offenceDetails.sentenceDate ?? cosso.sentenceDate
         cosso.sentenceType = offenceDetails.sentenceImposed?.description ?? cosso.sentenceType
         cosso.additionalOffence = offenceDetails.additionalOffences.map(x => x.description).join('\n')
+        if (offenceDetails.sentence?.length != null) {
+          cosso.sentenceLength = offenceDetails.sentence.length.toString()
+          cosso.lengthUnits = offenceDetails.sentence.lengthUnits ?? cosso.lengthUnits
+        }
         if (offenceDetails.suspendedCustodyLength?.length != null) {
-          cosso.sentenceLength =
+          cosso.suspendedCustodyLength =
             `${offenceDetails.suspendedCustodyLength.length} ${offenceDetails.suspendedCustodyLength.units ?? ''}`.trim()
         }
       } catch (error) {
