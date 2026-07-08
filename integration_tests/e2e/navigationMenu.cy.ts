@@ -61,7 +61,6 @@ context('Side Navigation Menu checks', () => {
 
   it('Check Your Answers is always enabled', () => {
     cy.visit(`/basic-details/${savedCossoId}`)
-    cy.get('#nav-check-your-answers')
-      .should('exist')
+    cy.get('#nav-check-your-answers').should('exist')
   })
 })
