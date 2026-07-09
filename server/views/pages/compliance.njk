@@ -70,7 +70,7 @@
                              data-aria-controls="conditional-{{ requirement.uiId }}">
                       <label class="govuk-label govuk-checkboxes__label" for="requirement_{{ requirement.uiId }}">
                         {% set requirementHtml = requirement.notes | escape | nl2br | safe %}
-                        {{ requirement.type.description }}
+                        {{ requirement.requirementTypeMainCategoryDescription }}
                       </label>
                     </div>
                     <div class="govuk-checkboxes__conditional govuk-checkboxes__conditional--hidden"

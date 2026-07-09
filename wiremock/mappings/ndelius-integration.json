@@ -667,31 +667,34 @@
         "jsonBody": {
           "requirements": [
             {
-              "id": 0,
-              "type": { "code": "REQ01", "description": "Requirement Zero" },
-              "subType": { "code": "REQ01A", "description": "Requirement Zero - Subtype" }
+              "id": 120,
+              "startDate": "2025-01-01",
+              "mainCategory": "Requirement Zero",
+              "length": 20,
+              "lengthUnit": "Months",
+              "subCategory": "Requirement Zero - Subtype",
+              "secondaryLength": 12,
+              "secondaryLengthUnit": "Weeks"
             },
             {
               "id": 167,
-              "type": {
-                "code": "string",
-                "description": "string"
-              },
-              "subType": {
-                "code": "string",
-                "description": "string"
-              }
+              "startDate": "2025-01-01",
+              "mainCategory": "string",
+              "length": 2,
+              "lengthUnit": "Years",
+              "subCategory": "String",
+              "secondaryLength": 16,
+              "secondaryLengthUnit": "Days"
             },
             {
               "id": 2,
-              "type": {
-                "code": "STR",
-                "description": "A STRING"
-              },
-              "subType": {
-                "code": "SSTR",
-                "description": "A SUBSTRING"
-              }
+              "startDate": "2025-01-01",
+              "mainCategory": "A STRING",
+              "length": 48,
+              "lengthUnit": "Months",
+              "subCategory": "A SUBSTRING",
+              "secondaryLength": 16,
+              "secondaryLengthUnit": "Weeks"
             }
           ],
           "breachReasons": [

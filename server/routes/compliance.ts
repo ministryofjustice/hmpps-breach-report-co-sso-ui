@@ -3,7 +3,7 @@ import { AuthenticationClient } from '@ministryofjustice/hmpps-auth-clients'
 import AuditService, { Page } from '../services/auditService'
 import CossoApiClient, { Cosso, CossoRequirement, ScreenInformation } from '../data/cossoApiClient'
 import CommonUtils from '../services/commonUtils'
-import NDeliusIntegrationApiClient, { ReferenceData, Requirements } from '../data/ndeliusIntegrationApiClient'
+import NDeliusIntegrationApiClient, { Requirements } from '../data/ndeliusIntegrationApiClient'
 import { ErrorMessages } from '../data/uiModels'
 import asArray, { convertLineBreaks, handleIntegrationErrors } from '../utils/utils'
 
@@ -94,13 +94,15 @@ export default function complianceRoutes(
         deliusRequirementId: ext.id,
         dbId: existing?.id ?? null,
         existing: !!existing,
-        type: ext.type,
-        subType: ext.subType,
         notes: existing?.notes ?? '',
         failure: existing?.failure ?? null,
         failureReason: existing?.failureReason ?? null,
-        requirementTypeMainCategoryDescription: ext.type.description,
-        requirementTypeSubCategoryDescription: ext.subType.description,
+        requirementTypeMainCategoryDescription: ext.mainCategory,
+        requirementTypeSubCategoryDescription: ext.subCategory,
+        length: ext.length,
+        lengthUnit: ext.lengthUnit,
+        secondaryLength: ext.secondaryLength,
+        secondaryLengthUnit: ext.secondaryLengthUnit,
       })
     }
 
@@ -216,13 +218,15 @@ export default function complianceRoutes(
         deliusRequirementId: ext.id,
         dbId: existing?.id ?? null,
         existing: !!existing,
-        type: ext.type,
-        subType: ext.subType,
         notes: existing?.notes ?? '',
         failure: existing?.failure ?? null,
         failureReason: existing?.failureReason ?? null,
-        requirementTypeMainCategoryDescription: ext.type.description,
-        requirementTypeSubCategoryDescription: ext.subType.description,
+        requirementTypeMainCategoryDescription: ext.mainCategory,
+        requirementTypeSubCategoryDescription: ext.subCategory,
+        length: ext.length,
+        lengthUnit: ext.lengthUnit,
+        secondaryLength: ext.secondaryLength,
+        secondaryLengthUnit: ext.secondaryLengthUnit,
       })
     }
 
@@ -296,8 +300,8 @@ export default function complianceRoutes(
           failure,
           failureReason,
           notes,
-          requirementLength: '',
-          requirementSecondLength: '',
+          requirementLength: `${reqItem.length} ${reqItem.lengthUnit}`,
+          requirementSecondLength: `${reqItem.secondaryLength} ${reqItem.secondaryLengthUnit}`,
         })
       }
     }
@@ -358,11 +362,13 @@ export interface UiRequirement {
   dbId: string
   deliusRequirementId: number
   existing: boolean
-  type: ReferenceData
-  subType: ReferenceData
   notes: string
   failure: boolean
   failureReason: string
   requirementTypeMainCategoryDescription: string
   requirementTypeSubCategoryDescription: string
+  length: number
+  lengthUnit: string
+  secondaryLength: number
+  secondaryLengthUnit: string
 }

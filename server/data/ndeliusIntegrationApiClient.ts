@@ -194,14 +194,8 @@ export interface WitnessDetails {
   replyAddresses: DeliusAddress[]
 }
 
-export interface Requirement {
-  id: number
-  type: ReferenceData
-  subType: ReferenceData
-}
-
 export interface Requirements {
-  requirements: Requirement[]
+  requirements: DeliusRequirement[]
   breachReasons: ReferenceData[]
 }
 
