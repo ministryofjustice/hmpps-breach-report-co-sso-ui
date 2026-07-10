@@ -92,16 +92,6 @@
               }
             }) }}
             {{ govukButton({
-              text: "Save Progress and Close",
-              type: "submit",
-              name: "action",
-              value: "saveProgressAndClose",
-              classes: "govuk-button--secondary",
-              attributes: {
-                id: "close-button"
-              }
-            }) }}
-            {{ govukButton({
               text: "Refresh from Delius",
               preventDoubleClick: "true",
               type: "submit",
@@ -110,6 +100,16 @@
               classes: "govuk-button--secondary",
               attributes: {
                 id: "refresh-from-ndelius--button"
+              }
+            }) }}
+            {{ govukButton({
+              text: "Save Progress and Close",
+              type: "submit",
+              name: "action",
+              value: "saveProgressAndClose",
+              classes: "govuk-button--secondary",
+              attributes: {
+                id: "close-button"
               }
             }) }}
           </div>
