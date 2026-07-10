@@ -65,9 +65,12 @@
 
         <h2 class="govuk-heading-m">Sentence Imposed</h2>
         <p id="sentence-imposed">{{ offenceDetails.sentenceImposed.description }}</p>
+        <p id="sentence-length">{{ offenceDetails.sentence.length }} {{ offenceDetails.sentence.lengthUnits }}</p>
 
-        <h2 class="govuk-heading-m">Suspended Custody Length</h2>
-        <p id="custody-length">{{ offenceDetails.suspendedCustodyLength.length }} {{ offenceDetails.suspendedCustodyLength.units }}</p>
+        {% if offenceDetails.suspendedCustodyLength and offenceDetails.suspendedCustodyLength.length %}
+          <h2 class="govuk-heading-m">Suspended Custody Length</h2>
+          <p id="custody-length">{{ offenceDetails.suspendedCustodyLength.length }} {{ offenceDetails.suspendedCustodyLength.units }}</p>
+        {% endif %}
 
         <h2 class="govuk-heading-m">Requirements Imposed</h2>
         {% if offenceDetails.requirementsImposed | length > 0 %}
