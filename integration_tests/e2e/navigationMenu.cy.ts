@@ -59,11 +59,8 @@ context('Side Navigation Menu checks', () => {
     cy.url().should('include', `/sign-and-send/${savedCossoId}`)
   })
 
-  it('Check Your Answers is disabled when sign-and-send not yet saved', () => {
+  it('Check Your Answers is always enabled', () => {
     cy.visit(`/basic-details/${savedCossoId}`)
-    cy.get('#nav-check-your-answers-disabled')
-      .should('exist')
-      .and('have.attr', 'href', '#')
-      .and('have.class', 'disabled-nav')
+    cy.get('#nav-check-your-answers').should('exist')
   })
 })
