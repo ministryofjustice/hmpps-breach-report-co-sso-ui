@@ -178,7 +178,7 @@ context('Failures and Enforcement page', () => {
     cy.get('.govuk-error-summary__title').should('exist').should('contain.text', 'There is a problem')
     cy.get('#confirmationStatement-error')
       .should('exist')
-      .should('contain.text', 'Please complete the confirmation to proceed')
+      .should('contain.text', 'Confirmation Statement: Please complete the confirmation to proceed')
   })
 
   it('should display contacts returned from DB as selected', () => {

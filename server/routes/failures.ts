@@ -326,7 +326,7 @@ export default function failuresRoutes(
 
     if (!cosso.confirmEqualities) {
       errorMessages.confirmEqualities = {
-        text: 'Please complete the confirmation to proceed',
+        text: 'Confirmation Statement: Please complete the confirmation to proceed',
       }
     }
 
