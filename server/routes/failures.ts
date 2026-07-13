@@ -326,13 +326,13 @@ export default function failuresRoutes(
 
     if (!cosso.confirmEqualities) {
       errorMessages.confirmEqualities = {
-        text: 'Confirmation Statement : Please complete the Diversity and equalities confirmation to proceed',
+        text: 'Confirmation Statement: Please complete the confirmation to proceed',
       }
     }
 
     if (cosso.riskOfHarmChanged && (!cosso.riskHistory || cosso.riskHistory.trim() === '')) {
       errorMessages.riskHistory = {
-        text: 'The "Please Describe" field is blank. Please enter relevant information here before proceeding',
+        text: 'The "Risk of Serious Harm (RoSH)" field is blank. Please enter relevant information here before proceeding',
       }
     }
 
