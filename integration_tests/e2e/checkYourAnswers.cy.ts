@@ -314,7 +314,7 @@ context('Check your answers', () => {
     cy.visit('/check-your-answers/e3b2f8c1-6a4d-4c92-9f27-8d5a1c7e4b90')
     cy.visit('/check-your-answers/e3b2f8c1-6a4d-4c92-9f27-8d5a1c7e4b90')
     cy.get('#cya-link-signature').click()
-    cy.url().should('include', '/compliance/e3b2f8c1-6a4d-4c92-9f27-8d5a1c7e4b90')
+    cy.url().should('include', '/sign-and-send/e3b2f8c1-6a4d-4c92-9f27-8d5a1c7e4b90')
     cy.visit('/check-your-answers/e3b2f8c1-6a4d-4c92-9f27-8d5a1c7e4b90')
     cy.visit('/check-your-answers/e3b2f8c1-6a4d-4c92-9f27-8d5a1c7e4b90')
   })
