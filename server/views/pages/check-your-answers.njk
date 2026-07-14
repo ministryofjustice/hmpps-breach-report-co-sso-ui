@@ -663,7 +663,7 @@
               </dt>
               <dd class="govuk-summary-list__value">
                 {% if cosso.complianceToDateSaved and (not cosso.signature or cosso.signature | trim == '') %}
-                  <a id="cya-link-signature" href="/compliance/{{ cossoId }}?returnTo=check-your-answers"
+                  <a id="cya-link-signature" href="/sign-and-send/{{ cossoId }}?returnTo=check-your-answers"
                      class="govuk-link">enter required
                     information<span class="govuk-visually-hidden">Signature</span></a>
                 {% else %}
