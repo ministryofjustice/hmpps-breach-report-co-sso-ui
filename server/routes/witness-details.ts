@@ -86,7 +86,7 @@ export default function witnessDetailsRoutes(
     if (await commonUtils.redirectRequired(cosso, cossoId, res, authenticationClient)) return
 
     let defaultAddress: DeliusAddress = null
-    if (cosso.workAddress == null && witnessDetails.replyAddresses != null) {
+    if (cosso.workAddress == null && witnessDetails.replyAddresses != null && !cosso.roAndWitnessDetailsSaved) {
       defaultAddress = witnessDetails.replyAddresses.find(record => record.status === 'Default')
 
       if (defaultAddress) {
@@ -105,6 +105,18 @@ export default function witnessDetailsRoutes(
         errorMessages.genericErrorMessage = {
           text: 'Work Location and Address: The previously selected address is no longer available. Please select an alternative.',
         }
+      }
+    } else if (
+      cosso.workAddress == null &&
+      cosso.roAndWitnessDetailsSaved &&
+      witnessDetails.replyAddresses != null &&
+      witnessDetails.replyAddresses.length > 0
+    ) {
+      // A work address was previously selected (and details saved) but is no longer null - keep warning the user
+      // on every visit until they choose a new address, rather than just the first time it was detected.
+      addressNotAvailable = true
+      errorMessages.genericErrorMessage = {
+        text: 'Work Location and Address: The previously selected address is no longer available. Please select an alternative.',
       }
     }
 
@@ -237,7 +249,7 @@ export default function witnessDetailsRoutes(
         }
       } else {
         let defaultAddress: DeliusAddress = null
-        if (cosso.workAddress == null && witnessDetails.replyAddresses != null) {
+        if (cosso.workAddress == null && witnessDetails.replyAddresses != null && !cosso.roAndWitnessDetailsSaved) {
           defaultAddress = witnessDetails.replyAddresses.find(record => record.status === 'Default')
 
           if (defaultAddress) {
@@ -256,6 +268,16 @@ export default function witnessDetailsRoutes(
             errorMessages.genericErrorMessage = {
               text: 'Work Location and Address: The previously selected address is no longer available. Please select an alternative.',
             }
+          }
+        } else if (
+          cosso.workAddress == null &&
+          cosso.roAndWitnessDetailsSaved &&
+          witnessDetails.replyAddresses != null &&
+          witnessDetails.replyAddresses.length > 0
+        ) {
+          addressNotAvailable = true
+          errorMessages.genericErrorMessage = {
+            text: 'Work Location and Address: The previously selected address is no longer available. Please select an alternative.',
           }
         }
 
