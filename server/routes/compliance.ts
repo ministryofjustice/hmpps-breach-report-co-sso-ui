@@ -344,7 +344,7 @@ export default function complianceRoutes(
     const errorMessages: ErrorMessages = {}
     if (cosso.complianceToDate && cosso.complianceToDate.length > 20000) {
       errorMessages.complianceToDate = {
-        text: 'This field must be 20000 characters or less',
+        text: 'Compliance To Date: This field must be 20000 characters or less',
       }
     }
     return errorMessages
