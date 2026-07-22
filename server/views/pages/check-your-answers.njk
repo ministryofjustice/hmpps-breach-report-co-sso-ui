@@ -445,9 +445,26 @@
                     information<span class="govuk-visually-hidden"> Amendments</span></a>
                 {% else %}
                   {% for req in cosso.amendments %}
-                    <p id="amendment-info-{{ loop.index }}">{{ req.amendmentDetails }}
+                    <p id="amendment-info-{{ loop.index }}">
+                      {% if req.amendmentDetails and req.amendmentDetails.length > 1500 %}
+                        <span id="amendment-details-{{ loop.index }}">{{ req.amendmentDetails | truncate(1500) }}</span>
+                        <br>
+                        <a id="amendment-details-link-{{ loop.index }}"
+                           href="/offence-details/{{ cossoId }}?returnTo=check-your-answers"
+                           class="govuk-link">Click here to view the full text on the Offence Details screen</a>
+                      {% else %}
+                        <span id="amendment-details-{{ loop.index }}">{{ req.amendmentDetails }}</span>
+                      {% endif %}
                       <br>
-                      {{ req.amendmentReason }}
+                      {% if req.amendmentReason and req.amendmentReason.length > 1500 %}
+                        <span id="amendment-reason-{{ loop.index }}">{{ req.amendmentReason | truncate(1500) }}</span>
+                        <br>
+                        <a id="amendment-reason-link-{{ loop.index }}"
+                           href="/offence-details/{{ cossoId }}?returnTo=check-your-answers"
+                           class="govuk-link">Click here to view the full text on the Offence Details screen</a>
+                      {% else %}
+                        <span id="amendment-reason-{{ loop.index }}">{{ req.amendmentReason }}</span>
+                      {% endif %}
                       <br>
                       {{ req.formattedAmendmentDate }}
                     </p>
