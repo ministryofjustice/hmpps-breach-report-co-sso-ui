@@ -8,6 +8,29 @@ import { ErrorMessages } from '../data/uiModels'
 import { handleIntegrationErrors } from '../utils/utils'
 import { toFullUserDate } from '../utils/dateUtils'
 
+function amendmentDateToTimestamp(amendmentDate: string): number {
+  if (!amendmentDate) {
+    return Number.NEGATIVE_INFINITY
+  }
+
+  const parsedTimestamp = Date.parse(amendmentDate)
+  if (!Number.isNaN(parsedTimestamp)) {
+    return parsedTimestamp
+  }
+
+  const dateOnly = amendmentDate.includes('T') ? amendmentDate.split('T')[0] : amendmentDate
+  const fallbackTimestamp = Date.parse(`${dateOnly}T00:00:00`)
+
+  return Number.isNaN(fallbackTimestamp) ? Number.NEGATIVE_INFINITY : fallbackTimestamp
+}
+
+export function sortAmendmentsByDateDesc(amendments: Cosso['amendments'] = []): Cosso['amendments'] {
+  return [...amendments].sort(
+    (leftAmendment, rightAmendment) =>
+      amendmentDateToTimestamp(rightAmendment.amendmentDate) - amendmentDateToTimestamp(leftAmendment.amendmentDate),
+  )
+}
+
 export default function offenceDetailsRoutes(
   router: Router,
   auditService: AuditService,
@@ -88,7 +111,7 @@ export default function offenceDetailsRoutes(
 
     const formattedSentenceDate = toFullUserDate(offenceDetails.sentenceDate)
 
-    const formattedAmendments = cosso.amendments?.map(amendment => ({
+    const formattedAmendments = sortAmendmentsByDateDesc(cosso.amendments).map(amendment => ({
       ...amendment,
       formattedAmendmentDate: toFullUserDate(amendment.amendmentDate),
     }))
