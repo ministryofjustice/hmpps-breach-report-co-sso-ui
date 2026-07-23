@@ -209,7 +209,7 @@ context('Failures and Enforcement page', () => {
     cy.get('.govuk-error-summary__title').should('exist').should('contain.text', 'There is a problem')
     cy.get('#roTelephoneNumber-error')
       .should('exist')
-      .should('contain.text', 'Please enter a value that is less than or equal to 35 characters for Telephone Number.')
+      .should('contain.text', 'Phone Number: Please enter a value that is less than or equal to 35 characters')
   })
 
   it('should show validation error when phone number contains non-numeric characters', () => {
@@ -231,7 +231,7 @@ context('Failures and Enforcement page', () => {
       .should('exist')
       .should(
         'contain.text',
-        'Please enter a value that is less than or equal to 100 characters for Officer Email Address.',
+        'Email Address: Please enter a value that is less than or equal to 100 characters',
       )
   })
 
@@ -243,6 +243,6 @@ context('Failures and Enforcement page', () => {
     cy.get('.govuk-error-summary__title').should('exist').should('contain.text', 'There is a problem')
     cy.get('#roEmailAddress-error')
       .should('exist')
-      .should('contain.text', 'Enter an email address in the correct format for Officer Email Address.')
+      .should('contain.text', 'Email Address: Enter an email address in the correct format')
   })
 })
