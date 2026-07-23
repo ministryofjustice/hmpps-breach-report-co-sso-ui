@@ -245,7 +245,7 @@ context('Check your answers', () => {
     cy.get('#work-address-building-name').should('contain.text', 'Work Address')
     cy.get('#work-address-building-number-street-name')
       .should('contain.text', '2')
-      .and('contain.text', 'Older Postal Address')
+      .and('contain.text', 'Work Address')
     cy.get('#work-address-district').should('contain.text', 'District Address')
     cy.get('#work-address-town').should('contain.text', 'Old Town')
     cy.get('#work-address-county').should('contain.text', 'County')
