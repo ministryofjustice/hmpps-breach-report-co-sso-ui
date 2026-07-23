@@ -47,7 +47,7 @@ context('Side Navigation Menu checks', () => {
     cy.url().should('include', `/failures/${savedCossoId}`)
   })
 
-  it('Navigates to Compliance to date when failures saved', () => {
+  it('Navigates to Compliance to Date when failures saved', () => {
     cy.visit(`/basic-details/${savedCossoId}`)
     cy.get('#nav-compliance').click()
     cy.url().should('include', `/compliance/${savedCossoId}`)
