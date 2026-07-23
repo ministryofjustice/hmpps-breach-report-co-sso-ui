@@ -132,6 +132,8 @@ export default function witnessDetailsRoutes(
       addressNotAvailable,
       alternateAddressOptions,
       manualAddressAllowed,
+      roTelephoneNumber: cosso.roTelephoneNumber || witnessDetails.telephoneNumber,
+      roEmailAddress: cosso.roEmailAddress || witnessDetails.emailAddress,
       errorMessages,
     })
   })
@@ -214,6 +216,8 @@ export default function witnessDetailsRoutes(
     } else {
       cosso.roAndWitnessDetailsSaved = true
       cosso.witnessAvailability = convertLineBreaks(req.body.witnessAvailability)
+      cosso.roTelephoneNumber = req.body.roTelephoneNumber?.trim()
+      cosso.roEmailAddress = req.body.roEmailAddress?.trim()
       // Validation when use
       const errorMessages: ErrorMessages = validateFailures(cosso)
       const hasErrors: boolean = Object.keys(errorMessages).length > 0
@@ -221,8 +225,6 @@ export default function witnessDetailsRoutes(
       if (!hasErrors) {
         cosso.probationArea = witnessDetails.probationArea.description
         cosso.roTitleAndFullName = formatFullName(witnessDetails.name)
-        cosso.roTelephoneNumber = witnessDetails.telephoneNumber
-        cosso.roEmailAddress = witnessDetails.emailAddress
         cosso = handleSelectedAddress(cosso, witnessDetails, req.body.alternateAddress)
 
         await cossoClient.updateCosso(cossoId, cosso, res.locals.user.username)
@@ -285,6 +287,8 @@ export default function witnessDetailsRoutes(
           roName: formatFullName(witnessDetails.name),
           displayAlternate: req.body.offenderAddressSelectOne === 'No',
           witnessAvailability: screenInfo.find(si => si.fieldName === 'witness_availability')?.fieldText,
+          roTelephoneNumber: cosso.roTelephoneNumber,
+          roEmailAddress: cosso.roEmailAddress,
         })
       }
     }
@@ -296,6 +300,34 @@ export default function witnessDetailsRoutes(
     if (cosso.witnessAvailability && cosso.witnessAvailability.length > 20000) {
       errorMessages.witnessAvailability = {
         text: 'Witness Availability: This field must be 20000 characters or less',
+      }
+    }
+
+    if (!cosso.roTelephoneNumber || cosso.roTelephoneNumber.trim() === '') {
+      errorMessages.roTelephoneNumber = {
+        text: 'Phone Number: This is a required field, please enter a value',
+      }
+    } else if (cosso.roTelephoneNumber.trim().length > 35) {
+      errorMessages.roTelephoneNumber = {
+        text: 'Phone Number: Please enter a value that is less than or equal to 35 characters',
+      }
+    } else if (!/^[0-9]+$/.test(cosso.roTelephoneNumber.trim())) {
+      errorMessages.roTelephoneNumber = {
+        text: 'Phone Number: Please enter a valid Telephone Number',
+      }
+    }
+
+    if (!cosso.roEmailAddress || cosso.roEmailAddress.trim() === '') {
+      errorMessages.roEmailAddress = {
+        text: 'Email Address: This is a required field, please enter a value',
+      }
+    } else if (cosso.roEmailAddress.trim().length > 100) {
+      errorMessages.roEmailAddress = {
+        text: 'Email Address: Please enter a value that is less than or equal to 100 characters',
+      }
+    } else if (!/^[^\s@]+@[^\s@]+$/.test(cosso.roEmailAddress.trim())) {
+      errorMessages.roEmailAddress = {
+        text: 'Email Address: Enter an email address in the correct format',
       }
     }
 
