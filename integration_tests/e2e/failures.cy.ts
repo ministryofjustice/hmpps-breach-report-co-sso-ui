@@ -29,10 +29,10 @@ context('Failures and Enforcement page', () => {
     cy.get('input[name="recommendationOptions"][value="The Order is continued"]').should('be.checked')
     cy.get('label[for="recommendationOptions-2"]').should(
       'contain.text',
-      'The community order is revoked and the person be re-sentenced',
+      'The Community Order is revoked and the person be re-sentenced',
     )
     cy.get(
-      'input[name="recommendationOptions"][value="The community order is revoked and the person be re-sentenced"]',
+      'input[name="recommendationOptions"][value="The Community Order is revoked and the person be re-sentenced"]',
     ).should('not.be.checked')
     cy.get('label[for="recommendationOptions-3"]').should(
       'contain.text',
@@ -57,7 +57,7 @@ context('Failures and Enforcement page', () => {
     cy.get('input[id="confirmationStatement"]').should('not.be.checked')
     cy.get('input[name="recommendationOptions"][value="The Order is continued"]').should('not.be.checked')
     cy.get(
-      'input[name="recommendationOptions"][value="The community order is revoked and the person be re-sentenced"]',
+      'input[name="recommendationOptions"][value="The Community Order is revoked and the person be re-sentenced"]',
     ).should('not.be.checked')
     cy.get('input[name="recommendationOptions"][value="Custody is activated for the suspended sentence"]').should(
       'not.be.checked',
