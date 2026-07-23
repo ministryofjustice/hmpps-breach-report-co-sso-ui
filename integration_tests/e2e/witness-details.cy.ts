@@ -229,10 +229,7 @@ context('Failures and Enforcement page', () => {
     cy.get('.govuk-error-summary__title').should('exist').should('contain.text', 'There is a problem')
     cy.get('#roEmailAddress-error')
       .should('exist')
-      .should(
-        'contain.text',
-        'Email Address: Please enter a value that is less than or equal to 100 characters',
-      )
+      .should('contain.text', 'Email Address: Please enter a value that is less than or equal to 100 characters')
   })
 
   it('should show validation error when email address is not in a valid format', () => {
