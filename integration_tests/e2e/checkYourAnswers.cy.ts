@@ -334,10 +334,10 @@ context('Check your answers', () => {
     cy.get('#publish').should('not.exist')
   })
 
-  it('I can delete draft', () => {
+  it('I can delete draft report', () => {
     cy.visit('/check-your-answers/9de01b5e-30bd-4989-b0ad-29d5df2b70cs')
     cy.url().should('include', '/check-your-answers')
-    cy.get('#delete-btn').should('exist')
+    cy.get('#delete-btn').should('contain.text', 'Delete Draft Report')
     cy.get('#delete-btn').click()
     cy.url().should('include', '/confirm-delete/9de01b5e-30bd-4989-b0ad-29d5df2b70cs')
     cy.visit('/check-your-answers/9de01b5e-30bd-4989-b0ad-29d5df2b70cs')
