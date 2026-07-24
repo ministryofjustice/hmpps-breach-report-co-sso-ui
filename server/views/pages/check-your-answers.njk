@@ -601,7 +601,7 @@
                 {% endif %}
               </dd>
               <dd class="govuk-summary-list__actions">
-                {% if not cosso.recommendations or cosso.recommendations | trim == '' %}
+                {% if not cosso.confirmEqualities %}
                   <span class="govuk-tag--light-blue">Required</span>
                 {% endif %}
               </dd>
