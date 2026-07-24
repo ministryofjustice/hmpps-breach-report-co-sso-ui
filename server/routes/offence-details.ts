@@ -1,7 +1,7 @@
 import { Router } from 'express'
 import { AuthenticationClient } from '@ministryofjustice/hmpps-auth-clients'
 import AuditService, { Page } from '../services/auditService'
-import CossoApiClient, { Cosso } from '../data/cossoApiClient'
+import CossoApiClient, { Cosso, CossoAmendment } from '../data/cossoApiClient'
 import CommonUtils from '../services/commonUtils'
 import NDeliusIntegrationApiClient, { OffenceDetails } from '../data/ndeliusIntegrationApiClient'
 import { ErrorMessages } from '../data/uiModels'
@@ -205,7 +205,7 @@ export default function offenceDetailsRoutes(
   return router
 }
 
-export function sortAmendmentsByDateDesc(amendments: Cosso['amendments'] = []): Cosso['amendments'] {
+export function sortAmendmentsByDateDesc(amendments: CossoAmendment[] = []): CossoAmendment[] {
   return [...amendments].sort(
     (leftAmendment, rightAmendment) =>
       dateStringToTimestamp(rightAmendment.amendmentDate) - dateStringToTimestamp(leftAmendment.amendmentDate),
