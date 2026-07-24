@@ -11,11 +11,14 @@
   {% from "govuk/components/radios/macro.njk" import govukRadios %}
   {% from "govuk/components/character-count/macro.njk" import govukCharacterCount %}
   {% from "govuk/components/button/macro.njk" import govukButton %}
+  {% from "govuk/components/input/macro.njk" import govukInput %}
 
   <form method="post">
 
     {% set errorList =[
       { text: errorMessages.genericErrorMessage.text, href: "#" } if errorMessages.genericErrorMessage else None,
+      { text: errorMessages.roTelephoneNumber.text, href: "#roTelephoneNumber" } if errorMessages.roTelephoneNumber else None,
+      { text: errorMessages.roEmailAddress.text, href: "#roEmailAddress" } if errorMessages.roEmailAddress else None,
       { text: errorMessages.witnessAvailability.text, href: "#witnessAvailability" } if errorMessages.witnessAvailability else None
     ] | reject("undefined") %}
 
@@ -138,11 +141,39 @@
 
         {% endif %}
 
-          <h2 class="govuk-heading-m">Phone Number</h2>
-          <p id="phone-number">{{ witnessDetails.telephoneNumber }}</p>
+          {{ govukInput({
+            id: "roTelephoneNumber",
+            name: "roTelephoneNumber",
+            label: {
+              text: "Phone Number",
+              classes: "govuk-label--m"
+            },
+            hint: {
+              text: "If no phone number has been returned from NDelius, please enter it manually."
+            },
+            value: roTelephoneNumber,
+            classes: "govuk-input--width-20",
+            errorMessage: {
+              text: errorMessages.roTelephoneNumber.text
+            } if errorMessages.roTelephoneNumber.text
+          }) }}
 
-          <h2 class="govuk-heading-m">Email Address</h2>
-          <p id="email-address">{{ witnessDetails.emailAddress }}</p>
+          {{ govukInput({
+            id: "roEmailAddress",
+            name: "roEmailAddress",
+            label: {
+              text: "Email Address",
+              classes: "govuk-label--m"
+            },
+            hint: {
+              text: "If no email address has been returned from NDelius, please enter it manually."
+            },
+            value: roEmailAddress,
+            classes: "govuk-input--width-20",
+            errorMessage: {
+              text: errorMessages.roEmailAddress.text
+            } if errorMessages.roEmailAddress.text
+          }) }}
 
           {% set witnessAvailabilityHelpHtml %}
             {{ govukDetails({

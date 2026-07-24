@@ -11,8 +11,8 @@ context('Failures and Enforcement page', () => {
     cy.get('#address').should('contain.text', 'Newer Postal City')
     cy.get('#address').should('contain.text', 'Newer Postal County')
     cy.get('#address').should('contain.text', 'PO20 2ST')
-    cy.get('#phone-number').should('contain.text', '01234567891')
-    cy.get('#email-address').should('contain.text', 'MrJeffTheChef@email.com')
+    cy.get('#roTelephoneNumber').should('have.value', '01234567891')
+    cy.get('#roEmailAddress').should('have.value', 'MrJeffTheChef@email.com')
     cy.get('#witnessAvailability-hint .govuk-details__text').should('contain.text', 'Witness Availability Help Text')
     cy.get('#witnessAvailability').should('contain.text', 'Some availability for my witness')
   })
@@ -172,5 +172,74 @@ context('Failures and Enforcement page', () => {
     cy.contains(
       'There has been a problem fetching information from the Breach Report CO SSO Service. Please try again later.',
     ).should('exist')
+  })
+
+  it('should allow manual entry of phone number and email address when not returned from NDelius integration', () => {
+    cy.intercept('POST', '/witness-details/**').as('formSubmit')
+    cy.visit('/witness-details/8a60c999-cc18-4e47-b107-62156a13d138')
+    cy.url().should('include', '/witness-details')
+    cy.get('#roTelephoneNumber').should('have.value', '')
+    cy.get('#roEmailAddress').should('have.value', '')
+
+    cy.get('#roTelephoneNumber').type('01234567891')
+    cy.get('#roEmailAddress').type('manually.entered@email.com')
+    cy.get('#continue-button').click()
+    cy.wait('@formSubmit')
+    cy.url().should('include', '/offence-details/8a60c999-cc18-4e47-b107-62156a13d138')
+  })
+
+  it('should show validation errors when phone number and email address are not provided', () => {
+    cy.visit('/witness-details/8a60c999-cc18-4e47-b107-62156a13d138')
+    cy.url().should('include', '/witness-details')
+    cy.get('#continue-button').click()
+    cy.get('.govuk-error-summary__title').should('exist').should('contain.text', 'There is a problem')
+    cy.get('#roTelephoneNumber-error')
+      .should('exist')
+      .should('contain.text', 'Phone Number: This is a required field, please enter a value')
+    cy.get('#roEmailAddress-error')
+      .should('exist')
+      .should('contain.text', 'Email Address: This is a required field, please enter a value')
+  })
+
+  it('should show validation error when phone number is too long', () => {
+    cy.visit('/witness-details/8a60c999-cc18-4e47-b107-62156a13d138')
+    cy.get('#roTelephoneNumber').type('1'.repeat(36))
+    cy.get('#roEmailAddress').type('manually.entered@email.com')
+    cy.get('#continue-button').click()
+    cy.get('.govuk-error-summary__title').should('exist').should('contain.text', 'There is a problem')
+    cy.get('#roTelephoneNumber-error')
+      .should('exist')
+      .should('contain.text', 'Phone Number: Please enter a value that is less than or equal to 35 characters')
+  })
+
+  it('should show validation error when phone number contains non-numeric characters', () => {
+    cy.visit('/witness-details/8a60c999-cc18-4e47-b107-62156a13d138')
+    cy.get('#roTelephoneNumber').type('01234-567891')
+    cy.get('#roEmailAddress').type('manually.entered@email.com')
+    cy.get('#continue-button').click()
+    cy.get('.govuk-error-summary__title').should('exist').should('contain.text', 'There is a problem')
+    cy.get('#roTelephoneNumber-error').should('exist').should('contain.text', 'Please enter a valid Telephone Number')
+  })
+
+  it('should show validation error when email address is too long', () => {
+    cy.visit('/witness-details/8a60c999-cc18-4e47-b107-62156a13d138')
+    cy.get('#roTelephoneNumber').type('01234567891')
+    cy.get('#roEmailAddress').type(`${'a'.repeat(96)}@a.com`)
+    cy.get('#continue-button').click()
+    cy.get('.govuk-error-summary__title').should('exist').should('contain.text', 'There is a problem')
+    cy.get('#roEmailAddress-error')
+      .should('exist')
+      .should('contain.text', 'Email Address: Please enter a value that is less than or equal to 100 characters')
+  })
+
+  it('should show validation error when email address is not in a valid format', () => {
+    cy.visit('/witness-details/8a60c999-cc18-4e47-b107-62156a13d138')
+    cy.get('#roTelephoneNumber').type('01234567891')
+    cy.get('#roEmailAddress').type('not-a-valid-email')
+    cy.get('#continue-button').click()
+    cy.get('.govuk-error-summary__title').should('exist').should('contain.text', 'There is a problem')
+    cy.get('#roEmailAddress-error')
+      .should('exist')
+      .should('contain.text', 'Email Address: Enter an email address in the correct format')
   })
 })

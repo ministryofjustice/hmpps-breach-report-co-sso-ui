@@ -644,6 +644,30 @@
     },
     {
       "request": {
+        "urlPattern": "/ndelius/responsible-officer/A002345",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "name": {
+            "forename": "No",
+            "middleName": "Phone Or",
+            "surname": "Email"
+          },
+          "probationArea": {
+            "description": "Address Area",
+            "code": "TCSA"
+          },
+          "replyAddresses": []
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        }
+      }
+    },
+    {
+      "request": {
         "urlPattern": "/ndelius/responsible-officer/Z000009",
         "method": "GET"
       },
