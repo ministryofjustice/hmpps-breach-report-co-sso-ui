@@ -195,7 +195,7 @@
                 {% if cosso.workAddress == null and cosso.roAndWitnessDetailsSaved %}
                   <a id="cya-link-office-address" href="/witness-details/{{ cossoId }}?returnTo=check-your-answers"
                      class="govuk-link">enter required
-                    information<span class="govuk-visually-hidden"> for Work Address</span></a>
+                    information<span class="govuk-visually-hidden"> for Office Address</span></a>
                 {% else %}
                   {% if cosso.workAddress.officeDescription != null %}
                     <span id="work-address-office-description">{{ cosso.workAddress.officeDescription }}</span><br>
@@ -205,7 +205,7 @@
                   {% endif %}
                   {% if cosso.workAddress.addressNumber != null or cosso.workAddress.streetName != null %}
                     <span id="work-address-building-number-street-name">
-                      {{ cosso.workAddress.addressNumber }} {{ cosso.postalAddress.streetName }}</span><br>
+                      {{ cosso.workAddress.addressNumber }} {{ cosso.workAddress.streetName }}</span><br>
                   {% endif %}
                   {% if cosso.workAddress.district != null %}
                     <span id="work-address-district">{{ cosso.workAddress.district }}</span><br>
