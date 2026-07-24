@@ -429,7 +429,7 @@
                 {% endif %}
               </dd>
               <dd class="govuk-summary-list__actions">
-                {% if cosso.requirementList == null or cosso.requirementList.length == 0 %}
+                {% if cosso.requirementList == null %}
                   <span class="govuk-tag--light-blue">Required</span>
                 {% endif %}
               </dd>
@@ -472,7 +472,7 @@
                 {% endif %}
               </dd>
               <dd class="govuk-summary-list__actions">
-                {% if cosso.amendments == null or cosso.amendments.length == 0 %}
+                {% if cosso.amendments == null %}
                   <span class="govuk-tag--light-blue">Required</span>
                 {% endif %}
               </dd>
