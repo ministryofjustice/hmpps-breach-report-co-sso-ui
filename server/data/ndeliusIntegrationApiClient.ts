@@ -101,8 +101,7 @@ export interface ReferenceData {
 }
 
 export interface UserDetails {
-  forename: string
-  middleName: string
+  forenames: string
   surname: string
 }
 
