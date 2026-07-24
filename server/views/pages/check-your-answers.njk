@@ -445,9 +445,26 @@
                     information<span class="govuk-visually-hidden"> Amendments</span></a>
                 {% else %}
                   {% for req in cosso.amendments %}
-                    <p id="amendment-info-{{ loop.index }}">{{ req.amendmentDetails }}
+                    <p id="amendment-info-{{ loop.index }}">
+                      {% if req.amendmentDetails and req.amendmentDetails.length > 1500 %}
+                        <span id="amendment-details-{{ loop.index }}">{{ req.amendmentDetails | truncate(1500) }}</span>
+                        <br>
+                        <a id="amendment-details-link-{{ loop.index }}"
+                           href="/offence-details/{{ cossoId }}?returnTo=check-your-answers"
+                           class="govuk-link">Click here to view the full text on the Offence Details screen</a>
+                      {% else %}
+                        <span id="amendment-details-{{ loop.index }}">{{ req.amendmentDetails }}</span>
+                      {% endif %}
                       <br>
-                      {{ req.amendmentReason }}
+                      {% if req.amendmentReason and req.amendmentReason.length > 1500 %}
+                        <span id="amendment-reason-{{ loop.index }}">{{ req.amendmentReason | truncate(1500) }}</span>
+                        <br>
+                        <a id="amendment-reason-link-{{ loop.index }}"
+                           href="/offence-details/{{ cossoId }}?returnTo=check-your-answers"
+                           class="govuk-link">Click here to view the full text on the Offence Details screen</a>
+                      {% else %}
+                        <span id="amendment-reason-{{ loop.index }}">{{ req.amendmentReason }}</span>
+                      {% endif %}
                       <br>
                       {{ req.formattedAmendmentDate }}
                     </p>
@@ -491,7 +508,12 @@
                      class="govuk-link">enter required
                     information<span class="govuk-visually-hidden">Why in breach?</span></a>
                 {% else %}
-                  <span id="why-in-breach">{{ cosso.whyInBreach }}</span>
+                  <span id="why-in-breach">{{ cosso.whyInBreach | truncate(1500) }}</span>
+                  {% if cosso.whyInBreach and cosso.whyInBreach.length > 1500 %}
+                    <br>
+                    <a id="why-in-breach-link" href="/failures/{{ cossoId }}?returnTo=check-your-answers"
+                       class="govuk-link">Click here to view the full text on the Failures and Enforcement screen</a>
+                  {% endif %}
                 {% endif %}
               </dd>
               <dd class="govuk-summary-list__actions">
@@ -510,7 +532,12 @@
                      class="govuk-link">enter required
                     information<span class="govuk-visually-hidden">Steps to prevent a breach</span></a>
                 {% else %}
-                  <span id="steps-to-prevent-breach">{{ cosso.stepsToPreventBreach }}</span>
+                  <span id="steps-to-prevent-breach">{{ cosso.stepsToPreventBreach | truncate(1500) }}</span>
+                  {% if cosso.stepsToPreventBreach and cosso.stepsToPreventBreach.length > 1500 %}
+                    <br>
+                    <a id="steps-to-prevent-breach-link" href="/failures/{{ cossoId }}?returnTo=check-your-answers"
+                       class="govuk-link">Click here to view the full text on the Failures and Enforcement screen</a>
+                  {% endif %}
                 {% endif %}
               </dd>
               <dd class="govuk-summary-list__actions">
@@ -608,7 +635,12 @@
                      class="govuk-link">enter required
                     information<span class="govuk-visually-hidden">Supporting comments</span></a>
                 {% else %}
-                    <span id="supporting-comments">{{ cosso.supportingComments }}</span>
+                    <span id="supporting-comments">{{ cosso.supportingComments | truncate(1500) }}</span>
+                    {% if cosso.supportingComments and cosso.supportingComments.length > 1500 %}
+                      <br>
+                      <a id="supporting-comments-link" href="/failures/{{ cossoId }}?returnTo=check-your-answers"
+                         class="govuk-link">Click here to view the full text on the Failures and Enforcement screen</a>
+                    {% endif %}
                 {% endif %}
               </dd>
               <dd class="govuk-summary-list__actions">
@@ -648,7 +680,12 @@
                      class="govuk-link">enter required
                     information<span class="govuk-visually-hidden">Compliance To Date</span></a>
                 {% else %}
-                  <span id="compliance">{{ cosso.complianceToDate }}</span>
+                  <span id="compliance">{{ cosso.complianceToDate | truncate(1500) }}</span>
+                  {% if cosso.complianceToDate and cosso.complianceToDate.length > 1500 %}
+                    <br>
+                    <a id="compliance-link" href="/compliance/{{ cossoId }}?returnTo=check-your-answers"
+                       class="govuk-link">Click here to view the full text on the Compliance to Date screen</a>
+                  {% endif %}
                 {% endif %}
               </dd>
               <dd class="govuk-summary-list__actions">
