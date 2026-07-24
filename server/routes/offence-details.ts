@@ -6,30 +6,7 @@ import CommonUtils from '../services/commonUtils'
 import NDeliusIntegrationApiClient, { OffenceDetails } from '../data/ndeliusIntegrationApiClient'
 import { ErrorMessages } from '../data/uiModels'
 import { handleIntegrationErrors } from '../utils/utils'
-import { toFullUserDate } from '../utils/dateUtils'
-
-function amendmentDateToTimestamp(amendmentDate: string): number {
-  if (!amendmentDate) {
-    return Number.NEGATIVE_INFINITY
-  }
-
-  const parsedTimestamp = Date.parse(amendmentDate)
-  if (!Number.isNaN(parsedTimestamp)) {
-    return parsedTimestamp
-  }
-
-  const dateOnly = amendmentDate.includes('T') ? amendmentDate.split('T')[0] : amendmentDate
-  const fallbackTimestamp = Date.parse(`${dateOnly}T00:00:00`)
-
-  return Number.isNaN(fallbackTimestamp) ? Number.NEGATIVE_INFINITY : fallbackTimestamp
-}
-
-export function sortAmendmentsByDateDesc(amendments: Cosso['amendments'] = []): Cosso['amendments'] {
-  return [...amendments].sort(
-    (leftAmendment, rightAmendment) =>
-      amendmentDateToTimestamp(rightAmendment.amendmentDate) - amendmentDateToTimestamp(leftAmendment.amendmentDate),
-  )
-}
+import { dateStringToTimestamp, toFullUserDate } from '../utils/dateUtils'
 
 export default function offenceDetailsRoutes(
   router: Router,
@@ -226,4 +203,11 @@ export default function offenceDetailsRoutes(
   })
 
   return router
+}
+
+export function sortAmendmentsByDateDesc(amendments: Cosso['amendments'] = []): Cosso['amendments'] {
+  return [...amendments].sort(
+    (leftAmendment, rightAmendment) =>
+      dateStringToTimestamp(rightAmendment.amendmentDate) - dateStringToTimestamp(leftAmendment.amendmentDate),
+  )
 }
