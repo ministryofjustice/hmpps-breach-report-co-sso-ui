@@ -290,7 +290,7 @@ context('Check your answers', () => {
     cy.visit('/check-your-answers/e3b2f8c1-6a4d-4c92-9f27-8d5a1c7e4b90')
   })
 
-  it('Compliance to date populated', () => {
+  it('Compliance to Date populated', () => {
     cy.visit('/check-your-answers/9de01b5e-30bd-4989-b0ad-29d5df2b70cs')
     cy.url().should('include', '/check-your-answers')
     cy.get('#change-compliance').should('exist')
