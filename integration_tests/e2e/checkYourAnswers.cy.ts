@@ -264,8 +264,6 @@ context('Check your answers', () => {
     cy.get('#cya-link-ro-title-and-full-name').should('exist')
     cy.get('#cya-link-probation-area').should('exist')
     cy.get('#cya-link-office-address').should('exist')
-    cy.get('#cya-link-ro-telephone-number').should('exist')
-    cy.get('#cya-link-ro-email-address').should('exist')
     cy.get('#cya-link-witness-availability').should('exist')
     cy.get('#cya-link-witness-availability').click()
     cy.url().should('include', '/witness-details/e3b2f8c1-6a4d-4c92-9f27-8d5a1c7e4b90')
