@@ -141,39 +141,43 @@
 
         {% endif %}
 
-          {{ govukInput({
-            id: "roTelephoneNumber",
-            name: "roTelephoneNumber",
-            label: {
-              text: "Phone Number",
-              classes: "govuk-label--m"
-            },
-            hint: {
-              text: "If no phone number has been returned from NDelius, please enter it manually."
-            },
-            value: roTelephoneNumber,
-            classes: "govuk-input--width-20",
-            errorMessage: {
-              text: errorMessages.roTelephoneNumber.text
-            } if errorMessages.roTelephoneNumber.text
-          }) }}
+          {% if roTelephoneNumberReadOnly %}
+            <h2 class="govuk-heading-m">Phone Number</h2>
+            <p id="roTelephoneNumber">{{ roTelephoneNumber }}</p>
+          {% else %}
+            {{ govukInput({
+              id: "roTelephoneNumber",
+              name: "roTelephoneNumber",
+              label: {
+                text: "Phone Number",
+                classes: "govuk-label--m"
+              },
+              value: roTelephoneNumber,
+              classes: "govuk-input--width-20",
+              errorMessage: {
+                text: errorMessages.roTelephoneNumber.text
+              } if errorMessages.roTelephoneNumber.text
+            }) }}
+          {% endif %}
 
-          {{ govukInput({
-            id: "roEmailAddress",
-            name: "roEmailAddress",
-            label: {
-              text: "Email Address",
-              classes: "govuk-label--m"
-            },
-            hint: {
-              text: "If no email address has been returned from NDelius, please enter it manually."
-            },
-            value: roEmailAddress,
-            classes: "govuk-input--width-20",
-            errorMessage: {
-              text: errorMessages.roEmailAddress.text
-            } if errorMessages.roEmailAddress.text
-          }) }}
+          {% if roEmailAddressReadOnly %}
+            <h2 class="govuk-heading-m">Email Address</h2>
+            <p id="roEmailAddress">{{ roEmailAddress }}</p>
+          {% else %}
+            {{ govukInput({
+              id: "roEmailAddress",
+              name: "roEmailAddress",
+              label: {
+                text: "Email Address",
+                classes: "govuk-label--m"
+              },
+              value: roEmailAddress,
+              classes: "govuk-input--width-20",
+              errorMessage: {
+                text: errorMessages.roEmailAddress.text
+              } if errorMessages.roEmailAddress.text
+            }) }}
+          {% endif %}
 
           {% set witnessAvailabilityHelpHtml %}
             {{ govukDetails({
