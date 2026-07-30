@@ -157,7 +157,7 @@
                   <a id="cya-link-ro-title-and-full-name"
                      href="/witness-details/{{ cossoId }}?returnTo=check-your-answers"
                      class="govuk-link">enter required
-                    information<span class="govuk-visually-hidden">RO title and full name</span></a>
+                    information<span class="govuk-visually-hidden">for Full name of RO</span></a>
                 {% else %}
                   <span id="ro-full-name">{{ cosso.roTitleAndFullName }}</span>
                 {% endif %}
@@ -176,7 +176,7 @@
                 {% if cosso.roAndWitnessDetailsSaved and (not cosso.probationArea or cosso.probationArea | trim == '') %}
                   <a id="cya-link-probation-area" href="/witness-details/{{ cossoId }}?returnTo=check-your-answers"
                      class="govuk-link">enter required
-                    information<span class="govuk-visually-hidden">Probation area</span></a>
+                    information<span class="govuk-visually-hidden">for Probation Area</span></a>
                 {% else %}
                   <span id="probation-area">{{ cosso.probationArea }}</span>
                 {% endif %}
@@ -235,7 +235,7 @@
                 {% if cosso.roAndWitnessDetailsSaved and (not cosso.roTelephoneNumber or cosso.roTelephoneNumber | trim == '') %}
                   <a id="cya-link-ro-telephone-number" href="/witness-details/{{ cossoId }}?returnTo=check-your-answers"
                      class="govuk-link">enter required
-                    information<span class="govuk-visually-hidden">Ro telephone number</span></a>
+                    information<span class="govuk-visually-hidden">for Phone Number</span></a>
                 {% else %}
                   <span id="ro-telephone-number">{{ cosso.roTelephoneNumber }}</span>
                 {% endif %}
@@ -254,7 +254,7 @@
                 {% if cosso.roAndWitnessDetailsSaved and (not cosso.roEmailAddress or cosso.roEmailAddress | trim == '') %}
                   <a id="cya-link-ro-email-address" href="/witness-details/{{ cossoId }}?returnTo=check-your-answers"
                      class="govuk-link">enter required
-                    information<span class="govuk-visually-hidden">RO email address</span></a>
+                    information<span class="govuk-visually-hidden">for Email Address</span></a>
                 {% else %}
                   <span id="ro-email-address">{{ cosso.roEmailAddress }}</span>
                 {% endif %}
@@ -273,7 +273,7 @@
                 {% if cosso.roAndWitnessDetailsSaved and (not cosso.witnessAvailability or cosso.witnessAvailability | trim == '') %}
                   <a id="cya-link-witness-availability" href="/witness-details/{{ cossoId }}?returnTo=check-your-answers"
                      class="govuk-link">enter required
-                    information<span class="govuk-visually-hidden">Witness availability</span></a>
+                    information<span class="govuk-visually-hidden">for Witness availability</span></a>
                 {% else %}
                   <span id="witness-availability">{{ cosso.witnessAvailability }}</span>
                 {% endif %}
@@ -313,7 +313,7 @@
                 {% if cosso.offenceDetailsSaved and (not cosso.mainOffence or cosso.mainOffence | trim == '') %}
                   <a id="cya-link-main-offence" href="/offence-details/{{ cossoId }}?returnTo=check-your-answers"
                      class="govuk-link">enter required
-                    information<span class="govuk-visually-hidden">Main Offence</span></a>
+                    information<span class="govuk-visually-hidden">for Main Offence</span></a>
                 {% else %}
                   <span id="main-offence">{{ cosso.mainOffence }}</span>
                 {% endif %}
@@ -332,7 +332,7 @@
                 {% if cosso.offenceDetailsSaved and (not cosso.sentencingCourt or cosso.sentencingCourt | trim == '') %}
                   <a id="cya-link-sentencing-court" href="/offence-details/{{ cossoId }}?returnTo=check-your-answers"
                      class="govuk-link">enter required
-                    information<span class="govuk-visually-hidden">Sentencing court</span></a>
+                    information<span class="govuk-visually-hidden">for Sentencing Court</span></a>
                 {% else %}
                   <span id="sentencing-court">{{ cosso.sentencingCourt }}</span>
                 {% endif %}
@@ -351,7 +351,7 @@
                 {% if cosso.offenceDetailsSaved and (not sentenceDate or sentenceDate | trim == '') %}
                   <a id="cya-link-sentence-date" href="/offence-details/{{ cossoId }}?returnTo=check-your-answers"
                      class="govuk-link">enter required
-                    information<span class="govuk-visually-hidden">Sentence date</span></a>
+                    information<span class="govuk-visually-hidden">for Date of Sentence</span></a>
                 {% else %}
                   <span id="sentence-date">{{ sentenceDate }}</span>
                 {% endif %}
@@ -370,7 +370,7 @@
                 {% if cosso.offenceDetailsSaved and (not cosso.sentenceType or cosso.sentenceType | trim == '') %}
                   <a id="cya-link-imposed-sentence" href="/offence-details/{{ cossoId }}?returnTo=check-your-answers"
                      class="govuk-link">enter required
-                    information<span class="govuk-visually-hidden">Sentence imposed</span></a>
+                    information<span class="govuk-visually-hidden">for Sentence Imposed</span></a>
                 {% else %}
                   <span id="sentence-imposed">{{ cosso.sentenceType }}</span>
                 {% endif %}
@@ -389,7 +389,7 @@
                 {% if cosso.offenceDetailsSaved and (not cosso.sentenceLength or cosso.sentenceLength | trim == '') %}
                   <a id="cya-link-sentence-length" href="/offence-details/{{ cossoId }}?returnTo=check-your-answers"
                      class="govuk-link">enter required
-                    information<span class="govuk-visually-hidden">Sentence length</span></a>
+                    information<span class="govuk-visually-hidden">for Sentence Length</span></a>
                 {% else %}
                   <span id="sentence-length">{{ cosso.sentenceLength }} {{ cosso.lengthUnits }}</span>
                 {% endif %}
@@ -506,7 +506,7 @@
                 {% if cosso.failuresAndEnforcementSaved and (not cosso.whyInBreach or cosso.whyInBreach | trim == '') %}
                   <a id="cya-link-why-in-breach" href="/failures/{{ cossoId }}?returnTo=check-your-answers"
                      class="govuk-link">enter required
-                    information<span class="govuk-visually-hidden">Why in breach?</span></a>
+                    information<span class="govuk-visually-hidden">for Why is this person in breach?</span></a>
                 {% else %}
                   <span id="why-in-breach">{{ cosso.whyInBreach | truncate(1500) }}</span>
                   {% if cosso.whyInBreach and cosso.whyInBreach.length > 1500 %}
@@ -530,7 +530,7 @@
                 {% if cosso.failuresAndEnforcementSaved and (not cosso.stepsToPreventBreach or cosso.stepsToPreventBreach | trim == '') %}
                   <a id="cya-link-steps-to-prevent-breach" href="/failures/{{ cossoId }}?returnTo=check-your-answers"
                      class="govuk-link">enter required
-                    information<span class="govuk-visually-hidden">Steps to prevent a breach</span></a>
+                    information<span class="govuk-visually-hidden">for Steps to prevent a breach</span></a>
                 {% else %}
                   <span id="steps-to-prevent-breach">{{ cosso.stepsToPreventBreach | truncate(1500) }}</span>
                   {% if cosso.stepsToPreventBreach and cosso.stepsToPreventBreach.length > 1500 %}
@@ -554,7 +554,7 @@
                 {% if cosso.failuresAndEnforcementSaved and cosso.riskOfHarmChanged == null %}
                   <a id="cya-link-risk-of-harm-changed" href="/failures/{{ cossoId }}?returnTo=check-your-answers"
                      class="govuk-link">enter required
-                    information<span class="govuk-visually-hidden">Risk of harm changed?</span></a>
+                    information<span class="govuk-visually-hidden">for Risk of Serious Self Harm changed?</span></a>
                 {% else %}
                   <span id="risk-changed">{{ 'Yes' if cosso.riskOfHarmChanged else 'No' }}</span>
                 {% endif %}
@@ -575,7 +575,7 @@
                   <a id="cya-link-please-describe-harm-changed"
                      href="/failures/{{ cossoId }}?returnTo=check-your-answers"
                      class="govuk-link">enter required
-                    information<span class="govuk-visually-hidden">Please describe</span></a>
+                    information<span class="govuk-visually-hidden">for Please describe risk of harm changed</span></a>
                 {% else %}
                   <span id="risk-history">{{ cosso.riskHistory }}</span>
                 {% endif %}
@@ -595,7 +595,7 @@
                 {% if cosso.failuresAndEnforcementSaved and not cosso.confirmEqualities %}
                   <a id="cya-link-diversity-confirmation" href="/failures/{{ cossoId }}?returnTo=check-your-answers"
                      class="govuk-link">enter required
-                    information<span class="govuk-visually-hidden">Diversity confirmation</span></a>
+                    information<span class="govuk-visually-hidden">for Diversity confirmation</span></a>
                 {% else %}
                   <span id="diversity-confirmation">Confirmed</span>
                 {% endif %}
@@ -614,7 +614,7 @@
                 {% if cosso.failuresAndEnforcementSaved and (not cosso.recommendations or cosso.recommendations | trim == '') %}
                   <a id="cya-link-recommendation" href="/failures/{{ cossoId }}?returnTo=check-your-answers"
                      class="govuk-link">enter required
-                    information<span class="govuk-visually-hidden">Recommendations</span></a>
+                    information<span class="govuk-visually-hidden">for Recommendations</span></a>
                 {% else %}
                   <span id="recommendations">{{ cosso.recommendations }}</span>
                 {% endif %}
@@ -633,7 +633,7 @@
                 {% if cosso.failuresAndEnforcementSaved and (not cosso.supportingComments or cosso.supportingComments | trim == '') %}
                   <a id="cya-link-supporting-comments" href="/failures/{{ cossoId }}?returnTo=check-your-answers"
                      class="govuk-link">enter required
-                    information<span class="govuk-visually-hidden">Supporting comments</span></a>
+                    information<span class="govuk-visually-hidden">for Comments to support the recommendation</span></a>
                 {% else %}
                     <span id="supporting-comments">{{ cosso.supportingComments | truncate(1500) }}</span>
                     {% if cosso.supportingComments and cosso.supportingComments.length > 1500 %}
@@ -678,7 +678,7 @@
                 {% if cosso.complianceToDateSaved and (not cosso.complianceToDate or cosso.complianceToDate | trim == '') %}
                   <a id="cya-link-compliance" href="/compliance/{{ cossoId }}?returnTo=check-your-answers"
                      class="govuk-link">enter required
-                    information<span class="govuk-visually-hidden">Compliance To Date</span></a>
+                    information<span class="govuk-visually-hidden">for Compliance with the order to date</span></a>
                 {% else %}
                   <span id="compliance">{{ cosso.complianceToDate | truncate(1500) }}</span>
                   {% if cosso.complianceToDate and cosso.complianceToDate.length > 1500 %}
@@ -702,7 +702,7 @@
                 {% if cosso.complianceToDateSaved and (not cosso.signature or cosso.signature | trim == '') %}
                   <a id="cya-link-signature" href="/sign-and-send/{{ cossoId }}?returnTo=check-your-answers"
                      class="govuk-link">enter required
-                    information<span class="govuk-visually-hidden">Signature</span></a>
+                    information<span class="govuk-visually-hidden">for Signature</span></a>
                 {% else %}
                   <span id="signature">{{ cosso.signature }}</span>
                 {% endif %}
