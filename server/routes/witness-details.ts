@@ -144,8 +144,10 @@ export default function witnessDetailsRoutes(
       addressNotAvailable,
       alternateAddressOptions,
       manualAddressAllowed,
-      roTelephoneNumber: cosso.roTelephoneNumber || witnessDetails.telephoneNumber,
-      roEmailAddress: cosso.roEmailAddress || witnessDetails.emailAddress,
+      roTelephoneNumber: witnessDetails.telephoneNumber || cosso.roTelephoneNumber,
+      roEmailAddress: witnessDetails.emailAddress || cosso.roEmailAddress,
+      roTelephoneNumberReadOnly: Boolean(witnessDetails.telephoneNumber),
+      roEmailAddressReadOnly: Boolean(witnessDetails.emailAddress),
       errorMessages,
     })
   })
@@ -228,8 +230,10 @@ export default function witnessDetailsRoutes(
     } else {
       cosso.roAndWitnessDetailsSaved = true
       cosso.witnessAvailability = convertLineBreaks(req.body.witnessAvailability)
-      cosso.roTelephoneNumber = req.body.roTelephoneNumber?.trim()
-      cosso.roEmailAddress = req.body.roEmailAddress?.trim()
+      // The value returned by the integration service always takes precedence over any manually entered value.
+      // A manual value is only accepted when the integration service has not returned one.
+      cosso.roTelephoneNumber = witnessDetails.telephoneNumber || req.body.roTelephoneNumber?.trim()
+      cosso.roEmailAddress = witnessDetails.emailAddress || req.body.roEmailAddress?.trim()
       // Validation when use
       const errorMessages: ErrorMessages = validateFailures(cosso)
       const hasErrors: boolean = Object.keys(errorMessages).length > 0
@@ -311,6 +315,8 @@ export default function witnessDetailsRoutes(
           witnessAvailability: screenInfo.find(si => si.fieldName === 'witness_availability')?.fieldText,
           roTelephoneNumber: cosso.roTelephoneNumber,
           roEmailAddress: cosso.roEmailAddress,
+          roTelephoneNumberReadOnly: Boolean(witnessDetails.telephoneNumber),
+          roEmailAddressReadOnly: Boolean(witnessDetails.emailAddress),
         })
       }
     }
@@ -332,10 +338,6 @@ export default function witnessDetailsRoutes(
     } else if (cosso.roTelephoneNumber.trim().length > 35) {
       errorMessages.roTelephoneNumber = {
         text: 'Phone Number: Please enter a value that is less than or equal to 35 characters',
-      }
-    } else if (!/^[0-9]+$/.test(cosso.roTelephoneNumber.trim())) {
-      errorMessages.roTelephoneNumber = {
-        text: 'Phone Number: Please enter a valid Telephone Number',
       }
     }
 

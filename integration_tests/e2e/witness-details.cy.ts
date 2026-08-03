@@ -11,8 +11,8 @@ context('Failures and Enforcement page', () => {
     cy.get('#address').should('contain.text', 'Newer Postal City')
     cy.get('#address').should('contain.text', 'Newer Postal County')
     cy.get('#address').should('contain.text', 'PO20 2ST')
-    cy.get('#roTelephoneNumber').should('have.value', '01234567891')
-    cy.get('#roEmailAddress').should('have.value', 'MrJeffTheChef@email.com')
+    cy.get('#roTelephoneNumber').should('contain.text', '01234567891')
+    cy.get('#roEmailAddress').should('contain.text', 'MrJeffTheChef@email.com')
     cy.get('#witnessAvailability-hint .govuk-details__text').should('contain.text', 'Witness Availability Help Text')
     cy.get('#witnessAvailability').should('contain.text', 'Some availability for my witness')
   })
@@ -210,15 +210,6 @@ context('Failures and Enforcement page', () => {
     cy.get('#roTelephoneNumber-error')
       .should('exist')
       .should('contain.text', 'Phone Number: Please enter a value that is less than or equal to 35 characters')
-  })
-
-  it('should show validation error when phone number contains non-numeric characters', () => {
-    cy.visit('/witness-details/8a60c999-cc18-4e47-b107-62156a13d138')
-    cy.get('#roTelephoneNumber').type('01234-567891')
-    cy.get('#roEmailAddress').type('manually.entered@email.com')
-    cy.get('#continue-button').click()
-    cy.get('.govuk-error-summary__title').should('exist').should('contain.text', 'There is a problem')
-    cy.get('#roTelephoneNumber-error').should('exist').should('contain.text', 'Please enter a valid Telephone Number')
   })
 
   it('should show validation error when email address is too long', () => {
