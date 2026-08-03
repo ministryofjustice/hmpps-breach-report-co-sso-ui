@@ -109,8 +109,6 @@ export default function checkYourAnswersRoutes(
       cosso.postalAddress != null &&
       cosso.dateOfBirth?.trim().length > 0 &&
       cosso.roTitleAndFullName?.trim().length > 0 &&
-      cosso.roTelephoneNumber?.trim().length > 0 &&
-      cosso.roEmailAddress?.trim().length > 0 &&
       cosso.witnessAvailability?.trim().length > 0 &&
       cosso.workAddress != null &&
       cosso.mainOffence?.trim().length > 0 &&

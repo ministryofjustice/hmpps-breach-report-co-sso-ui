@@ -100,7 +100,7 @@ export default function complianceRoutes(
         failure: existing?.failure ?? null,
         failureReason: existing?.failureReason ?? null,
         requirementTypeMainCategoryDescription: ext.type.description,
-        requirementTypeSubCategoryDescription: ext.subType.description,
+        requirementTypeSubCategoryDescription: ext.subType?.description ?? null,
       })
     }
 
@@ -222,7 +222,7 @@ export default function complianceRoutes(
         failure: existing?.failure ?? null,
         failureReason: existing?.failureReason ?? null,
         requirementTypeMainCategoryDescription: ext.type.description,
-        requirementTypeSubCategoryDescription: ext.subType.description,
+        requirementTypeSubCategoryDescription: ext.subType?.description ?? null,
       })
     }
 
