@@ -105,13 +105,6 @@ export interface UserDetails {
   surname: string
 }
 
-export interface ResponsibleOfficerDetails {
-  name: Name
-  telephoneNumber?: string
-  emailAddress?: string
-  addresses: DeliusAddress[]
-}
-
 export interface EnforceableContact {
   id: number
   datetime: string
@@ -206,5 +199,4 @@ export interface Requirements {
 
 export interface SignAndSendDetails {
   userDetails: UserDetails
-  responsibleOfficer: ResponsibleOfficerDetails
 }

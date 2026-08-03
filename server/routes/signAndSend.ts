@@ -2,11 +2,7 @@ import { Router } from 'express'
 import { AuthenticationClient } from '@ministryofjustice/hmpps-auth-clients'
 import AuditService, { Page } from '../services/auditService'
 import CossoApiClient, { Cosso } from '../data/cossoApiClient'
-import NDeliusIntegrationApiClient, {
-  ResponsibleOfficerDetails,
-  SignAndSendDetails,
-  UserDetails,
-} from '../data/ndeliusIntegrationApiClient'
+import NDeliusIntegrationApiClient, { SignAndSendDetails, UserDetails } from '../data/ndeliusIntegrationApiClient'
 import { ErrorMessages } from '../data/uiModels'
 import { handleIntegrationErrors } from '../utils/utils'
 import { toFullUserDate } from '../utils/dateUtils'
@@ -198,7 +194,6 @@ export default function signAndSendRoutes(
       res.redirect(`/sign-and-send/${req.params.id}`)
     } else if (req.body.action === 'sign') {
       cosso.signature = createSignatureString(signAndSendDetails.userDetails, formSentBy)
-      cosso.sheetSentBy = getOfficerString(signAndSendDetails.responsibleOfficer)
       cosso.signedByRo = formSentBy === null ? null : formSentBy === 'RO'
       await cossoClient.updateCosso(cossoId, cosso, res.locals.user.username)
       res.redirect(`/sign-and-send/${req.params.id}`)
@@ -262,18 +257,6 @@ export default function signAndSendRoutes(
       signature += ` (User on behalf of the Responsible Officer)`
     }
 
-    return signature
-  }
-
-  function getOfficerString(responsibleOfficerDetails: ResponsibleOfficerDetails): string {
-    let signature: string = ''
-    if (responsibleOfficerDetails != null) {
-      signature += responsibleOfficerDetails.name.forename
-      if (responsibleOfficerDetails.name.middleName != null) {
-        signature += ` ${responsibleOfficerDetails.name.middleName}`
-      }
-      signature += ` ${responsibleOfficerDetails.name.surname}`
-    }
     return signature
   }
 

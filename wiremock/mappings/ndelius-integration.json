@@ -781,17 +781,6 @@
           "userDetails": {
             "forenames": "UserSignForename UserSignMiddle",
             "surname": "UserSignSurname"
-          },
-          "responsibleOfficer": {
-            "name":
-            {
-              "forename": "RoForename",
-              "middleName": "RoMiddle",
-              "surname": "RoSurname"
-            },
-            "telephoneNumber": "01234567891",
-            "emailAddress": "respondibleOfficer@email.com",
-            "addresses": []
           }
         },
         "headers": {
