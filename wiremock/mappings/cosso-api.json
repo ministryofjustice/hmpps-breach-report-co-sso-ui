@@ -1569,6 +1569,46 @@
     },
     {
       "request": {
+        "url": "/cosso-api/cosso/8a60c999-cc18-4e47-b107-62156a13d138",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "id": "8a60c999-cc18-4e47-b107-62156a13d138",
+          "crn": "A002345",
+          "workAddress": {
+            "id": "8a60c999-cc18-4e47-b107-62156a13d139",
+            "addressId": null,
+            "status": null,
+            "buildingName": "Manually Entered Building",
+            "addressNumber": "1",
+            "streetName": "Manually Entered Street",
+            "townCity": "Manually Entered City",
+            "district": null,
+            "county": null,
+            "postcode": "MA1 1AA",
+            "startDate": null
+          },
+          "completedDate": null
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        "transformers": ["response-template"]
+      }
+    },
+    {
+      "request": {
+        "url": "/cosso-api/cosso/8a60c999-cc18-4e47-b107-62156a13d138",
+        "method": "PUT"
+      },
+      "response": {
+        "status": 200
+      }
+    },
+    {
+      "request": {
         "url": "/cosso-api/cosso/8465e5d8-9417-4ff1-9738-bcb047be3c38",
         "method": "GET"
       },

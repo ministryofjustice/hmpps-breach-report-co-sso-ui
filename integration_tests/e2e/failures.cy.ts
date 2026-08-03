@@ -29,10 +29,10 @@ context('Failures and Enforcement page', () => {
     cy.get('input[name="recommendationOptions"][value="The Order is continued"]').should('be.checked')
     cy.get('label[for="recommendationOptions-2"]').should(
       'contain.text',
-      'The community order is revoked and the person be re-sentenced',
+      'The Community Order is revoked and the person be re-sentenced',
     )
     cy.get(
-      'input[name="recommendationOptions"][value="The community order is revoked and the person be re-sentenced"]',
+      'input[name="recommendationOptions"][value="The Community Order is revoked and the person be re-sentenced"]',
     ).should('not.be.checked')
     cy.get('label[for="recommendationOptions-3"]').should(
       'contain.text',
@@ -57,7 +57,7 @@ context('Failures and Enforcement page', () => {
     cy.get('input[id="confirmationStatement"]').should('not.be.checked')
     cy.get('input[name="recommendationOptions"][value="The Order is continued"]').should('not.be.checked')
     cy.get(
-      'input[name="recommendationOptions"][value="The community order is revoked and the person be re-sentenced"]',
+      'input[name="recommendationOptions"][value="The Community Order is revoked and the person be re-sentenced"]',
     ).should('not.be.checked')
     cy.get('input[name="recommendationOptions"][value="Custody is activated for the suspended sentence"]').should(
       'not.be.checked',
@@ -98,7 +98,7 @@ context('Failures and Enforcement page', () => {
       .should('exist')
       .should(
         'contain.text',
-        'The "Please Describe" field is blank. Please enter relevant information here before proceeding',
+        'The "Risk of Serious Harm (RoSH)" field is blank. Please enter relevant information here before proceeding',
       )
   })
 
@@ -178,10 +178,7 @@ context('Failures and Enforcement page', () => {
     cy.get('.govuk-error-summary__title').should('exist').should('contain.text', 'There is a problem')
     cy.get('#confirmationStatement-error')
       .should('exist')
-      .should(
-        'contain.text',
-        'Confirmation Statement : Please complete the Diversity and equalities confirmation to proceed',
-      )
+      .should('contain.text', 'Confirmation Statement: Please complete the confirmation to proceed')
   })
 
   it('should display contacts returned from DB as selected', () => {

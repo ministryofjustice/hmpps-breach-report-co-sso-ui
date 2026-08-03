@@ -101,16 +101,8 @@ export interface ReferenceData {
 }
 
 export interface UserDetails {
-  forename: string
-  middleName: string
+  forenames: string
   surname: string
-}
-
-export interface ResponsibleOfficerDetails {
-  name: Name
-  telephoneNumber?: string
-  emailAddress?: string
-  addresses: DeliusAddress[]
 }
 
 export interface EnforceableContact {
@@ -201,5 +193,4 @@ export interface Requirements {
 
 export interface SignAndSendDetails {
   userDetails: UserDetails
-  responsibleOfficer: ResponsibleOfficerDetails
 }

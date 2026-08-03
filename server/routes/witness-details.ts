@@ -86,7 +86,7 @@ export default function witnessDetailsRoutes(
     if (await commonUtils.redirectRequired(cosso, cossoId, res, authenticationClient)) return
 
     let defaultAddress: DeliusAddress = null
-    if (cosso.workAddress == null && witnessDetails.replyAddresses != null) {
+    if (cosso.workAddress == null && witnessDetails.replyAddresses != null && !cosso.roAndWitnessDetailsSaved) {
       defaultAddress = witnessDetails.replyAddresses.find(record => record.status === 'Default')
 
       if (defaultAddress) {
@@ -105,6 +105,18 @@ export default function witnessDetailsRoutes(
         errorMessages.genericErrorMessage = {
           text: 'Work Location and Address: The previously selected address is no longer available. Please select an alternative.',
         }
+      }
+    } else if (
+      cosso.workAddress == null &&
+      cosso.roAndWitnessDetailsSaved &&
+      witnessDetails.replyAddresses != null &&
+      witnessDetails.replyAddresses.length > 0
+    ) {
+      // A work address was previously selected (and details saved) but is no longer null - keep warning the user
+      // on every visit until they choose a new address, rather than just the first time it was detected.
+      addressNotAvailable = true
+      errorMessages.genericErrorMessage = {
+        text: 'Work Location and Address: The previously selected address is no longer available. Please select an alternative.',
       }
     }
 
@@ -132,6 +144,10 @@ export default function witnessDetailsRoutes(
       addressNotAvailable,
       alternateAddressOptions,
       manualAddressAllowed,
+      roTelephoneNumber: witnessDetails.telephoneNumber || cosso.roTelephoneNumber,
+      roEmailAddress: witnessDetails.emailAddress || cosso.roEmailAddress,
+      roTelephoneNumberReadOnly: Boolean(witnessDetails.telephoneNumber),
+      roEmailAddressReadOnly: Boolean(witnessDetails.emailAddress),
       errorMessages,
     })
   })
@@ -214,6 +230,10 @@ export default function witnessDetailsRoutes(
     } else {
       cosso.roAndWitnessDetailsSaved = true
       cosso.witnessAvailability = convertLineBreaks(req.body.witnessAvailability)
+      // The value returned by the integration service always takes precedence over any manually entered value.
+      // A manual value is only accepted when the integration service has not returned one.
+      cosso.roTelephoneNumber = witnessDetails.telephoneNumber || req.body.roTelephoneNumber?.trim()
+      cosso.roEmailAddress = witnessDetails.emailAddress || req.body.roEmailAddress?.trim()
       // Validation when use
       const errorMessages: ErrorMessages = validateFailures(cosso)
       const hasErrors: boolean = Object.keys(errorMessages).length > 0
@@ -221,8 +241,6 @@ export default function witnessDetailsRoutes(
       if (!hasErrors) {
         cosso.probationArea = witnessDetails.probationArea.description
         cosso.roTitleAndFullName = formatFullName(witnessDetails.name)
-        cosso.roTelephoneNumber = witnessDetails.telephoneNumber
-        cosso.roEmailAddress = witnessDetails.emailAddress
         cosso = handleSelectedAddress(cosso, witnessDetails, req.body.alternateAddress)
 
         await cossoClient.updateCosso(cossoId, cosso, res.locals.user.username)
@@ -237,7 +255,7 @@ export default function witnessDetailsRoutes(
         }
       } else {
         let defaultAddress: DeliusAddress = null
-        if (cosso.workAddress == null && witnessDetails.replyAddresses != null) {
+        if (cosso.workAddress == null && witnessDetails.replyAddresses != null && !cosso.roAndWitnessDetailsSaved) {
           defaultAddress = witnessDetails.replyAddresses.find(record => record.status === 'Default')
 
           if (defaultAddress) {
@@ -256,6 +274,16 @@ export default function witnessDetailsRoutes(
             errorMessages.genericErrorMessage = {
               text: 'Work Location and Address: The previously selected address is no longer available. Please select an alternative.',
             }
+          }
+        } else if (
+          cosso.workAddress == null &&
+          cosso.roAndWitnessDetailsSaved &&
+          witnessDetails.replyAddresses != null &&
+          witnessDetails.replyAddresses.length > 0
+        ) {
+          addressNotAvailable = true
+          errorMessages.genericErrorMessage = {
+            text: 'Work Location and Address: The previously selected address is no longer available. Please select an alternative.',
           }
         }
 
@@ -285,6 +313,10 @@ export default function witnessDetailsRoutes(
           roName: formatFullName(witnessDetails.name),
           displayAlternate: req.body.offenderAddressSelectOne === 'No',
           witnessAvailability: screenInfo.find(si => si.fieldName === 'witness_availability')?.fieldText,
+          roTelephoneNumber: cosso.roTelephoneNumber,
+          roEmailAddress: cosso.roEmailAddress,
+          roTelephoneNumberReadOnly: Boolean(witnessDetails.telephoneNumber),
+          roEmailAddressReadOnly: Boolean(witnessDetails.emailAddress),
         })
       }
     }
@@ -296,6 +328,30 @@ export default function witnessDetailsRoutes(
     if (cosso.witnessAvailability && cosso.witnessAvailability.length > 20000) {
       errorMessages.witnessAvailability = {
         text: 'Witness Availability: This field must be 20000 characters or less',
+      }
+    }
+
+    if (!cosso.roTelephoneNumber || cosso.roTelephoneNumber.trim() === '') {
+      errorMessages.roTelephoneNumber = {
+        text: 'Phone Number: This is a required field, please enter a value',
+      }
+    } else if (cosso.roTelephoneNumber.trim().length > 35) {
+      errorMessages.roTelephoneNumber = {
+        text: 'Phone Number: Please enter a value that is less than or equal to 35 characters',
+      }
+    }
+
+    if (!cosso.roEmailAddress || cosso.roEmailAddress.trim() === '') {
+      errorMessages.roEmailAddress = {
+        text: 'Email Address: This is a required field, please enter a value',
+      }
+    } else if (cosso.roEmailAddress.trim().length > 100) {
+      errorMessages.roEmailAddress = {
+        text: 'Email Address: Please enter a value that is less than or equal to 100 characters',
+      }
+    } else if (!/^[^\s@]+@[^\s@]+$/.test(cosso.roEmailAddress.trim())) {
+      errorMessages.roEmailAddress = {
+        text: 'Email Address: Enter an email address in the correct format',
       }
     }
 

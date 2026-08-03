@@ -1,12 +1,12 @@
 import { Router } from 'express'
 import { AuthenticationClient } from '@ministryofjustice/hmpps-auth-clients'
 import AuditService, { Page } from '../services/auditService'
-import CossoApiClient, { Cosso } from '../data/cossoApiClient'
+import CossoApiClient, { Cosso, CossoAmendment } from '../data/cossoApiClient'
 import CommonUtils from '../services/commonUtils'
 import NDeliusIntegrationApiClient, { OffenceDetails } from '../data/ndeliusIntegrationApiClient'
 import { ErrorMessages } from '../data/uiModels'
 import { handleIntegrationErrors } from '../utils/utils'
-import { toFullUserDate } from '../utils/dateUtils'
+import { dateStringToTimestamp, toFullUserDate } from '../utils/dateUtils'
 
 export default function offenceDetailsRoutes(
   router: Router,
@@ -88,7 +88,7 @@ export default function offenceDetailsRoutes(
 
     const formattedSentenceDate = toFullUserDate(offenceDetails.sentenceDate)
 
-    const formattedAmendments = cosso.amendments?.map(amendment => ({
+    const formattedAmendments = sortAmendmentsByDateDesc(cosso.amendments).map(amendment => ({
       ...amendment,
       formattedAmendmentDate: toFullUserDate(amendment.amendmentDate),
     }))
@@ -148,6 +148,9 @@ export default function offenceDetailsRoutes(
 
     if (req.body.action === 'addAmendment') {
       res.redirect(`/add-amendment/${cossoId}`)
+    } else if (req.body.action === 'refreshFromNdelius') {
+      // redirect to force a reload
+      res.redirect(`/offence-details/${cossoId}`)
     } else {
       try {
         const offenceDetails = await ndeliusIntegrationApiClient.getOffenceDetails(cossoId, res.locals.user.username)
@@ -156,8 +159,12 @@ export default function offenceDetailsRoutes(
         cosso.sentenceDate = offenceDetails.sentenceDate ?? cosso.sentenceDate
         cosso.sentenceType = offenceDetails.sentenceImposed?.description ?? cosso.sentenceType
         cosso.additionalOffence = offenceDetails.additionalOffences.map(x => x.description).join('\n')
+        if (offenceDetails.sentence?.length != null) {
+          cosso.sentenceLength = offenceDetails.sentence.length.toString()
+          cosso.lengthUnits = offenceDetails.sentence.lengthUnits ?? cosso.lengthUnits
+        }
         if (offenceDetails.suspendedCustodyLength?.length != null) {
-          cosso.sentenceLength =
+          cosso.suspendedCustodyLength =
             `${offenceDetails.suspendedCustodyLength.length} ${offenceDetails.suspendedCustodyLength.units ?? ''}`.trim()
         }
       } catch (error) {
@@ -199,4 +206,11 @@ export default function offenceDetailsRoutes(
   })
 
   return router
+}
+
+export function sortAmendmentsByDateDesc(amendments: CossoAmendment[] = []): CossoAmendment[] {
+  return [...amendments].sort(
+    (leftAmendment, rightAmendment) =>
+      dateStringToTimestamp(rightAmendment.amendmentDate) - dateStringToTimestamp(leftAmendment.amendmentDate),
+  )
 }

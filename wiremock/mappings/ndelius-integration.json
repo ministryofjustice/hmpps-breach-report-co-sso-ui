@@ -644,6 +644,30 @@
     },
     {
       "request": {
+        "urlPattern": "/ndelius/responsible-officer/A002345",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "name": {
+            "forename": "No",
+            "middleName": "Phone Or",
+            "surname": "Email"
+          },
+          "probationArea": {
+            "description": "Address Area",
+            "code": "TCSA"
+          },
+          "replyAddresses": []
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        }
+      }
+    },
+    {
+      "request": {
         "urlPattern": "/ndelius/responsible-officer/Z000009",
         "method": "GET"
       },
@@ -758,20 +782,8 @@
         "status": 200,
         "jsonBody": {
           "userDetails": {
-            "forename": "UserSignForename",
-            "middleName": "UserSignMiddle",
+            "forenames": "UserSignForename UserSignMiddle",
             "surname": "UserSignSurname"
-          },
-          "responsibleOfficer": {
-            "name":
-            {
-              "forename": "RoForename",
-              "middleName": "RoMiddle",
-              "surname": "RoSurname"
-            },
-            "telephoneNumber": "01234567891",
-            "emailAddress": "respondibleOfficer@email.com",
-            "addresses": []
           }
         },
         "headers": {

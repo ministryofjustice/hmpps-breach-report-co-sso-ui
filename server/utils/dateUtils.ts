@@ -65,3 +65,19 @@ export function isValidUserDate(str: string): boolean {
     return false
   }
 }
+
+export function dateStringToTimestamp(amendmentDate: string): number {
+  if (!amendmentDate) {
+    return Number.NEGATIVE_INFINITY
+  }
+
+  const parsedTimestamp = Date.parse(amendmentDate)
+  if (!Number.isNaN(parsedTimestamp)) {
+    return parsedTimestamp
+  }
+
+  const dateOnly = amendmentDate.includes('T') ? amendmentDate.split('T')[0] : amendmentDate
+  const fallbackTimestamp = Date.parse(`${dateOnly}T00:00:00`)
+
+  return Number.isNaN(fallbackTimestamp) ? Number.NEGATIVE_INFINITY : fallbackTimestamp
+}

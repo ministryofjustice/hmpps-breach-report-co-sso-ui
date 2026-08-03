@@ -2,7 +2,7 @@ context('Compliance page', () => {
   it('can see fields with stored data', () => {
     cy.visit('/compliance/4c9a1ad2-7141-4b03-837f-b66346a0b6ad')
     cy.url().should('include', '/compliance')
-    cy.get('#page-title').should('contain.text', 'Breach Report CO SSO - Compliance to date')
+    cy.get('#page-title').should('contain.text', 'Breach Report CO SSO - Compliance to Date')
     cy.get('#complianceToDate-hint .govuk-details__summary-text').should(
       'contain.text',
       'What information to include here',
@@ -28,7 +28,7 @@ context('Compliance page', () => {
   it('close button displays message', () => {
     cy.intercept('POST', '/compliance/**').as('saveAndCloseRequest')
     cy.visit('/compliance/4c9a1ad2-7141-4b03-837f-b66346a0b6ad')
-    cy.get('#page-title').should('contain.text', 'Breach Report CO SSO - Compliance to date')
+    cy.get('#page-title').should('contain.text', 'Breach Report CO SSO - Compliance to Date')
     cy.get('#close-button').click()
     cy.wait('@saveAndCloseRequest').then(({ request }) => {
       const body = new URLSearchParams(request.body)
@@ -41,7 +41,7 @@ context('Compliance page', () => {
   it('continue button redirects to sign and send page', () => {
     cy.intercept('POST', '/compliance/**').as('formSubmit')
     cy.visit('/compliance/4c9a1ad2-7141-4b03-837f-b66346a0b6ad')
-    cy.get('#page-title').should('contain.text', 'Breach Report CO SSO - Compliance to date')
+    cy.get('#page-title').should('contain.text', 'Breach Report CO SSO - Compliance to Date')
     cy.get('#continue-button').click()
     cy.wait('@formSubmit')
     cy.url().should('include', '/sign-and-send/4c9a1ad2-7141-4b03-837f-b66346a0b6ad')
@@ -50,13 +50,13 @@ context('Compliance page', () => {
   it('correct validation should show on max character fields', () => {
     cy.visit('/compliance/4c9a1ad2-7141-4b03-837f-b66346a0b6ad')
     cy.url().should('include', '/compliance')
-    cy.get('#page-title').should('contain.text', 'Breach Report CO SSO - Compliance to date')
+    cy.get('#page-title').should('contain.text', 'Breach Report CO SSO - Compliance to Date')
     cy.get('#complianceToDate').clear()
     cy.get('#complianceToDate').invoke('val', 'X'.repeat(20001)).trigger('input')
     cy.get('#notes_1').clear()
     cy.get('#notes_1').invoke('val', 'X'.repeat(20001)).trigger('input')
     cy.get('#continue-button').click()
-    cy.get('#page-title').should('contain.text', 'Breach Report CO SSO - Compliance to date')
+    cy.get('#page-title').should('contain.text', 'Breach Report CO SSO - Compliance to Date')
     cy.get('.govuk-error-summary__title').should('exist').should('contain.text', 'There is a problem')
     cy.get('.govuk-error-summary__list')
       .should('exist')
@@ -69,7 +69,7 @@ context('Compliance page', () => {
   it('should display contacts returned from DB as selected', () => {
     cy.visit('/compliance/4c9a1ad2-7141-4b03-837f-b66346a0b6ad')
     cy.url().should('include', '/compliance')
-    cy.get('#page-title').should('contain.text', 'Breach Report CO SSO - Compliance to date')
+    cy.get('#page-title').should('contain.text', 'Breach Report CO SSO - Compliance to Date')
     cy.get('#requirement_1').should('be.checked')
     cy.get('#requirement_2').should('be.checked')
     cy.get('#requirement_3').should('not.be.checked')
@@ -79,7 +79,7 @@ context('Compliance page', () => {
     cy.intercept('POST', '/compliance/**').as('formSubmit')
     cy.visit('/compliance/4c9a1ad2-7141-4b03-837f-b66346a0b6ad')
     cy.url().should('include', '/compliance')
-    cy.get('#page-title').should('contain.text', 'Breach Report CO SSO - Compliance to date')
+    cy.get('#page-title').should('contain.text', 'Breach Report CO SSO - Compliance to Date')
     cy.get('#requirement_3').check()
     cy.get('#continue-button').click()
     cy.wait('@formSubmit')
@@ -90,7 +90,7 @@ context('Compliance page', () => {
     cy.intercept('POST', '/compliance/**').as('formSubmit')
     cy.visit('/compliance/4c9a1ad2-7141-4b03-837f-b66346a0b6ad')
     cy.url().should('include', '/compliance')
-    cy.get('#page-title').should('contain.text', 'Breach Report CO SSO - Compliance to date')
+    cy.get('#page-title').should('contain.text', 'Breach Report CO SSO - Compliance to Date')
     cy.get('#requirement_1').uncheck()
     cy.get('#continue-button').click()
     cy.wait('@formSubmit')

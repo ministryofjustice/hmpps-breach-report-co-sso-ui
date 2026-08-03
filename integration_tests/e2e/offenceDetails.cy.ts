@@ -27,6 +27,10 @@ context('Offence Details page', () => {
     cy.get('#amendment-2').should('contain.text', 'Details of the Amendment: SECOND DETAILS')
     cy.get('#amendment-2').should('contain.text', 'Reasons for the Amendment: SECOND REASON')
     cy.get('#amendment-2').should('contain.text', 'Date of the Amendment: 25/12/2025')
+    cy.get('[id^="amendment-"]').then(amendments => {
+      expect(amendments.eq(0)).to.contain.text('14/01/2026')
+      expect(amendments.eq(1)).to.contain.text('25/12/2025')
+    })
   })
 
   it('can see buttons', () => {

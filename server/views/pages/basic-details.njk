@@ -63,14 +63,15 @@
                 <br/>{% endif %}
             </p>
           {% else %}
-            <p id="no-address-found"> No Postal Address found in National Delius <br/>
-              In order to complete a Breach Report CO SSO you must add an address to Delius <br/>
-              Please use the below link to add an address <br/>
+            <p id="no-address-found" class="govuk-body">No Postal Address found in National Delius</p>
+            <p class="govuk-body">In order to complete a Breach Report CO SSO you must add an address to Delius</p>
+            <p class="govuk-body">Please use the below link to add an address<br/>
               <a href="{{ addAddressDeeplink }}" id="add-address--deeplink"
                  target="_blank" class="govuk-link">
                 Click this hyperlink to open a new tab to add an address to Delius
-              </a><br/>
-              Once this is completed, click the Refresh from Delius button </p>
+              </a>
+            </p>
+            <p class="govuk-body">Once this is completed, click the Refresh from Delius button</p>
           {% endif %}
 
           <h2 class="govuk-heading-m">Phone Number</h2>
@@ -92,16 +93,6 @@
               }
             }) }}
             {{ govukButton({
-              text: "Save Progress and Close",
-              type: "submit",
-              name: "action",
-              value: "saveProgressAndClose",
-              classes: "govuk-button--secondary",
-              attributes: {
-                id: "close-button"
-              }
-            }) }}
-            {{ govukButton({
               text: "Refresh from Delius",
               preventDoubleClick: "true",
               type: "submit",
@@ -110,6 +101,16 @@
               classes: "govuk-button--secondary",
               attributes: {
                 id: "refresh-from-ndelius--button"
+              }
+            }) }}
+            {{ govukButton({
+              text: "Save Progress and Close",
+              type: "submit",
+              name: "action",
+              value: "saveProgressAndClose",
+              classes: "govuk-button--secondary",
+              attributes: {
+                id: "close-button"
               }
             }) }}
           </div>

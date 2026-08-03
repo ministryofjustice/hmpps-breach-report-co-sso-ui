@@ -2,19 +2,17 @@ import { Router } from 'express'
 import { AuthenticationClient } from '@ministryofjustice/hmpps-auth-clients'
 import AuditService, { Page } from '../services/auditService'
 import CossoApiClient, { Cosso } from '../data/cossoApiClient'
-import NDeliusIntegrationApiClient, {
-  ResponsibleOfficerDetails,
-  SignAndSendDetails,
-  UserDetails,
-} from '../data/ndeliusIntegrationApiClient'
+import NDeliusIntegrationApiClient, { SignAndSendDetails, UserDetails } from '../data/ndeliusIntegrationApiClient'
 import { ErrorMessages } from '../data/uiModels'
 import { handleIntegrationErrors } from '../utils/utils'
 import { toFullUserDate } from '../utils/dateUtils'
+import CommonUtils from '../services/commonUtils'
 
 export default function signAndSendRoutes(
   router: Router,
   auditService: AuditService,
   authenticationClient: AuthenticationClient,
+  commonUtils: CommonUtils,
 ): Router {
   const currentPage = 'sign-and-send'
 
@@ -58,6 +56,8 @@ export default function signAndSendRoutes(
       res.render(`pages/sign-and-send`, { errorMessages, showEmbeddedError })
       return
     }
+
+    if (await commonUtils.redirectRequired(cosso, cossoId, res, authenticationClient)) return
 
     try {
       signAndSendDetails = await ndeliusIntegrationApiClient.getSignAndSendDetails(cosso.crn, res.locals.user.username)
@@ -139,6 +139,8 @@ export default function signAndSendRoutes(
       return
     }
 
+    if (await commonUtils.redirectRequired(cosso, cossoId, res, authenticationClient)) return
+
     try {
       signAndSendDetails = await ndeliusIntegrationApiClient.getSignAndSendDetails(cosso.crn, res.locals.user.username)
     } catch (error) {
@@ -192,7 +194,6 @@ export default function signAndSendRoutes(
       res.redirect(`/sign-and-send/${req.params.id}`)
     } else if (req.body.action === 'sign') {
       cosso.signature = createSignatureString(signAndSendDetails.userDetails, formSentBy)
-      cosso.sheetSentBy = getOfficerString(signAndSendDetails.responsibleOfficer)
       cosso.signedByRo = formSentBy === null ? null : formSentBy === 'RO'
       await cossoClient.updateCosso(cossoId, cosso, res.locals.user.username)
       res.redirect(`/sign-and-send/${req.params.id}`)
@@ -244,10 +245,7 @@ export default function signAndSendRoutes(
   function createSignatureString(currentUserDetails: UserDetails, formSentBy: string): string {
     let signature: string = ''
     if (currentUserDetails != null) {
-      signature += currentUserDetails.forename
-      if (currentUserDetails.middleName != null) {
-        signature += ` ${currentUserDetails.middleName}`
-      }
+      signature += currentUserDetails.forenames
       signature += ` ${currentUserDetails.surname} ${toFullUserDate(new Date().toISOString())}`
     }
 
@@ -259,18 +257,6 @@ export default function signAndSendRoutes(
       signature += ` (User on behalf of the Responsible Officer)`
     }
 
-    return signature
-  }
-
-  function getOfficerString(responsibleOfficerDetails: ResponsibleOfficerDetails): string {
-    let signature: string = ''
-    if (responsibleOfficerDetails != null) {
-      signature += responsibleOfficerDetails.name.forename
-      if (responsibleOfficerDetails.name.middleName != null) {
-        signature += ` ${responsibleOfficerDetails.name.middleName}`
-      }
-      signature += ` ${responsibleOfficerDetails.name.surname}`
-    }
     return signature
   }
 
