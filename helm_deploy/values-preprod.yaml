@@ -21,6 +21,7 @@ generic-service:
     groups:
       - digital_staff_and_mojo
       - unilink_staff
+      - mod-platform-live
 
 generic-prometheus-alerts:
   alertSeverity: hmpps-co-sso-notifications
