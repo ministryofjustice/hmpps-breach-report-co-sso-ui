@@ -193,10 +193,24 @@ export default function signAndSendRoutes(
       await cossoClient.updateCosso(cossoId, cosso, res.locals.user.username)
       res.redirect(`/sign-and-send/${req.params.id}`)
     } else if (req.body.action === 'sign') {
-      cosso.signature = createSignatureString(signAndSendDetails.userDetails, formSentBy)
-      cosso.signedByRo = formSentBy === null ? null : formSentBy === 'RO'
-      await cossoClient.updateCosso(cossoId, cosso, res.locals.user.username)
-      res.redirect(`/sign-and-send/${req.params.id}`)
+      if (formSentBy !== null) {
+        cosso.signature = createSignatureString(signAndSendDetails.userDetails, formSentBy)
+        cosso.signedByRo = formSentBy === 'RO'
+        await cossoClient.updateCosso(cossoId, cosso, res.locals.user.username)
+        res.redirect(`/sign-and-send/${req.params.id}`)
+      } else {
+        errorMessages.sentByResponsibleOfficerOrUser = {
+          text: 'Who is sending this document: Please select who is sending this document before pressing "Sign Now"',
+        }
+        res.render('pages/sign-and-send', {
+          errorMessages,
+          cosso,
+          cossoId,
+          currentPage,
+          callingScreen,
+          signAndSendDetails,
+        })
+      }
     } else if (callingScreen === 'check-your-answers') {
       cosso.signAndSendSaved = true
       cosso.signedByRo = null

@@ -33,32 +33,34 @@
 
         <h1 id="page-title" class="govuk-heading-l">Breach Report CO SSO - Signature</h1>
 
-        {{ govukRadios({
-          id: "who-is-sending-the-form",
-          name: "whoIsSendingTheForm",
-          fieldset: {
-            legend: {
-              text: "Please select who is sending this document?",
-              isPageHeading: false,
-              classes: "govuk-fieldset__legend--m"
-            }
-          },
-          errorMessage: {
-            text: errorMessages.sentByResponsibleOfficerOrUser.text
-          } if errorMessages.sentByResponsibleOfficerOrUser,
-          items: [
-            {
-              value: "RO",
-              text: "Responsible Officer",
-              checked: cosso.signedByRo === true
+        {% if cosso.signature == null %}
+          {{ govukRadios({
+            id: "who-is-sending-the-form",
+            name: "whoIsSendingTheForm",
+            fieldset: {
+              legend: {
+                text: "Please select who is sending this document?",
+                isPageHeading: false,
+                classes: "govuk-fieldset__legend--m"
+              }
             },
-            {
-              value: "USER",
-              text: "User on behalf of the Responsible Officer",
-              checked: cosso.signedByRo === false
-            }
-          ]
-        }) }}
+            errorMessage: {
+              text: errorMessages.sentByResponsibleOfficerOrUser.text
+            } if errorMessages.sentByResponsibleOfficerOrUser,
+            items: [
+              {
+                value: "RO",
+                text: "Responsible Officer",
+                checked: cosso.signedByRo === true
+              },
+              {
+                value: "USER",
+                text: "User on behalf of the Responsible Officer",
+                checked: cosso.signedByRo === false
+              }
+            ]
+          }) }}
+        {% endif %}
 
         <h2 class="govuk-heading-m">Signature</h2>
 
