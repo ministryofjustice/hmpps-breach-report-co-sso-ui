@@ -1,6 +1,6 @@
 {% extends "../partials/layout.njk" %}
 
-{% set pageTitle = applicationName + " - Sign and Send" %}
+{% set pageTitle = applicationName + " - Signature" %}
 {% set mainClasses = "app-container govuk-body" %}
 
 {% block content %}
@@ -31,7 +31,7 @@
       <div class="govuk-grid-column-two-thirds">
         {% include "partials/review-required.njk" %}
 
-        <h1 id="page-title" class="govuk-heading-l">Breach Report CO SSO - Sign and Send</h1>
+        <h1 id="page-title" class="govuk-heading-l">Breach Report CO SSO - Signature</h1>
 
         {{ govukRadios({
           id: "who-is-sending-the-form",
