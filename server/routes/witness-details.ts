@@ -132,7 +132,8 @@ export default function witnessDetailsRoutes(
     )
 
     witnessDetails.replyAddresses?.sort((a, b) => (a.buildingName ?? '').localeCompare(b.buildingName ?? ''))
-    // Sort addresses alphabetically
+
+    const manualRoContactFieldLabels = getManualRoContactFieldLabels(witnessDetails)
 
     res.render('pages/witness-details', {
       cosso,
@@ -148,6 +149,7 @@ export default function witnessDetailsRoutes(
       roEmailAddress: witnessDetails.emailAddress || cosso.roEmailAddress,
       roTelephoneNumberReadOnly: Boolean(witnessDetails.telephoneNumber),
       roEmailAddressReadOnly: Boolean(witnessDetails.emailAddress),
+      manualRoContactFieldLabels,
       errorMessages,
     })
   })
@@ -299,6 +301,7 @@ export default function witnessDetailsRoutes(
         )
 
         witnessDetails.replyAddresses?.sort((a, b) => (a.buildingName ?? '').localeCompare(b.buildingName ?? ''))
+        const manualRoContactFieldLabels = getManualRoContactFieldLabels(witnessDetails)
 
         res.render('pages/witness-details', {
           errorMessages,
@@ -317,10 +320,18 @@ export default function witnessDetailsRoutes(
           roEmailAddress: cosso.roEmailAddress,
           roTelephoneNumberReadOnly: Boolean(witnessDetails.telephoneNumber),
           roEmailAddressReadOnly: Boolean(witnessDetails.emailAddress),
+          manualRoContactFieldLabels,
         })
       }
     }
   })
+
+  function getManualRoContactFieldLabels(witnessDetails: WitnessDetails): string[] {
+    return [
+      !witnessDetails.telephoneNumber ? 'Telephone Number' : null,
+      !witnessDetails.emailAddress ? 'Email Address' : null,
+    ].filter((fieldLabel): fieldLabel is string => Boolean(fieldLabel))
+  }
 
   function validateFailures(cosso: Cosso): ErrorMessages {
     const errorMessages: ErrorMessages = {}
