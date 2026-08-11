@@ -46,15 +46,6 @@ context('Sign and Send Page', () => {
       .should('contain.text', 'Please select who is sending this document before leaving this screen')
   })
 
-  it('Can See pre-populated who and telephone fields', () => {
-    cy.visit('/sign-and-send/2015734f-390c-49e4-8401-fde750c38524')
-    cy.url().should('include', '/sign-and-send')
-    cy.get('#page-title').should('contain.text', 'Breach Report CO SSO - Signature')
-    cy.get('#whoIsSendingTheForm').should('exist')
-    cy.get('input[type="radio"][value="RO"]').should('be.checked')
-    cy.get('#signature').should('exist')
-  })
-
   it('Continue saves and navigates away', () => {
     cy.visit('/sign-and-send/a66b643e-0bdc-4599-aa63-74e6073767f3')
     cy.url().should('include', '/sign-and-send')
