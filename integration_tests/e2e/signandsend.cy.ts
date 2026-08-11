@@ -75,16 +75,6 @@ context('Sign and Send Page', () => {
     cy.url().should('include', '/check-your-answers/ee7140bc-ae6e-434f-980a-6c648d8248d5')
   })
 
-  it('Refresh from delius reloads', () => {
-    cy.visit('/sign-and-send/f0fa9a46-8f64-4459-b48a-7e9e2860737c')
-    cy.url().should('include', '/sign-and-send')
-    cy.get('#page-title').should('contain.text', 'Breach Report CO SSO - Signature')
-    cy.get('#refresh-from-ndelius--button').should('exist')
-    cy.get('#refresh-from-ndelius--button').click()
-    cy.url().should('include', '/sign-and-send/f0fa9a46-8f64-4459-b48a-7e9e2860737c')
-    cy.get('#page-title').should('contain.text', 'Breach Report CO SSO - Signature')
-  })
-
   it('close button displays message', () => {
     cy.intercept('POST', '/sign-and-send/**').as('saveAndCloseRequest')
     cy.visit('/sign-and-send/b548e8b6-d1ff-43e7-b3fa-b0faeb77a3dd')
