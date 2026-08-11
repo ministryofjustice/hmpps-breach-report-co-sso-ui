@@ -2,7 +2,7 @@ context('Sign and Send Page', () => {
   it('Sign and Send with no signature', () => {
     cy.visit('/sign-and-send/01fee60f-63c1-495b-b36e-33aff0e429e4')
     cy.url().should('include', '/sign-and-send')
-    cy.get('#page-title').should('contain.text', 'Breach Report CO SSO - Sign and Send')
+    cy.get('#page-title').should('contain.text', 'Breach Report CO SSO - Signature')
     cy.get('#sign-button').should('exist')
     cy.get('#clear-signature-button').should('not.exist')
     cy.get('#sign-button').should('exist')
@@ -12,7 +12,7 @@ context('Sign and Send Page', () => {
   it('Sign and Send with signature', () => {
     cy.visit('/sign-and-send/6fcb76c7-f06c-4aac-92a9-fada15781694')
     cy.url().should('include', '/sign-and-send')
-    cy.get('#page-title').should('contain.text', 'Breach Report CO SSO - Sign and Send')
+    cy.get('#page-title').should('contain.text', 'Breach Report CO SSO - Signature')
     cy.get('#sign-button').should('not.exist')
     cy.get('#clear-signature-button').should('exist')
     cy.get('#sign-button').should('not.exist')
@@ -22,7 +22,7 @@ context('Sign and Send Page', () => {
   it('Can See and Select who is sending fields', () => {
     cy.visit('/sign-and-send/5cacfff9-dbe0-4e8c-9d3e-f10ac302b502')
     cy.url().should('include', '/sign-and-send')
-    cy.get('#page-title').should('contain.text', 'Breach Report CO SSO - Sign and Send')
+    cy.get('#page-title').should('contain.text', 'Breach Report CO SSO - Signature')
     cy.get('#whoIsSendingTheForm').should('exist')
     cy.get('input[type="radio"][value="RO"]').should('exist')
     cy.get('input[type="radio"][value="USER"]').should('exist')
@@ -37,9 +37,9 @@ context('Sign and Send Page', () => {
   it('Validation when no radio button selected', () => {
     cy.visit('/sign-and-send/95e35d1a-fefe-4d4f-aaa4-a175ced57e1e')
     cy.url().should('include', '/sign-and-send')
-    cy.get('#page-title').should('contain.text', 'Breach Report CO SSO - Sign and Send')
+    cy.get('#page-title').should('contain.text', 'Breach Report CO SSO - Signature')
     cy.get('#continue-button').click()
-    cy.get('#page-title').should('contain.text', 'Breach Report CO SSO - Sign and Send')
+    cy.get('#page-title').should('contain.text', 'Breach Report CO SSO - Signature')
     cy.get('.govuk-error-summary__title').should('exist').should('contain.text', 'There is a problem')
     cy.get('#whoIsSendingTheForm-error')
       .should('exist')
@@ -49,7 +49,7 @@ context('Sign and Send Page', () => {
   it('Can See pre-populated who and telephone fields', () => {
     cy.visit('/sign-and-send/2015734f-390c-49e4-8401-fde750c38524')
     cy.url().should('include', '/sign-and-send')
-    cy.get('#page-title').should('contain.text', 'Breach Report CO SSO - Sign and Send')
+    cy.get('#page-title').should('contain.text', 'Breach Report CO SSO - Signature')
     cy.get('#whoIsSendingTheForm').should('exist')
     cy.get('input[type="radio"][value="RO"]').should('be.checked')
     cy.get('#signature').should('exist')
@@ -58,7 +58,7 @@ context('Sign and Send Page', () => {
   it('Continue saves and navigates away', () => {
     cy.visit('/sign-and-send/a66b643e-0bdc-4599-aa63-74e6073767f3')
     cy.url().should('include', '/sign-and-send')
-    cy.get('#page-title').should('contain.text', 'Breach Report CO SSO - Sign and Send')
+    cy.get('#page-title').should('contain.text', 'Breach Report CO SSO - Signature')
     cy.get('input[type="radio"][value="RO"]').check()
     cy.get('#continue-button').should('exist')
     cy.get('#continue-button').click()
@@ -68,7 +68,7 @@ context('Sign and Send Page', () => {
   it('should return to check your answers if came from check your answers', () => {
     cy.visit('/sign-and-send/ee7140bc-ae6e-434f-980a-6c648d8248d5?returnTo=check-your-answers')
     cy.url().should('include', '/sign-and-send')
-    cy.get('#page-title').should('contain.text', 'Breach Report CO SSO - Sign and Send')
+    cy.get('#page-title').should('contain.text', 'Breach Report CO SSO - Signature')
     cy.get('input[type="radio"][value="RO"]').check()
     cy.get('#continue-button').should('exist')
     cy.get('#continue-button').click()
@@ -78,18 +78,18 @@ context('Sign and Send Page', () => {
   it('Refresh from delius reloads', () => {
     cy.visit('/sign-and-send/f0fa9a46-8f64-4459-b48a-7e9e2860737c')
     cy.url().should('include', '/sign-and-send')
-    cy.get('#page-title').should('contain.text', 'Breach Report CO SSO - Sign and Send')
+    cy.get('#page-title').should('contain.text', 'Breach Report CO SSO - Signature')
     cy.get('#refresh-from-ndelius--button').should('exist')
     cy.get('#refresh-from-ndelius--button').click()
     cy.url().should('include', '/sign-and-send/f0fa9a46-8f64-4459-b48a-7e9e2860737c')
-    cy.get('#page-title').should('contain.text', 'Breach Report CO SSO - Sign and Send')
+    cy.get('#page-title').should('contain.text', 'Breach Report CO SSO - Signature')
   })
 
   it('close button displays message', () => {
     cy.intercept('POST', '/sign-and-send/**').as('saveAndCloseRequest')
     cy.visit('/sign-and-send/b548e8b6-d1ff-43e7-b3fa-b0faeb77a3dd')
     cy.url().should('include', '/sign-and-send')
-    cy.get('#page-title').should('contain.text', 'Breach Report CO SSO - Sign and Send')
+    cy.get('#page-title').should('contain.text', 'Breach Report CO SSO - Signature')
     cy.get('input[type="radio"][value="RO"]').check()
     cy.get('#close-button').click()
     cy.wait('@saveAndCloseRequest').then(({ request }) => {
