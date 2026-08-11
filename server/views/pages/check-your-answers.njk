@@ -400,8 +400,10 @@
                     <p id="requirement-info-{{ loop.index }}">{{ req.requirementTypeMainCategoryDescription }}
                       <br>
                       {{ req.requirementLength }}
-                      <br>
-                      {{ req.requirementSecondLength }}
+                      {% if req.requirementSecondLength %}
+                        <br>
+                        {{ req.requirementSecondLength }}
+                      {% endif %}
                     </p>
                   {% endfor %}
                 {% endif %}

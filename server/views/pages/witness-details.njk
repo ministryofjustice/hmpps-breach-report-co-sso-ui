@@ -12,6 +12,7 @@
   {% from "govuk/components/character-count/macro.njk" import govukCharacterCount %}
   {% from "govuk/components/button/macro.njk" import govukButton %}
   {% from "govuk/components/input/macro.njk" import govukInput %}
+  {% from "govuk/components/warning-text/macro.njk" import govukWarningText %}
 
   <form method="post">
 
@@ -25,6 +26,16 @@
     {% if errorMessages | length > 0 %}
       {% from "govuk/components/error-summary/macro.njk" import govukErrorSummary %}
       {{ govukErrorSummary({ titleText: "There is a problem", errorList: errorList }) }}
+    {% endif %}
+
+    {% if manualRoContactFieldLabels and manualRoContactFieldLabels.length > 0 %}
+      {% set manualRoContactFields = manualRoContactFieldLabels | join(" and ") %}
+      {{ govukWarningText({
+        text: "Details could not be retrieved from NDelius: " + manualRoContactFields + ". Check the manually entered details are correct.",
+        attributes: {
+          id: "ndelius-details-warning"
+        }
+      }) }}
     {% endif %}
 
     <input type="hidden" name="_csrf" value="{{ csrfToken }}">
