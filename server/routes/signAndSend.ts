@@ -217,8 +217,6 @@ export default function signAndSendRoutes(
           signAndSendDetails,
         })
       }
-    } else if (req.body.action === 'refreshFromNdelius') {
-      res.redirect(`/sign-and-send/${cossoId}`)
     } else {
       cosso.signAndSendSaved = true
       cosso.signedByRo = null
