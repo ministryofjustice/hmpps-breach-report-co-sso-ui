@@ -15,7 +15,7 @@ import formDeletedRoutes from './form-deleted'
 import addAddressRoutes from './add-address'
 import deleteRecipientRoutes from './deleteAmendment'
 import signAndSendRoutes from './signAndSend'
-import eventTerminatedRoutes from "./eventTerminated";
+import eventTerminatedRoutes from './eventTerminated'
 
 export default function routes({ auditService, hmppsAuthClient, commonUtils }: Services): Router {
   const router = Router()
