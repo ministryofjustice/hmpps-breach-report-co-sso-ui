@@ -261,6 +261,8 @@ export interface Cosso {
   signAndSendSaved: boolean
   sheetSentBy: string
   signedByRo: boolean
+  terminated: boolean
+  terminatedUnterminatedDate: Date
 }
 
 export interface CossoAddress {

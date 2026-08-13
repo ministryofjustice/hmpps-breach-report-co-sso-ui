@@ -15,6 +15,7 @@ export enum Page {
   DOCUMENT_DELETED = 'DOCUMENT_DELETED',
   ADD_ADDRESS = 'ADD_ADDRESS',
   SIGN_AND_SEND = 'SIGN_AND_SEND',
+  EVENT_TERMINATED = 'EVENT_TERMINATED',
 }
 
 export interface PageViewEventDetails {

@@ -168,6 +168,8 @@ export function createBlankCossoWithId(id: string): Cosso {
     sheetSentBy: '',
     signedByRo: false,
     complianceToDateSaved: false,
+    terminated: false,
+    terminatedUnterminatedDate: undefined,
   }
 }
 

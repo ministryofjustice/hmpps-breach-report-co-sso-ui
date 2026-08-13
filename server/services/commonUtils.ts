@@ -30,6 +30,11 @@ export default class CommonUtils {
       return true
     }
 
+    if (cosso.terminated === true) {
+      res.redirect(`/event-terminated/${cossoId}`)
+      return true
+    }
+
     return false
   }
 }
