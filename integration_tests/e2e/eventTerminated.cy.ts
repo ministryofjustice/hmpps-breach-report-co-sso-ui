@@ -22,7 +22,7 @@ context('Event Terminated page', () => {
     cy.visit('/event-terminated/7f0b0ed4-3c87-4c5b-90e0-1d7edcb5f5d8')
     cy.get('#delete-button').should('exist').should('be.visible').click()
     cy.get('#confirm-button').should('exist').should('be.visible').click()
-    cy.url().should('include', '/report-deleted')
+    cy.url().should('include', '/form-deleted')
   })
 
   it('should close tab details if close button is clicked', () => {
