@@ -167,7 +167,7 @@ export default function signAndSendRoutes(
     if (req.body.action === 'saveProgressAndClose') {
       cosso.signAndSendSaved = true
       cosso.signedByRo = null
-      if (formSentBy !== null) {
+      if (formSentBy !== null || cosso.signature !== null) {
         cosso.signedByRo = formSentBy === 'RO'
         await cossoClient.updateCosso(cossoId, cosso, res.locals.user.username)
         res.send(
@@ -214,7 +214,7 @@ export default function signAndSendRoutes(
     } else if (callingScreen === 'check-your-answers') {
       cosso.signAndSendSaved = true
       cosso.signedByRo = null
-      if (formSentBy !== null) {
+      if (formSentBy !== null || cosso.signature !== null) {
         cosso.signedByRo = formSentBy === 'RO'
         await cossoClient.updateCosso(cossoId, cosso, res.locals.user.username)
         res.redirect(`/check-your-answers/${cossoId}`)
@@ -234,7 +234,7 @@ export default function signAndSendRoutes(
     } else {
       cosso.signAndSendSaved = true
       cosso.signedByRo = null
-      if (formSentBy !== null) {
+      if (formSentBy !== null || cosso.signature !== null) {
         cosso.signedByRo = formSentBy === 'RO'
         await cossoClient.updateCosso(cossoId, cosso, res.locals.user.username)
         res.redirect(`/check-your-answers/${cossoId}`)
