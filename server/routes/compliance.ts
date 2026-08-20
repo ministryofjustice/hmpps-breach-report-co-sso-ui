@@ -301,7 +301,10 @@ export default function complianceRoutes(
           failureReason,
           notes,
           requirementLength: `${reqItem.length} ${reqItem.lengthUnit}`,
-          requirementSecondLength: `${reqItem.secondaryLength} ${reqItem.secondaryLengthUnit}`,
+          requirementSecondLength:
+            reqItem.secondaryLength != null && reqItem.secondaryLengthUnit != null
+              ? `${reqItem.secondaryLength} ${reqItem.secondaryLengthUnit}`
+              : null,
         })
       }
     }

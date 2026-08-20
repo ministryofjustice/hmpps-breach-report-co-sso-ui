@@ -312,7 +312,7 @@ export interface CossoRequirement {
   requirementTypeMainCategoryDescription: string
   requirementTypeSubCategoryDescription: string
   requirementLength: string
-  requirementSecondLength: string
+  requirementSecondLength?: string | null
   failureReason?: string
   notes?: string
   failure?: boolean
