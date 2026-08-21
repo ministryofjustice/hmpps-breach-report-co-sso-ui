@@ -133,32 +133,32 @@ export default function addAmendmentRoutes(
 
     if (!amendment.amendmentDetails || amendment.amendmentDetails.trim() === '') {
       errorMessages.amendmentDetails = {
-        text: 'Details of Amendment: This is a required field, please enter a value',
+        text: 'Enter details of the amendment',
       }
     } else if (amendment.amendmentDetails.length > 20000) {
       errorMessages.amendmentDetails = {
-        text: 'Details of Amendment: This field must be 20000 characters or less',
+        text: 'Details of the amendment must be 20,000 characters or less',
       }
     }
 
     if (!amendment.amendmentReason || amendment.amendmentReason.trim() === '') {
       errorMessages.amendmentReason = {
-        text: 'Reason for Amendment: This is a required field, please enter a value',
+        text: 'Enter a reason for the amendment',
       }
     } else if (amendment.amendmentReason.length > 20000) {
       errorMessages.amendmentReason = {
-        text: 'Reason for Amendment: This field must be 20000 characters or less',
+        text: 'Reason for the amendment must be 20,000 characters or less',
       }
     }
 
     if (!amendment.amendmentDate || amendment.amendmentDate.trim() === '') {
       if (rawAmendmentDate && rawAmendmentDate.trim() !== '') {
         errorMessages.amendmentDate = {
-          text: 'Date of Amendment: Please enter a valid date in the format dd/mm/yyyy',
+          text: 'Enter the date of the amendment in the correct format, for example 27/3/2024',
         }
       } else {
         errorMessages.amendmentDate = {
-          text: 'Date of Amendment: This is a required field, please enter a value',
+          text: 'Enter the date of the amendment',
         }
       }
     }

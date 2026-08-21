@@ -72,15 +72,9 @@ context('Amendment Details page', () => {
     cy.get('#save-button').click()
     cy.get('#page-title').should('contain.text', 'Edit Amendments')
     cy.get('.govuk-error-summary__title').should('exist').should('contain.text', 'There is a problem')
-    cy.get('#amendmentdetail-error')
-      .should('exist')
-      .should('contain.text', 'Details of Amendment: This is a required field, please enter a value')
-    cy.get('#amendmentreason-error')
-      .should('exist')
-      .should('contain.text', 'Reason for Amendment: This is a required field, please enter a value')
-    cy.get('#amendmentdate-error')
-      .should('exist')
-      .should('contain.text', 'Date of Amendment: This is a required field, please enter a value')
+    cy.get('#amendmentdetail-error').should('exist').should('contain.text', 'Enter details of the amendment')
+    cy.get('#amendmentreason-error').should('exist').should('contain.text', 'Enter a reason for the amendment')
+    cy.get('#amendmentdate-error').should('exist').should('contain.text', 'Enter the date of the amendment')
   })
 
   it('correct validation should show on max character fields', () => {
@@ -94,10 +88,10 @@ context('Amendment Details page', () => {
     cy.get('.govuk-error-summary__title').should('exist').should('contain.text', 'There is a problem')
     cy.get('#amendmentdetail-error')
       .should('exist')
-      .should('contain.text', 'Details of Amendment: This field must be 20000 characters or less')
+      .should('contain.text', 'Details of the amendment must be 20,000 characters or less')
     cy.get('#amendmentreason-error')
       .should('exist')
-      .should('contain.text', 'Reason for Amendment: This field must be 20000 characters or less')
+      .should('contain.text', 'Reason for the amendment must be 20,000 characters or less')
   })
 
   it('should stay on page and show COSSO Service error message if 500 thrown from COSSO Service', () => {

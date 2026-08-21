@@ -175,7 +175,7 @@ export default function signAndSendRoutes(
         )
       } else {
         errorMessages.sentByResponsibleOfficerOrUser = {
-          text: 'Who is sending this document: Please select who is sending this document before leaving this screen',
+          text: 'Select who is sending this document before leaving this screen',
         }
         res.render('pages/sign-and-send', {
           errorMessages,
@@ -200,7 +200,7 @@ export default function signAndSendRoutes(
         res.redirect(`/sign-and-send/${req.params.id}`)
       } else {
         errorMessages.sentByResponsibleOfficerOrUser = {
-          text: 'Who is sending this document: Please select who is sending this document before pressing "Sign Now"',
+          text: 'Select who is sending this document before pressing "Sign Now"',
         }
         res.render('pages/sign-and-send', {
           errorMessages,
@@ -220,7 +220,7 @@ export default function signAndSendRoutes(
         res.redirect(`/check-your-answers/${cossoId}`)
       } else {
         errorMessages.sentByResponsibleOfficerOrUser = {
-          text: 'Who is sending this document: Please select who is sending this document before leaving this screen',
+          text: 'Select who is sending this document before leaving this screen',
         }
         res.render('pages/sign-and-send', {
           errorMessages,
@@ -240,7 +240,7 @@ export default function signAndSendRoutes(
         res.redirect(`/check-your-answers/${cossoId}`)
       } else {
         errorMessages.sentByResponsibleOfficerOrUser = {
-          text: 'Who is sending this document: Please select who is sending this document before leaving this screen',
+          text: 'Select who is sending this document before leaving this screen',
         }
         res.render('pages/sign-and-send', {
           errorMessages,

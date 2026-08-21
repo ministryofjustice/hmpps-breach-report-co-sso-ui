@@ -71,15 +71,9 @@ context('Add Address page', () => {
     cy.get('#save-button').should('exist').should('be.visible')
     cy.get('#save-button').click()
     cy.get('.govuk-error-summary__title').should('exist').should('contain.text', 'There is a problem')
-    cy.get('#streetName-error')
-      .should('exist')
-      .should('contain.text', 'Street Name : This is a required field, please enter a value')
-    cy.get('#townCity-error')
-      .should('exist')
-      .should('contain.text', 'Town/City : This is a required field, please enter a value')
-    cy.get('#postcode-error')
-      .should('exist')
-      .should('contain.text', 'Postcode : This is a required field, please enter a value')
+    cy.get('#streetName-error').should('exist').should('contain.text', 'Enter a street name')
+    cy.get('#townCity-error').should('exist').should('contain.text', 'Enter a town or city')
+    cy.get('#postcode-error').should('exist').should('contain.text', 'Enter a postcode')
   })
 
   it('page will load and show previously entered data fields', () => {

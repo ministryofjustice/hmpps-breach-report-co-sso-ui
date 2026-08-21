@@ -151,22 +151,16 @@ context('Failures and Enforcement page', () => {
     cy.get('.govuk-error-summary__title').should('exist').should('contain.text', 'There is a problem')
     cy.get('#whyInBreach-error')
       .should('exist')
-      .should('contain.text', 'Why is this person in breach: This field must be 20000 characters or less')
+      .should('contain.text', 'Why this person is in breach must be 20,000 characters or less')
     cy.get('#stepsToPreventBreach-error')
       .should('exist')
-      .should(
-        'contain.text',
-        'What steps have been taken to prevent this breach: This field must be 20000 characters or less',
-      )
+      .should('contain.text', 'The steps taken to prevent this breach must be 20,000 characters or less')
     cy.get('#riskHistory-error')
       .should('exist')
-      .should(
-        'contain.text',
-        'Has the Risk of Serious Harm changed since the order was imposed: This field must be 20000 characters or less',
-      )
+      .should('contain.text', 'Details of how the risk of serious harm has changed must be 20,000 characters or less')
     cy.get('#supportingComments-error')
       .should('exist')
-      .should('contain.text', 'Comments to support the Recommendation : This field must be 20000 characters or less')
+      .should('contain.text', 'Comments to support the recommendation must be 20,000 characters or less')
   })
 
   it('correct validation should show when Confirmation Statement unchecked', () => {
@@ -178,7 +172,7 @@ context('Failures and Enforcement page', () => {
     cy.get('.govuk-error-summary__title').should('exist').should('contain.text', 'There is a problem')
     cy.get('#confirmationStatement-error')
       .should('exist')
-      .should('contain.text', 'Confirmation Statement: Please complete the confirmation to proceed')
+      .should('contain.text', 'Confirm that equalities and diversity information has been considered')
   })
 
   it('should display contacts returned from DB as selected', () => {
@@ -201,7 +195,7 @@ context('Failures and Enforcement page', () => {
     cy.get('label[for="contact-42"]').should('contain.text', 'Missing Contact Description')
     cy.get('.govuk-error-summary__title').should('exist').should('contain.text', 'There is a problem')
     cy.contains(
-      'Selected Contact: One or more previously selected contacts are no longer available in Delius. Please review your selections before continuing.',
+      'One or more previously selected contacts are no longer available in Delius. Review your selections before continuing.',
     ).should('exist')
   })
 
