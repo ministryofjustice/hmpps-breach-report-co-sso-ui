@@ -121,19 +121,19 @@ export default function addAddressRoutes(
 
     if (!address.streetName || address.streetName.trim() === '') {
       errorMessages.streetName = {
-        text: 'Street Name : This is a required field, please enter a value',
+        text: 'Enter a street name',
       }
     }
 
     if (!address.townCity || address.townCity.trim() === '') {
       errorMessages.townCity = {
-        text: 'Town/City : This is a required field, please enter a value',
+        text: 'Enter a town or city',
       }
     }
 
     if (!address.postcode || address.postcode.trim() === '') {
       errorMessages.postcode = {
-        text: 'Postcode : This is a required field, please enter a value',
+        text: 'Enter a postcode',
       }
     }
 

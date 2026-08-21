@@ -287,7 +287,7 @@ export default function complianceRoutes(
 
         if (notes && notes.length > 20000) {
           errorMessages[`requirement_${uiId}`] = {
-            text: 'Requirement Failure Notes: This field must be 20000 characters or less',
+            text: 'Requirement failure notes must be 20,000 characters or less',
           }
         }
 
@@ -351,7 +351,7 @@ export default function complianceRoutes(
     const errorMessages: ErrorMessages = {}
     if (cosso.complianceToDate && cosso.complianceToDate.length > 20000) {
       errorMessages.complianceToDate = {
-        text: 'Compliance To Date: This field must be 20000 characters or less',
+        text: 'Compliance to date must be 20,000 characters or less',
       }
     }
     return errorMessages

@@ -109,7 +109,7 @@ context('Failures and Enforcement page', () => {
     cy.get('.govuk-error-summary__title').should('exist').should('contain.text', 'There is a problem')
     cy.get('#witnessAvailability-error')
       .should('exist')
-      .should('contain.text', 'Witness Availability: This field must be 20000 characters or less')
+      .should('contain.text', 'Witness availability must be 20,000 characters or less')
   })
 
   it('should auto populate address if default returned from integrations', () => {
@@ -132,7 +132,7 @@ context('Failures and Enforcement page', () => {
     cy.get('#old-address-endDated').should('exist').should('be.visible')
     cy.get('#old-address-endDated').should(
       'contain.text',
-      'Work Location and address: The previously selected address is no longer available. Please select an alternative',
+      'The previously selected address is no longer available. Select an alternative',
     )
   })
 
@@ -193,12 +193,8 @@ context('Failures and Enforcement page', () => {
     cy.url().should('include', '/witness-details')
     cy.get('#continue-button').click()
     cy.get('.govuk-error-summary__title').should('exist').should('contain.text', 'There is a problem')
-    cy.get('#roTelephoneNumber-error')
-      .should('exist')
-      .should('contain.text', 'Phone Number: This is a required field, please enter a value')
-    cy.get('#roEmailAddress-error')
-      .should('exist')
-      .should('contain.text', 'Email Address: This is a required field, please enter a value')
+    cy.get('#roTelephoneNumber-error').should('exist').should('contain.text', 'Enter a phone number')
+    cy.get('#roEmailAddress-error').should('exist').should('contain.text', 'Enter an email address')
   })
 
   it('should show validation error when phone number is too long', () => {
@@ -209,7 +205,7 @@ context('Failures and Enforcement page', () => {
     cy.get('.govuk-error-summary__title').should('exist').should('contain.text', 'There is a problem')
     cy.get('#roTelephoneNumber-error')
       .should('exist')
-      .should('contain.text', 'Phone Number: Please enter a value that is less than or equal to 35 characters')
+      .should('contain.text', 'Phone number must be 35 characters or less')
   })
 
   it('should show validation error when email address is too long', () => {
@@ -220,7 +216,7 @@ context('Failures and Enforcement page', () => {
     cy.get('.govuk-error-summary__title').should('exist').should('contain.text', 'There is a problem')
     cy.get('#roEmailAddress-error')
       .should('exist')
-      .should('contain.text', 'Email Address: Please enter a value that is less than or equal to 100 characters')
+      .should('contain.text', 'Email address must be 100 characters or less')
   })
 
   it('should show validation error when email address is not in a valid format', () => {
@@ -231,6 +227,6 @@ context('Failures and Enforcement page', () => {
     cy.get('.govuk-error-summary__title').should('exist').should('contain.text', 'There is a problem')
     cy.get('#roEmailAddress-error')
       .should('exist')
-      .should('contain.text', 'Email Address: Enter an email address in the correct format')
+      .should('contain.text', 'Enter an email address in the correct format')
   })
 })

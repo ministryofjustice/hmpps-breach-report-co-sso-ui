@@ -103,7 +103,7 @@ export default function witnessDetailsRoutes(
         await cossoClient.updateCosso(req.params.id, cosso, res.locals.user.username)
 
         errorMessages.genericErrorMessage = {
-          text: 'Work Location and Address: The previously selected address is no longer available. Please select an alternative.',
+          text: 'The previously selected address is no longer available. Select an alternative.',
         }
       }
     } else if (
@@ -116,7 +116,7 @@ export default function witnessDetailsRoutes(
       // on every visit until they choose a new address, rather than just the first time it was detected.
       addressNotAvailable = true
       errorMessages.genericErrorMessage = {
-        text: 'Work Location and Address: The previously selected address is no longer available. Please select an alternative.',
+        text: 'The previously selected address is no longer available. Select an alternative.',
       }
     }
 
@@ -274,7 +274,7 @@ export default function witnessDetailsRoutes(
             await cossoClient.updateCosso(req.params.id, cosso, res.locals.user.username)
 
             errorMessages.genericErrorMessage = {
-              text: 'Work Location and Address: The previously selected address is no longer available. Please select an alternative.',
+              text: 'The previously selected address is no longer available. Select an alternative.',
             }
           }
         } else if (
@@ -285,7 +285,7 @@ export default function witnessDetailsRoutes(
         ) {
           addressNotAvailable = true
           errorMessages.genericErrorMessage = {
-            text: 'Work Location and Address: The previously selected address is no longer available. Please select an alternative.',
+            text: 'The previously selected address is no longer available. Select an alternative.',
           }
         }
 
@@ -338,31 +338,31 @@ export default function witnessDetailsRoutes(
 
     if (cosso.witnessAvailability && cosso.witnessAvailability.length > 20000) {
       errorMessages.witnessAvailability = {
-        text: 'Witness Availability: This field must be 20000 characters or less',
+        text: 'Witness availability must be 20,000 characters or less',
       }
     }
 
     if (!cosso.roTelephoneNumber || cosso.roTelephoneNumber.trim() === '') {
       errorMessages.roTelephoneNumber = {
-        text: 'Phone Number: This is a required field, please enter a value',
+        text: 'Enter a phone number',
       }
     } else if (cosso.roTelephoneNumber.trim().length > 35) {
       errorMessages.roTelephoneNumber = {
-        text: 'Phone Number: Please enter a value that is less than or equal to 35 characters',
+        text: 'Phone number must be 35 characters or less',
       }
     }
 
     if (!cosso.roEmailAddress || cosso.roEmailAddress.trim() === '') {
       errorMessages.roEmailAddress = {
-        text: 'Email Address: This is a required field, please enter a value',
+        text: 'Enter an email address',
       }
     } else if (cosso.roEmailAddress.trim().length > 100) {
       errorMessages.roEmailAddress = {
-        text: 'Email Address: Please enter a value that is less than or equal to 100 characters',
+        text: 'Email address must be 100 characters or less',
       }
     } else if (!/^[^\s@]+@[^\s@]+$/.test(cosso.roEmailAddress.trim())) {
       errorMessages.roEmailAddress = {
-        text: 'Email Address: Enter an email address in the correct format',
+        text: 'Enter an email address in the correct format',
       }
     }
 

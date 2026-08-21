@@ -115,7 +115,7 @@ export default function failuresRoutes(
     const errorMessages: ErrorMessages = {}
     if (deletedContactExists) {
       errorMessages.contacts = {
-        text: 'Selected Contact: One or more previously selected contacts are no longer available in Delius. Please review your selections before continuing.',
+        text: 'One or more previously selected contacts are no longer available in Delius. Review your selections before continuing.',
       }
     }
 
@@ -277,7 +277,7 @@ export default function failuresRoutes(
     } else {
       if (deletedContactExists) {
         errorMessages.contacts = {
-          text: 'Selected Contact: One or more previously selected contacts are no longer available in Delius. Please review your selections before continuing.',
+          text: 'One or more previously selected contacts are no longer available in Delius. Review your selections before continuing.',
         }
       }
 
@@ -302,31 +302,31 @@ export default function failuresRoutes(
 
     if (cosso.whyInBreach && cosso.whyInBreach.length > 20000) {
       errorMessages.whyInBreach = {
-        text: 'Why is this person in breach: This field must be 20000 characters or less',
+        text: 'Why this person is in breach must be 20,000 characters or less',
       }
     }
 
     if (cosso.stepsToPreventBreach && cosso.stepsToPreventBreach.length > 20000) {
       errorMessages.stepsToPreventBreach = {
-        text: 'What steps have been taken to prevent this breach: This field must be 20000 characters or less',
+        text: 'The steps taken to prevent this breach must be 20,000 characters or less',
       }
     }
 
     if (cosso.riskOfHarmChanged && cosso.riskHistory && cosso.riskHistory.length > 20000) {
       errorMessages.riskHistory = {
-        text: 'Has the Risk of Serious Harm changed since the order was imposed: This field must be 20000 characters or less',
+        text: 'Details of how the risk of serious harm has changed must be 20,000 characters or less',
       }
     }
 
     if (cosso.supportingComments && cosso.supportingComments.length > 20000) {
       errorMessages.supportingComments = {
-        text: 'Comments to support the Recommendation : This field must be 20000 characters or less',
+        text: 'Comments to support the recommendation must be 20,000 characters or less',
       }
     }
 
     if (!cosso.confirmEqualities) {
       errorMessages.confirmEqualities = {
-        text: 'Confirmation Statement: Please complete the confirmation to proceed',
+        text: 'Confirm that equalities and diversity information has been considered',
       }
     }
 
