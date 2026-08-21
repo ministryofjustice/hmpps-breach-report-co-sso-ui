@@ -43,7 +43,7 @@ context('Sign and Send Page', () => {
     cy.get('.govuk-error-summary__title').should('exist').should('contain.text', 'There is a problem')
     cy.get('#whoIsSendingTheForm-error')
       .should('exist')
-      .should('contain.text', 'Please select who is sending this document before leaving this screen')
+      .should('contain.text', 'Select who is sending this document before leaving this screen')
   })
 
   it('Continue saves and navigates away', () => {
