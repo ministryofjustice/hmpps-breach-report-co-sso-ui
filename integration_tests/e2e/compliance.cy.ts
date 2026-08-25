@@ -60,10 +60,10 @@ context('Compliance page', () => {
     cy.get('.govuk-error-summary__title').should('exist').should('contain.text', 'There is a problem')
     cy.get('.govuk-error-summary__list')
       .should('exist')
-      .should('contain.text', 'Requirement Failure Notes: This field must be 20000 characters or less')
+      .should('contain.text', 'Requirement failure notes must be 20,000 characters or less')
     cy.get('#complianceToDate-error')
       .should('exist')
-      .should('contain.text', 'This field must be 20000 characters or less')
+      .should('contain.text', 'Compliance to date must be 20,000 characters or less')
   })
 
   it('should display contacts returned from DB as selected', () => {
