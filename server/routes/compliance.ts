@@ -285,6 +285,12 @@ export default function complianceRoutes(
           }
         }
 
+        if (!notes || notes.trim() === '') {
+          errorMessages[`requirement_${uiId}`] = {
+            text: 'Requirement Failure notes must be added',
+          }
+        }
+
         if (notes && notes.length > 20000) {
           errorMessages[`requirement_${uiId}`] = {
             text: 'Requirement failure notes must be 20,000 characters or less',
