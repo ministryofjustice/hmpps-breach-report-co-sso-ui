@@ -280,7 +280,7 @@ export default function complianceRoutes(
 
       if (outerChecked) {
         if (failure === true && (!failureReason || failureReason === '-1')) {
-          errorMessages.failureNotSelected = {
+          errorMessages[`failureNotSelected_${uiId}`] = {
             text: 'Please select a valid breach reason for each failed requirement',
           }
         }

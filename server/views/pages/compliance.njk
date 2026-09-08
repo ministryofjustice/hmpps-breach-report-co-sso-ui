@@ -26,6 +26,9 @@
       {% set errorList = errorList.concat([{ text: errorMessages.failureNotSelected.text, href: "#" }]) %}
     {% endif %}
     {% for requirement in uiRequirements %}
+      {% if errorMessages['failureNotSelected_' + requirement.uiId] %}
+        {% set errorList = errorList.concat([{ text: errorMessages['failureNotSelected_' + requirement.uiId].text, href: "#failureReason_" + requirement.uiId }]) %}
+      {% endif %}
       {% if errorMessages['requirement_' + requirement.uiId] %}
         {% set errorList = errorList.concat([{ text: errorMessages['requirement_' + requirement.uiId].text, href: "#notes_" + requirement.uiId }]) %}
       {% endif %}
@@ -85,7 +88,10 @@
                               text: "Please select a failure reason"
                             },
                             value: requirement.failureReason,
-                            items: breachItems
+                            items: breachItems,
+                            errorMessage: {
+                              text: errorMessages['failureNotSelected_' + requirement.uiId].text
+                            } if errorMessages['failureNotSelected_' + requirement.uiId]
                           }) }}
                         {% endset -%}
 
