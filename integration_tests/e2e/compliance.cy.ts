@@ -81,6 +81,8 @@ context('Compliance page', () => {
     cy.url().should('include', '/compliance')
     cy.get('#page-title').should('contain.text', 'Breach Report CO SSO - Compliance to Date')
     cy.get('#requirement_3').check()
+    cy.get('#requirement_3-2').check()
+    cy.get('#notes_3').invoke('val', 'X'.repeat(100)).trigger('input')
     cy.get('#continue-button').click()
     cy.wait('@formSubmit')
     cy.url().should('include', '/sign-and-send/4c9a1ad2-7141-4b03-837f-b66346a0b6ad')
