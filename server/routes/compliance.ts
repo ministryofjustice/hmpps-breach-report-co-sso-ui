@@ -279,9 +279,9 @@ export default function complianceRoutes(
       reqItem.existing = outerChecked
 
       if (outerChecked) {
-        if (failure === true && (!failureReason || failureReason === '-1')) {
+        if ((failure === true && (!failureReason || failureReason === '-1')) || !notes || notes.trim() === '') {
           errorMessages.failureNotSelected = {
-            text: 'Please select a valid breach reason for each failed requirement',
+            text: 'Please select a valid breach reason and enter relevant details for each failed requirement',
           }
         }
 
