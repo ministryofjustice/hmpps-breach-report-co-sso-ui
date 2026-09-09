@@ -23,12 +23,9 @@
       {% set errorList = errorList.concat([{ text: errorMessages.genericErrorMessage.text, href: "#" }]) %}
     {% endif %}
     {% if errorMessages.failureNotSelected %}
-      {% set errorList = errorList.concat([{ text: errorMessages.failureNotSelected.text, href: "#" }]) %}
+      {% set errorList = errorList.concat([{ text: errorMessages.failureNotSelected.text, href: "#requirement-error" }]) %}
     {% endif %}
     {% for requirement in uiRequirements %}
-      {% if errorMessages['failureNotSelected_' + requirement.uiId] %}
-        {% set errorList = errorList.concat([{ text: errorMessages['failureNotSelected_' + requirement.uiId].text, href: "#failureReason_" + requirement.uiId }]) %}
-      {% endif %}
       {% if errorMessages['requirement_' + requirement.uiId] %}
         {% set errorList = errorList.concat([{ text: errorMessages['requirement_' + requirement.uiId].text, href: "#notes_" + requirement.uiId }]) %}
       {% endif %}
@@ -55,12 +52,17 @@
         <h1 id="page-title" class="govuk-heading-l">Breach Report CO SSO - Compliance to Date</h1>
 
         <div class="govuk-form-group">
-          <h4 id="requirement-text" class="govuk-heading-m">
-            Please select the failures that you wish to record or add details to
-          </h4>
           {% if uiRequirements | length > 0 %}
-            <div class="govuk-form-group">
-              <fieldset class="govuk-fieldset">
+            <div class="govuk-form-group {{ 'govuk-form-group--error' if errorMessages.failureNotSelected }}">
+              <fieldset class="govuk-fieldset" aria-describedby="requirement-error">
+                <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
+                  <h4 id="requirement-text" class="govuk-heading-m">
+                    Please select the failures that you wish to record or add details to
+                  </h4>
+                </legend>
+                <p id="requirement-error" class="govuk-error-message">
+                  <span class="govuk-visually-hidden">Error:</span>{{ errorMessages.failureNotSelected.text }}
+                </p>
                 <div class="govuk-checkboxes" data-module="govuk-checkboxes">
                   {% for requirement in uiRequirements %}
                     <div class="govuk-checkboxes__item">
@@ -88,10 +90,7 @@
                               text: "Please select a failure reason"
                             },
                             value: requirement.failureReason,
-                            items: breachItems,
-                            errorMessage: {
-                              text: errorMessages['failureNotSelected_' + requirement.uiId].text
-                            } if errorMessages['failureNotSelected_' + requirement.uiId]
+                            items: breachItems
                           }) }}
                         {% endset -%}
 
