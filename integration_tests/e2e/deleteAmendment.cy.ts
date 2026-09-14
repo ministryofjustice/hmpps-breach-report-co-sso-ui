@@ -4,7 +4,7 @@ context('Delete Amendment Page', () => {
 
   it('renders the delete confirmation screen correctly', () => {
     cy.visit(`/delete-amendment/${cossoId}/${amendmentId}`)
-    cy.contains('Are you sure you wish to delete this Amendment?').should('exist')
+    cy.contains('Are you sure you wish to delete this amendment?').should('exist')
     cy.get('#confirm-button').should('exist').and('contain.text', 'Confirm')
     cy.get('#cancel-button').should('exist').and('contain.text', 'Cancel')
   })

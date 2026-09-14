@@ -2,7 +2,7 @@ context('Failures and Enforcement page', () => {
   it('page loads with stored data in fields', () => {
     cy.visit('/witness-details/22b2660c-8b2b-41fc-8ff4-88ec47423e26')
     cy.url().should('include', '/witness-details')
-    cy.get('#page-title').should('contain.text', 'Breach Report CO SSO – RO and Witness Details')
+    cy.get('#page-title').should('contain.text', 'RO and witness details')
     cy.get('#name').should('contain.text', 'Jeff the Chef')
     cy.get('#probation-area').should('contain.text', 'The Cooking Show Area')
     cy.get('#address').should('contain.text', 'Newer Postal Address')
@@ -20,7 +20,7 @@ context('Failures and Enforcement page', () => {
   it('can see buttons', () => {
     cy.visit('/witness-details/22b2660c-8b2b-41fc-8ff4-88ec47423e26')
     cy.url().should('include', '/witness-details')
-    cy.get('#page-title').should('contain.text', 'Breach Report CO SSO – RO and Witness Details')
+    cy.get('#page-title').should('contain.text', 'RO and witness details')
     cy.get('#continue-button').should('contain.text', 'Continue')
     cy.get('#close-button').should('contain.text', 'Save Progress and Close')
     cy.get('#refresh-from-ndelius-button').should('contain.text', 'Refresh from Delius')
@@ -29,7 +29,6 @@ context('Failures and Enforcement page', () => {
   it('can see alternate address dropdown conditionally', () => {
     cy.visit('/witness-details/22b2660c-8b2b-41fc-8ff4-88ec47423e26')
     cy.url().should('include', '/witness-details')
-    cy.get('#page-title').should('contain.text', 'Breach Report CO SSO – RO and Witness Details')
     cy.get('input[name="offenderAddressSelectOne"][value="Yes"]').should('be.checked')
     cy.get('#alternate-address').should('exist')
     cy.get('#alternate-address').should('not.be.visible')
@@ -42,7 +41,6 @@ context('Failures and Enforcement page', () => {
     cy.intercept('POST', '/witness-details/**').as('formSubmit')
     cy.visit('/witness-details/8465e5d8-9417-4ff1-9738-bcb047be3c38')
     cy.url().should('include', '/witness-details')
-    cy.get('#page-title').should('contain.text', 'Breach Report CO SSO – RO and Witness Details')
     cy.get('#continue-button').click()
     cy.wait('@formSubmit')
     cy.url().should('include', '/offence-details/8465e5d8-9417-4ff1-9738-bcb047be3c38')
@@ -52,7 +50,6 @@ context('Failures and Enforcement page', () => {
     cy.intercept('POST', '/witness-details/**').as('formSubmit')
     cy.visit('/witness-details/ff0dc548-b881-4da5-875f-86f6ca676b64')
     cy.url().should('include', '/witness-details')
-    cy.get('#page-title').should('contain.text', 'Breach Report CO SSO – RO and Witness Details')
     cy.get('input[name="offenderAddressSelectOne"][value="No"]').click()
     cy.get('#alternate-address').should('be.visible')
     cy.get('#alternate-address').select('4')
@@ -65,7 +62,6 @@ context('Failures and Enforcement page', () => {
     cy.intercept('POST', '/witness-details/**').as('saveAndCloseRequest')
     cy.visit('/witness-details/683da152-0c88-4340-ad18-169a435b70f4')
     cy.url().should('include', '/witness-details')
-    cy.get('#page-title').should('contain.text', 'Breach Report CO SSO – RO and Witness Details')
     cy.get('#close-button').click()
     cy.wait('@saveAndCloseRequest').then(({ request }) => {
       const body = new URLSearchParams(request.body)
@@ -79,7 +75,6 @@ context('Failures and Enforcement page', () => {
     cy.intercept('POST', '/witness-details/**').as('formSubmit')
     cy.visit('/witness-details/107c8aa7-acd9-46c7-8dbb-e1c3b5d7fd1c?returnTo=check-your-answers')
     cy.url().should('include', '/witness-details')
-    cy.get('#page-title').should('contain.text', 'Breach Report CO SSO – RO and Witness Details')
     cy.get('#continue-button').click()
     cy.wait('@formSubmit')
     cy.url().should('include', '/check-your-answers/107c8aa7-acd9-46c7-8dbb-e1c3b5d7fd1c')
@@ -88,24 +83,24 @@ context('Failures and Enforcement page', () => {
   it('refresh button performs a post request then reloads the screen', () => {
     cy.intercept('POST', '/witness-details/**').as('refreshRequest')
     cy.visit('/witness-details/0fea3a87-039d-42c7-b531-3f6b30252e6f')
-    cy.get('#page-title').should('contain.text', 'Breach Report CO SSO – RO and Witness Details')
+    cy.get('#page-title').should('contain.text', 'RO and witness details')
     cy.get('#name').should('contain.text', 'Jeff the Chef')
     cy.get('#refresh-from-ndelius-button').click()
     cy.wait('@refreshRequest')
     cy.url().should('include', '/witness-details/0fea3a87-039d-42c7-b531-3f6b30252e6f')
     cy.url().should('include', '/witness-details')
-    cy.get('#page-title').should('contain.text', 'Breach Report CO SSO – RO and Witness Details')
+    cy.get('#page-title').should('contain.text', 'RO and witness details')
     cy.get('#name').should('contain.text', 'Jeff the Chef')
   })
 
   it('correct validation should show on max character fields', () => {
     cy.visit('/witness-details/7b75e1c7-2288-4ab6-afdc-727be2898f6c')
     cy.url().should('include', '/witness-details')
-    cy.get('#page-title').should('contain.text', 'Breach Report CO SSO – RO and Witness Details')
+    cy.get('#page-title').should('contain.text', 'RO and witness details')
     cy.get('#witnessAvailability').clear()
     cy.get('#witnessAvailability').invoke('val', 'X'.repeat(20001)).trigger('input')
     cy.get('#continue-button').click()
-    cy.get('#page-title').should('contain.text', 'Breach Report CO SSO – RO and Witness Details')
+    cy.get('#page-title').should('contain.text', 'RO and witness details')
     cy.get('.govuk-error-summary__title').should('exist').should('contain.text', 'There is a problem')
     cy.get('#witnessAvailability-error')
       .should('exist')
@@ -115,7 +110,6 @@ context('Failures and Enforcement page', () => {
   it('should auto populate address if default returned from integrations', () => {
     cy.visit('/witness-details/bff008a7-80a9-4c74-ab80-4d15f3c68532')
     cy.url().should('include', '/witness-details')
-    cy.get('#page-title').should('contain.text', 'Breach Report CO SSO – RO and Witness Details')
     cy.get('#address').should('contain.text', 'Default Address')
     cy.get('#address').should('contain.text', '3 Default Street')
     cy.get('#address').should('contain.text', 'Default District')
@@ -127,7 +121,6 @@ context('Failures and Enforcement page', () => {
   it('should display message when current saved address is no longer available', () => {
     cy.visit('/witness-details/532b684a-e0d6-4694-b445-e2e1c01b4517')
     cy.url().should('include', '/witness-details')
-    cy.get('#page-title').should('contain.text', 'Breach Report CO SSO – RO and Witness Details')
     cy.get('.govuk-error-summary__title').should('exist').should('contain.text', 'There is a problem')
     cy.get('#old-address-endDated').should('exist').should('be.visible')
     cy.get('#old-address-endDated').should(
@@ -139,7 +132,6 @@ context('Failures and Enforcement page', () => {
   it('add address button should navigate to add address', () => {
     cy.visit('/witness-details/2e6d8c12-a090-4509-9e39-ac1844ed1062')
     cy.url().should('include', '/witness-details')
-    cy.get('#page-title').should('contain.text', 'Breach Report CO SSO – RO and Witness Details')
     cy.get('#AddAddressMessage').should('exist').should('be.visible')
     cy.get('#AddAddressMessage').should(
       'contain.text',
@@ -153,7 +145,6 @@ context('Failures and Enforcement page', () => {
   it('update address button should navigate to add address', () => {
     cy.visit('/witness-details/396393bc-de1f-488b-9d03-63d0381382ba')
     cy.url().should('include', '/witness-details')
-    cy.get('#page-title').should('contain.text', 'Breach Report CO SSO – RO and Witness Details')
     cy.get('#address').should('contain.text', '32 Manual Street')
     cy.get('#update-address-button').should('exist').should('be.visible')
     cy.get('#update-address-button').click()

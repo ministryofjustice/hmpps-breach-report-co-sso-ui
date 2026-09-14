@@ -45,7 +45,7 @@
       {% if not showEmbeddedError %}
         {% include "partials/review-required.njk" %}
 
-        <h1 id="page-title" class="govuk-heading-l">Breach Report CO SSO - Offence Details</h1>
+        <h1 id="page-title" class="govuk-heading-l">Offence details</h1>
 
         <h2 class="govuk-heading-m">Original Offence</h2>
         <p id="main-offence">{{ offenceDetails.mainOffence.description }}</p>
@@ -108,8 +108,8 @@
             <p id="amendment-{{loop.index}}"><span class="govuk-!-font-weight-bold">Details of the Amendment:</span> {{ amendment.amendmentDetails }}<br/>
               <span class="govuk-!-font-weight-bold">Reasons for the Amendment:</span> {{ amendment.amendmentReason }}<br/>
               <span class="govuk-!-font-weight-bold">Date of the Amendment:</span> {{ amendment.formattedAmendmentDate }}<br/>
-              <a id="edit-link-{{ loop.index }}" href="/add-amendment/{{ cossoId }}?amendmentId={{ amendment.id }}" class="govuk-link">Edit this Amendment</a><br/>
-              <a id="delete-link-{{ loop.index }}" href="/delete-amendment/{{ cossoId }}/{{ amendment.id }}" class="govuk-link">Delete this Amendment</a>
+              <a id="edit-link-{{ loop.index }}" href="/add-amendment/{{ cossoId }}?amendmentId={{ amendment.id }}" class="govuk-link">Edit this amendment</a><br/>
+              <a id="delete-link-{{ loop.index }}" href="/delete-amendment/{{ cossoId }}/{{ amendment.id }}" class="govuk-link">Delete this amendment</a>
             </p>
             {% if not loop.last %}
               <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
