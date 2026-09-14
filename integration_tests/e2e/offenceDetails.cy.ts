@@ -2,7 +2,7 @@ context('Offence Details page', () => {
   it('can see readonly fields', () => {
     cy.visit('/offence-details/f92b344c-5a20-405c-b407-3bac4a507043')
     cy.url().should('include', '/offence-details')
-    cy.get('#page-title').should('contain.text', 'Breach Report CO SSO - Offence Details')
+    cy.get('#page-title').should('contain.text', 'Offence details')
     cy.get('#main-offence').should('contain.text', 'Offence Description')
     cy.get('#additional-offence-1').should('contain.text', 'Additional Offence Description A')
     cy.get('#additional-offence-2').should('contain.text', 'Additional Offence Description B')
@@ -36,7 +36,6 @@ context('Offence Details page', () => {
   it('can see buttons', () => {
     cy.visit('/offence-details/f92b344c-5a20-405c-b407-3bac4a507043')
     cy.url().should('include', '/offence-details')
-    cy.get('#page-title').should('contain.text', 'Breach Report CO SSO - Offence Details')
     cy.get('#continue-button').should('contain.text', 'Continue')
     cy.get('#close-button').should('contain.text', 'Save Progress and Close')
   })
@@ -44,7 +43,6 @@ context('Offence Details page', () => {
   it('can see add amendment button conditionally', () => {
     cy.visit('/offence-details/f92b344c-5a20-405c-b407-3bac4a507043')
     cy.url().should('include', '/offence-details')
-    cy.get('#page-title').should('contain.text', 'Breach Report CO SSO - Offence Details')
     cy.get('#add-amendment-button').should('not.be.visible')
     cy.get('input[name="amendmentsToAdd"][value="Yes"]').check({ force: true })
     cy.get('#add-amendment-button').should('be.visible').should('contain.text', 'Add Amendment')
@@ -76,7 +74,7 @@ context('Offence Details page', () => {
     cy.intercept('POST', '/offence-details/**').as('formSubmit')
     cy.visit('/offence-details/65877fba-84d1-48f1-a354-646e642a8774?returnTo=check-your-answers')
     cy.url().should('include', '/offence-details')
-    cy.get('#page-title').should('contain.text', 'Breach Report CO SSO - Offence Details')
+    cy.get('#page-title').should('contain.text', 'Offence details')
     cy.get('#continue-button').click()
     cy.wait('@formSubmit')
     cy.url().should('include', '/check-your-answers/65877fba-84d1-48f1-a354-646e642a8774')
@@ -85,7 +83,6 @@ context('Offence Details page', () => {
   it('add amendment button redirects to add amendment page', () => {
     cy.visit('/offence-details/1397b54d-4360-4ec5-bc75-8a908bc5e49c')
     cy.url().should('include', '/offence-details')
-    cy.get('#page-title').should('contain.text', 'Breach Report CO SSO - Offence Details')
     cy.get('input[name="amendmentsToAdd"][value="Yes"]').check({ force: true })
     cy.get('#add-amendment-button').click()
     cy.url().should('include', '/add-amendment/1397b54d-4360-4ec5-bc75-8a908bc5e49c')
@@ -94,8 +91,7 @@ context('Offence Details page', () => {
   it('edit amendment link redirects to edit amendment page with correct url', () => {
     cy.visit('/offence-details/499ab129-866a-4f9e-a4bf-7699cc95a4f7')
     cy.url().should('include', '/offence-details')
-    cy.get('#page-title').should('contain.text', 'Breach Report CO SSO - Offence Details')
-    cy.get('#edit-link-1').should('exist').should('contain.text', 'Edit this Amendment')
+    cy.get('#edit-link-1').should('exist').should('contain.text', 'Edit this amendment')
     cy.get('#edit-link-1').click()
     cy.url().should(
       'include',
@@ -105,8 +101,7 @@ context('Offence Details page', () => {
 
   it('delete amendment link redirects to delete amendment page with correct url', () => {
     cy.visit('/offence-details/deb3be2a-e196-412e-b349-7c89d1b539af')
-    cy.get('#page-title').should('contain.text', 'Breach Report CO SSO - Offence Details')
-    cy.get('#delete-link-1').should('exist').should('contain.text', 'Delete this Amendment')
+    cy.get('#delete-link-1').should('exist').should('contain.text', 'Delete this amendment')
     cy.get('#delete-link-1').click()
     cy.url().should(
       'include',
