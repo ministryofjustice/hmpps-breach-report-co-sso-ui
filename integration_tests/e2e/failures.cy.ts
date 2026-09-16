@@ -2,7 +2,7 @@ context('Failures and Enforcement page', () => {
   it('can see fields with stored data', () => {
     cy.visit('/failures/dd88f738-f5f9-4ada-94e8-897b781e5db1')
     cy.url().should('include', '/failures')
-    cy.get('#page-title').should('contain.text', 'Breach Report CO SSO - Failures and Enforcement')
+    cy.get('#page-title').should('contain.text', 'Failures and Enforcement')
     cy.get('label[for="contact-0"]').should(
       'contain.text',
       '22/8/2025, Contact Type Description, Contact Outcome Description',
@@ -48,7 +48,7 @@ context('Failures and Enforcement page', () => {
   it('can see fields on first time visit to page', () => {
     cy.visit('/failures/755df153-992c-4104-a094-42dc88e1a5f9')
     cy.url().should('include', '/failures')
-    cy.get('#page-title').should('contain.text', 'Breach Report CO SSO - Failures and Enforcement')
+    cy.get('#page-title').should('contain.text', 'Failures and Enforcement')
     cy.get('#whyInBreach').should('have.value', '')
     cy.get('#stepsToPreventBreach').should('have.value', '')
     cy.get('input[name="riskOfHarmChanged"][value="true"]').should('not.be.checked')
@@ -68,7 +68,7 @@ context('Failures and Enforcement page', () => {
   it('can see buttons', () => {
     cy.visit('/failures/dd88f738-f5f9-4ada-94e8-897b781e5db1')
     cy.url().should('include', '/failures')
-    cy.get('#page-title').should('contain.text', 'Breach Report CO SSO - Failures and Enforcement')
+    cy.get('#page-title').should('contain.text', 'Failures and Enforcement')
     cy.get('#continue-button').should('contain.text', 'Continue')
     cy.get('#close-button').should('contain.text', 'Save Progress and Close')
   })
@@ -76,7 +76,7 @@ context('Failures and Enforcement page', () => {
   it('can see Risk of Serious Harm text entry conditionally', () => {
     cy.visit('/failures/dd88f738-f5f9-4ada-94e8-897b781e5db1')
     cy.url().should('include', '/failures')
-    cy.get('#page-title').should('contain.text', 'Breach Report CO SSO - Failures and Enforcement')
+    cy.get('#page-title').should('contain.text', 'Failures and Enforcement')
     cy.get('input[name="riskOfHarmChanged"][value="false"]').click()
     cy.get('#riskHistory').should('exist')
     cy.get('#riskHistory').should('not.be.visible')
@@ -88,7 +88,7 @@ context('Failures and Enforcement page', () => {
   it('correct validation should show when risk of serious harm is yes and no reason is entered', () => {
     cy.visit('/failures/2d9d0ad5-3f6a-4c2c-8a27-3d5b4e2f1c90')
     cy.url().should('include', '/failures')
-    cy.get('#page-title').should('contain.text', 'Breach Report CO SSO - Failures and Enforcement')
+    cy.get('#page-title').should('contain.text', 'Failures and Enforcement')
     cy.get('input[name="riskOfHarmChanged"][value="true"]').click()
     cy.get('#riskHistory').should('be.visible')
     cy.get('#riskHistory').should('have.value', '')
@@ -105,7 +105,7 @@ context('Failures and Enforcement page', () => {
   it('close button displays message', () => {
     cy.intercept('POST', '/failures/**').as('saveAndCloseRequest')
     cy.visit('/failures/8a5fca4c-f72d-4bae-8170-fbe069ed1aaf')
-    cy.get('#page-title').should('contain.text', 'Breach Report CO SSO - Failures and Enforcement')
+    cy.get('#page-title').should('contain.text', 'Failures and Enforcement')
     cy.get('#close-button').click()
     cy.wait('@saveAndCloseRequest').then(({ request }) => {
       const body = new URLSearchParams(request.body)
@@ -118,7 +118,7 @@ context('Failures and Enforcement page', () => {
   it('continue button redirects to compliance page', () => {
     cy.intercept('POST', '/failures/**').as('formSubmit')
     cy.visit('/failures/7d03c0ce-4c65-4488-8448-6ae7475dd99b')
-    cy.get('#page-title').should('contain.text', 'Breach Report CO SSO - Failures and Enforcement')
+    cy.get('#page-title').should('contain.text', 'Failures and Enforcement')
     cy.get('#continue-button').click()
     cy.wait('@formSubmit')
     cy.url().should('include', '/compliance/7d03c0ce-4c65-4488-8448-6ae7475dd99b')
@@ -128,7 +128,7 @@ context('Failures and Enforcement page', () => {
     cy.intercept('POST', '/failures/**').as('formSubmit')
     cy.visit('/failures/89096e7c-c5cb-4ab0-b741-ae7fcd4d2ae1?returnTo=check-your-answers')
     cy.url().should('include', '/failures')
-    cy.get('#page-title').should('contain.text', 'Breach Report CO SSO - Failures and Enforcement')
+    cy.get('#page-title').should('contain.text', 'Failures and Enforcement')
     cy.get('#continue-button').click()
     cy.wait('@formSubmit')
     cy.url().should('include', '/check-your-answers/89096e7c-c5cb-4ab0-b741-ae7fcd4d2ae1')
@@ -137,7 +137,7 @@ context('Failures and Enforcement page', () => {
   it('correct validation should show on max character fields', () => {
     cy.visit('/failures/5800666c-d39e-4a04-8277-a82bf484f68d')
     cy.url().should('include', '/failures')
-    cy.get('#page-title').should('contain.text', 'Breach Report CO SSO - Failures and Enforcement')
+    cy.get('#page-title').should('contain.text', 'Failures and Enforcement')
     cy.get('#whyInBreach').clear()
     cy.get('#stepsToPreventBreach').clear()
     cy.get('#riskHistory').clear()
@@ -147,7 +147,7 @@ context('Failures and Enforcement page', () => {
     cy.get('#riskHistory').invoke('val', 'X'.repeat(20001)).trigger('input')
     cy.get('#supportingComments').invoke('val', 'X'.repeat(20001)).trigger('input')
     cy.get('#continue-button').click()
-    cy.get('#page-title').should('contain.text', 'Breach Report CO SSO - Failures and Enforcement')
+    cy.get('#page-title').should('contain.text', 'Failures and Enforcement')
     cy.get('.govuk-error-summary__title').should('exist').should('contain.text', 'There is a problem')
     cy.get('#whyInBreach-error')
       .should('exist')
@@ -166,7 +166,7 @@ context('Failures and Enforcement page', () => {
   it('correct validation should show when Confirmation Statement unchecked', () => {
     cy.visit('/failures/f90dc7e9-1792-471a-af57-f6425abd58ec')
     cy.url().should('include', '/failures')
-    cy.get('#page-title').should('contain.text', 'Breach Report CO SSO - Failures and Enforcement')
+    cy.get('#page-title').should('contain.text', 'Failures and Enforcement')
     cy.get('input[id="confirmationStatement"]').uncheck()
     cy.get('#continue-button').click()
     cy.get('.govuk-error-summary__title').should('exist').should('contain.text', 'There is a problem')
@@ -178,7 +178,7 @@ context('Failures and Enforcement page', () => {
   it('should display contacts returned from DB as selected', () => {
     cy.visit('/failures/9adf969d-7632-4703-a039-965b9ecf6db6')
     cy.url().should('include', '/failures')
-    cy.get('#page-title').should('contain.text', 'Breach Report CO SSO - Failures and Enforcement')
+    cy.get('#page-title').should('contain.text', 'Failures and Enforcement')
     cy.get('#contact-7').should('be.checked')
     cy.get('#contact-0').should('not.be.checked')
     cy.get('#contact-1246574').should('not.be.checked')
@@ -187,7 +187,7 @@ context('Failures and Enforcement page', () => {
   it('should display contacts returned from DB but not integrations and show warning message', () => {
     cy.visit('/failures/fcba94f3-af98-45b4-9df4-eab8c2ad2c46')
     cy.url().should('include', '/failures')
-    cy.get('#page-title').should('contain.text', 'Breach Report CO SSO - Failures and Enforcement')
+    cy.get('#page-title').should('contain.text', 'Failures and Enforcement')
     cy.get('#contact-7').should('not.be.checked')
     cy.get('#contact-0').should('not.be.checked')
     cy.get('#contact-1246574').should('not.be.checked')
@@ -203,7 +203,7 @@ context('Failures and Enforcement page', () => {
     cy.intercept('POST', '/failures/**').as('formSubmit')
     cy.visit('/failures/677f38d6-28be-488f-948c-e5757bd688e3')
     cy.url().should('include', '/failures')
-    cy.get('#page-title').should('contain.text', 'Breach Report CO SSO - Failures and Enforcement')
+    cy.get('#page-title').should('contain.text', 'Failures and Enforcement')
     cy.get('#contact-0').check()
     cy.get('#continue-button').click()
     cy.wait('@formSubmit')
@@ -215,7 +215,7 @@ context('Failures and Enforcement page', () => {
     cy.visit('/failures/f34327bb-5e85-45e3-956b-e855fcb4ca59')
     cy.url().should('include', '/failures')
     cy.url().should('include', '/failures')
-    cy.get('#page-title').should('contain.text', 'Breach Report CO SSO - Failures and Enforcement')
+    cy.get('#page-title').should('contain.text', 'Failures and Enforcement')
     cy.get('#contact-42').uncheck()
     cy.get('#contact-7').uncheck()
     cy.get('#continue-button').click()
