@@ -25,16 +25,17 @@
     "precommit:secrets": "gitleaks git --pre-commit --redact --staged --verbose --config .gitleaks/config.toml --gitleaks-ignore-path .gitleaks/.gitleaksignore",
     "precommit:lint": "lint-staged",
     "precommit:verify": "npm run typecheck && npm test",
-    "setup": "npm ci && hmpps-npm-script-run-allowlist"
+    "setup": "npm ci"
   },
   "engines": {
-    "node": "^24"
+    "node": "^24",
+    "npm": "^12"
   },
   "dependencies": {
-    "@aws-sdk/client-sns": "^3.1145.0",
-    "@aws-sdk/client-sqs": "^3.1145.0",
-    "@js-joda/core": "^6.1.0",
-    "@js-joda/timezone": "^2.25.2",
+    "@aws-sdk/client-sns": "^3.1146.0",
+    "@aws-sdk/client-sqs": "^3.1146.0",
+    "@js-joda/core": "^6.2.0",
+    "@js-joda/timezone": "^2.26.0",
     "@ministryofjustice/frontend": "^11.1.0",
     "@ministryofjustice/hmpps-auth-clients": "^3.0.0",
     "@ministryofjustice/hmpps-monitoring": "^2.1.0",
@@ -108,12 +109,21 @@
     "nock": "^14.0.17",
     "prettier": "^3.9.9",
     "prettier-plugin-jinja-template": "^2.2.0",
-    "supertest": "^7.3.0",
+    "supertest": "^7.3.1",
     "ts-jest": "^29.4.14",
     "typescript": "^5.9.3",
     "wiremock": "^3.13.2"
   },
   "overrides": {
     "shell-quote": "1.12.0"
+  },
+  "allowScripts": {
+    "@parcel/watcher@2.6.0": true,
+    "cypress@16.1.1": true,
+    "dtrace-provider@0.8.8": true,
+    "esbuild@0.28.2": true,
+    "fsevents@2.3.3": true,
+    "protobufjs@7.6.6": true,
+    "unrs-resolver@1.12.2": true
   }
 }
