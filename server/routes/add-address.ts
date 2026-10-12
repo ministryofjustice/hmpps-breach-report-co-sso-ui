@@ -18,6 +18,7 @@ export default function addAddressRoutes(
   router.get('/add-address/:id', async (req, res) => {
     await auditService.logPageView(Page.ADD_ADDRESS, { who: res.locals.user.username, correlationId: req.id })
     const cossoId: string = req.params.id
+    const callingScreen: string = req.query.returnTo as string
     const cossoApiClient = new CossoApiClient(authenticationClient)
 
     let cosso: Cosso = null
@@ -36,6 +37,7 @@ export default function addAddressRoutes(
       cosso,
       currentPage,
       cossoId,
+      callingScreen,
     })
   })
 
@@ -43,6 +45,7 @@ export default function addAddressRoutes(
     const cossoApiClient = new CossoApiClient(authenticationClient)
 
     const cossoId: string = req.params.id
+    const callingScreen: string = req.query.returnTo as string
     let cosso: Cosso = null
 
     try {
@@ -84,7 +87,9 @@ export default function addAddressRoutes(
     if (!hasErrors) {
       try {
         await cossoApiClient.updateCosso(req.params.id, cosso, res.locals.user.username)
-        res.redirect(`/witness-details/${req.params.id}`)
+        res.redirect(
+          `/witness-details/${req.params.id}${callingScreen ? `?returnTo=${encodeURIComponent(callingScreen)}` : ''}`,
+        )
       } catch (error) {
         const integrationErrorMessages = handleIntegrationErrors(error.status, error.data?.message, 'Breach Notice')
         const showEmbeddedError = true
@@ -92,7 +97,7 @@ export default function addAddressRoutes(
         res.render(`pages/add-address`, { errorMessages, showEmbeddedError, integrationErrorMessages })
       }
     } else {
-      res.render('pages/add-address', { errorMessages, cosso, currentPage, cossoId })
+      res.render('pages/add-address', { errorMessages, cosso, currentPage, cossoId, callingScreen })
     }
   })
 

@@ -174,7 +174,7 @@
             {{ govukButton({
               text: "Cancel",
               type: "submit",
-              href: '/witness-details/'+cossoId,
+              href: '/witness-details/' + cossoId + ('?returnTo=' + callingScreen | urlencode if callingScreen else ''),
               classes: "govuk-button--secondary",
               attributes: {
                 id: "cancel-button"

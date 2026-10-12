@@ -90,7 +90,7 @@
             {% if cosso.workAddress and not cosso.workAddress.addressId %}
               {{ govukButton({
                 text: "Update Address",
-                href: '/add-address/'+cossoId,
+                href: '/add-address/' + cossoId + ('?returnTo=' + callingScreen | urlencode if callingScreen else ''),
                 classes: "govuk-button--secondary",
                 preventDoubleClick: "true",
                 attributes: {
@@ -108,7 +108,7 @@
           <p id="AddAddressMessage">No reply address can be found for this responsible officer. Please add an address by selecting the button below.</p>
           {{ govukButton({
             text: "Add Address",
-            href: '/add-address/'+cossoId,
+            href: '/add-address/' + cossoId + ('?returnTo=' + callingScreen | urlencode if callingScreen else ''),
             classes: "govuk-button--secondary",
             preventDoubleClick: "true",
             attributes: {
