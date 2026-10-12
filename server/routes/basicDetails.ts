@@ -203,7 +203,7 @@ export default function basicDetailsRoutes(
       )
     } else if (req.body.action === 'refreshFromNdelius') {
       // redirect to warning details to force a reload
-      res.redirect(`/basic-details/${cossoId}`)
+      res.redirect(`/basic-details/${cossoId}${callingScreen ? `?returnTo=${encodeURIComponent(callingScreen)}` : ''}`)
     } else if (callingScreen && callingScreen === 'check-your-answers') {
       res.redirect(`/check-your-answers/${req.params.id}`)
     } else {
