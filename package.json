@@ -39,7 +39,6 @@
     "@ministryofjustice/frontend": "^11.1.0",
     "@ministryofjustice/hmpps-auth-clients": "^3.0.0",
     "@ministryofjustice/hmpps-monitoring": "^2.1.0",
-    "@ministryofjustice/hmpps-npm-script-allowlist": "0.0.6",
     "@ministryofjustice/hmpps-rest-client": "^2.2.0",
     "@playwright/test": "^1.64.0",
     "@types/qs": "^6.15.1",
