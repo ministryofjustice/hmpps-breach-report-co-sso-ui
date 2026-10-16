@@ -228,7 +228,9 @@ export default function witnessDetailsRoutes(
 
     if (req.body.action === 'refreshFromNdelius') {
       // redirect to witness details to force a reload
-      res.redirect(`/witness-details/${cossoId}`)
+      res.redirect(
+        `/witness-details/${cossoId}${callingScreen ? `?returnTo=${encodeURIComponent(callingScreen)}` : ''}`,
+      )
     } else {
       cosso.roAndWitnessDetailsSaved = true
       cosso.witnessAvailability = convertLineBreaks(req.body.witnessAvailability)

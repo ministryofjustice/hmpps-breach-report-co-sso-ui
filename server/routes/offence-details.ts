@@ -150,7 +150,9 @@ export default function offenceDetailsRoutes(
       res.redirect(`/add-amendment/${cossoId}`)
     } else if (req.body.action === 'refreshFromNdelius') {
       // redirect to force a reload
-      res.redirect(`/offence-details/${cossoId}`)
+      res.redirect(
+        `/offence-details/${cossoId}${callingScreen ? `?returnTo=${encodeURIComponent(callingScreen)}` : ''}`,
+      )
     } else {
       try {
         const offenceDetails = await ndeliusIntegrationApiClient.getOffenceDetails(cossoId, res.locals.user.username)
