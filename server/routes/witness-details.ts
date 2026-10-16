@@ -27,6 +27,7 @@ export default function witnessDetailsRoutes(
     const cossoClient = new CossoApiClient(authenticationClient)
     const ndeliusIntegrationApiClient = new NDeliusIntegrationApiClient(authenticationClient)
     const cossoId: string = req.params.id
+    const callingScreen: string = req.query.returnTo as string
     let errorMessages: ErrorMessages = {}
     let cosso: Cosso = null
     let witnessDetails: WitnessDetails = null
@@ -138,6 +139,7 @@ export default function witnessDetailsRoutes(
     res.render('pages/witness-details', {
       cosso,
       cossoId,
+      callingScreen,
       currentPage,
       roName: formatFullName(witnessDetails.name),
       witnessAvailabilityHelp: screenInfo.find(si => si.fieldName === 'witness_availability')?.fieldText,
