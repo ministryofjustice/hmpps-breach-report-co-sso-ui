@@ -61,15 +61,15 @@
 
         {% if not showEmbeddedError %}
 
-          <h1 id="page-title" class="govuk-heading-l">RO and witness details</h1>
+          <h1 id="page-title" class="govuk-heading-l">Responsible officer and witness details</h1>
 
-          <h2 class="govuk-heading-m">Full name of RO</h2>
+          <h2 class="govuk-heading-m">Full name of responsible officer</h2>
           <p id="name">{{ roName }}</p>
 
-          <h2 class="govuk-heading-m">Probation Region</h2>
+          <h2 class="govuk-heading-m">Probation region</h2>
           <p id="probation-area">{{ witnessDetails.probationArea.description }}</p>
 
-          <h2 class="govuk-heading-m">Work Location and Address</h2>
+          <h2 class="govuk-heading-m">Work location and address</h2>
           {% if cosso.workAddress != null %}
               <p id="address">
                 {% if cosso.workAddress.officeDescription %} {{ cosso.workAddress.officeDescription }}
@@ -89,7 +89,7 @@
               </p>
             {% if cosso.workAddress and not cosso.workAddress.addressId %}
               {{ govukButton({
-                text: "Update Address",
+                text: "Update address",
                 href: '/add-address/' + cossoId + ('?returnTo=' + callingScreen | urlencode if callingScreen else ''),
                 classes: "govuk-button--secondary",
                 preventDoubleClick: "true",
@@ -101,13 +101,13 @@
           {% elseif addressNotAvailable %}
               <p id="old-address-endDated">The previously selected address is no longer available. Select an alternative.</p>
           {% else %}
-              <p id="no-valid-default">Please specify the Work Location and Address that the Person on Probation should contact.</p>
+              <p id="no-valid-default">Please specify the work location and address that the person on probation should contact.</p>
           {% endif %}
 
         {% if manualAddressAllowed and cosso.workAddress == null %}
           <p id="AddAddressMessage">No reply address can be found for this responsible officer. Please add an address by selecting the button below.</p>
           {{ govukButton({
-            text: "Add Address",
+            text: "Add address",
             href: '/add-address/' + cossoId + ('?returnTo=' + callingScreen | urlencode if callingScreen else ''),
             classes: "govuk-button--secondary",
             preventDoubleClick: "true",
@@ -121,7 +121,7 @@
             name: "offenderAddressSelectOne",
             fieldset: {
               legend: {
-                text: "Would you like to use the work location above for this Breach report CO SSO?",
+                text: "Would you like to use the work location above for this breach report CO SSO?",
                 isPageHeading: false,
                 classes: "govuk-fieldset__legend--m"
               }
@@ -153,14 +153,14 @@
         {% endif %}
 
           {% if roTelephoneNumberReadOnly %}
-            <h2 class="govuk-heading-m">Phone Number</h2>
+            <h2 class="govuk-heading-m">Phone number</h2>
             <p id="roTelephoneNumber">{{ roTelephoneNumber }}</p>
           {% else %}
             {{ govukInput({
               id: "roTelephoneNumber",
               name: "roTelephoneNumber",
               label: {
-                text: "Phone Number",
+                text: "Phone number",
                 classes: "govuk-label--m"
               },
               value: roTelephoneNumber,
@@ -172,14 +172,14 @@
           {% endif %}
 
           {% if roEmailAddressReadOnly %}
-            <h2 class="govuk-heading-m">Email Address</h2>
+            <h2 class="govuk-heading-m">Email address</h2>
             <p id="roEmailAddress">{{ roEmailAddress }}</p>
           {% else %}
             {{ govukInput({
               id: "roEmailAddress",
               name: "roEmailAddress",
               label: {
-                text: "Email Address",
+                text: "Email address",
                 classes: "govuk-label--m"
               },
               value: roEmailAddress,
@@ -198,7 +198,7 @@
           {% endset -%}
           {{ govukCharacterCount({
             label: {
-              text: "Witness Availability",
+              text: "Witness availability",
               classes: "govuk-label--m",
               isPageHeading: false
             },
@@ -225,7 +225,7 @@
               }
             }) }}
             {{ govukButton({
-              text: "Refresh from Delius",
+              text: "Refresh from National Delius",
               preventDoubleClick: "true",
               type: "submit",
               name: "action",
@@ -236,7 +236,7 @@
               }
             }) }}
             {{ govukButton({
-              text: "Save Progress and Close",
+              text: "Save progress and close",
               type: "submit",
               name: "action",
               value: "saveProgressAndClose",

@@ -4,7 +4,7 @@ context('Event Terminated page', () => {
     cy.url().should('include', '/event-terminated')
     cy.get('.govuk-error-summary').should(
       'contain.text',
-      'This Document is attached to an Event that has been terminated',
+      'This document is attached to an event that has been terminated',
     )
     cy.get('#delete-button').should('exist').should('be.visible').should('contain.text', 'Delete')
     cy.get('#close-button').should('exist').should('be.visible').should('contain.text', 'Close')

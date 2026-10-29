@@ -2,7 +2,7 @@ context('Failures and Enforcement page', () => {
   it('page loads with stored data in fields', () => {
     cy.visit('/witness-details/22b2660c-8b2b-41fc-8ff4-88ec47423e26')
     cy.url().should('include', '/witness-details')
-    cy.get('#page-title').should('contain.text', 'RO and witness details')
+    cy.get('#page-title').should('contain.text', 'Responsible officer and witness details')
     cy.get('#name').should('contain.text', 'Jeff the Chef')
     cy.get('#probation-area').should('contain.text', 'The Cooking Show Area')
     cy.get('#address').should('contain.text', 'Newer Postal Address')
@@ -20,10 +20,10 @@ context('Failures and Enforcement page', () => {
   it('can see buttons', () => {
     cy.visit('/witness-details/22b2660c-8b2b-41fc-8ff4-88ec47423e26')
     cy.url().should('include', '/witness-details')
-    cy.get('#page-title').should('contain.text', 'RO and witness details')
+    cy.get('#page-title').should('contain.text', 'Responsible officer and witness details')
     cy.get('#continue-button').should('contain.text', 'Continue')
-    cy.get('#close-button').should('contain.text', 'Save Progress and Close')
-    cy.get('#refresh-from-ndelius-button').should('contain.text', 'Refresh from Delius')
+    cy.get('#close-button').should('contain.text', 'Save progress and close')
+    cy.get('#refresh-from-ndelius-button').should('contain.text', 'Refresh from National Delius')
   })
 
   it('can see alternate address dropdown conditionally', () => {
@@ -83,24 +83,24 @@ context('Failures and Enforcement page', () => {
   it('refresh button performs a post request then reloads the screen', () => {
     cy.intercept('POST', '/witness-details/**').as('refreshRequest')
     cy.visit('/witness-details/0fea3a87-039d-42c7-b531-3f6b30252e6f')
-    cy.get('#page-title').should('contain.text', 'RO and witness details')
+    cy.get('#page-title').should('contain.text', 'Responsible officer and witness details')
     cy.get('#name').should('contain.text', 'Jeff the Chef')
     cy.get('#refresh-from-ndelius-button').click()
     cy.wait('@refreshRequest')
     cy.url().should('include', '/witness-details/0fea3a87-039d-42c7-b531-3f6b30252e6f')
     cy.url().should('include', '/witness-details')
-    cy.get('#page-title').should('contain.text', 'RO and witness details')
+    cy.get('#page-title').should('contain.text', 'Responsible officer and witness details')
     cy.get('#name').should('contain.text', 'Jeff the Chef')
   })
 
   it('correct validation should show on max character fields', () => {
     cy.visit('/witness-details/7b75e1c7-2288-4ab6-afdc-727be2898f6c')
     cy.url().should('include', '/witness-details')
-    cy.get('#page-title').should('contain.text', 'RO and witness details')
+    cy.get('#page-title').should('contain.text', 'Responsible officer and witness details')
     cy.get('#witnessAvailability').clear()
     cy.get('#witnessAvailability').invoke('val', 'X'.repeat(20001)).trigger('input')
     cy.get('#continue-button').click()
-    cy.get('#page-title').should('contain.text', 'RO and witness details')
+    cy.get('#page-title').should('contain.text', 'Responsible officer and witness details')
     cy.get('.govuk-error-summary__title').should('exist').should('contain.text', 'There is a problem')
     cy.get('#witnessAvailability-error')
       .should('exist')

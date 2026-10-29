@@ -37,16 +37,16 @@
 
           <h1 id="page-title" class="govuk-heading-l">Basic details</h1>
 
-          <h2 class="govuk-heading-m">Title and Full Name</h2>
+          <h2 class="govuk-heading-m">Title and full name</h2>
           <p id="name">{{ titleAndFullName }}</p>
 
-          <h2 class="govuk-heading-m">Date of Birth</h2>
+          <h2 class="govuk-heading-m">Date of birth</h2>
           <p id="date-of-birth">{{ formattedDob }}</p>
 
           <h2 class="govuk-heading-m">CRN</h2>
           <p id="crn">{{ cosso.crn }}</p>
 
-          <h2 class="govuk-heading-m">Main Address</h2>
+          <h2 class="govuk-heading-m">Main address</h2>
           {% if defaultAddress %}
             <p id="address">
               {% if defaultAddress.buildingName %} {{ defaultAddress.buildingName }}
@@ -63,24 +63,24 @@
                 <br/>{% endif %}
             </p>
           {% else %}
-            <p id="no-address-found" class="govuk-body">No Postal Address found in National Delius</p>
-            <p class="govuk-body">In order to complete a Breach Report CO SSO you must add an address to Delius</p>
+            <p id="no-address-found" class="govuk-body">No postal address found in National Delius</p>
+            <p class="govuk-body">In order to complete a breach report CO SSO you must add an address to National Delius</p>
             <p class="govuk-body">Please use the below link to add an address<br/>
               <a href="{{ addAddressDeeplink }}" id="add-address--deeplink"
                  target="_blank" class="govuk-link">
-                Click this hyperlink to open a new tab to add an address to Delius
+                Click this hyperlink to open a new tab to add an address to National Delius
               </a>
             </p>
-            <p class="govuk-body">Once this is completed, click the Refresh from Delius button</p>
+            <p class="govuk-body">Once this is completed, click the Refresh from National Delius button</p>
           {% endif %}
 
-          <h2 class="govuk-heading-m">Phone Number</h2>
+          <h2 class="govuk-heading-m">Phone number</h2>
           <p id="phone-number">{{ telephoneNumber }}</p>
 
-          <h2 class="govuk-heading-m">Mobile Number</h2>
+          <h2 class="govuk-heading-m">Mobile number</h2>
           <p id="mobile-number">{{ mobileNumber }}</p>
 
-          <h2 class="govuk-heading-m">Email Address</h2>
+          <h2 class="govuk-heading-m">Email address</h2>
           <p id="email-address">{{ emailAddress }}</p>
 
           <div class="moj-button-group">
@@ -93,7 +93,7 @@
               }
             }) }}
             {{ govukButton({
-              text: "Refresh from Delius",
+              text: "Refresh from National Delius",
               preventDoubleClick: "true",
               type: "submit",
               name: "action",
@@ -104,7 +104,7 @@
               }
             }) }}
             {{ govukButton({
-              text: "Save Progress and Close",
+              text: "Save progress and close",
               type: "submit",
               name: "action",
               value: "saveProgressAndClose",

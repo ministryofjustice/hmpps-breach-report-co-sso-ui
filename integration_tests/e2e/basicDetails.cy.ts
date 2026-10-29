@@ -17,8 +17,8 @@ context('Basic Details page', () => {
     cy.url().should('include', '/basic-details')
     cy.get('#page-title').should('contain.text', 'Basic details')
     cy.get('#continue-button').should('contain.text', 'Continue')
-    cy.get('#close-button').should('contain.text', 'Save Progress and Close')
-    cy.get('#refresh-from-ndelius--button').should('contain.text', 'Refresh from Delius')
+    cy.get('#close-button').should('contain.text', 'Save progress and close')
+    cy.get('#refresh-from-ndelius--button').should('contain.text', 'Refresh from National Delius')
   })
 
   it('refresh button performs a post request then reloads the screen', () => {
@@ -69,10 +69,10 @@ context('Basic Details page', () => {
     cy.url().should('include', '/basic-details')
     cy.get('#page-title').should('contain.text', 'Basic details')
     cy.get('#address').should('not.exist')
-    cy.get('#no-address-found').should('exist').should('contain.text', 'No Postal Address found in National Delius')
+    cy.get('#no-address-found').should('exist').should('contain.text', 'No postal address found in National Delius')
     cy.get('#add-address--deeplink')
       .should('exist')
-      .should('contain.text', 'Click this hyperlink to open a new tab to add an address to Delius')
+      .should('contain.text', 'Click this hyperlink to open a new tab to add an address to National Delius')
     cy.get('#add-address--deeplink').should('have.attr', 'href').and('include', 'component=AddressandAccommodation')
   })
 

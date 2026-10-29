@@ -712,7 +712,7 @@
           "stepsToPreventBreach": "Preventative Steps Test Text",
           "riskHistory": "Heres why the risk has changed",
           "confirmEqualities": false,
-          "recommendations": "The Order is continued",
+          "recommendations": "The order is continued",
           "supportingComments": "Additional comments to Support recommendation",
           "riskOfHarmChanged": true,
           "cossoContactList": []

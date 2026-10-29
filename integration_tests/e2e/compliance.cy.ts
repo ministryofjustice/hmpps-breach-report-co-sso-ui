@@ -10,7 +10,7 @@ context('Compliance page', () => {
     cy.get('#complianceToDate-hint .govuk-details__text').should('contain.text', 'By assessing both compliance')
     cy.get('#compliance-to-date-information').should(
       'contain.text',
-      'Describe the Compliance with the whole order to date?',
+      'Describe the compliance with the whole order to date?',
     )
     cy.get('#complianceToDate').should('contain.text', 'test 444')
     cy.get('label[for="requirement_1"]').should('contain.text', 'Requirement Zero')

@@ -49,15 +49,15 @@ context('Add Address page', () => {
     cy.get('.govuk-error-summary__title').should('exist').should('contain.text', 'There is a problem')
     cy.get('#officeDescription-error').should('exist')
     cy.get('#officeDescription-error').contains(
-      'At least 1 out of [Description, Building Name, Address Number] must be present',
+      'At least 1 out of [Description, Building name, Address number] must be present',
     )
     cy.get('#buildingName-error').should('exist')
     cy.get('#buildingName-error').contains(
-      'At least 1 out of [Description, Building Name, Address Number] must be present',
+      'At least 1 out of [Description, Building name, Address number] must be present',
     )
     cy.get('#buildingNumber-error').should('exist')
     cy.get('#buildingNumber-error').contains(
-      'At least 1 out of [Description, Building Name, Address Number] must be present',
+      'At least 1 out of [Description, Building name, Address number] must be present',
     )
   })
 
@@ -104,16 +104,16 @@ context('Add Address page', () => {
     cy.get('.govuk-error-summary__title').should('exist').should('contain.text', 'There is a problem')
     cy.get('#officeDescription-error')
       .should('exist')
-      .should('contain.text', 'Please enter 50 characters or less for Office Description')
+      .should('contain.text', 'Please enter 50 characters or less for Office description')
     cy.get('#buildingName-error')
       .should('exist')
-      .should('contain.text', 'Please enter 80 characters or less for Building Name')
+      .should('contain.text', 'Please enter 80 characters or less for Building name')
     cy.get('#buildingNumber-error')
       .should('exist')
-      .should('contain.text', 'Please enter 35 characters or less for Address Number')
+      .should('contain.text', 'Please enter 35 characters or less for Address number')
     cy.get('#streetName-error')
       .should('exist')
-      .should('contain.text', 'Please enter 80 characters or less for Street Name')
+      .should('contain.text', 'Please enter 80 characters or less for Street name')
     cy.get('#townCity-error')
       .should('exist')
       .should('contain.text', 'Please enter 35 characters or less for Town or City')

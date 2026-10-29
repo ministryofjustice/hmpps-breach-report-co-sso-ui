@@ -12,21 +12,21 @@ context('Offence Details page', () => {
     cy.get('#custody-length').should('contain.text', '20 Days')
     cy.get('#requirements-imposed-1').should(
       'contain.text',
-      'Requirement Type: Requirement Type Main Category Description',
+      'Requirement type: Requirement Type Main Category Description',
     )
-    cy.get('#requirements-imposed-1').should('contain.text', 'Requirement Length: 20 Months')
-    cy.get('#requirements-imposed-1').should('contain.text', 'Secondary Requirement Length: 12 Months')
-    cy.get('#requirements-imposed-2').should('contain.text', 'Requirement Type: Another Main Category Description')
-    cy.get('#requirements-imposed-2').should('contain.text', 'Requirement Length: 7 Years')
-    cy.get('#requirements-imposed-2').should('contain.text', 'Secondary Requirement Length: 10 Months')
+    cy.get('#requirements-imposed-1').should('contain.text', 'Requirement length: 20 Months')
+    cy.get('#requirements-imposed-1').should('contain.text', 'Secondary requirement length: 12 Months')
+    cy.get('#requirements-imposed-2').should('contain.text', 'Requirement type: Another Main Category Description')
+    cy.get('#requirements-imposed-2').should('contain.text', 'Requirement length: 7 Years')
+    cy.get('#requirements-imposed-2').should('contain.text', 'Secondary requirement length: 10 Months')
     cy.get('#additional-sentence-1').should('contain.text', 'COMPENSATION').and('contain.text', '£789.00')
     cy.get('#additional-sentence-2').should('contain.text', 'Additional Sentence Type').and('contain.text', '£67.00')
-    cy.get('#amendment-1').should('contain.text', 'Details of the Amendment: TEST DETAILS')
-    cy.get('#amendment-1').should('contain.text', 'Reasons for the Amendment: TEST REASON')
-    cy.get('#amendment-1').should('contain.text', 'Date of the Amendment: 14/01/2026')
-    cy.get('#amendment-2').should('contain.text', 'Details of the Amendment: SECOND DETAILS')
-    cy.get('#amendment-2').should('contain.text', 'Reasons for the Amendment: SECOND REASON')
-    cy.get('#amendment-2').should('contain.text', 'Date of the Amendment: 25/12/2025')
+    cy.get('#amendment-1').should('contain.text', 'Details of the amendment: TEST DETAILS')
+    cy.get('#amendment-1').should('contain.text', 'Reasons for the amendment: TEST REASON')
+    cy.get('#amendment-1').should('contain.text', 'Date of the amendment: 14/01/2026')
+    cy.get('#amendment-2').should('contain.text', 'Details of the amendment: SECOND DETAILS')
+    cy.get('#amendment-2').should('contain.text', 'Reasons for the amendment: SECOND REASON')
+    cy.get('#amendment-2').should('contain.text', 'Date of the amendment: 25/12/2025')
     cy.get('[id^="amendment-"]').then(amendments => {
       expect(amendments.eq(0)).to.contain.text('14/01/2026')
       expect(amendments.eq(1)).to.contain.text('25/12/2025')
@@ -37,7 +37,7 @@ context('Offence Details page', () => {
     cy.visit('/offence-details/f92b344c-5a20-405c-b407-3bac4a507043')
     cy.url().should('include', '/offence-details')
     cy.get('#continue-button').should('contain.text', 'Continue')
-    cy.get('#close-button').should('contain.text', 'Save Progress and Close')
+    cy.get('#close-button').should('contain.text', 'Save progress and close')
   })
 
   it('can see add amendment button conditionally', () => {
@@ -45,7 +45,7 @@ context('Offence Details page', () => {
     cy.url().should('include', '/offence-details')
     cy.get('#add-amendment-button').should('not.be.visible')
     cy.get('input[name="amendmentsToAdd"][value="Yes"]').check({ force: true })
-    cy.get('#add-amendment-button').should('be.visible').should('contain.text', 'Add Amendment')
+    cy.get('#add-amendment-button').should('be.visible').should('contain.text', 'Add amendment')
     cy.get('input[name="amendmentsToAdd"][value="No"]').check({ force: true })
     cy.get('#add-amendment-button').should('not.be.visible')
   })

@@ -277,7 +277,7 @@ export default function failuresRoutes(
     } else {
       if (deletedContactExists) {
         errorMessages.contacts = {
-          text: 'One or more previously selected contacts are no longer available in Delius. Review your selections before continuing.',
+          text: 'One or more previously selected contacts are no longer available in National Delius. Review your selections before continuing.',
         }
       }
 
@@ -320,7 +320,7 @@ export default function failuresRoutes(
 
     if (cosso.supportingComments && cosso.supportingComments.length > 20000) {
       errorMessages.supportingComments = {
-        text: 'Comments to support the recommendation must be 20,000 characters or less',
+        text: 'Comments to support the recommendations must be 20,000 characters or less',
       }
     }
 
