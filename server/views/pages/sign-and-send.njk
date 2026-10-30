@@ -50,12 +50,12 @@
             items: [
               {
                 value: "RO",
-                text: "Responsible Officer",
+                text: "Responsible officer",
                 checked: cosso.signedByRo === true
               },
               {
                 value: "USER",
-                text: "User on behalf of the Responsible Officer",
+                text: "User on behalf of the responsible officer",
                 checked: cosso.signedByRo === false
               }
             ]
@@ -78,7 +78,7 @@
         {% else %}
           <p id="signature">{{ cosso.signature }}</p>
           {{ govukButton({
-            text: "Clear Signature",
+            text: "Clear signature",
             type: "submit",
             name: "action",
             value: "clear-signature",

@@ -43,7 +43,7 @@
         {% if not showEmbeddedError %}
           {% include "partials/review-required.njk" %}
 
-          <h1 id="page-title" class="govuk-heading-l">Failures and Enforcement</h1>
+          <h1 id="page-title" class="govuk-heading-l">Failures and enforcement</h1>
 
           {% if failures.enforceableContacts | length > 0 %}
             <div class="govuk-form-group" id="contacts">
@@ -121,8 +121,8 @@
                 <p id="registration-{{loop.index}}"> <span class="govuk-!-font-weight-bold">Type:</span> {{ reg.type.description }}<br/>
                   <span class="govuk-!-font-weight-bold">Category:</span> {{ reg.category.description }}<br/>
                   <span class="govuk-!-font-weight-bold">Level:</span> {{ reg.level.description }}<br/>
-                  <span class="govuk-!-font-weight-bold">Start Date:</span> {{ reg.formattedStartDate }}<br/>
-                  <span class="govuk-!-font-weight-bold">End Date:</span> {{ reg.formattedEndDate }}</p>
+                  <span class="govuk-!-font-weight-bold">Start date:</span> {{ reg.formattedStartDate }}<br/>
+                  <span class="govuk-!-font-weight-bold">End date:</span> {{ reg.formattedEndDate }}</p>
                 {% if not loop.last %}
                   <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
                 {% endif %}
@@ -132,7 +132,7 @@
             {% endif %}
           {% endset -%}
           {{ govukDetails({
-            summaryText: "Show Registration History",
+            summaryText: "Show registration history",
             html: registrationListHtml,
             classes: "govuk-label--m"
           }) }}
@@ -162,7 +162,7 @@
             name: "riskOfHarmChanged",
             fieldset: {
               legend: {
-                text: "Has the Risk of Serious Harm changed since the order was imposed?",
+                text: "Has the risk of serious harm changed since the order was imposed?",
                 isPageHeading: false,
                 classes: "govuk-fieldset__legend--m"
               }
@@ -192,7 +192,7 @@
             id: "confirmationStatement",
             fieldset: {
               legend: {
-                text: "Confirmation Statement",
+                text: "Confirmation statement",
                 isPageHeading: true,
                 classes: "govuk-fieldset__legend--m"
               }
@@ -221,12 +221,12 @@
             },
             items: [
               {
-                value: "The Order is continued",
-                text: "The Order is continued"
+                value: "The order is continued",
+                text: "The order is continued"
               },
               {
-                value: "The Community Order is revoked and the person be re-sentenced",
-                text: "The Community Order is revoked and the person be re-sentenced"
+                value: "The community order is revoked and the person be re-sentenced",
+                text: "The community order is revoked and the person be re-sentenced"
               },
               {
                 value: "Custody is activated for the suspended sentence",
@@ -243,7 +243,7 @@
           {% endset -%}
           {{ govukCharacterCount({
             label: {
-              text: "Comments to support the Recommendation",
+              text: "Comments to support the recommendations",
               classes: "govuk-label--m",
               isPageHeading: false
             },
@@ -270,7 +270,7 @@
               }
             }) }}
             {{ govukButton({
-              text: "Save Progress and Close",
+              text: "Save progress and close",
               type: "submit",
               name: "action",
               value: "saveProgressAndClose",

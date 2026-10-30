@@ -27,7 +27,7 @@
 
       {% set addAmendmentButton %}
         {{ govukButton({
-          text: "Add Amendment",
+          text: "Add amendment",
           type: "submit",
           name: "action",
           value: "addAmendment",
@@ -47,38 +47,37 @@
 
         <h1 id="page-title" class="govuk-heading-l">Offence details</h1>
 
-        <h2 class="govuk-heading-m">Original Offence</h2>
+        <h2 class="govuk-heading-m">Original offence</h2>
         <p id="main-offence">{{ offenceDetails.mainOffence.description }}</p>
 
-        <h2 class="govuk-heading-m">Original Additional Offence(s)</h2>
+        <h2 class="govuk-heading-m">Original additional offences</h2>
         {% if offenceDetails.additionalOffences | length > 0 %}
           {% for off in offenceDetails.additionalOffences %}
             <p id="additional-offence-{{loop.index}}">{{ off.description }}</p>
           {% endfor %}
         {% endif %}
 
-        <h2 class="govuk-heading-m">Sentencing Court</h2>
+        <h2 class="govuk-heading-m">Sentencing court</h2>
         <p id="court">{{ offenceDetails.sentencingCourt }}</p>
 
-        <h2 class="govuk-heading-m">Date of Sentence</h2>
+        <h2 class="govuk-heading-m">Date of sentence</h2>
         <p id="sentence-date">{{ formattedSentenceDate }}</p>
 
-        <h2 class="govuk-heading-m">Sentence Imposed</h2>
+        <h2 class="govuk-heading-m">Sentence imposed</h2>
         <p id="sentence-imposed">{{ offenceDetails.sentenceImposed.description }}</p>
         <p id="sentence-length">{{ offenceDetails.sentence.length }} {{ offenceDetails.sentence.lengthUnits }}</p>
 
         {% if offenceDetails.suspendedCustodyLength and offenceDetails.suspendedCustodyLength.length %}
-          <h2 class="govuk-heading-m">Suspended Custody Length</h2>
+          <h2 class="govuk-heading-m">Suspended custody length</h2>
           <p id="custody-length">{{ offenceDetails.suspendedCustodyLength.length }} {{ offenceDetails.suspendedCustodyLength.units }}</p>
         {% endif %}
 
-        <h2 class="govuk-heading-m">Requirements Imposed</h2>
+        <h2 class="govuk-heading-m">Requirements imposed</h2>
         {% if offenceDetails.requirementsImposed | length > 0 %}
           {% for req in offenceDetails.requirementsImposed %}
-            <p id="requirements-imposed-{{loop.index}}"> <span class="govuk-!-font-weight-bold">Requirement Type:</span> {{ req.mainCategory }} - {{ req.subCategory }}<br/>
-              <span class="govuk-!-font-weight-bold"> Requirement Length:</span> {{ req.length ~ " " ~ req.lengthUnit if req.length else "" }}<br/>
-              <span class="govuk-!-font-weight-bold">Secondary Requirement Length:</span> {{ req.secondaryLength ~ " " ~ req.secondaryLengthUnit if req.secondaryLength else "" }}</p>
-            {% if not loop.last %}
+            <p id="requirements-imposed-{{loop.index}}"> <span class="govuk-!-font-weight-bold">Requirement type:</span> {{ req.mainCategory }} - {{ req.subCategory }}<br/>
+              <span class="govuk-!-font-weight-bold"> Requirement length:</span> {{ req.length ~ " " ~ req.lengthUnit if req.length else "" }}<br/>
+              <span class="govuk-!-font-weight-bold">Secondary requirement length:</span> {{ req.secondaryLength ~ " " ~ req.secondaryLengthUnit if req.secondaryLength else "" }}</p>            {% if not loop.last %}
               <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
             {% endif %}
           {% endfor %}
@@ -86,7 +85,7 @@
           <p>No information found</p>
         {% endif %}
 
-        <h2 class="govuk-heading-m">Additional Sentences</h2>
+        <h2 class="govuk-heading-m">Additional sentences</h2>
         {% if offenceDetails.additionalSentences | length > 0 %}
           {% for sen in offenceDetails.additionalSentences %}
             <p id="additional-sentence-{{loop.index}}">{{ sen.type.description}}<br/>
@@ -102,12 +101,12 @@
           {% endfor %}
         {% endif %}
 
-        <h2 class="govuk-heading-m">Amendments to the Order</h2>
+        <h2 class="govuk-heading-m">Amendments to the order</h2>
         {% if formattedAmendments | length > 0 %}
           {% for amendment in formattedAmendments %}
-            <p id="amendment-{{loop.index}}"><span class="govuk-!-font-weight-bold">Details of the Amendment:</span> {{ amendment.amendmentDetails }}<br/>
-              <span class="govuk-!-font-weight-bold">Reasons for the Amendment:</span> {{ amendment.amendmentReason }}<br/>
-              <span class="govuk-!-font-weight-bold">Date of the Amendment:</span> {{ amendment.formattedAmendmentDate }}<br/>
+            <p id="amendment-{{loop.index}}"><span class="govuk-!-font-weight-bold">Details of the amendment:</span> {{ amendment.amendmentDetails }}<br/>
+              <span class="govuk-!-font-weight-bold">Reasons for the amendment:</span> {{ amendment.amendmentReason }}<br/>
+              <span class="govuk-!-font-weight-bold">Date of the amendment:</span> {{ amendment.formattedAmendmentDate }}<br/>
               <a id="edit-link-{{ loop.index }}" href="/add-amendment/{{ cossoId }}?amendmentId={{ amendment.id }}" class="govuk-link">Edit this amendment</a><br/>
               <a id="delete-link-{{ loop.index }}" href="/delete-amendment/{{ cossoId }}/{{ amendment.id }}" class="govuk-link">Delete this amendment</a>
             </p>
@@ -116,7 +115,7 @@
             {% endif %}
           {% endfor %}
         {% else %}
-          <p>No Amendments added</p>
+          <p>No amendments added</p>
         {% endif %}
         {{ govukRadios({
           name: "amendmentsToAdd",
@@ -155,7 +154,7 @@
             }
           }) }}
           {{ govukButton({
-            text: "Refresh from Delius",
+            text: "Refresh from National Delius",
             preventDoubleClick: "true",
             type: "submit",
             name: "action",
@@ -166,7 +165,7 @@
             }
           }) }}
           {{ govukButton({
-            text: "Save Progress and Close",
+            text: "Save progress and close",
             type: "submit",
             name: "action",
             value: "saveProgressAndClose",
