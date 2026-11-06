@@ -5,7 +5,7 @@ import AuditService, { Page } from '../services/auditService'
 import CommonUtils from '../services/commonUtils'
 import { ErrorMessages } from '../data/uiModels'
 import { handleIntegrationErrors } from '../utils/utils'
-import CossoApiClient, { Cosso, CossoAddress } from '../data/cossoApiClient'
+import CossoApiClient, { CossoAddress } from '../data/cossoApiClient'
 
 export default function addAddressRoutes(
   router: Router,
@@ -21,11 +21,11 @@ export default function addAddressRoutes(
     const callingScreen: string = req.query.returnTo as string
     const cossoApiClient = new CossoApiClient(authenticationClient)
 
-    let cosso: Cosso = null
+    let cosso
     try {
       cosso = await cossoApiClient.getCossoById(cossoId, res.locals.user.username)
     } catch (error) {
-      const errorMessages: ErrorMessages = handleIntegrationErrors(error.status, error.data?.message, 'Suicide Risk')
+      const errorMessages: ErrorMessages = handleIntegrationErrors(error, 'Suicide Risk')
       const showEmbeddedError = true
       res.render(`pages/add-address`, { errorMessages, showEmbeddedError })
       return
@@ -43,15 +43,14 @@ export default function addAddressRoutes(
 
   router.post('/add-address/:id', async (req, res) => {
     const cossoApiClient = new CossoApiClient(authenticationClient)
-
     const cossoId: string = req.params.id
     const callingScreen: string = req.query.returnTo as string
-    let cosso: Cosso = null
+    let cosso
 
     try {
       cosso = await cossoApiClient.getCossoById(cossoId, res.locals.user.username)
     } catch (error) {
-      const errorMessages: ErrorMessages = handleIntegrationErrors(error.status, error.data?.message, 'Suicide Risk')
+      const errorMessages: ErrorMessages = handleIntegrationErrors(error, 'Suicide Risk')
       const showEmbeddedError = true
       res.render(`pages/add-address`, { errorMessages, showEmbeddedError })
       return
@@ -91,7 +90,7 @@ export default function addAddressRoutes(
           `/witness-details/${req.params.id}${callingScreen ? `?returnTo=${encodeURIComponent(callingScreen)}` : ''}`,
         )
       } catch (error) {
-        const integrationErrorMessages = handleIntegrationErrors(error.status, error.data?.message, 'Breach Notice')
+        const integrationErrorMessages = handleIntegrationErrors(error, 'Breach Notice')
         const showEmbeddedError = true
         // always stay on page and display the error when there are isssues retrieving the breach notice
         res.render(`pages/add-address`, { errorMessages, showEmbeddedError, integrationErrorMessages })
@@ -146,7 +145,7 @@ export default function addAddressRoutes(
   }
 
   function validateLength(
-    fieldValue: string,
+    fieldValue: string | null | undefined,
     fieldName: keyof typeof FIELD_LIMITS,
     label: string,
     errorMessages: ErrorMessages,

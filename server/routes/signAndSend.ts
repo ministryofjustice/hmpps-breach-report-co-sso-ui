@@ -1,8 +1,12 @@
 import { Router } from 'express'
 import { AuthenticationClient } from '@ministryofjustice/hmpps-auth-clients'
 import AuditService, { Page } from '../services/auditService'
-import CossoApiClient, { Cosso } from '../data/cossoApiClient'
-import NDeliusIntegrationApiClient, { SignAndSendDetails, UserDetails } from '../data/ndeliusIntegrationApiClient'
+import CossoApiClient from '../data/cossoApiClient'
+import NDeliusIntegrationApiClient, {
+  IntegrationError,
+  SignAndSendDetails,
+  UserDetails,
+} from '../data/ndeliusIntegrationApiClient'
 import { ErrorMessages } from '../data/uiModels'
 import { handleIntegrationErrors } from '../utils/utils'
 import { toFullUserDate } from '../utils/dateUtils'
@@ -24,7 +28,7 @@ export default function signAndSendRoutes(
     const cossoId: string = req.params.id
     const callingScreen: string = req.query.returnTo as string
 
-    let cosso: Cosso = null
+    let cosso
     let errorMessages: ErrorMessages = {}
     let signAndSendDetails: SignAndSendDetails
 
@@ -38,16 +42,17 @@ export default function signAndSendRoutes(
         return
       }
     } catch (error) {
-      errorMessages = handleIntegrationErrors(error?.responseStatus, error?.data?.userMessage, 'Breach Report CO SSO')
+      errorMessages = handleIntegrationErrors(error, 'Breach Report CO SSO')
+      const httpError: IntegrationError = error as unknown as IntegrationError
 
       // Navigate to the detailed error page on 400
-      if (error?.responseStatus === 400) {
+      if (httpError.responseStatus === 400) {
         res.render(`pages/detailed-error`, { errorMessages })
         return
       }
 
       // Navigate to the detailed error page on 404
-      if (error?.responseStatus === 404) {
+      if (httpError.responseStatus === 404) {
         res.render(`pages/detailed-error`, { errorMessages })
         return
       }
@@ -64,17 +69,18 @@ export default function signAndSendRoutes(
     } catch (error) {
       errorMessages = {
         ...errorMessages,
-        ...handleIntegrationErrors(error?.responseStatus, error.data?.userMessage, 'NDelius Integration'),
+        ...handleIntegrationErrors(error, 'NDelius Integration'),
       }
+      const httpError: IntegrationError = error as unknown as IntegrationError
 
       // take the user to detailed error page for 400 type errors
-      if (error.responseStatus === 400) {
+      if (httpError.responseStatus === 400) {
         res.render(`pages/detailed-error`, { errorMessages })
         return
       }
 
       // stay on the current page for 500 errors
-      if (error.responseStatus === 500) {
+      if (httpError.responseStatus === 500) {
         const showEmbeddedError = true
         res.render(`pages/basic-details`, { errorMessages, showEmbeddedError })
         return
@@ -103,7 +109,7 @@ export default function signAndSendRoutes(
 
     const formSentBy: string = req.body.whoIsSendingTheForm || null
 
-    let cosso: Cosso = null
+    let cosso
     let signAndSendDetails: SignAndSendDetails
     let errorMessages: ErrorMessages = {}
 
@@ -119,17 +125,18 @@ export default function signAndSendRoutes(
     } catch (error) {
       errorMessages = {
         ...errorMessages,
-        ...handleIntegrationErrors(error?.responseStatus, error?.data?.userMessage, 'Breach Report CO SSO'),
+        ...handleIntegrationErrors(error, 'Breach Report CO SSO'),
       }
+      const httpError: IntegrationError = error as unknown as IntegrationError
 
       // Navigate to the detailed error page on 400
-      if (error?.responseStatus === 400) {
+      if (httpError.responseStatus === 400) {
         res.render(`pages/detailed-error`, { errorMessages })
         return
       }
 
       // Navigate to the detailed error page on 404
-      if (error?.responseStatus === 404) {
+      if (httpError.responseStatus === 404) {
         res.render(`pages/detailed-error`, { errorMessages })
         return
       }
@@ -146,15 +153,16 @@ export default function signAndSendRoutes(
     } catch (error) {
       errorMessages = {
         ...errorMessages,
-        ...handleIntegrationErrors(error?.responseStatus, error.data?.userMessage, 'NDelius Integration'),
+        ...handleIntegrationErrors(error, 'NDelius Integration'),
       }
 
-      if (error.responseStatus === 400) {
+      const httpError: IntegrationError = error as unknown as IntegrationError
+      if (httpError.responseStatus === 400) {
         res.render(`pages/detailed-error`, { errorMessages })
         return
       }
 
-      if (error.responseStatus === 500) {
+      if (httpError.responseStatus === 500) {
         const showEmbeddedError = true
         res.render(`pages/basic-details`, { errorMessages, showEmbeddedError })
         return

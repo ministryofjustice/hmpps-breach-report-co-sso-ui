@@ -40,7 +40,7 @@ export default function deleteRecipientRoutes(
         }
         await cossoApiClient.deleteAmendment(amendmentId, res.locals.user.username)
       } catch (error) {
-        const errorMessages: ErrorMessages = handleIntegrationErrors(error.status, error.data?.message, 'COSSO')
+        const errorMessages: ErrorMessages = handleIntegrationErrors(error, 'COSSO')
         const showEmbeddedError = true
         res.render(`pages/detailed-error`, { errorMessages, showEmbeddedError })
         return

@@ -5,6 +5,7 @@ import CossoApiClient, { CossoAmendment } from '../data/cossoApiClient'
 import { ErrorMessages } from '../data/uiModels'
 import { fromUserDate, isValidUserDate, toFullUserDate } from '../utils/dateUtils'
 import { handleIntegrationErrors } from '../utils/utils'
+import { IntegrationError } from '../data/ndeliusIntegrationApiClient'
 
 export default function addAmendmentRoutes(
   router: Router,
@@ -32,20 +33,18 @@ export default function addAmendmentRoutes(
           return
         }
       } catch (error) {
-        const errorMessages: ErrorMessages = handleIntegrationErrors(
-          error?.responseStatus,
-          error?.data?.userMessage,
-          'Breach Report CO SSO',
-        )
+        const errorMessages: ErrorMessages = handleIntegrationErrors(error, 'Breach Report CO SSO')
+
+        const httpError: IntegrationError = error as unknown as IntegrationError
 
         // Navigate to the detailed error page on 400
-        if (error?.responseStatus === 400) {
+        if (httpError.responseStatus === 400) {
           res.render(`pages/detailed-error`, { errorMessages })
           return
         }
 
         // Navigate to the detailed error page on 404
-        if (error?.responseStatus === 404) {
+        if (httpError.responseStatus === 404) {
           res.render(`pages/detailed-error`, { errorMessages })
           return
         }
@@ -107,11 +106,7 @@ export default function addAmendmentRoutes(
           }
           res.redirect(`/offence-details/${cossoId}`)
         } catch (error) {
-          const integrationErrorMessages = handleIntegrationErrors(
-            error.status,
-            error.data?.message,
-            'Breach Report CO SSO',
-          )
+          const integrationErrorMessages = handleIntegrationErrors(error, 'Breach Report CO SSO')
           const showEmbeddedError = true
           res.render(`pages/add-amendment`, { errorMessages, showEmbeddedError, integrationErrorMessages })
         }

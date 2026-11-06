@@ -36,7 +36,7 @@ export function toUserDateFromDateTime(str: string): string {
   return ''
 }
 
-export function toFullUserDate(str: string): string {
+export function toFullUserDate(str: string | null): string {
   if (str) {
     const timeStrippedString = str.includes('T') ? str.split('T')[0] : str
     return DateTimeFormatter.ofPattern('dd/MM/yyyy').format(DateTimeFormatter.ISO_LOCAL_DATE.parse(timeStrippedString))
@@ -44,7 +44,7 @@ export function toFullUserDate(str: string): string {
   return ''
 }
 
-export function toIsoLocalDateTime(str: string): string {
+export function toIsoLocalDateTime(str: string | undefined): string {
   if (str) {
     if (/(Z|[+-]\d{2}:\d{2})$/.test(str)) {
       return OffsetDateTime.parse(str).toLocalDateTime().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME)
@@ -66,7 +66,7 @@ export function isValidUserDate(str: string): boolean {
   }
 }
 
-export function dateStringToTimestamp(amendmentDate: string): number {
+export function dateStringToTimestamp(amendmentDate: string | null): number {
   if (!amendmentDate) {
     return Number.NEGATIVE_INFINITY
   }

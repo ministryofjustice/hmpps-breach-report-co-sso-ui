@@ -85,7 +85,7 @@ export default class CossoApiClient extends RestClient {
     )
   }
 
-  async deleteContact(id: string, username: string) {
+  async deleteContact(id: string | null | undefined, username: string) {
     return this.delete(
       {
         path: `/cosso/contact/${id}`,
@@ -152,7 +152,7 @@ export default class CossoApiClient extends RestClient {
     )
   }
 
-  async deleteCossoRequirement(id: string, username: string) {
+  async deleteCossoRequirement(id: string | undefined, username: string) {
     return this.delete(
       {
         path: `/cosso/requirement/${id}`,
@@ -173,7 +173,7 @@ export default class CossoApiClient extends RestClient {
   async batchDeleteRequirements(reqs: Array<CossoRequirement>, username: string): Promise<void> {
     const promises = []
     for (const r of reqs) {
-      promises.push(this.deleteCossoRequirement(r.id, username))
+      promises.push(this.deleteCossoRequirement(r.id!, username))
     }
     await Promise.all(promises)
   }
@@ -225,13 +225,13 @@ export interface Cosso {
   telephoneNumber: string
   emailAddress: string
   mobileNumber: string
-  postalAddress: CossoAddress
+  postalAddress: CossoAddress | null | undefined
   basicDetailsSaved: boolean
   roTitleAndFullName: string
   roTelephoneNumber: string
   roEmailAddress: string
   witnessAvailability: string
-  workAddress: CossoAddress
+  workAddress: CossoAddress | null | undefined
   roAndWitnessDetailsSaved: boolean
   mainOffence: string
   additionalOffence: string
@@ -255,48 +255,48 @@ export interface Cosso {
   riskOfHarmChanged: boolean
   failuresAndEnforcementSaved: boolean
   offenceDetailsSaved: boolean
-  probationArea: string
+  probationArea: string | null | undefined
   diversityConfirmation: boolean
-  signature: string
-  signAndSendSaved: boolean
-  sheetSentBy: string
-  signedByRo: boolean
+  signature: string | null
+  signAndSendSaved: boolean | null
+  sheetSentBy: string | null
+  signedByRo: boolean | null
   terminated: boolean
   terminatedUnterminatedDate: Date
 }
 
 export interface CossoAddress {
-  id?: string
-  addressId: number
-  status: string
-  officeDescription?: string
-  buildingName: string
-  addressNumber: string
-  streetName: string
-  townCity: string
-  district: string
-  county: string
-  postcode: string
+  id?: string | null | undefined
+  addressId: number | null | undefined
+  status: string | null | undefined
+  officeDescription?: string | null | undefined
+  buildingName: string | null | undefined
+  addressNumber: string | null | undefined
+  streetName: string | null | undefined
+  townCity: string | null | undefined
+  district: string | null | undefined
+  county: string | null | undefined
+  postcode: string | null | undefined
 }
 
 export interface CossoAmendment {
   id?: string
   cossoId: string
-  amendmentDetails: string
-  amendmentReason: string
-  amendmentDate: string
+  amendmentDetails: string | null
+  amendmentReason: string | null
+  amendmentDate: string | null
 }
 
 export interface CossoContact {
   id?: string
   cossoId: string
-  deliusContactId: number
-  contactTypeDescription: string
-  contactPerson: string
-  contactLocation: CossoAddress
+  deliusContactId: number | undefined
+  contactTypeDescription: string | null | undefined
+  contactPerson: string | null
+  contactLocation: CossoAddress | null
   contactDate: string
-  contactOutcome: string
-  formSent: string
+  contactOutcome: string | undefined | null
+  formSent: string | null
 }
 
 export interface ScreenInformation {
@@ -306,14 +306,14 @@ export interface ScreenInformation {
 }
 
 export interface CossoRequirement {
-  id?: string
+  id?: string | undefined | null
   deliusRequirementId: number
   cossoId: string
   requirementTypeMainCategoryDescription: string
   requirementTypeSubCategoryDescription: string
   requirementLength: string
   requirementSecondLength?: string | null
-  failureReason?: string
+  failureReason?: string | undefined | null
   notes?: string
-  failure?: boolean
+  failure?: boolean | undefined | null
 }

@@ -19,7 +19,7 @@ export default function checkYourAnswersRoutes(
     await auditService.logPageView(Page.CHECK_YOUR_REPORT, { who: res.locals.user.username, correlationId: req.id })
     const cossoClient = new CossoApiClient(authenticationClient)
     const cossoId: string = req.params.id
-    let cosso: Cosso
+    let cosso
     let dateOfBirth: string
     let sentenceDate: string
     let reportValidated: boolean
@@ -34,7 +34,7 @@ export default function checkYourAnswersRoutes(
         formattedAmendmentDate: toFullUserDate(amendment.amendmentDate),
       }))
     } catch (error) {
-      const errorMessages: ErrorMessages = handleIntegrationErrors(error.status, error.data?.message, 'COSSO')
+      const errorMessages: ErrorMessages = handleIntegrationErrors(error, 'COSSO')
       const showEmbeddedError = true
       cosso = createBlankCossoWithId(req.params.id)
       // always stay on page and display the error when there are isssues retrieving the breach notice
@@ -57,12 +57,12 @@ export default function checkYourAnswersRoutes(
     await auditService.logPageView(Page.CHECK_YOUR_REPORT, { who: res.locals.user.username, correlationId: req.id })
     const cossoClient = new CossoApiClient(authenticationClient)
     const cossoId: string = req.params.id
-    let cosso: Cosso
+    let cosso
 
     try {
       cosso = await cossoClient.getCossoById(cossoId, res.locals.user.username)
     } catch (error) {
-      const errorMessages: ErrorMessages = handleIntegrationErrors(error.status, error.data?.message, 'COSSO')
+      const errorMessages: ErrorMessages = handleIntegrationErrors(error, 'COSSO')
       const showEmbeddedError = true
       cosso = createBlankCossoWithId(req.params.id)
       res.render(`pages/check-your-answers`, { errorMessages, showEmbeddedError, cosso })
@@ -93,7 +93,7 @@ export default function checkYourAnswersRoutes(
       await cossoClient.updateCosso(cossoId, cosso, res.locals.user.username)
       await cossoClient.publishCosso(cossoId, res.locals.user.username)
     } catch (error) {
-      const errorMessages: ErrorMessages = handleIntegrationErrors(error.status, error.data?.message, 'COSSO')
+      const errorMessages: ErrorMessages = handleIntegrationErrors(error, 'COSSO')
       const showEmbeddedError = true
       res.render(`pages/check-your-answers`, { errorMessages, showEmbeddedError, cosso })
       return
@@ -125,8 +125,9 @@ export default function checkYourAnswersRoutes(
       cosso.recommendations?.trim().length > 0 &&
       cosso.supportingComments?.trim().length > 0 &&
       cosso.complianceToDate?.trim().length > 0 &&
+      cosso.signature != null &&
       cosso.signature?.trim().length > 0 &&
-      (cosso.riskOfHarmChanged === false || (cosso.riskOfHarmChanged === true && cosso.riskHistory?.trim().length > 0))
+      (!cosso.riskOfHarmChanged || (cosso.riskOfHarmChanged && cosso.riskHistory?.trim().length > 0))
     )
   }
 

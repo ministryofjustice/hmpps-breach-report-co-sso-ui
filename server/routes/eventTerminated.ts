@@ -37,11 +37,7 @@ export default function eventTerminatedRoutes(
         }
         await cossoApiClient.deleteCosso(id as string, res.locals.user.username)
       } catch (error) {
-        const errorMessages: ErrorMessages = handleIntegrationErrors(
-          error.responseStatus,
-          error.data?.message,
-          'Breach Report CO SSO',
-        )
+        const errorMessages: ErrorMessages = handleIntegrationErrors(error, 'Breach Report CO SSO')
         const showEmbeddedError = true
         res.render(`pages/detailed-error`, { errorMessages, showEmbeddedError })
         return
