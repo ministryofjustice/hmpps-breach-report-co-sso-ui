@@ -82,22 +82,22 @@ export interface BasicDetails {
 }
 
 export interface DeliusAddress {
-  id: number
-  status: string
-  officeDescription?: string
-  buildingName: string
-  buildingNumber: string
-  streetName: string
-  townCity: string
-  district: string
-  county: string
-  postcode: string
-  startDate: string
+  id: number | null | undefined
+  status: string | null | undefined
+  officeDescription?: string | null | undefined
+  buildingName: string | null | undefined
+  buildingNumber: string | null | undefined
+  streetName: string | null | undefined
+  townCity: string | null | undefined
+  district: string | null | undefined
+  county: string | null | undefined
+  postcode: string | null | undefined
+  startDate: string | null | undefined
 }
 
 export interface ReferenceData {
-  code: string
-  description: string
+  code: string | null | undefined
+  description: string | null | undefined
 }
 
 export interface UserDetails {
@@ -106,12 +106,12 @@ export interface UserDetails {
 }
 
 export interface EnforceableContact {
-  id: number
+  id: number | undefined
   datetime: string
-  description: string
+  description: string | undefined | null
   type: ReferenceData
   outcome: ReferenceData
-  notes: string
+  notes: string | null
 }
 
 export interface Registration {
@@ -193,4 +193,11 @@ export interface Requirements {
 
 export interface SignAndSendDetails {
   userDetails: UserDetails
+}
+
+export interface IntegrationError {
+  responseStatus?: number
+  data?: {
+    message?: string
+  }
 }

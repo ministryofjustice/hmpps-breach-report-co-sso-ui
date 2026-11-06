@@ -1,7 +1,7 @@
 import { Router } from 'express'
 import { AuthenticationClient } from '@ministryofjustice/hmpps-auth-clients'
 import AuditService, { Page } from '../services/auditService'
-import CossoApiClient, { Cosso, ScreenInformation } from '../data/cossoApiClient'
+import CossoApiClient, { Cosso } from '../data/cossoApiClient'
 import CommonUtils from '../services/commonUtils'
 import { ErrorMessages, SelectItem } from '../data/uiModels'
 import {
@@ -12,7 +12,11 @@ import {
   handleIntegrationErrors,
   toCossoAddress,
 } from '../utils/utils'
-import NDeliusIntegrationApiClient, { DeliusAddress, WitnessDetails } from '../data/ndeliusIntegrationApiClient'
+import NDeliusIntegrationApiClient, {
+  DeliusAddress,
+  IntegrationError,
+  WitnessDetails,
+} from '../data/ndeliusIntegrationApiClient'
 
 export default function witnessDetailsRoutes(
   router: Router,
@@ -29,9 +33,9 @@ export default function witnessDetailsRoutes(
     const cossoId: string = req.params.id
     const callingScreen: string = req.query.returnTo as string
     let errorMessages: ErrorMessages = {}
-    let cosso: Cosso = null
-    let witnessDetails: WitnessDetails = null
-    let screenInfo: ScreenInformation[] = null
+    let cosso
+    let witnessDetails
+    let screenInfo
 
     try {
       cosso = await cossoClient.getCossoById(cossoId, res.locals.user.username)
@@ -44,16 +48,17 @@ export default function witnessDetailsRoutes(
       }
       screenInfo = await cossoClient.getScreenInformationForScreen('witness_details', res.locals.user.username)
     } catch (error) {
-      errorMessages = handleIntegrationErrors(error?.responseStatus, error?.data?.userMessage, 'Breach Report CO SSO')
+      errorMessages = handleIntegrationErrors(error, 'Breach Report CO SSO')
+      const httpError: IntegrationError = error as unknown as IntegrationError
 
       // Navigate to the detailed error page on 400
-      if (error?.responseStatus === 400) {
+      if (httpError.responseStatus === 400) {
         res.render(`pages/detailed-error`, { errorMessages })
         return
       }
 
       // Navigate to the detailed error page on 404
-      if (error?.responseStatus === 404) {
+      if (httpError.responseStatus === 404) {
         res.render(`pages/detailed-error`, { errorMessages })
         return
       }
@@ -66,16 +71,17 @@ export default function witnessDetailsRoutes(
     try {
       witnessDetails = await ndeliusIntegrationApiClient.getWitnessDetails(cosso.crn, res.locals.user.username)
     } catch (error) {
-      errorMessages = handleIntegrationErrors(error.responseStatus, error.data?.message, 'NDelius Integration')
+      errorMessages = handleIntegrationErrors(error, 'NDelius Integration')
+      const httpError: IntegrationError = error as unknown as IntegrationError
 
       // take the user to detailed error page for 400 type errors
-      if (error.responseStatus === 400) {
+      if (httpError.responseStatus === 400) {
         res.render(`pages/detailed-error`, { errorMessages })
         return
       }
 
       // stay on the current page for 500 errors
-      if (error.responseStatus === 500) {
+      if (httpError.responseStatus === 500) {
         const showEmbeddedError = true
         res.render(`pages/witness-details`, { errorMessages, showEmbeddedError })
         return
@@ -86,7 +92,7 @@ export default function witnessDetailsRoutes(
 
     if (await commonUtils.redirectRequired(cosso, cossoId, res, authenticationClient)) return
 
-    let defaultAddress: DeliusAddress = null
+    let defaultAddress
     if (cosso.workAddress == null && witnessDetails.replyAddresses != null && !cosso.roAndWitnessDetailsSaved) {
       defaultAddress = witnessDetails.replyAddresses.find(record => record.status === 'Default')
 
@@ -97,7 +103,7 @@ export default function witnessDetailsRoutes(
 
     let addressNotAvailable: boolean = false
     if (cosso.workAddress != null && cosso.workAddress.addressId != null && witnessDetails.replyAddresses != null) {
-      const addressPresent = witnessDetails.replyAddresses.find(record => record.id === cosso.workAddress.addressId)
+      const addressPresent = witnessDetails.replyAddresses.find(record => record.id === cosso.workAddress?.addressId)
       if (addressPresent == null) {
         cosso.workAddress = null
         addressNotAvailable = true
@@ -162,9 +168,9 @@ export default function witnessDetailsRoutes(
     const ndeliusIntegrationApiClient = new NDeliusIntegrationApiClient(authenticationClient)
     const callingScreen: string = req.query.returnTo as string
     const cossoId: string = req.params.id
-    let cosso: Cosso = null
-    let witnessDetails: WitnessDetails = null
-    let screenInfo: ScreenInformation[] = null
+    let cosso: Cosso
+    let witnessDetails
+    let screenInfo
 
     try {
       cosso = await cossoClient.getCossoById(cossoId, res.locals.user.username)
@@ -178,20 +184,17 @@ export default function witnessDetailsRoutes(
       }
       screenInfo = await cossoClient.getScreenInformationForScreen('witness_details', res.locals.user.username)
     } catch (error) {
-      const errorMessages: ErrorMessages = handleIntegrationErrors(
-        error?.responseStatus,
-        error?.data?.userMessage,
-        'Breach Report CO SSO',
-      )
+      const errorMessages: ErrorMessages = handleIntegrationErrors(error, 'Breach Report CO SSO')
+      const httpError: IntegrationError = error as unknown as IntegrationError
 
       // Navigate to the detailed error page on 400
-      if (error?.responseStatus === 400) {
+      if (httpError.responseStatus === 400) {
         res.render(`pages/detailed-error`, { errorMessages })
         return
       }
 
       // Navigate to the detailed error page on 404
-      if (error?.responseStatus === 404) {
+      if (httpError.responseStatus === 404) {
         res.render(`pages/detailed-error`, { errorMessages })
         return
       }
@@ -204,20 +207,18 @@ export default function witnessDetailsRoutes(
     try {
       witnessDetails = await ndeliusIntegrationApiClient.getWitnessDetails(cosso.crn, res.locals.user.username)
     } catch (error) {
-      const errorMessages: ErrorMessages = handleIntegrationErrors(
-        error.responseStatus,
-        error.data?.message,
-        'NDelius Integration',
-      )
+      const errorMessages: ErrorMessages = handleIntegrationErrors(error, 'NDelius Integration')
+
+      const httpError: IntegrationError = error as unknown as IntegrationError
 
       // take the user to detailed error page for 400 type errors
-      if (error.responseStatus === 400) {
+      if (httpError.responseStatus === 400) {
         res.render(`pages/detailed-error`, { errorMessages })
         return
       }
 
       // stay on the current page for 500 errors
-      if (error.responseStatus === 500) {
+      if (httpError.responseStatus === 500) {
         const showEmbeddedError = true
         res.render(`pages/witness-details`, { errorMessages, showEmbeddedError })
         return
@@ -260,18 +261,22 @@ export default function witnessDetailsRoutes(
           res.redirect(`/offence-details/${cossoId}`)
         }
       } else {
-        let defaultAddress: DeliusAddress = null
+        let defaultAddress
         if (cosso.workAddress == null && witnessDetails.replyAddresses != null && !cosso.roAndWitnessDetailsSaved) {
           defaultAddress = witnessDetails.replyAddresses.find(record => record.status === 'Default')
 
           if (defaultAddress) {
             cosso.workAddress = toCossoAddress(defaultAddress)
+          } else {
+            cosso.workAddress = null
           }
         }
 
         let addressNotAvailable: boolean = false
         if (cosso.workAddress != null && cosso.workAddress.addressId != null && witnessDetails.replyAddresses != null) {
-          const addressPresent = witnessDetails.replyAddresses.find(record => record.id === cosso.workAddress.addressId)
+          const addressPresent = witnessDetails.replyAddresses.find(
+            record => record.id === cosso.workAddress?.addressId,
+          )
           if (addressPresent == null) {
             cosso.workAddress = null
             addressNotAvailable = true
@@ -382,15 +387,15 @@ export default function witnessDetailsRoutes(
     return co
   }
 
-  function getSelectedAddress(addressList: DeliusAddress[], addressIdentifier: string): DeliusAddress {
+  function getSelectedAddress(addressList: DeliusAddress[], addressIdentifier: string) {
     const addressIdentifierNumber: number = +addressIdentifier
     return addressList?.find(address => address.id === addressIdentifierNumber)
   }
 
   function addressListToSelectItemList(
     addresses: DeliusAddress[],
-    witnessDetailsSaved: boolean,
-    selectedAddressId: number,
+    witnessDetailsSaved: boolean | null | undefined,
+    selectedAddressId: number | null | undefined,
   ): SelectItem[] {
     const returnAddressList: SelectItem[] = [
       {
@@ -400,7 +405,7 @@ export default function witnessDetailsRoutes(
       },
     ]
     if (addresses) {
-      const orderedAddressList: SelectItem[] = arrangeSelectItemListAlphabetically(
+      const orderedAddressList = arrangeSelectItemListAlphabetically(
         addresses.map(address => ({
           text: formatAddressForSelectMenuDisplay(address),
           value: `${address.id}`,

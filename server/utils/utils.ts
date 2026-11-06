@@ -1,7 +1,6 @@
 import { ParsedQs } from 'qs'
-import { DeliusAddress, Name } from '../data/ndeliusIntegrationApiClient'
+import { DeliusAddress, IntegrationError, Name } from '../data/ndeliusIntegrationApiClient'
 import { ErrorMessages, SelectItem } from '../data/uiModels'
-import { Cosso, CossoAddress } from '../data/cossoApiClient'
 
 const properCase = (word: string): string =>
   word.length >= 1 ? word[0].toUpperCase() + word.toLowerCase().slice(1) : word
@@ -35,17 +34,23 @@ export function formatFullName(name: Name): string {
   return [name.forename, name.middleName, name.surname].filter(Boolean).join(' ')
 }
 
-export function findMainOrPostalAddressInAddressList(addressList: Array<DeliusAddress>): DeliusAddress {
+export function findMainOrPostalAddressInAddressList(addressList: Array<DeliusAddress>) {
   if (!Array.isArray(addressList) || addressList.length === 0) {
     return null
   }
 
-  addressList.sort((a, b) => a.startDate && a.startDate.localeCompare(b.startDate)).reverse()
+  const parseDate = (date?: string): number => (date ? Date.parse(date) || 0 : 0)
+  const latestByStatus = (status: string): DeliusAddress =>
+    addressList.filter(a => a.status === status).sort((a, b) => parseDate(b.startDate!) - parseDate(a.startDate!))[0]
 
-  return addressList.find(a => a.status === 'Postal') ?? addressList.find(a => a.status === 'Main') ?? null
+  // Return the latest address from start date with the following priority for statuses:
+  // Postal → Main → None (Displays No Fixed Abode)
+  return latestByStatus('Postal') ?? latestByStatus('Main') ?? null
 }
 
-export function handleIntegrationErrors(status: number, message: string, integrationService: string): ErrorMessages {
+export function handleIntegrationErrors(error: unknown, integrationService: string): ErrorMessages {
+  const httpError: IntegrationError = error as unknown as IntegrationError
+  const status = httpError.responseStatus
   const errorMessages: ErrorMessages = {}
   if (status === 400) {
     errorMessages.genericErrorMessage = {
@@ -72,7 +77,7 @@ export function handleIntegrationErrors(status: number, message: string, integra
   return errorMessages
 }
 
-export function toCossoAddress(deliusAddress: DeliusAddress): CossoAddress {
+export function toCossoAddress(deliusAddress: DeliusAddress | null) {
   if (!deliusAddress) {
     return null
   }
@@ -95,7 +100,7 @@ export default function asArray(param: undefined | string | ParsedQs | (string |
   return Array.isArray(param) ? (param as string[]) : [param as string]
 }
 
-export function formatAddressForSelectMenuDisplay(deliusAddress: DeliusAddress): string {
+export function formatAddressForSelectMenuDisplay(deliusAddress: DeliusAddress | null | undefined) {
   if (deliusAddress) {
     return [
       deliusAddress.officeDescription,
@@ -117,12 +122,16 @@ export function formatAddressForSelectMenuDisplay(deliusAddress: DeliusAddress):
 
 export function arrangeSelectItemListAlphabetically(selectItemsToSort: SelectItem[]): SelectItem[] {
   if (selectItemsToSort) {
-    return selectItemsToSort.sort((a, b) => a?.text.localeCompare(b?.text, 'en', { numeric: true }))
+    return selectItemsToSort.sort((a, b) => {
+      const textA = a?.text ?? ''
+      const textB = b?.text ?? ''
+      return textA.localeCompare(textB, 'en', { numeric: true })
+    })
   }
   return selectItemsToSort
 }
 
-export function createBlankCossoWithId(id: string): Cosso {
+export function createBlankCossoWithId(id: string) {
   return {
     amendments: [],
     basicDetailsSaved: false,

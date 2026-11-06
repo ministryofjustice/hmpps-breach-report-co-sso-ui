@@ -25,11 +25,7 @@ export default function pdfMaintenanceRoutes(
       res.setHeader('Content-Disposition', `filename="breach_report_co_sso_${cosso.crn}_draft.pdf"`)
       res.send(stream)
     } catch (error) {
-      const errorMessages: ErrorMessages = handleIntegrationErrors(
-        error.status,
-        error.data?.message,
-        'NDelius Integration',
-      )
+      const errorMessages: ErrorMessages = handleIntegrationErrors(error, 'NDelius Integration')
 
       res.render(`pages/pdf-generation-failed`, { errorMessages })
     }

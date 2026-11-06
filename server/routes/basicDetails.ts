@@ -1,9 +1,9 @@
 import { Router } from 'express'
 import { AuthenticationClient } from '@ministryofjustice/hmpps-auth-clients'
 import AuditService, { Page } from '../services/auditService'
-import CossoApiClient, { Cosso } from '../data/cossoApiClient'
+import CossoApiClient from '../data/cossoApiClient'
 import CommonUtils from '../services/commonUtils'
-import NDeliusIntegrationApiClient, { BasicDetails, DeliusAddress } from '../data/ndeliusIntegrationApiClient'
+import NDeliusIntegrationApiClient, { IntegrationError } from '../data/ndeliusIntegrationApiClient'
 import { toFullUserDate } from '../utils/dateUtils'
 import {
   findMainOrPostalAddressInAddressList,
@@ -28,8 +28,8 @@ export default function basicDetailsRoutes(
     const ndeliusIntegrationApiClient = new NDeliusIntegrationApiClient(authenticationClient)
     const cossoId: string = req.params.id
     const callingScreen: string = req.query.returnTo as string
-    let basicDetails: BasicDetails = null
-    let cosso: Cosso = null
+    let basicDetails
+    let cosso
 
     try {
       cosso = await cossoClient.getCossoById(cossoId, res.locals.user.username)
@@ -42,20 +42,18 @@ export default function basicDetailsRoutes(
         return
       }
     } catch (error) {
-      const errorMessages: ErrorMessages = handleIntegrationErrors(
-        error?.responseStatus,
-        error?.data?.userMessage,
-        'Breach Report CO SSO',
-      )
+      const errorMessages: ErrorMessages = handleIntegrationErrors(error, 'Breach Report CO SSO')
+
+      const httpError: IntegrationError = error as unknown as IntegrationError
 
       // Navigate to the detailed error page on 400
-      if (error?.responseStatus === 400) {
+      if (httpError.responseStatus === 400) {
         res.render(`pages/detailed-error`, { errorMessages })
         return
       }
 
       // Navigate to the detailed error page on 404
-      if (error?.responseStatus === 404) {
+      if (httpError.responseStatus === 404) {
         res.render(`pages/detailed-error`, { errorMessages })
         return
       }
@@ -70,20 +68,17 @@ export default function basicDetailsRoutes(
     try {
       basicDetails = await ndeliusIntegrationApiClient.getBasicDetails(cosso.crn, res.locals.user.username)
     } catch (error) {
-      const errorMessages: ErrorMessages = handleIntegrationErrors(
-        error.responseStatus,
-        error.data?.message,
-        'NDelius Integration',
-      )
+      const errorMessages: ErrorMessages = handleIntegrationErrors(error, 'NDelius Integration')
+      const httpError: IntegrationError = error as unknown as IntegrationError
 
       // take the user to detailed error page for 400 type errors
-      if (error.responseStatus === 400) {
+      if (httpError.responseStatus === 400) {
         res.render(`pages/detailed-error`, { errorMessages })
         return
       }
 
       // stay on the current page for 500 errors
-      if (error.responseStatus === 500) {
+      if (httpError.responseStatus === 500) {
         const showEmbeddedError = true
         res.render(`pages/basic-details`, { errorMessages, showEmbeddedError })
         return
@@ -93,7 +88,7 @@ export default function basicDetailsRoutes(
     }
 
     const formattedDob = toFullUserDate(basicDetails.dateOfBirth)
-    const defaultAddress: DeliusAddress = findMainOrPostalAddressInAddressList(basicDetails.addresses)
+    const defaultAddress = findMainOrPostalAddressInAddressList(basicDetails.addresses)
     const titleAndFullName: string = formatTitleAndFullName(basicDetails.title, basicDetails.name)
     const addAddressDeeplink = `${config.ndeliusDeeplink.url}?component=AddressandAccommodation&CRN=${cosso.crn}`
     const { mobileNumber, telephoneNumber, emailAddress } = basicDetails
@@ -115,13 +110,13 @@ export default function basicDetailsRoutes(
     })
   })
 
-  router.post('/basic-details/:id', async (req, res, next) => {
+  router.post('/basic-details/:id', async (req, res) => {
     const cossoClient = new CossoApiClient(authenticationClient)
     const ndeliusIntegrationApiClient = new NDeliusIntegrationApiClient(authenticationClient)
     const cossoId: string = req.params.id
     const callingScreen: string = req.query.returnTo as string
-    let cosso: Cosso = null
-    let basicDetails: BasicDetails = null
+    let cosso
+    let basicDetails
 
     try {
       cosso = await cossoClient.getCossoById(cossoId, res.locals.user.username)
@@ -134,20 +129,16 @@ export default function basicDetailsRoutes(
         return
       }
     } catch (error) {
-      const errorMessages: ErrorMessages = handleIntegrationErrors(
-        error?.responseStatus,
-        error?.data?.userMessage,
-        'Breach Report CO SSO',
-      )
-
+      const errorMessages: ErrorMessages = handleIntegrationErrors(error, 'Breach Report CO SSO')
+      const httpError: IntegrationError = error as unknown as IntegrationError
       // Navigate to the detailed error page on 400
-      if (error?.responseStatus === 400) {
+      if (httpError.responseStatus === 400) {
         res.render(`pages/detailed-error`, { errorMessages })
         return
       }
 
       // Navigate to the detailed error page on 404
-      if (error?.responseStatus === 404) {
+      if (httpError.responseStatus === 404) {
         res.render(`pages/detailed-error`, { errorMessages })
         return
       }
@@ -162,19 +153,16 @@ export default function basicDetailsRoutes(
     try {
       basicDetails = await ndeliusIntegrationApiClient.getBasicDetails(cosso.crn, res.locals.user.username)
     } catch (error) {
-      const errorMessages: ErrorMessages = handleIntegrationErrors(
-        error.responseStatus,
-        error.data?.message,
-        'NDelius Integration',
-      )
+      const errorMessages: ErrorMessages = handleIntegrationErrors(error, 'NDelius Integration')
+      const httpError: IntegrationError = error as unknown as IntegrationError
       // take the user to detailed error page for 400 type errors
-      if (error.responseStatus === 400) {
+      if (httpError.responseStatus === 400) {
         res.render(`pages/detailed-error`, { errorMessages })
         return
       }
 
       // stay on the current page for 500 errors
-      if (error.responseStatus === 500) {
+      if (httpError.responseStatus === 500) {
         const showEmbeddedError = true
         res.render(`pages/basic-details`, { errorMessages, showEmbeddedError })
         return
@@ -183,7 +171,7 @@ export default function basicDetailsRoutes(
       return
     }
 
-    const defaultAddress: DeliusAddress = findMainOrPostalAddressInAddressList(basicDetails.addresses)
+    const defaultAddress = findMainOrPostalAddressInAddressList(basicDetails.addresses)
     cosso.postalAddress = toCossoAddress(defaultAddress)
     cosso.titleAndFullName = formatTitleAndFullName(basicDetails.title, basicDetails.name)
 

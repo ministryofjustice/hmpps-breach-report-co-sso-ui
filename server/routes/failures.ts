@@ -5,7 +5,11 @@ import CossoApiClient, { Cosso, CossoContact, ScreenInformation } from '../data/
 import CommonUtils from '../services/commonUtils'
 import { ErrorMessages } from '../data/uiModels'
 import asArray, { convertLineBreaks, handleIntegrationErrors } from '../utils/utils'
-import NDeliusIntegrationApiClient, { EnforceableContact, Failures } from '../data/ndeliusIntegrationApiClient'
+import NDeliusIntegrationApiClient, {
+  EnforceableContact,
+  Failures,
+  IntegrationError,
+} from '../data/ndeliusIntegrationApiClient'
 import { toFullUserDate, toIsoLocalDateTime } from '../utils/dateUtils'
 
 export default function failuresRoutes(
@@ -22,9 +26,9 @@ export default function failuresRoutes(
     const ndeliusIntegrationApiClient = new NDeliusIntegrationApiClient(authenticationClient)
     const cossoId: string = req.params.id
     const callingScreen: string = req.query.returnTo as string
-    let cosso: Cosso = null
-    let failures: Failures = null
-    let screenInfo: ScreenInformation[] = null
+    let cosso: Cosso
+    let failures: Failures
+    let screenInfo: ScreenInformation[]
 
     try {
       cosso = await cossoClient.getCossoById(cossoId, res.locals.user.username)
@@ -41,20 +45,17 @@ export default function failuresRoutes(
         res.locals.user.username,
       )
     } catch (error) {
-      const errorMessages: ErrorMessages = handleIntegrationErrors(
-        error?.responseStatus,
-        error?.data?.userMessage,
-        'Breach Report CO SSO',
-      )
+      const errorMessages: ErrorMessages = handleIntegrationErrors(error, 'Breach Report CO SSO')
+      const httpError: IntegrationError = error as unknown as IntegrationError
 
       // Navigate to the detailed error page on 400
-      if (error?.responseStatus === 400) {
+      if (httpError.responseStatus === 400) {
         res.render(`pages/detailed-error`, { errorMessages })
         return
       }
 
       // Navigate to the detailed error page on 404
-      if (error?.responseStatus === 404) {
+      if (httpError.responseStatus === 404) {
         res.render(`pages/detailed-error`, { errorMessages })
         return
       }
@@ -67,20 +68,18 @@ export default function failuresRoutes(
     try {
       failures = await ndeliusIntegrationApiClient.getFailures(cosso.crn, cossoId, res.locals.user.username)
     } catch (error) {
-      const errorMessages: ErrorMessages = handleIntegrationErrors(
-        error.responseStatus,
-        error.data?.message,
-        'NDelius Integration',
-      )
+      const errorMessages: ErrorMessages = handleIntegrationErrors(error, 'NDelius Integration')
+
+      const httpError: IntegrationError = error as unknown as IntegrationError
 
       // take the user to detailed error page for 400 type errors
-      if (error.responseStatus === 400) {
+      if (httpError.responseStatus === 400) {
         res.render(`pages/detailed-error`, { errorMessages })
         return
       }
 
       // stay on the current page for 500 errors
-      if (error.responseStatus === 500) {
+      if (httpError.responseStatus === 500) {
         const showEmbeddedError = true
         res.render(`pages/basic-details`, { errorMessages, showEmbeddedError })
         return
@@ -92,7 +91,7 @@ export default function failuresRoutes(
     const enforceableContactListIds = failures.enforceableContacts?.map(c => c.id)
     let deletedContactExists = false
     for (const contact of cosso.cossoContactList) {
-      if (!enforceableContactListIds || !enforceableContactListIds.includes(contact.deliusContactId)) {
+      if (!enforceableContactListIds || !enforceableContactListIds.includes(contact.deliusContactId!)) {
         failures.enforceableContacts.push({
           id: contact.deliusContactId,
           datetime: contact.contactDate,
@@ -140,9 +139,9 @@ export default function failuresRoutes(
     const ndeliusIntegrationApiClient = new NDeliusIntegrationApiClient(authenticationClient)
     const cossoId: string = req.params.id
     const callingScreen: string = req.query.returnTo as string
-    let cosso: Cosso = null
-    let failures: Failures = null
-    let screenInfo: ScreenInformation[] = null
+    let cosso: Cosso
+    let failures: Failures
+    let screenInfo: ScreenInformation[]
 
     try {
       cosso = await cossoClient.getCossoById(cossoId, res.locals.user.username)
@@ -159,20 +158,16 @@ export default function failuresRoutes(
         res.locals.user.username,
       )
     } catch (error) {
-      const errorMessages: ErrorMessages = handleIntegrationErrors(
-        error?.responseStatus,
-        error?.data?.userMessage,
-        'Breach Report CO SSO',
-      )
-
+      const errorMessages: ErrorMessages = handleIntegrationErrors(error, 'Breach Report CO SSO')
+      const httpError: IntegrationError = error as unknown as IntegrationError
       // Navigate to the detailed error page on 400
-      if (error?.responseStatus === 400) {
+      if (httpError.responseStatus === 400) {
         res.render(`pages/detailed-error`, { errorMessages })
         return
       }
 
       // Navigate to the detailed error page on 404
-      if (error?.responseStatus === 404) {
+      if (httpError.responseStatus === 404) {
         res.render(`pages/detailed-error`, { errorMessages })
         return
       }
@@ -185,20 +180,16 @@ export default function failuresRoutes(
     try {
       failures = await ndeliusIntegrationApiClient.getFailures(cosso.crn, cossoId, res.locals.user.username)
     } catch (error) {
-      const errorMessages: ErrorMessages = handleIntegrationErrors(
-        error.responseStatus,
-        error.data?.message,
-        'NDelius Integration',
-      )
-
+      const errorMessages: ErrorMessages = handleIntegrationErrors(error, 'NDelius Integration')
+      const httpError: IntegrationError = error as unknown as IntegrationError
       // take the user to detailed error page for 400 type errors
-      if (error.responseStatus === 400) {
+      if (httpError.responseStatus === 400) {
         res.render(`pages/detailed-error`, { errorMessages })
         return
       }
 
       // stay on the current page for 500 errors
-      if (error.responseStatus === 500) {
+      if (httpError.responseStatus === 500) {
         const showEmbeddedError = true
         res.render(`pages/failures`, { errorMessages, showEmbeddedError })
         return
@@ -247,12 +238,12 @@ export default function failuresRoutes(
 
       // Add all selected contacts
       const selectedContactList = asArray(req.body.contact)
-      const cossoContactIds = cosso.cossoContactList.map(c => c.deliusContactId.toString())
+      const cossoContactIds = cosso.cossoContactList.map(c => c.deliusContactId?.toString())
       if (selectedContactList && Object.keys(selectedContactList).length > 0) {
         const contactsToPush: CossoContact[] = []
         for (const selectedContactId of selectedContactList) {
           if (cossoContactIds && !cossoContactIds.includes(selectedContactId)) {
-            const selectedContact = failures.enforceableContacts.find(c => c.id.toString() === selectedContactId)
+            const selectedContact = failures.enforceableContacts.find(c => c.id?.toString() === selectedContactId)
             contactsToPush.push(enforceableContactToContact(cosso, selectedContact, cossoId))
           }
         }
@@ -260,7 +251,7 @@ export default function failuresRoutes(
         cosso.cossoContactList = await cossoClient.getCossoContactsForCosso(cossoId, res.locals.user.username)
       }
       await cossoClient.batchDeleteContacts(
-        cosso.cossoContactList.filter(c => !selectedContactList.includes(c.deliusContactId.toString())),
+        cosso.cossoContactList.filter(c => !selectedContactList.includes(c.deliusContactId!.toString())),
         res.locals.user.username,
       )
 
@@ -341,19 +332,19 @@ export default function failuresRoutes(
 
   function enforceableContactToContact(
     cosso: Cosso,
-    enforceableContact: EnforceableContact,
+    enforceableContact: EnforceableContact | undefined,
     cossoId: string,
   ): CossoContact {
     return {
       id: (cosso.cossoContactList ?? [])
-        .filter(c => c.deliusContactId === enforceableContact.id)
+        .filter(c => c.deliusContactId === enforceableContact?.id)
         .map(c => c.id)
         .at(0),
-      deliusContactId: enforceableContact.id,
+      deliusContactId: enforceableContact?.id,
       cossoId,
-      contactTypeDescription: enforceableContact.type.description,
-      contactDate: toIsoLocalDateTime(enforceableContact.datetime),
-      contactOutcome: enforceableContact.outcome.description,
+      contactTypeDescription: enforceableContact?.type.description,
+      contactDate: toIsoLocalDateTime(enforceableContact?.datetime),
+      contactOutcome: enforceableContact?.outcome.description,
       contactLocation: null,
       contactPerson: null,
       formSent: null,

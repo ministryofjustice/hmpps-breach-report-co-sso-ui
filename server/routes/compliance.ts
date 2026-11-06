@@ -3,7 +3,7 @@ import { AuthenticationClient } from '@ministryofjustice/hmpps-auth-clients'
 import AuditService, { Page } from '../services/auditService'
 import CossoApiClient, { Cosso, CossoRequirement, ScreenInformation } from '../data/cossoApiClient'
 import CommonUtils from '../services/commonUtils'
-import NDeliusIntegrationApiClient, { Requirements } from '../data/ndeliusIntegrationApiClient'
+import NDeliusIntegrationApiClient, { IntegrationError, Requirements } from '../data/ndeliusIntegrationApiClient'
 import { ErrorMessages } from '../data/uiModels'
 import asArray, { convertLineBreaks, handleIntegrationErrors } from '../utils/utils'
 
@@ -23,10 +23,10 @@ export default function complianceRoutes(
     const cossoId: string = req.params.id
     const callingScreen: string = req.query.returnTo as string
 
-    let cosso: Cosso = null
-    let requirements: Requirements = null
+    let cosso: Cosso
+    let requirements: Requirements
     let errorMessages: ErrorMessages = {}
-    let screenInfo: ScreenInformation[] = null
+    let screenInfo: ScreenInformation[]
 
     try {
       cosso = await cossoClient.getCossoById(cossoId, res.locals.user.username)
@@ -39,16 +39,17 @@ export default function complianceRoutes(
       }
       screenInfo = await cossoClient.getScreenInformationForScreen('compliance', res.locals.user.username)
     } catch (error) {
-      errorMessages = handleIntegrationErrors(error?.responseStatus, error?.data?.userMessage, 'Breach Report CO SSO')
+      errorMessages = handleIntegrationErrors(error, 'Breach Report CO SSO')
+      const httpError: IntegrationError = error as unknown as IntegrationError
 
       // Navigate to the detailed error page on 400
-      if (error?.responseStatus === 400) {
+      if (httpError.responseStatus === 400) {
         res.render(`pages/detailed-error`, { errorMessages })
         return
       }
 
       // Navigate to the detailed error page on 404
-      if (error?.responseStatus === 404) {
+      if (httpError.responseStatus === 404) {
         res.render(`pages/detailed-error`, { errorMessages })
         return
       }
@@ -63,17 +64,19 @@ export default function complianceRoutes(
     } catch (error) {
       errorMessages = {
         ...errorMessages,
-        ...handleIntegrationErrors(error?.responseStatus, error.data?.userMessage, 'NDelius Integration'),
+        ...handleIntegrationErrors(error, 'NDelius Integration'),
       }
 
+      const httpError: IntegrationError = error as unknown as IntegrationError
+
       // take the user to detailed error page for 400 type errors
-      if (error.responseStatus === 400) {
+      if (httpError.responseStatus === 400) {
         res.render(`pages/detailed-error`, { errorMessages })
         return
       }
 
       // stay on the current page for 500 errors
-      if (error.responseStatus === 500) {
+      if (httpError.responseStatus === 500) {
         const showEmbeddedError = true
         res.render(`pages/basic-details`, { errorMessages, showEmbeddedError })
         return
@@ -136,9 +139,9 @@ export default function complianceRoutes(
     const cossoId: string = req.params.id
     const callingScreen: string = req.query.returnTo as string
 
-    let cosso: Cosso = null
-    let requirements: Requirements = null
-    let screenInfo: ScreenInformation[] = null
+    let cosso: Cosso
+    let requirements: Requirements
+    let screenInfo: ScreenInformation[]
     let errorMessages: ErrorMessages = {}
 
     try {
@@ -154,17 +157,19 @@ export default function complianceRoutes(
     } catch (error) {
       errorMessages = {
         ...errorMessages,
-        ...handleIntegrationErrors(error?.responseStatus, error?.data?.userMessage, 'Breach Report CO SSO'),
+        ...handleIntegrationErrors(error, 'Breach Report CO SSO'),
       }
 
+      const httpError: IntegrationError = error as unknown as IntegrationError
+
       // Navigate to the detailed error page on 400
-      if (error?.responseStatus === 400) {
+      if (httpError.responseStatus === 400) {
         res.render(`pages/detailed-error`, { errorMessages })
         return
       }
 
       // Navigate to the detailed error page on 404
-      if (error?.responseStatus === 404) {
+      if (httpError.responseStatus === 404) {
         res.render(`pages/detailed-error`, { errorMessages })
         return
       }
@@ -179,15 +184,17 @@ export default function complianceRoutes(
     } catch (error) {
       errorMessages = {
         ...errorMessages,
-        ...handleIntegrationErrors(error?.responseStatus, error.data?.userMessage, 'NDelius Integration'),
+        ...handleIntegrationErrors(error, 'NDelius Integration'),
       }
 
-      if (error.responseStatus === 400) {
+      const httpError: IntegrationError = error as unknown as IntegrationError
+
+      if (httpError.responseStatus === 400) {
         res.render(`pages/detailed-error`, { errorMessages })
         return
       }
 
-      if (error.responseStatus === 500) {
+      if (httpError.responseStatus === 500) {
         const showEmbeddedError = true
         res.render(`pages/basic-details`, { errorMessages, showEmbeddedError })
         return
@@ -271,6 +278,7 @@ export default function complianceRoutes(
         failureReason = br?.description ?? null
       }
 
+      // @ts-expect-error: all variables should be set
       const notes = extractedNotes.find(n => n.id === uiId).notes ?? null
 
       reqItem.notes = notes
@@ -362,12 +370,12 @@ export default function complianceRoutes(
 
 export interface UiRequirement {
   uiId: number
-  dbId: string
+  dbId: string | null
   deliusRequirementId: number
   existing: boolean
   notes: string
-  failure: boolean
-  failureReason: string
+  failure: boolean | null
+  failureReason: string | null
   requirementTypeMainCategoryDescription: string
   requirementTypeSubCategoryDescription: string
   length: number
