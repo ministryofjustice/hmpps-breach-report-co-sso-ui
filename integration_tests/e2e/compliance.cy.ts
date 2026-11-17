@@ -22,7 +22,7 @@ context('Compliance page', () => {
     cy.visit('/compliance/4c9a1ad2-7141-4b03-837f-b66346a0b6ad')
     cy.url().should('include', '/compliance')
     cy.get('#continue-button').should('contain.text', 'Continue')
-    cy.get('#close-button').should('contain.text', 'Save Progress and Close')
+    cy.get('#close-button').should('contain.text', 'Save progress and close')
   })
 
   it('close button displays message', () => {

@@ -72,6 +72,7 @@ context('Sign and Send Page', () => {
     cy.url().should('include', '/sign-and-send')
     cy.get('#page-title').should('contain.text', 'Signature')
     cy.get('input[type="radio"][value="RO"]').check()
+    cy.get('#close-button').should('contain.text', 'Save progress and close')
     cy.get('#close-button').click()
     cy.wait('@saveAndCloseRequest').then(({ request }) => {
       const body = new URLSearchParams(request.body)
